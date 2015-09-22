@@ -1,0 +1,24 @@
+{
+  "name": "imgame",
+  "version": "1.0.0",
+  "description": "server-side modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Finvr/Imgame.git"
+  },
+  "author": "Fangting Liu Prahl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Finvr/Imgame/issues"
+  },
+  "homepage": "https://github.com/Finvr/Imgame#readme",
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "express": "^4.13.3",
+    "knex": "^0.8.6"
+  }
+}
