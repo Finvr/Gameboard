@@ -1,3 +1,9 @@
-<button>Host</button>
-<button>Browse</button>
-<button>My Games</button>
+(function(){
+ angular.module('imgame.home', [])
+ 	.controller('HomeController', HomeController);
+
+ 	function HomeController($scope){
+ 		$scope.home = "Hello, World";
+ 	};
+
+})();
