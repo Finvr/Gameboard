@@ -1,23 +1,16 @@
 (function(){
 
   angular.module("imgame", [
-  		'imgame.createGame',
-  		'imgame.allGames',
-  		'imgame.myGames',
+  		'imgame.home',
   		'ngRoute',
-      'ui.router',
   	])
-  	.config('config');
+  	.config(config);
 
-  	function config($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
-			$urlRouterProvider.otherwise('/');
-
-			stateProvider
-      .state('home', {
-        templateUrl: 'app/auth/home.html',
-        url: '/',
+  	function config($routeProvider, $httpProvider) {
+			$routeProvider
+			.when('/', {
+        templateUrl: 'app/auth/homeTemplate.html',
         controller: 'HomeController'
       })
-
   	};
 })();

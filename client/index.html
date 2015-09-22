@@ -8,12 +8,16 @@
 	<header>
 		<h1>I'm Game</h1>
 	</header>
-	<main ng-app="Imgame">
+	<main ng-app="imgame">
+		<div ng-view>
+		</div>
 
 	</main>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js">
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js">
 	</script>
+	<script src="app/app.js"></script>
+	<script src="app/auth/homeController.js"></script>
 </body>
 </html>
