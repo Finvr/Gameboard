@@ -9,13 +9,13 @@ exports.up = function(knex, Promise) {
       table.string("facebook_id");
     }),
 
-    knex.schema.createTable("games", function(table) {
-      table.increments("id").primary(); // id
-      table.timestamps();
-      table.string("game_name");
-      table.string("game_description");
-      table.integer("game_count");
-    }),
+    // knex.schema.createTable("games", function(table) {
+    //   table.increments("id").primary(); // id
+    //   table.timestamps();
+    //   table.string("game_name");
+    //   table.string("game_description");
+    //   table.integer("game_count");
+    // }),
 
     knex.schema.createTable("gameposts", function(table) {
       table.increments("id").primary(); // id
@@ -24,9 +24,10 @@ exports.up = function(knex, Promise) {
             .references("id")
             .inTable("users");
       table.string("game_location");
-      table.integer("game_id")
-            .references("id")
-            .inTable("games");
+      // table.integer("game_id")
+      //       .references("id")
+      //       .inTable("games");
+      table.string('game');//for mvp only
       table.integer("player_count");
       table.string("gamepost_description");
       table.time("game_time");

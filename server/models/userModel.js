@@ -22,5 +22,3 @@ create: function (facebookId, username){
 
 
 }
-
-module.exports.create(1005, 'testUser');
