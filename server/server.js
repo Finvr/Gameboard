@@ -7,6 +7,9 @@ var config = require('./oauth.js');
 
 var app = express();
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 passport.serializeUser(function(user, done){
   console.log('passport serializeUser')
   done(null, user);
@@ -20,7 +23,7 @@ passport.deserializeUser(function(obj, done){
 passport.use(new FacebookStrategy ({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
-    callbackURL: config.facebook.callbackURL
+    callbackURL: "http://localhost:3000/#/create-game"
   },
   function(accessToken, refreshToken, profile, done) {
     console.log("passport use FacebookStr profile: ", profile);
@@ -33,6 +36,13 @@ app.use(parse.json());
 app.use(express.static(__dirname + '/../client'));
 
 //User Routes
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', {failureRedirect: '/'}), 
+  function (req, res) {
+    console.log("hi")
+    res.redirect('/create-game')
+  })
+
 app.post('/users', function (req, res){
   Utils.createUser(req, res);
 })
