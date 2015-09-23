@@ -19,7 +19,7 @@ passport.deserializeUser(function(obj, done){
 passport.use(new FacebookStrategy ({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
-    callbackURL: console.facebook.callbackURL
+    callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
     console.log("passport use FacebookStr profile: ", profile);
