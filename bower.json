@@ -1,0 +1,30 @@
+{
+  "name": "y",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Finvr/Imgame",
+  "authors": [
+    "finvr"
+  ],
+  "description": "An app to find people to play board games with in your area",
+  "keywords": [
+    "games",
+    "social",
+    "media"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-route": "~1.4.6",
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
+    "jquery": "~2.1.4",
+    "Materialize": "materialize#~0.97.1"
+  }
+}

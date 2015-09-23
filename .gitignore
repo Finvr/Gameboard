@@ -3,3 +3,6 @@ node_modules/
 
 ## facebook secret ##
 server/oauth.js
+
+## bower components ##
+client/lib/
