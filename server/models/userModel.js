@@ -8,6 +8,7 @@ create: function (facebookId, username){
       facebook_id:facebookId, 
       username:username
     })
+    .returning("id")
     .then(function(user){
       console.log(user);
       return user;

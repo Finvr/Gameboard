@@ -4,7 +4,8 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable("users", function(table) {
       table.increments("id").primary(); // id
-      table.timestamps();
+      table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
+      table.timestamp('updated_at');
       table.string("username");
       table.string("facebook_id");
     }),
@@ -19,7 +20,8 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable("gameposts", function(table) {
       table.increments("id").primary(); // id
-      table.timestamps();
+      table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
+      table.timestamp('updated_at');
       table.integer("host_id")
             .references("id")
             .inTable("users");
@@ -35,7 +37,8 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable("users_games", function(table) {
       table.increments("id").primary(); // id
-      table.timestamps();
+      table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
+      table.timestamp('updated_at');
       table.integer("user_id")
             .references("id")
             .inTable("users");
@@ -46,7 +49,8 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable("requests", function(table) {
       table.increments("id").primary(); // id
-      table.timestamps();
+      table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
+      table.timestamp('updated_at');
       table.integer("user_id")
             .references("id")
             .inTable("users");

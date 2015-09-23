@@ -13,7 +13,7 @@ module.exports = {
 			res.send(err.message);
 		})
 	},
-	createGameposts: function (req, res){
+	createGamepost: function (req, res){
 		var gamepost = req.body;
 		Gameposts.create(gamepost)
 		.then(function (data){

@@ -17,13 +17,14 @@ module.exports = {
 	},
 	create: function(gamepost){
 		return db('gameposts').insert(gamepost)
+		  .returning("id")
 		  .then(function(gamepost){
-        console.log(gamepost);
-        return gamepost;
-      })
-      .catch(function(err){
-        console.log(err);
-        return err;
-      })
+		    console.log(gamepost);
+		    return gamepost;
+		 })
+		  .catch(function(err){
+		    console.log(err);
+		    return err;
+		  })
 	},
 }

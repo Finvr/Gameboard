@@ -1,6 +1,5 @@
 var express = require('express');
 var parse = require('body-parser');
-var jwt = require('jwt-simple');
 var Utils = require('./utils/helpers.js');
 
 var app = express();
@@ -10,7 +9,8 @@ app.use(parse.json());
 app.use(express.static(__dirname + '/../client'));
 
 app.post('/users', function (req, res){
-	res.send('create a user')
+	Utils.createUser(req, res);
+	
 })
 
 app.get('/users/*', function (req, res){
@@ -30,11 +30,11 @@ app.get('/users/*/games', function(req, res){
 })
 
 app.get('/gameposts', function(req, res){
-	res.send('fetch all games for all users')
+	Utils.getAllGameposts(req, res);
 })
 
 app.post('/gameposts', function (req, res){
-	res.send('create a new post')
+	Utils.createGamepost(req, res);
 })
 
 
