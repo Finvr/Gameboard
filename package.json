@@ -21,6 +21,13 @@
     "body-parser": "^1.14.0",
     "express": "^4.13.3",
     "knex": "^0.8.6",
-    "pg": "^4.4.2"
+    "pg": "^4.4.2",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "sassdoc": "^2.1.15"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4"
   }
 }
