@@ -9,6 +9,8 @@
 			<input type="number" id="num-players" ng-model="game.numPlayers" />
 			<label for="game-datetime">Date and Time: </label>
 			<input type="datetime-local" id="game-datetime" ng-model="game.datetime" />
+			<label for="description">Description:</label> 
+			<input type="text-area" id="description" ng-model="game.description" />
 			<button type="submit" ng-click="createGame(game)">Create Game</button>
 		</form>
 	</div>
