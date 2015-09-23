@@ -4,6 +4,7 @@
   		'imgame.home',
       'imgame.createGame',
       'imgame.auth',
+      'imgame.service',
   		'ngRoute',
   	])
   	.config(config);
