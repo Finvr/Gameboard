@@ -1,21 +1,36 @@
-<div ng-controller="CreateGameController">
+<div ng-controller="CreateGameController" class="container">
 	<div>
 		<form novalidate class="create-form">
-			<label for="game-location">Location: </label>
-			<textarea id="game-location" placeholder="Enter address where game will be hosted"></textarea>
-			<div class = "row">
-				<div class= "input-field col s12">
-					<label for="game-name">Name: </label>
-					<input type="text" id="game-name" placeholder="Enter name of game" ng-model="game.name" />
+			<div class ="row">
+			 	<div class= "input-field col s12">
+					<textarea id="game-location"></textarea>
+					<label for="game-location">Location: </label>
 				</div>
 			</div>
-			<label for="num-players">Number of Players</label>
-			<input type="number" id="num-players" ng-model="game.numPlayers" />
-			<label for="game-datetime">Date and Time: </label>
-			<input type="datetime-local" id="game-datetime" ng-model="game.datetime" />
-			<label for="description">Description:</label> 
-			<input type="text-area" id="description" ng-model="game.description" />
-			<button type="submit" ng-click="createGame(game)">Create Game</button>
+			<div class = "row">
+				<div class= "input-field col s12">
+					<input type="text" id="game-name" ng-model="game.name" />
+					<label for="game-name">Game Name </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class= "input-field col s6">
+					<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
+				</div>
+				<div class= "input-field col s6">
+					<input type="date" id="game-datetime" ng-model="game.datetime" />
+				</div>
+			</div>
+			<div class = "row">
+				<div class= "input-field col s12">
+					<input type="text-area" id="description" placeholder="Description" ng-model="game.description" />
+				</div>
+			</div>
+			<div class ="row">
+				<div class= "input-field col s12">
+					<button type="submit" class="btn amber white-text waves-effect waves-lighten" ng-click="createGame(game)"> Create Game</button>
+				</div>
+			</div>
 		</form>
 	</div>
 </div>

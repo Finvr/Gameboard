@@ -3,16 +3,26 @@
 	<meta charset="utf-8">
 	<title>I'm Game</title>
  	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+ 	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 </head>
 <body>
 	<header>
+	  <nav>
+	    <div class="nav-wrapper cyan">
+	      <a href="/#/" class="brand-logo center">i'm game</a>
+	      <ul id="nav-mobile" class="left hide-on-med-and-down">
+	        <li><a href="/#/create-game">Host</a></li>
+	        <li><a href="/#/browse-games">Browse</a></li>
+	        <li><a href="/#/my-games">My Games</a></li>
+	      </ul>
+	    </div>
+  	</nav>
 	</header>
-	<main ng-app="imgame">
-		<div ng-view class="container">
-		</div>
-
+	<main ng-app="imgame" class="container">
+		<div ng-view></div>
 	</main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js">
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js">
@@ -20,7 +30,6 @@
 	<script src="app/app.js"></script>
 	<script src="app/auth/homeController.js"></script>
 	<script src="app/games/create/createGameController.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-  	!-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 </body>
 </html>
