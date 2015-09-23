@@ -3,8 +3,12 @@
 		<form novalidate class="create-form">
 			<label for="game-location">Location: </label>
 			<textarea id="game-location" placeholder="Enter address where game will be hosted"></textarea>
-			<label for="game-name">Name: </label>
-			<input type="text" id="game-name" placeholder="Enter name of game" ng-model="game.name" />
+			<div class = "row">
+				<div class= "input-field col s12">
+					<label for="game-name">Name: </label>
+					<input type="text" id="game-name" placeholder="Enter name of game" ng-model="game.name" />
+				</div>
+			</div>
 			<label for="num-players">Number of Players</label>
 			<input type="number" id="num-players" ng-model="game.numPlayers" />
 			<label for="game-datetime">Date and Time: </label>

@@ -2,14 +2,14 @@
 <head>
 	<meta charset="utf-8">
 	<title>I'm Game</title>
+ 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
 </head>
 <body>
 	<header>
-		<h1>I'm Game</h1>
 	</header>
 	<main ng-app="imgame">
-		<div ng-view>
+		<div ng-view class="container">
 		</div>
 
 	</main>
@@ -20,5 +20,7 @@
 	<script src="app/app.js"></script>
 	<script src="app/auth/homeController.js"></script>
 	<script src="app/games/create/createGameController.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+  	!-->
 </body>
 </html>
