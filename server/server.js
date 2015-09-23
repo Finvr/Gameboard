@@ -4,30 +4,36 @@ var Utils   = require('./utils/helpers.js');
 var passport = require('passport');
 var FacebookStrategy = require("passport-facebook").Strategy;
 var config = require('./oauth.js');
-
+var sessions = require('cookie-session')
 var app = express();
+
+app.use(sessions({
+  name: 'imgame:session',
+  secret: process.env.SESSION_SECRET || 'development',
+  secure: (!! process.env.SESSION_SECRET),
+  signed: true
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done){
-  console.log('passport serializeUser')
-  done(null, user);
+  console.log('passport serializeUser user: ', user)
+  done(null, user.id);
 })
 
-passport.deserializeUser(function(obj, done){
-  console.log('passport deserializeUser')
-  done(null, obj);
+passport.deserializeUser(function(userId, done){
+  done(null, userId);
 })
 
 passport.use(new FacebookStrategy ({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
-    callbackURL: "http://localhost:3000/#/create-game"
+    callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("passport use FacebookStr profile: ", profile);
-    return done(err, profile)
+    var user = {name: profile.displayName, id: profile.id}
+    return done(null, user);
     }
 ));
 
@@ -36,11 +42,13 @@ app.use(parse.json());
 app.use(express.static(__dirname + '/../client'));
 
 //User Routes
+app.get('/auth/facebook', 
+  passport.authenticate('facebook'));
+
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', {failureRedirect: '/'}), 
   function (req, res) {
-    console.log("hi")
-    res.redirect('/create-game')
+    res.redirect('/#/create-game')
   })
 
 app.post('/users', function (req, res){
