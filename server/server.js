@@ -7,6 +7,8 @@ var config = require('./oauth.js');
 var sessions = require('cookie-session')
 var app = express();
 
+var userController = require('./controllers/userController.js')
+
 app.use(sessions({
   name: 'imgame:session',
   secret: process.env.SESSION_SECRET || 'development',
@@ -48,9 +50,7 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', {failureRedirect: '/'}), 
   function (req, res) {
-    //console.log("callback req: ", req)
-    console.log('req.user', req.user)
-    res.redirect('/#/create-game')
+    userController.createUser(req, res);
   })
 
 app.get('/users/logout', function(req, res) {
