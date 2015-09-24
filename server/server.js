@@ -53,7 +53,7 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', {failureRedirect: '/'}), 
   function (req, res) {
-    userController.createUser(req, res);
+    userController.findOrCreateUser(req, res);
   })
 
 app.get('/users/logout', function(req, res) {
