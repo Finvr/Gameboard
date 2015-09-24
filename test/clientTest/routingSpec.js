@@ -6,7 +6,7 @@ describe('Routing', function() {
     $route = $injector.get('$route');
   }));
 
-  it('Should have root ('/') route that is linked to the landing page',
+  it('Should have root ('/') route that is linked to the home controller and home page template',
     function() {
       //expect($route.routes['/']).to.be.ok();
       expect($route.routes['/'].controller).toBe('HomeController');
