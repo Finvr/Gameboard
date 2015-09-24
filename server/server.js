@@ -60,7 +60,10 @@ app.get('/auth/facebook/callback',
 require ('./routes.js')(router);
 app.use('/', router); 
 
-var port = 3000;
-app.listen(port, function() {
-  console.log("Listening to localhost, port #: ", + port);
-});
+var port = 3000
+
+if(process.env.NODE_ENV === 'test') {
+}
+  app.listen(port, function() {
+    console.log("Listening to localhost, port #: ", + port);
+  });
