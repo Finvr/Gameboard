@@ -7,8 +7,8 @@ var express           = require('express'),
     sessions          = require('cookie-session'),
     logger            = require('morgan'),
     userController    = require('./controllers/userController.js'),
-    router            = require('routes.js'),
-    app               = express(),
+    router            = require('./routes.js'),  
+    app               = express();
 
 
 //Middleware
@@ -28,7 +28,6 @@ app.use(passport.session());
 app.use(logger('dev'));
 
 passport.serializeUser(function(user, done){
-  console.log('passport serializeUser user: ', user)
   done(null, user);
 });
 
@@ -46,16 +45,6 @@ passport.use(new FacebookStrategy ({
     return done(null, user);
     }
 ));
-
-//Passport routes
-app.get('/auth/facebook', 
-  passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', {failureRedirect: '/'}), 
-  function (req, res) {
-    userController.findOrCreateUser(req, res);
-  });
 
 //Other routes
 app.use('/', router); 
