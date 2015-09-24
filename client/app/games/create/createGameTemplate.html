@@ -3,7 +3,7 @@
 		<form novalidate class="create-form">
 			<div class ="row">
 			 	<div class= "input-field col s12">
-					<textarea id="game-location"></textarea>
+					<textarea id="game-location" ng-model="game.location"></textarea>
 					<label for="game-location">Location: </label>
 				</div>
 			</div>
@@ -18,7 +18,7 @@
 					<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
 				</div>
 				<div class= "input-field col s6">
-					<input type="date" id="game-datetime" ng-model="game.datetime" />
+					<input type="date" id="game-datetime" ng-model="game.time" />
 				</div>
 			</div>
 			<div class = "row">
