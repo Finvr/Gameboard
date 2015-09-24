@@ -6,7 +6,6 @@ var express           = require('express'),
     config            = require('./oauth.js'),
     sessions          = require('cookie-session'),
     logger            = require('morgan'),
-    userController    = require('./controllers/userController.js'),
     router            = require('./routes.js'),  
     app               = express();
 
@@ -49,8 +48,9 @@ passport.use(new FacebookStrategy ({
 // router
 app.use('/', router); 
 
-var port = 3000
 
+// listen to port
+var port = 3000
 if(process.env.NODE_ENV === 'test') {
   port = 8000;
 }

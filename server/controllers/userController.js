@@ -27,9 +27,11 @@ module.exports= {
         console.log("err in checkAuth: ", err);
         res.send("User does not exist!");
       })
+  },
 
+  logout: function(req, res) {
+    req.logout();
+    res.redirect('/')
   }
-
-
 
 }
