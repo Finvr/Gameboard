@@ -7,21 +7,22 @@ var express           = require('express'),
     sessions          = require('cookie-session'),
     logger            = require('morgan'),
     userController    = require('./controllers/userController.js'),
+    router            = require('routes.js'),
     app               = express(),
-    router            = express.Router();
+
 
 //Middleware
 app.use(parse.urlencoded({extended: true}));
 app.use(parse.json());
 app.use(express.static(__dirname + '/../client'));
+
+//Passport Middleware
 app.use(sessions({
   name: 'imgame:session',
   secret: process.env.SESSION_SECRET || 'development',
   secure: (!! process.env.SESSION_SECRET),
   signed: true
 }));
-
-//Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
@@ -57,7 +58,6 @@ app.get('/auth/facebook/callback',
   });
 
 //Other routes
-require ('./routes.js')(router);
 app.use('/', router); 
 
 var port = 3000
