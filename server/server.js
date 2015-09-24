@@ -7,27 +7,27 @@ var express           = require('express'),
     sessions          = require('cookie-session'),
     logger            = require('morgan'),
     userController    = require('./controllers/userController.js'),
-    app               = express(),
-    router            = express.Router();
+    router            = require('./routes.js'),  
+    app               = express();
+
 
 //Middleware
 app.use(parse.urlencoded({extended: true}));
 app.use(parse.json());
+app.use(logger('dev'));
 app.use(express.static(__dirname + '/../client'));
+
+//Passport Middleware
 app.use(sessions({
   name: 'imgame:session',
   secret: process.env.SESSION_SECRET || 'development',
   secure: (!! process.env.SESSION_SECRET),
   signed: true
 }));
-
-//Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(logger('dev'));
 
 passport.serializeUser(function(user, done){
-  console.log('passport serializeUser user: ', user)
   done(null, user);
 });
 
@@ -46,21 +46,15 @@ passport.use(new FacebookStrategy ({
     }
 ));
 
-//Passport routes
-app.get('/auth/facebook', 
-  passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', {failureRedirect: '/'}), 
-  function (req, res) {
-    userController.findOrCreateUser(req, res);
-  });
-
-//Other routes
-require ('./routes.js')(router);
+// router
 app.use('/', router); 
 
-var port = 3000;
+var port = 3000
+
+if(process.env.NODE_ENV === 'test') {
+  port = 8000;
+}
+
 app.listen(port, function() {
   console.log("Listening to localhost, port #: ", + port);
 });
