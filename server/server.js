@@ -1,25 +1,27 @@
-var express = require('express');
-var parse = require('body-parser');
-var Utils   = require('./utils/helpers.js');
-var passport = require('passport');
-var FacebookStrategy = require("passport-facebook").Strategy;
-var config = require('./oauth.js');
-var sessions = require('cookie-session');
-var logger = require('morgan');
-var app = express();
-var userController = require('./controllers/userController.js')
+var express           = require('express'),
+    parse             = require('body-parser'),
+    Utils             = require('./utils/helpers.js'),
+    passport          = require('passport'),
+    FacebookStrategy  = require("passport-facebook").Strategy,
+    config            = require('./oauth.js'),
+    sessions          = require('cookie-session'),
+    logger            = require('morgan'),
+    userController    = require('./controllers/userController.js'),
+    app               = express(),
+    router            = express.Router();
 
-var router = express.Router();
-require ('./routes.js')(router)
-app.use('/', router); 
-
+//Middleware
+app.use(parse.urlencoded({extended: true}));
+app.use(parse.json());
+app.use(express.static(__dirname + '/../client'));
 app.use(sessions({
   name: 'imgame:session',
   secret: process.env.SESSION_SECRET || 'development',
   secure: (!! process.env.SESSION_SECRET),
   signed: true
-}))
+}));
 
+//Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
@@ -27,11 +29,11 @@ app.use(logger('dev'));
 passport.serializeUser(function(user, done){
   console.log('passport serializeUser user: ', user)
   done(null, user);
-})
+});
 
 passport.deserializeUser(function(userId, done){
   done(null, userId);
-})
+});
 
 passport.use(new FacebookStrategy ({
     clientID: config.facebook.clientID,
@@ -44,11 +46,7 @@ passport.use(new FacebookStrategy ({
     }
 ));
 
-app.use(parse.urlencoded({extended: true}));
-app.use(parse.json());
-app
-app.use(express.static(__dirname + '/../client'));
-
+//Passport routes
 app.get('/auth/facebook', 
   passport.authenticate('facebook'));
 
@@ -56,14 +54,13 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/'}), 
   function (req, res) {
     userController.findOrCreateUser(req, res);
-  })
+  });
 
-app.get('/users/logout', function(req, res) {
-  req.logout();
-  res.redirect('/')
-})
+//Other routes
+require ('./routes.js')(router);
+app.use('/', router); 
 
-var port = 3000
+var port = 3000;
 app.listen(port, function() {
   console.log("Listening to localhost, port #: ", + port);
 });
