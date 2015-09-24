@@ -2,7 +2,7 @@ var Users = require ('../models/userModel.js')
 
 module.exports= {
 
-  findOrCreateUser: function (req, res){
+  findOrCreateUser: function (req, res) {
     var user = req.user;
     Users.findOrCreate(user)
       .then(function (facebookId){
@@ -12,6 +12,13 @@ module.exports= {
         console.log(err);
         res.send(err.message);
       })
+  },
+
+  checkAuth: function(req, res, next) {
+    console.log("server checkAuth req.user : ", req.user)
+
   }
+
+
 
 }
