@@ -31,7 +31,6 @@ function create(user) {
     .insert(user)
     .returning("facebook_id")
     .then(function(facebookId){
-      console.log(facebookId[0]);
       return facebookId[0]; //returning gives an array, but facebookId is unique
     })
 };
