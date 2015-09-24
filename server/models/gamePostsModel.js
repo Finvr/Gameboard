@@ -3,7 +3,7 @@ var db = require('../db.js');
 module.exports = {
 
   getAll: function (facebookId){
-    fetch(facebookId)
+    return fetch(facebookId)
       .then(function (gameposts){
         console.log(gameposts);
         return gameposts;
