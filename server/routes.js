@@ -6,9 +6,11 @@ var express = require('express');
 var router = express.Router();
 
 
+
 //Passport routes
 router.get('/auth/facebook', 
   passport.authenticate('facebook'));
+
 
 router.get('/auth/facebook/callback', 
   passport.authenticate('facebook', {failureRedirect: '/'}), 
@@ -17,7 +19,7 @@ router.get('/auth/facebook/callback',
   });
 
 // user routes
-router.get('/users/logout', function (req, res) {
+router.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/')
 })
