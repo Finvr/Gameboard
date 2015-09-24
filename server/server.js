@@ -4,7 +4,8 @@ var Utils   = require('./utils/helpers.js');
 var passport = require('passport');
 var FacebookStrategy = require("passport-facebook").Strategy;
 var config = require('./oauth.js');
-var sessions = require('cookie-session')
+var sessions = require('cookie-session');
+var logger = require('morgan');
 var app = express();
 
 var userController = require('./controllers/userController.js')
@@ -18,6 +19,7 @@ app.use(sessions({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(logger('dev'));
 
 passport.serializeUser(function(user, done){
   console.log('passport serializeUser user: ', user)
@@ -41,6 +43,7 @@ passport.use(new FacebookStrategy ({
 
 app.use(parse.urlencoded({extended: true}));
 app.use(parse.json());
+app
 app.use(express.static(__dirname + '/../client'));
 
 //User Routes

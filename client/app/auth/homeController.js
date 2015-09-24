@@ -3,7 +3,7 @@
  	.controller('HomeController', HomeController);
 
  	function HomeController($scope){
- 		$scope.home = "Hello, World";
+
  	};
 
 })();
