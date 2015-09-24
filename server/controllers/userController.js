@@ -15,6 +15,9 @@ module.exports= {
   },
 
   checkAuth: function(req, res, next) {
+    if (!req.user) {
+      res.redirect('/');
+    }
     Users.find(req.user)
       .then(function(res){
         if (res.length !== 0) {
