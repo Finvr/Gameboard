@@ -14,6 +14,7 @@ var express           = require('express'),
 //Middleware
 app.use(parse.urlencoded({extended: true}));
 app.use(parse.json());
+app.use(logger('dev'));
 app.use(express.static(__dirname + '/../client'));
 
 //Passport Middleware
@@ -25,7 +26,6 @@ app.use(sessions({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(logger('dev'));
 
 passport.serializeUser(function(user, done){
   done(null, user);
@@ -46,7 +46,7 @@ passport.use(new FacebookStrategy ({
     }
 ));
 
-//Other routes
+// router
 app.use('/', router); 
 
 var port = 3000
