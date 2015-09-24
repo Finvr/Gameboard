@@ -6,7 +6,7 @@ module.exports= {
     var user = req.user;
     Users.create(user)
       .then(function (facebookId){
-        res.send(facebookId);
+        res.redirect('/#/create-game')
       })
       .catch(function(err){
         console.log(err);
