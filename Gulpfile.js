@@ -9,7 +9,7 @@ var sassdoc = require('sassdoc');
 // -----------------------------------------------------------------------------
 
 var input = 'client/styles/*.scss';
-var output = 'client/';
+var output = 'client/styles/';
 var sassOptions = { outputStyle: 'expanded' };
 var autoprefixerOptions = { browsers: ['last 2 versions', '> 5%', 'Firefox ESR'] };
 var sassdocOptions = { dest: 'dist/sassdoc' };
