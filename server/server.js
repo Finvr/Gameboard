@@ -19,7 +19,7 @@ app.use(passport.session());
 
 passport.serializeUser(function(user, done){
   console.log('passport serializeUser user: ', user)
-  done(null, user.id);
+  done(null, user);
 })
 
 passport.deserializeUser(function(userId, done){
@@ -32,7 +32,7 @@ passport.use(new FacebookStrategy ({
     callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-    var user = {name: profile.displayName, id: profile.id}
+    var user = {username: profile.displayName, facebook_id: profile.id}
     return done(null, user);
     }
 ));
@@ -48,8 +48,15 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', {failureRedirect: '/'}), 
   function (req, res) {
+    //console.log("callback req: ", req)
+    console.log('req.user', req.user)
     res.redirect('/#/create-game')
   })
+
+app.get('/users/logout', function(req, res) {
+  req.logout();
+  res.redirect('/')
+})
 
 app.post('/users', function (req, res){
   Utils.createUser(req, res);
