@@ -28,18 +28,12 @@ router.get('/me', function (req, res) {
   res.send('Authenticate the session');
 })
 
-router.get('/me/gameposts', function (req, res) {
-  gameController.getUserGamePosts(req, res);
-}) 
+router.get('/me/gameposts', gameController.getUserGamePosts); 
 
 //GamePosts Routes
-router.get('/gameposts', function (req, res) {
-  gameController.getAllGameposts(req, res);
-})
+router.get('/gameposts', gameController.getAllGameposts);
 
-router.post('/gameposts', function (req, res) {
-  gameController.createGamepost(req, res);
-})
+router.post('/gameposts', gameController.createGamepost);
 
 module.exports = router;
 
