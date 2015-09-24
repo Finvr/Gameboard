@@ -6,7 +6,7 @@ module.exports = {
     return module.exports.find(user)
       .then(function(result) {
         if ( result.length ) {
-          return result[0].facebookId;
+          return result[0].facebook_id;
         } else {
           return create(user);
         }
