@@ -1,5 +1,4 @@
-var Users     = require ('../models/userModel.js'),
-    GamePosts = require ('../models/gamePostsModel.js');
+var GamePosts = require ('../models/gamePostsModel.js');
 
 module.exports = {
   
@@ -26,20 +25,6 @@ module.exports = {
         console.log(err);
         res.send(err.message);
       })
-  },
-
-  createUser: function (req, res){
-    //authentication
-    var testId = 250;
-    var username = req.body.username;
-
-    Users.create(testId, username)
-      .then(function (userId){
-        res.send(userId);
-      })
-      .catch(function(err){
-        console.log(err);
-        res.send(err.message);
-      })
   }
+
 }
