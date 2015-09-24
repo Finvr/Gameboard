@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/Finvr/Imgame#readme",
   "dependencies": {
-    "angular-route": "^1.4.6",
     "body-parser": "^1.14.0",
     "bower": "^1.5.2",
     "cookie-session": "^1.2.0",
