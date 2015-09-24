@@ -20,7 +20,7 @@ module.exports = function(config) {
       'client/lib/angular-route/angular-route.min.js',
       'client/lib/jquery/dist/jquery.min.js',
       'client/lib/Materialize/dist/js/materialize.min.js',
-      'client/lib/angular-mocks/angular-mocks.js'
+      'client/lib/angular-mocks/angular-mocks.js',
 
       // our app code
       'client/app/**/*.js',
@@ -46,7 +46,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress','nyan','unicorn'],
 
 
     // web server port
