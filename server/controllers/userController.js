@@ -4,7 +4,7 @@ module.exports= {
 
   createUser: function (req, res){
     var user = req.user;
-    Users.create(user)
+    Users.findOrCreate(user)
       .then(function (facebookId){
         res.redirect('/#/create-game')
       })
