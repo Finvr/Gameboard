@@ -36,6 +36,10 @@
           Auth.signout();
         }}
       })
+       .when('/getposts', {
+        templateUrl: 'app/games/browse/browseGameTemplate.html',
+        controller: 'BrowseGameController'
+      })
       .otherwise('/')
   	};
 })();
