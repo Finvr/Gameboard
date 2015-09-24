@@ -27,7 +27,7 @@ module.exports= function (app){
 
 	app.get('/users/*/games', function(req, res){
 	  res.send('get the games for a specific user')
-	})
+	}) 
 
 	//GamePosts Routes
 	app.get('/gameposts', function(req, res){
