@@ -17,8 +17,11 @@ module.exports = {
     var gamepost = req.body;
     
     GamePosts.create(gamepost)
+    
       .then(function (data){
+        console.log('gamepost: ', gamepost)
         res.send(data);
+
       })
       .catch(function(err){
         console.log(err);
@@ -30,6 +33,18 @@ module.exports = {
     var facebookId = req.user.facebook_id;
     GamePosts.getAll(facebookId)
       .then(function(data){
+        res.send(data);
+      })
+      .catch(function(err){
+        console.log(err);
+        res.send(err.message);
+      })
+  },
+
+  deleteGamepost: function (req, res){
+    
+    GamePosts.deleteGamePost(gamepost)
+      .then(function (data){
         res.send(data);
       })
       .catch(function(err){
