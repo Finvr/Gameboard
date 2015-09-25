@@ -4,7 +4,7 @@
 
   .factory('Auth', Auth)
 
-  function Auth ($http, $location, $window) {
+  function Auth ($rootScope, $http, $location, $window) {
 
     function requireAuth () {
       return $http({
@@ -12,7 +12,8 @@
         url: '/me'
       })
       .then(function(){
-        console.log("Authorized!")
+        console.log("Authorized!");
+        $rootScope.loggedIn = true;
       })
       .catch(function(){
         console.log("User is not logged in! Redirecting to homepage!")
@@ -21,7 +22,7 @@
     };
 
     function signout () {
-      $window.localStorage.removeItem('userid');
+      $rootScope.loggedIn = false;
       return $http({
         method: 'GET',
         url: '/me/logout',
