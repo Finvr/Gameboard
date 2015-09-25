@@ -6,7 +6,7 @@
  		$scope.game = {
  			name: "What are we playing?",
  			description: "What are the notes?",
- 			time: "When",
+ 			datetime: "When",
  			location: "Where"
  		}
 
@@ -18,7 +18,7 @@
  				"game": game.name,
  				"gamepost_description": game.description,
 				"player_count": game.numPlayers,
-				"game_time": '12:00:00'
+				"game_date": game.datetime
  			};
  			GamePost.create(game)
  				.then(function(data){
