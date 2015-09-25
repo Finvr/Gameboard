@@ -1,0 +1,29 @@
+<div ng-controller="BrowseGameController">
+ <h3>Browse All Games</h3>
+   <nav>
+    <div class="nav-wrapper orange lighten-2" id="browse_search">
+      <form>
+        <div class="input-field">
+          <input id="search_games" type="search" ng-model="searchText"required>
+          <label for="search"><i class="material-icons">search</i></label>
+        </div>
+      </form>
+    </div>
+  </nav>
+	<ul class = "collection">
+	  <li class = "collection-item" ng-repeat="game in games | filter:searchText">
+	  <div class = "row">
+	  	<div class = "col s10">
+		  	<h5><strong>{{game.game}}</strong></h5>
+		  	<h6><strong>Location: </strong>{{game.game_location}}</h6>
+		  	<h6><strong> Time: </strong>{{game.game_time}} </h6>
+		  	<h6><strong> Number of Players: </strong>{{game.player_count}}</h6>
+		  	<h6><strong>Description: </strong>{{game.gamepost_description}}</h6>
+		</div>
+		<div class = "col s2 req_btn">
+	  		<button class= "btn cyan waves-effect waves-light" id="request_btn">Request</button>
+	  	</div>
+	  </div>
+	  </li>
+	</ul>
+</div>

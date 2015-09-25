@@ -4,6 +4,7 @@
   		'imgame.home',
       'imgame.createGame',
       'imgame.myGames',
+      'imgame.browseGames',
       'imgame.auth',
       'imgame.service',
   		'ngRoute',
@@ -35,6 +36,10 @@
         resolve: {function (Auth) {
           Auth.signout();
         }}
+      })
+      .when('/browse-games', {
+        templateUrl: 'app/games/browse/browseGameTemplate.html',
+        controller: 'BrowseGameController'
       })
       .otherwise('/')
   	};
