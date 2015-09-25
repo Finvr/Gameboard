@@ -11,7 +11,7 @@
 	  </div>
 	  <div class="card-action">
 	    <a href="#">{{ game.location}}</a>
-	    <a href="#">{{ game.time}}</a>
+	    <a href="#">{{ game.datetime}}</a>
 	  </div>
  	</div>
  	<div class="half-div container">
@@ -32,11 +32,8 @@
 				<div class= "input-field col s4">
 					<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
 				</div>
-				<div class="input-field col s4">
-					<input type="time" id="game-time" ng-model="game.time" />
-				</div>
-				<div class="input-field col s4" ng-model="game.date" />
-					<input type="date" id="game-date" ng-model="game.date" />
+				<div class="input-field col s8" ng-model="game.datetime" />
+					<input type="datetime-local" id="game-datetime" ng-model="game.datetime" />
 				</div>
 			</div>
 			<div class = "row">
