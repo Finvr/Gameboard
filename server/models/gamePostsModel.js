@@ -35,7 +35,7 @@ function fetch(facebookId) {
     return db.select()
       .from('gameposts')
       .where({
-        host_id: facebook_Id
+        host_id: facebookId
       })
   } else {
     return db.select()
