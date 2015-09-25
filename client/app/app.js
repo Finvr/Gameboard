@@ -3,6 +3,7 @@
   angular.module("imgame", [
   		'imgame.home',
       'imgame.createGame',
+      'imgame.myGames',
       'imgame.auth',
       'imgame.service',
   		'ngRoute',
@@ -18,6 +19,10 @@
       .when('/create-game', {
         templateUrl: 'app/games/create/createGameTemplate.html',
         controller: 'CreateGameController'
+      })
+      .when('/my-games', {
+        templateUrl: 'app/games/my/myGamesTemplate.html',
+        controller: 'MyGamesController'       
       })
       .when('/signin', {
         templateUrl: 'app/auth/signin.html',

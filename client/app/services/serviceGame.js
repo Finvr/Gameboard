@@ -5,7 +5,6 @@
 
   function GamePost($http) {
   	function create(gameInfo){
-  		debugger;
 			return $http({
         method: 'POST',
         url: '/gameposts',
@@ -15,9 +14,20 @@
         return resp.data;
       });
   	};
+
+    function myGames(){
+      return $http({
+        method: 'GET',
+        url: '/me/gameposts'
+      })
+      .then(function(gamePosts){
+        return gamePosts.data();
+      });
+    };
   	
   	return {
-  		create: create
+  		create: create,
+      myGames: myGames
   	};
   };
 
