@@ -58,6 +58,7 @@ passport.use(new FacebookStrategy ({
 // router
 app.use('/', router); 
 
+module.exports = app;
 
 // listen to port
 var port = 3000

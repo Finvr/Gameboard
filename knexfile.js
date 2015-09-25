@@ -1,8 +1,45 @@
 module.exports = {
 
-  client: 'postgresql',
-  connection: {
-    database: 'imgame'
-  }
+  production: {
+    client: 'postgresql',
+    connection: {
+      database: 'imgame'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
   
+  development: {
+    client: 'postgresql',
+    connection: {
+      database: 'imgame_dev'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
+
+  test: {
+    client: 'postgresql',
+    connection: {
+      database: 'imgame_test'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  }
+
 };

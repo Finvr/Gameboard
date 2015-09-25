@@ -28,6 +28,7 @@
     "pg": "^4.4.2"
   },
   "devDependencies": {
+    "chai": "^3.3.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-sass": "^2.0.4",
