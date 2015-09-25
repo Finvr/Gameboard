@@ -17,13 +17,13 @@ describe('Routing', function() {
     expect($route.routes['/create-game'].templateUrl).toBe(
       'app/games/create/createGameTemplate.html');
   });
-/*
+
   it('Should have my-games (\'/my-games\') route that is linked to the myGames controller and template', function() {
     expect($route.routes['/my-games'].controller).toBe('MyGamesController');
     expect($route.routes['/my-games'].templateUrl).toBe(
-      'app/my/myGamesTemplate.html');
+      'app/games/my/myGamesTemplate.html');
   });
-
+/*
   it('Should have browse-games (\'/browse-games\') route that is to the browseGames controller and template', function(){
     expect($route.routes['/browse-games'].controller).toBe('BrowseGameController');
     expect($route.routes['/browse-games'].templateUrl).toBe(
