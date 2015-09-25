@@ -23,13 +23,12 @@ describe('Routing', function() {
     expect($route.routes['/my-games'].templateUrl).toBe(
       'app/games/my/myGamesTemplate.html');
   });
-/*
+
   it('Should have browse-games (\'/browse-games\') route that is to the browseGames controller and template', function(){
     expect($route.routes['/browse-games'].controller).toBe('BrowseGameController');
     expect($route.routes['/browse-games'].templateUrl).toBe(
-      'app/browse/browseGameTemplate.html');
-      }
-  });
+      'app/games/browse/browseGameTemplate.html');
+  });/*
 
   it('Should have signin (\'/signin\') route that is linked to the auth controller and signin template', function() {
     expect($route.routes['/signin'].controller).toBe('AuthController');
