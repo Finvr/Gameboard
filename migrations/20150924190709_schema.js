@@ -1,9 +1,10 @@
+'use strict';
 
 exports.up = function(knex, Promise) {
   return Promise.all([
-    knex.Schema.table('gameposts', function (table) {
+    knex.schema.table('gameposts', function (table) {
       table.date('game_date');
-    });
+    })
   ])
 };
 
