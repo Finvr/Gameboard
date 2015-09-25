@@ -27,8 +27,8 @@ module.exports = {
   },
 
   getUserGamePosts: function (req, res){
-    var facebookId = req.user.facebook_id;
-    GamePosts.getAll(facebookId)
+    var userId = req.user;
+    GamePosts.getAll(userId)
       .then(function(data){
         res.send(data);
       })
