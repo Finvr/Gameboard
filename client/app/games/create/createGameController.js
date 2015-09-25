@@ -5,18 +5,7 @@
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {}
 
-    $scope.$watch(function(){
-      $window.localStorage.userid;
-    }, function(authed){
-      Auth.isAuth()
-        .then(function(data){
-          if (data === "User is not logged in!") {
-            $location.path('/')
-          } else {
-            $location.path('/create-game');
-          }
-        })
-    })
+    Auth.requireAuth();
 
  		$scope.createGame = function(game){
  			game = { 

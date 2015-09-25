@@ -5,18 +5,18 @@
   .factory('Auth', Auth)
 
   function Auth ($http, $location, $window) {
-    function isAuth () {
+
+    function requireAuth () {
       return $http({
         method: 'GET',
         url: '/me'
       })
-      .then(function(resp) {
-        $window.localStorage.setItem('userid', resp.data.token);
-        return;
+      .then(function(){
+        console.log("Authorized!")
       })
-      .catch(function(err) {
-        console.log("isAuth Error: ", err)
-        return err.data;
+      .catch(function(){
+        console.log("User is not logged in! Redirecting to homepage!")
+        $location.path('/');
       });
     };
 
@@ -38,7 +38,7 @@
     };
 
     return {
-      isAuth: isAuth,
+      requireAuth: requireAuth,
       signout: signout
     }
 
