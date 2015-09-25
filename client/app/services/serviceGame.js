@@ -12,6 +12,10 @@
       })
       .then(function(resp) {
         return resp.data;
+      })
+      .catch(function(err) {
+        console.log("Create game Error: ", err);
+        return err.data;
       });
   	};
 
