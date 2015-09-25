@@ -30,8 +30,11 @@ module.exports = {
 function create(user) {
   return db('users')
     .insert(user)
-    .returning("facebook_id")
-    .then(function(facebookId){
-      return facebookId[0]; //returning gives an array, but facebookId is unique
+    .returning("id")
+    .then(function(userId){
+      return module.exports.find(userId[0])
+        .then(function(user){
+          return user[0]; //returning gives an array, but facebookId is unique
+        })
     })
 };
