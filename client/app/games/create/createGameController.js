@@ -5,20 +5,17 @@
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {}
 
-    // $scope.$watch(Auth.isAuth, function(authed){
-    //     if (authed) {
-    //       $location.path('/create-game');
-    //     } else {
-    //       $location.path('/signin')
-    //     } 
-    //   });
-
     if ($window.localStorage.userid) {
       $location.path('/create-game');
     } else {
-      Auth.isAuth();
-      console.log("CreateGameController window: ", $window.localStorage.userid )
-      $location.path('/')
+      Auth.isAuth()
+        .then(function(data){
+          if (data === "User is not logged in!") {
+            $location.path('/')
+          } else {
+            $location.path('/create-game');
+          }
+        })
     } 
 
  		$scope.createGame = function(game){
@@ -31,10 +28,11 @@
  			};
  			GamePost.create(game)
  				.then(function(data){
+          // if user is not authrized, data = "User is not logged in!"
           console.log("create gamepost: ", data)
  					console.log(data);
- 				});
- 		}
+ 				})
+      };
  	};
 
 })();
