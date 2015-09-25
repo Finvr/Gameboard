@@ -21,7 +21,7 @@
         url: '/me/gameposts'
       })
       .then(function(gamePosts){
-        return gamePosts.data();
+        return gamePosts.data;
       });
     };
   	
