@@ -15,7 +15,7 @@ describe('Routing', function() {
   it('Should have create-game (\'/create-game\') route that is linked to the createGame controller and template', function() {
     expect($route.routes['/create-game'].controller).toBe('CreateGameController');
     expect($route.routes['/create-game'].templateUrl).toBe(
-      'app/create/createGameTemplate.html');
+      'app/games/create/createGameTemplate.html');
   });
 /*
   it('Should have my-games (\'/my-games\') route that is linked to the myGames controller and template', function() {
