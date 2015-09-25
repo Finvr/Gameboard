@@ -6,7 +6,6 @@
 		$scope.home = "djsaldjaskl";
 		$scope.getGames = function() {
 			return BrowseGames.getGames();
-
 		}
 		$scope.getGames();
 	}
