@@ -2,8 +2,8 @@ var db = require('../db.js');
 
 module.exports = {
 
-  getAll: function (facebookId){
-    return fetch(facebookId)
+  getAll: function (userId){
+    return fetch(userId)
       .then(function (gameposts){
         console.log(gameposts);
         return gameposts;
@@ -30,12 +30,12 @@ module.exports = {
   
 }
 
-function fetch(facebookId) {
-  if ( facebookId ) {
+function fetch(userId) {
+  if ( userId ) {
     return db.select()
       .from('gameposts')
       .where({
-        host_id: facebookId
+        host_id: userId
       })
   } else {
     return db.select()
