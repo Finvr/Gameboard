@@ -28,7 +28,7 @@ describe('Routing', function() {
     expect($route.routes['/browse-games'].controller).toBe('BrowseGameController');
     expect($route.routes['/browse-games'].templateUrl).toBe(
       'app/games/browse/browseGameTemplate.html');
-  });/*
+  });
 
   it('Should have signin (\'/signin\') route that is linked to the auth controller and signin template', function() {
     expect($route.routes['/signin'].controller).toBe('AuthController');
@@ -40,6 +40,6 @@ describe('Routing', function() {
     expect($route.routes['/logout'].controller).toBe('AuthController');
     expect($route.routes['/logout'].url).toBe('/');
     expect($route.routes['/logout'].templateUrl).toBe('app/auth/homeTemplate.html'); //write test for resolve
-  }); */
+  });
       
 });
