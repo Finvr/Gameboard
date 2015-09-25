@@ -2,11 +2,12 @@
 	angular.module('imgame.browseGames', [])
 		.controller('BrowseGameController', BrowseGameController);
 
-	function BrowseGameController($scope) {
+	function BrowseGameController($scope, BrowseGames) {
 		$scope.home = "djsaldjaskl";
-		// $scope.games = [];
-		// $scope.getGames = function() {
-		// 	BrowseGames.getGames();
-		// }
+		$scope.getGames = function() {
+			return BrowseGames.getGames();
+
+		}
+		$scope.getGames();
 	}
 })();
