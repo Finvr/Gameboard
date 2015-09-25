@@ -4,9 +4,11 @@
 
 	function BrowseGameController($scope, BrowseGames) {
 		$scope.home = "djsaldjaskl";
+		$scope.games = [];
 		$scope.getGames = function() {
-			return BrowseGames.getGames();
+			$scope.games.push(BrowseGames.getGames());
 		}
 		$scope.getGames();
+		console.log($scope.games);
 	}
 })();

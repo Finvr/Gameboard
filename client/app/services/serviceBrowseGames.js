@@ -10,7 +10,7 @@
 		      })
 		      .then(function(resp) {
 		      	console.log("resp",resp);
-		        return resp.data;
+		        return resp.config.data;
 		      });
 		  	};
 		  	
