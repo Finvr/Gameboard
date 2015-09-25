@@ -8,12 +8,13 @@
     Auth.requireAuth();
 
   	var getMyGames = function(){
-  		GamePost.myGames()
+  		return GamePost.myGames()
   			.then(function(games){
   				console.log(games);
+          $scope.myGames = games;
   			});
   	}
-  	$scope.myGames = getMyGames();
+  	getMyGames();
   };
 
 })();
