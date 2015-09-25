@@ -5,19 +5,20 @@
   .factory('Auth', Auth)
 
   function Auth ($http, $location, $window) {
-    function signin (user) {
-      return $http({
-        method: 'POST',
-        url: '/users/signin',
-        data: user
+    function isAuth () {
+      $http({
+        method: 'GET',
+        url: '/me'
       })
       .then(function(resp) {
-        return resp.data;
+        console.log("isAuth: ", resp.data.token)
+        $window.localStorage.setItem('userid', resp);
+        return $window.localStorage.userid;
       });
     }
 
     return {
-      signin: signin
+      isAuth: isAuth
     }
 
   };

@@ -28,5 +28,6 @@
         templateUrl: 'app/auth/signin.html',
         controller: 'AuthController'
       })
+      .otherwise('/')
   	};
 })();
