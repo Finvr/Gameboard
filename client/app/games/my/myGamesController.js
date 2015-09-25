@@ -5,18 +5,7 @@
   function MyGamesController($scope, $window, $location, Auth, GamePost){
   	$scope.myGames = [];
 
-    $scope.$watch(function(){
-      $window.localStorage.userid;
-    }, function(authed){
-      Auth.isAuth()
-        .then(function(data){
-          if (data === "User is not logged in!") {
-            $location.path('/')
-          } else {
-            $location.path('/my-games');
-          }
-        })
-    });
+    Auth.requireAuth();
 
   	var getMyGames = function(){
   		GamePost.myGames()
