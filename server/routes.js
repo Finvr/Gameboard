@@ -18,9 +18,7 @@ router.get('/auth/facebook/callback',
 // user routes
 router.get('/me/logout', checkAuth, userController.logout)
 
-router.get('/me', checkAuth, function(req, res){
-  res.send(200);
-})
+router.get('/me', checkAuth, userController.loggedIn);
 
 router.get('/me/gameposts', checkAuth, gameController.getUserGamePosts); 
 
