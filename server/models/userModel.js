@@ -3,10 +3,12 @@ var db = require ('../db.js')
 module.exports = {
 
   findOrCreate: function(user) {
-    return module.exports.find(user)
+    return db.select()
+      .from('users')
+      .where({facebook_id: user.facebook_id})
       .then(function(result) {
         if ( result.length ) {
-          return result[0].facebook_id;
+          return result[0];
         } else {
           return create(user);
         }
@@ -17,11 +19,10 @@ module.exports = {
       })
   },
 
-  find: function(user) {
-    var facebookId = user.facebook_id;
+  find: function(userId) {
     return db.select()
       .from('users')
-      .where({facebook_id: facebookId})      
+      .where({id: userId})      
   }
 
 };
