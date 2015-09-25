@@ -5,10 +5,9 @@
 	function BrowseGameController($scope, BrowseGames) {
 		$scope.home = "djsaldjaskl";
 		$scope.games = [];
-		$scope.getGames = function() {
-			$scope.games.push(BrowseGames.getGames());
-		}
-		$scope.getGames();
-		console.log($scope.games);
+		BrowseGames.getGames().then(function(resp) {
+			console.log("inside getGsmes", resp);
+			$scope.games = resp;
+		});
 	}
 })();

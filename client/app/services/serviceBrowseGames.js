@@ -9,10 +9,10 @@
 		        url: '/gameposts'
 		      })
 		      .then(function(resp) {
-		      	console.log("resp",resp);
-		        return resp.config.data;
+		      	console.log("resp",resp.data);
+		        return resp.data;
 		      });
-		  	};
+		 };
 		  	
 		  	return {
 		  		getGames: getGames
