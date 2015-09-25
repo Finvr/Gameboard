@@ -13,7 +13,7 @@
           if (data === "User is not logged in!") {
             $location.path('/')
           } else {
-            $location.path('/create-game');
+            $location.path('/my-games');
           }
         })
     });
