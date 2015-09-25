@@ -3,6 +3,13 @@
 	  .controller('MyGamesController', MyGamesController);
 
 	  function MyGamesController($scope, GamePost){
-	  	$scope.myGames = "Hello my games";
+	  	$scope.myGames = [];
+	  	var getMyGames = function(){
+	  		GamePost.myGames()
+	  			.then(function(games){
+	  				console.log(games);
+	  			});
+	  	}
+	  	$scope.myGames = getMyGames();
 	  };
 })();
