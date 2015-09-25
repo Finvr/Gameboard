@@ -5,9 +5,9 @@
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {}
 
-    if ($window.localStorage.userid) {
-      $location.path('/create-game');
-    } else {
+    $scope.$watch(function(){
+      $window.localStorage.userid;
+    }, function(authed){
       Auth.isAuth()
         .then(function(data){
           if (data === "User is not logged in!") {
@@ -16,7 +16,7 @@
             $location.path('/create-game');
           }
         })
-    } 
+    })
 
  		$scope.createGame = function(game){
  			game = { 

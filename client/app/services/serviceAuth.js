@@ -11,7 +11,6 @@
         url: '/me'
       })
       .then(function(resp) {
-        console.log("isAuth: ", resp.data)
         $window.localStorage.setItem('userid', resp.data.token);
         return;
       })
