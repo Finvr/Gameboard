@@ -7,7 +7,8 @@ var express           = require('express'),
     sessions          = require('cookie-session'),
     logger            = require('morgan'),
     router            = require('./routes.js'),  
-    app               = express();
+    app               = express(),
+    Users             = require ('./models/userModel.js');
 
 
 //Middleware
@@ -27,10 +28,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done){
-  done(null, user);
+  console.log("serializeUser user: ", user)
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(userId, done){
+  console.log("deserializeUser id: ", userId)
   done(null, userId);
 });
 
@@ -41,7 +44,14 @@ passport.use(new FacebookStrategy ({
   },
   function(accessToken, refreshToken, profile, done) {
     var user = {username: profile.displayName, facebook_id: profile.id}
-    return done(null, user);
+    Users.findOrCreate(user)
+      .then(function(user){
+        return done(null, user);
+      })
+      .catch(function(err){
+        console.log("err from findOrCreateUser: ",err);
+        res.send(err.message);
+      })
     }
 ));
 

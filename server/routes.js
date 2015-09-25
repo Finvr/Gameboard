@@ -13,7 +13,9 @@ router.get('/auth/facebook',
 
 router.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {failureRedirect: '/'}), 
-	userController.findOrCreateUser);
+	function(req, res) {
+    res.redirect('/#/create-game')
+  });
 
 // user routes
 router.get('/me/logout', checkAuth, userController.logout)
