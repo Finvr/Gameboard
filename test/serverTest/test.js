@@ -1,18 +1,22 @@
-var request = require('supertest')
-  , express = require('express');
+var request = require('supertest');
+var expect = require('chai').expect;
  
 var app = require('../../server/server.js');
 
-describe('GET /user', function(){
-  it('respond with json', function(done){
+process.env.NODE_ENV === 'test';
+
+describe('Server - "/" routes test: ', function(){
+  it(' "/" respond with 200', function(done){
     request(app)
-      .get('/user')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .get('/')
       .expect(200)
+      .expect('Content-Type', "text/html; charset=UTF-8")
       .end(function(err, res) {
         if (err) throw err;
-        expect(res)
+        expect(res);
+        done();
       })
-  })
-})
+  });
+
+  it(' ')
+});
