@@ -11,10 +11,10 @@
   		return GamePost.myGames()
   			.then(function(games){
   				console.log(games);
-  				return games;
+          $scope.myGames = games;
   			});
   	}
-  	$scope.myGames = getMyGames();
+  	getMyGames();
   };
 
 })();
