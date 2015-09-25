@@ -16,7 +16,7 @@ module.exports= {
 
   checkAuth: function(req, res, next) {
     if (!req.user) {
-      res.redirect('/');
+      res.status(403).send('User is not logged in!')
     }
     Users.find(req.user)
       .then(function(res){
@@ -34,7 +34,8 @@ module.exports= {
 
   logout: function(req, res) {
     req.logout();
-    res.redirect('/')
+    res.send(200);
+    //res.redirect('/')
   }
 
 }

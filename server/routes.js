@@ -16,10 +16,10 @@ router.get('/auth/facebook/callback',
 	userController.findOrCreateUser);
 
 // user routes
-router.get('/logout', checkAuth, userController.logout)
+router.get('/me/logout', checkAuth, userController.logout)
 
 router.get('/me', checkAuth, function(req, res){
-  res.send({token: '123'});
+  res.send(200);
 })
 
 router.get('/me/gameposts', checkAuth, gameController.getUserGamePosts); 
