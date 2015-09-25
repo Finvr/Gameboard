@@ -2,8 +2,22 @@
  angular.module('imgame.createGame', [])
  	.controller('CreateGameController', CreateGameController);
 
- 	function CreateGameController($scope, GamePost){
+ 	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {}
+
+    $scope.$watch(function(){
+      $window.localStorage.userid;
+    }, function(authed){
+      Auth.isAuth()
+        .then(function(data){
+          if (data === "User is not logged in!") {
+            $location.path('/')
+          } else {
+            $location.path('/create-game');
+          }
+        })
+    })
+
  		$scope.createGame = function(game){
  			game = { 
  				"game_location": game.location,
@@ -14,9 +28,11 @@
  			};
  			GamePost.create(game)
  				.then(function(data){
+          // if user is not authrized, data = "User is not logged in!"
+          console.log("create gamepost: ", data)
  					console.log(data);
- 				});
- 		}
+ 				})
+      };
  	};
 
 })();

@@ -28,5 +28,14 @@
         templateUrl: 'app/auth/signin.html',
         controller: 'AuthController'
       })
+      .when('/logout', {
+        templateUrl: 'app/auth/homeTemplate.html',
+        url: '/',
+        controller: 'AuthController',
+        resolve: {function (Auth) {
+          Auth.signout();
+        }}
+      })
+      .otherwise('/')
   	};
 })();
