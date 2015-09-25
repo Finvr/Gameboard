@@ -1,36 +1,56 @@
-<div ng-controller="CreateGameController" class="container">
-	<div>
-		<form novalidate class="create-form">
-			<div class ="row">
-			 	<div class= "input-field col s12">
-					<textarea id="game-location" ng-model="game.location"></textarea>
-					<label for="game-location">Location: </label>
+<div class="createGame" ng-controller="CreateGameController">
+	<h1 class="orange-text">Host a Game</h1>
+	<div class="row main-row">
+   	<div class="col s12 m5 card main-col">
+ 			<div class="card-image">
+ 				<img src="http://i.imgur.com/R3vAV.jpg">
+   		  <span class="card-title" ng-model="game.name"></span>
+ 		  </div>
+ 		  <div class="card-content">
+ 		  	  <p ng-model="game.description"></p>
+ 		  	  <p ng-model="game.location"></p>
+ 		  </div>
+      <div class="card-action">
+        <a href="#" ng-model="game.when"></a>
+        <a href="#" ng-model="game.where"></a>
+      </div>
+ 		</div>
+   	<div class="col s12 offset-m1 m5 main-col">
+			<form novalidate class="create-form">
+				<div class ="row">
+				 	<div class= "input-field col s12">
+						<textarea id="game-location" ng-model="game.location"></textarea>
+						<label for="game-location">Location: </label>
+					</div>
 				</div>
-			</div>
-			<div class = "row">
-				<div class= "input-field col s12">
-					<input type="text" id="game-name" ng-model="game.name" />
-					<label for="game-name">Game Name </label>
+				<div class = "row">
+					<div class= "input-field col s12">
+						<input type="text" id="game-name" ng-model="game.name" />
+						<label for="game-name">Game Name </label>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class= "input-field col s6">
-					<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
+				<div class="row">
+					<div class= "input-field col s4">
+						<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
+					</div>
+					<div class="input-field col s4">
+						<input type="time" id="game-time" ng-model="game.time" />
+					</div>
+					<div class="input-field col s4" ng-model="game.date" />
+						<input type="date" id="game-date" ng-model="game.date" />
+					</div>
 				</div>
-				<div class= "input-field col s6">
-					<input type="time" id="game-datetime" ng-model="game.time" />
+				<div class = "row">
+					<div class= "input-field col s12">
+						<input type="text-area" id="description" placeholder="Description" ng-model="game.description" />
+					</div>
 				</div>
-			</div>
-			<div class = "row">
-				<div class= "input-field col s12">
-					<input type="text-area" id="description" placeholder="Description" ng-model="game.description" />
+				<div class ="row">
+					<div class= "input-field col s12">
+						<button type="submit" class="btn orange white-text waves-effect waves-light" ng-click="createGame(game)">Create Game</button>
+					</div>
 				</div>
-			</div>
-			<div class ="row">
-				<div class= "input-field col s12">
-					<button type="submit" class="btn orange white-text waves-effect waves-light" ng-click="createGame(game)">Create Game</button>
-				</div>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div><!-- end col -->
+	</div><!-- end row -->
 </div>

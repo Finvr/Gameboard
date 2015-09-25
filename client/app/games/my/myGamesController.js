@@ -8,9 +8,10 @@
     Auth.requireAuth();
 
   	var getMyGames = function(){
-  		GamePost.myGames()
+  		return GamePost.myGames()
   			.then(function(games){
   				console.log(games);
+  				return games;
   			});
   	}
   	$scope.myGames = getMyGames();
