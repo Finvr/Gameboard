@@ -15,7 +15,7 @@ module.exports = {
 
   createGamepost: function (req, res){
     var gamepost = req.body;
-    
+    gamepost.host_id = req.user;
     GamePosts.create(gamepost)
       .then(function (data){
         res.send(data);
