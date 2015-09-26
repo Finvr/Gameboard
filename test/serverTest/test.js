@@ -18,5 +18,14 @@ describe('Server - "/" routes test: ', function(){
       })
   });
 
-  it(' ')
+  it(' redirect to create-game after facebook login succeed', function(done){
+    request(app)
+      .get('/auth/facebook/callback')
+      .expect(302)
+      .end(function(err, res) {
+        if (err) throw err;
+        expect(res);
+        done();
+      });
+  });
 });
