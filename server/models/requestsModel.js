@@ -43,7 +43,7 @@ module.exports = {
         .then(function(result) {
           if ( result.length ) {
             return result;
-            } 
+          } 
           else {
             return "there are no requests"
             }
@@ -58,7 +58,7 @@ module.exports = {
       return db.select()
         .from('requests')
         .where({id: requestId})      
-    }
+    },
 
     create: function(request) {
       return db('requests')
@@ -72,4 +72,6 @@ module.exports = {
         })
     }
 
+
+    
 };

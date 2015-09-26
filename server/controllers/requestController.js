@@ -1,4 +1,4 @@
-var Requests = require ('../models/userModel.js')
+var Requests = require ('../models/requestsModel.js')
 
 module.exports = {
 	getAllRequests: function (req, res){
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   getUserRequests: function (req, res){
-  	var user = {id:1, username:Reagan Schiller, facebook_id:10206230787502131};
+  	var user = {id:1, username:'Reagan Schiller', facebook_id:10206230787502131};
   	//var user = req.body
 
       Requests.getRequestsByUserId(user)
@@ -38,16 +38,23 @@ module.exports = {
   },
 
   createRequest: function (req, res){
-  	var userId = req.user;
-  	var gamepostId = req.body.gamepost_id;
-  	var comments = req.body.comments;
+  	// var userId = req.user;
+  	// var gamepostId = req.body.gamepost_id;
+  	// var comments = req.body.comments;
 
 
-  	var request = {
-  		user_id: userId,
-  		gamepost_id: gamepostId,
-  		comments: comments
-    }
+  	// var request = {
+  	// 	user_id: userId,
+  	// 	gamepost_id: gamepostId,
+  	// 	comments: comments
+   //  }
+
+   	var request = {
+   		user_id: 17,
+   		gamepost_id:33, 
+   		comments: 'this is a test'
+   	}
+
   	Requests.create(request)
   	.then(function(data){
   		res.send(data);
@@ -60,5 +67,5 @@ module.exports = {
 
 
 }
-
+module.exports.createRequest();
 module.exports.getUserRequests()
