@@ -4,11 +4,12 @@ module.exports = {
 	getAllRequests: function (req, res){
       Requests.getAll()
       .then(function (data){
-        res.send(data);
+      	console.log(data);
+        //res.send(data);
       })
       .catch(function(err){
         console.log(err);
-        res.send(err.message);
+        //res.send(err.message);
       })
   },
 
@@ -18,22 +19,24 @@ module.exports = {
 
       Requests.getRequestsByUserId(user)
       .then(function (data){
-        res.send(data);
+      	console.log(data);
+        //res.send(data);
       })
       .catch(function(err){
         console.log(err);
-        res.send(err.message);
+        //res.send(err.message);
       })
   },
 
   getGamepostRequests: function (req, res){
       Requests.getAll()
       .then(function (data){
-        res.send(data);
+      	console.log(data);
+       // res.send(data);
       })
       .catch(function(err){
         console.log(err);
-        res.send(err.message);
+       // res.send(err.message);
       })
   },
 
@@ -50,18 +53,20 @@ module.exports = {
    //  }
 
    	var request = {
-   		user_id: 17,
-   		gamepost_id:33, 
+   		user_id: 1,
+   		gamepost_id:1, 
    		comments: 'this is a test'
    	}
 
   	Requests.create(request)
   	.then(function(data){
-  		res.send(data);
+  		console.log(data);
+  		//res.send(data);
+
   	})
   	.catch(function(err){
   		console.log(err);
-  		res.send(err.message);
+  		//res.send(err.message);
   	})
   }
 
