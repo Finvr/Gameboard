@@ -25,6 +25,8 @@
     "angular-route": "~1.4.6",
     "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
     "jquery": "~2.1.4",
+    "Materialize": "materialize#~0.97.1",
+    "sc-date-time": "~1.1.2"
     "material-design-icons": "~2.0.0",
     "Materialize": "materialize#~0.97.1"
   },

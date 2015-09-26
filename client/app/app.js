@@ -7,6 +7,7 @@
       'imgame.browseGames',
       'imgame.auth',
       'imgame.service',
+      'imgame.datetime',
   		'ngRoute',
   	])
   	.config(config);
