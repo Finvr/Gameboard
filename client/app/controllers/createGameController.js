@@ -77,6 +77,7 @@
       console.log("create gamepost game: ", game)
  			GamePost.create(game)
  				.then(function(data){
+          $location.path("/my-games")
           // if user is not authrized, data = "User is not logged in!"
           console.log("create gamepost: ", data)
  					console.log(data);
