@@ -1,43 +1,43 @@
-<div class="createGame" ng-controller="CreateGameController">
-	<h1 class="orange-text">Host a Game</h1>
+<div class="row createGame">
+	<div class="half-div container col s12">
+		<h1 class="orange-text">Host a Game</h1>
+	</div>
 
- 	<div class="row">
-	 	<div id="map" class="half-div container col s6">
-	 	</div>
+ 	<div id="map" class="half-div container col s6">
+ 	</div>
 
-	 	<div class="half-div container col s6">
-			<form novalidate class="create-form">
-				<div class ="row">
-				 	<div class= "input-field col s12">
-						<textarea id="game-location" ng-model="game.location"></textarea>
-						<label for="game-location"></label>
-					</div>
+ 	<div class="half-div container col s6">
+		<form novalidate class="create-form">
+			<div class ="row">
+			 	<div class= "input-field col s12">
+					<textarea id="game-location" ng-model="game.location"></textarea>
+					<label for="game-location"></label>
 				</div>
-				<div class = "row">
-					<div class= "input-field col s12">
-						<input type="text" id="game-name" ng-model="game.name" />
-						<label for="game-name"></label>
-					</div>
+			</div>
+			<div class = "row">
+				<div class= "input-field col s12">
+					<input type="text" id="game-name" ng-model="game.name" />
+					<label for="game-name"></label>
 				</div>
-				<div class="row">
-					<div class= "input-field col s4">
-						<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
-					</div>
-					<div class="input-field col s8" ng-model="game.datetime" />
-						<input type="datetime-local" id="game-datetime" ng-model="game.datetime" />
-					</div>
+			</div>
+			<div class="row">
+				<div class= "input-field col s4">
+					<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
 				</div>
-				<div class = "row">
-					<div class= "input-field col s12">
-						<textarea id="description" ng-model="game.description"></textarea>
-					</div>
+				<div class="input-field col s8" ng-model="game.datetime" />
+					<input type="datetime-local" id="game-datetime" ng-model="game.datetime" />
 				</div>
-				<div class ="row">
-					<div class= "input-field col s12">
-						<button type="submit" class="btn orange white-text waves-effect waves-light" ng-click="createGame(game)">Create Game</button>
-					</div>
+			</div>
+			<div class = "row">
+				<div class= "input-field col s12">
+					<textarea id="description" ng-model="game.description"></textarea>
 				</div>
-			</form>
-		</div>
+			</div>
+			<div class ="row">
+				<div class= "input-field col s12">
+					<button type="submit" class="btn orange white-text waves-effect waves-light" ng-click="createGame(game)">Create Game</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
