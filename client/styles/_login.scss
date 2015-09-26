@@ -1,17 +1,11 @@
-body {
-	height: 100%;
-	width: 100%;
-	position: relative;
-}
+.home {
 
-main {
-	height: 100%;
-}
-.login {
-	width: 80%;
-	margin: 0 auto;
-}
+	margin-top: 30%;
+	.login { 
+		margin-bottom: 3%;
+	}
 
-.login a {
-	margin: 0 auto;
+	.login a, .browse a{
+		width: 100%;
+	}
 }
