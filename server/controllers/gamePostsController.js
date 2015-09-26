@@ -41,11 +41,12 @@ module.exports = {
       })
   },
 
-  deleteGamepost: function (req, res){
-    
-    GamePosts.deleteGamePost(gamepost)
-      .then(function (data){
-        res.send(data);
+  deleteGamePost: function (req, res){
+    var gamepostId = parseInt(req.url.split('/')[2]) //for "/gameposts/123", gamepostID === 123
+    var userId = req.user;
+    GamePosts.deleteGamePost(gamepostId, userId)
+      .then(function (){
+        res.send(200);
       })
       .catch(function(err){
         console.log(err);

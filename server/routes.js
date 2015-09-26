@@ -29,7 +29,7 @@ router.get('/gameposts', checkAuth, gameController.getAllGameposts);
 
 router.post('/gameposts', checkAuth, gameController.createGamepost);
 
-router.delete('/gameposts/*', checkAuth, gameController.deleteGamepost);
+router.delete('/gameposts/*', checkAuth, gameController.deleteGamePost);
 
 module.exports = router;
 
