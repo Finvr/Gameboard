@@ -1,46 +1,55 @@
-<div class="createGame" ng-controller="CreateGameController">
-	<h1 class="orange-text">Host a Game</h1>
-	<div class="half-div container card">
-		<div class="card-image">
-			<img src="http://i.imgur.com/R3vAV.jpg">
-		  <span class="card-title">{{ game.name }}</span>
-	  </div>
-	  <div class="card-content">
-	  	  <p>{{game.description}}</p>
-	  	  <p>{{game.address}}</p>
-	  </div>
-	  <div class="card-action">
-	    <a href="#">{{ game.location}}</a>
-	    <a href="#">{{ game.datetime}}</a>
-	  </div>
+<div class="row createGame">
+	<div class="half-div container col s12">
+		<h1 class="orange-text">Host a Game</h1>
+	</div>
+	<!-- google map -->
+ 	<div id="map" class="col s6">
  	</div>
- 	<div class="half-div container">
+
+ 	<!-- game input form -->
+ 	<div class="col s6">
 		<form novalidate class="create-form">
+
+			<!-- location form -->
 			<div class ="row">
 			 	<div class= "input-field col s12">
-					<textarea id="game-location" ng-model="game.location"></textarea>
-					<label for="game-location"></label>
+					<input type="text" id="game-location" class="validate" ng-model="game.location" />
+					<label class="active" for="game-location">Location</label>
 				</div>
 			</div>
+
+			<!-- game name form -->
 			<div class = "row">
 				<div class= "input-field col s12">
 					<input type="text" id="game-name" ng-model="game.name" />
-					<label for="game-name"></label>
+					<label class="active" for="game-name">Game name</label>
 				</div>
 			</div>
+
+			<!-- number of players and datetime form -->
 			<div class="row">
+				<!-- # of players form -->
 				<div class= "input-field col s4">
-					<input type="number" id="num-players" ng-model="game.numPlayers" placeholder="Number  of Players"/>
+					<input type="number" id="num-players" ng-model="game.numPlayers"/>
+					<label class="active" for="num-players"># of Players</label>
 				</div>
-				<div class="input-field col s8" ng-model="game.datetime" />
-					<input type="datetime-local" id="game-datetime" ng-model="game.datetime" />
+				<!-- datetime form -->
+				<div class="input-field col s8"/>
+					<input type="datetime-local" id="game-datetime" class="datepicker" ng-model="game.datetime"/>
+					<label class="active" for="game-datetime">Time</label>
+					<time-date-picker ng-model="dateValue"></time-date-picker>
 				</div>
 			</div>
+
+			<!-- game description form -->
 			<div class = "row">
 				<div class= "input-field col s12">
-					<textarea id="description" ng-model="game.description"></textarea>
+					<textarea id="game-description" ng-model="game.description"></textarea>
+					<label class="active" for="game-description">Description</label>
 				</div>
 			</div>
+
+			<!-- create game button -->
 			<div class ="row">
 				<div class= "input-field col s12">
 					<button type="submit" class="btn orange white-text waves-effect waves-light" ng-click="createGame(game)">Create Game</button>
