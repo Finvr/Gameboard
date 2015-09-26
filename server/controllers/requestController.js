@@ -4,73 +4,55 @@ module.exports = {
 	getAllRequests: function (req, res){
       Requests.getAll()
       .then(function (data){
-      	console.log(data);
-        //res.send(data);
+        res.send(data);
       })
       .catch(function(err){
         console.log(err);
-        //res.send(err.message);
+        res.send(err.message);
       })
   },
 
-  getUserRequests: function (req, res){
-  	var user = {id:1, username:'Reagan Schiller', facebook_id:10206230787502131};
-  	//var user = req.body
+    getUserRequests: function (req, res){
+  	  var user = req.body
 
       Requests.getRequestsByUserId(user)
       .then(function (data){
-      	console.log(data);
-        //res.send(data);
+        res.send(data);
       })
       .catch(function(err){
         console.log(err);
-        //res.send(err.message);
+        res.send(err.message);
       })
-  },
+    },
 
-  getGamepostRequests: function (req, res){
-      Requests.getAll()
+    getGamepostRequests: function (req, res){
+  	  var gamepost= {id:3, host_id:2, game:'clue'}
+
+      Requests.getRequestByGameId(gamepost)
       .then(function (data){
-      	console.log(data);
-       // res.send(data);
-      })
+        console.log(data);
+        res.send(data);
+       })
       .catch(function(err){
         console.log(err);
-       // res.send(err.message);
+           res.send(err.message);
       })
   },
 
   createRequest: function (req, res){
-  	// var userId = req.user;
-  	// var gamepostId = req.body.gamepost_id;
-  	// var comments = req.body.comments;
+  	 var userId = req.user;
+  	 var gamepostId = req.body.gamepost_id;
+  	 var comments = req.body.comments;
 
-
-  	// var request = {
-  	// 	user_id: userId,
-  	// 	gamepost_id: gamepostId,
-  	// 	comments: comments
-   //  }
-
-   	var request = {
-   		user_id: 1,
-   		gamepost_id:1, 
-   		comments: 'this is a test'
-   	}
-
-  	Requests.create(request)
-  	.then(function(data){
-  		console.log(data);
-  		//res.send(data);
-
-  	})
-  	.catch(function(err){
+     Requests.create(request)
+  	 .then(function(data){
+  		res.send(data);
+     })
+  	 .catch(function(err){
   		console.log(err);
-  		//res.send(err.message);
+  		res.send(err.message);
   	})
   }
 
 
 }
-module.exports.createRequest();
-module.exports.getUserRequests()
