@@ -23,7 +23,7 @@
    	</div>-->
       <ul class="collection with-header">
         <li class="collection-header"><h4>Game's I'm Hosting</h4></li>
-        <li ng-repeat="game in myGames" class="collection-item"><div>{{ game.game}} | {{ game.game_date }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        <li ng-repeat="game in myGames" class="collection-item"><div>{{ game.game}} | {{ game.game_date | date : "EEEE, MMMM d, y, h:mm a" }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
       </ul>
   </section>
   <section class="joined">
