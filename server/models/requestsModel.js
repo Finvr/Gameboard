@@ -37,7 +37,7 @@ module.exports = {
           })
     },
 
-    getAll: function(gamepost) {
+    getAll: function() {
       return db.select()
         .from('requests')
         .then(function(result) {
