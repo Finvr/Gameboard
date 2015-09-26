@@ -7,6 +7,8 @@
       'imgame.browseGames',
       'imgame.auth',
       'imgame.service',
+      'ui.router',
+      'ui.materialize',
   		'ngRoute',
   	])
   	.config(config);
@@ -14,23 +16,23 @@
   	function config($routeProvider, $httpProvider) {
 			$routeProvider
 			.when('/', {
-        templateUrl: 'app/auth/homeTemplate.html',
+        templateUrl: 'app/templates/homeTemplate.html',
         controller: 'HomeController'
       })
       .when('/create-game', {
-        templateUrl: 'app/games/create/createGameTemplate.html',
+        templateUrl: 'app/templates/createGameTemplate.html',
         controller: 'CreateGameController'
       })
       .when('/my-games', {
-        templateUrl: 'app/games/my/myGamesTemplate.html',
+        templateUrl: 'app/templates/myGamesTemplate.html',
         controller: 'MyGamesController'       
       })
       .when('/signin', {
-        templateUrl: 'app/auth/signin.html',
+        templateUrl: 'app/templates/signin.html',
         controller: 'AuthController'
       })
       .when('/logout', {
-        templateUrl: 'app/auth/homeTemplate.html',
+        templateUrl: 'app/templates/homeTemplate.html',
         url: '/',
         controller: 'AuthController',
         resolve: {function (Auth) {
@@ -38,7 +40,7 @@
         }}
       })
       .when('/browse-games', {
-        templateUrl: 'app/games/browse/browseGameTemplate.html',
+        templateUrl: 'app/templates/browseGameTemplate.html',
         controller: 'BrowseGameController'
       })
       .otherwise('/')
