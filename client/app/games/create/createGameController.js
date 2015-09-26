@@ -4,10 +4,9 @@
 
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {
- 			name: "What are we playing?",
- 			description: "What are the notes?",
- 			datetime: "",//When",
- 			location: "Where"
+ 			//name: "What are we playing?",
+ 			//description: "What are the notes?",
+ 			datetime: ""
  		}
 
     Auth.requireAuth();
