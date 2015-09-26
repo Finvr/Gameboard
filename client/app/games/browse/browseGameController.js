@@ -4,8 +4,6 @@
 
 	function BrowseGameController($scope, BrowseGames, Auth) {
 
-		Auth.requireAuth();
-
 		$scope.home = "djsaldjaskl";
 		$scope.games = [];
 		BrowseGames.getGames().then(function(resp) {
