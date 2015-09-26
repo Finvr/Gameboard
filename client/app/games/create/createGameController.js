@@ -3,11 +3,7 @@
  	.controller('CreateGameController', CreateGameController);
 
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
- 		$scope.game = {
- 			//name: "What are we playing?",
- 			//description: "What are the notes?",
- 			//datetime: ""
- 		}
+ 		$scope.game = {};
 
     Auth.requireAuth();
 
@@ -76,8 +72,9 @@
  				"game": game.name,
  				"gamepost_description": game.description,
 				"player_count": game.numPlayers,
-				"game_date": game.datetime
+				"game_datetime": game.datetime
  			};
+      console.log("create gamepost game: ", game)
  			GamePost.create(game)
  				.then(function(data){
           // if user is not authrized, data = "User is not logged in!"
