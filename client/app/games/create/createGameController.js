@@ -6,7 +6,7 @@
  		$scope.game = {
  			//name: "What are we playing?",
  			//description: "What are the notes?",
- 			datetime: ""
+ 			//datetime: ""
  		}
 
     Auth.requireAuth();
