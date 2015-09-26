@@ -21,9 +21,18 @@
         </div>
    		</div>
    	</div>-->
-      <ul class="collection with-header">
+      <ul class="collapsible collection with-header">
         <li class="collection-header"><h4>Game's I'm Hosting</h4></li>
-        <li ng-repeat="game in myGames" class="collection-item"><div>{{ game.game}} | {{ game.game_date | date : "EEEE, MMMM d, y, h:mm a" }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        <li ng-repeat="game in myGames" class="collection-item">
+          <div class="collapsible-header">
+            {{ game.game}} | {{ game.game_date | date : "EEEE, MMMM d, y, h:mm a" }}
+          </div>
+          <div class="collapsible-body">
+              <p>{{game.gamepost_description}}</p>
+              <p>Players: {{game.player_count}}</p>
+              <p><a href="#">{{ game.game_location }}</a></p>
+          </div>
+        </li>
       </ul>
   </section>
   <section class="joined">
