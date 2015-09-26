@@ -14,7 +14,13 @@
 
     // google map
     var geocoder;
-    function initialize() {
+    $scope.initialize = function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+           map.setCenter(initialLocation);
+        });
+      }
       var mapCanvas = document.getElementById('map');
       var mapOptions = {
         center: new google.maps.LatLng(30.2500, -97.7500),
@@ -27,21 +33,15 @@
       var map = new google.maps.Map(mapCanvas, mapOptions);
       var GeoMarker = new GeolocationMarker(map);
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-           map.setCenter(initialLocation);
-        });
-      }
 
       google.maps.event.addListener(map, 'click', function(event) { 
         marker.setMap && marker.setMap(null);
-        changeMarker(event.latLng, map);
+        $scope.changeMarker(event.latLng, map);
       });
     }
     var marker = {};
-
-    function changeMarker(location, map) {
+    
+    $scope.changeMarker =  function (location, map) {
       // Add the marker at the clicked location, and add the next-available label
       // from the array of alphabetical characters.
       geocoder.geocode({'latLng': location},
@@ -66,9 +66,10 @@
 
     };
     
-    initialize();
+    $scope.initialize();
     
-    google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', $scope.initialize);
+    // google map over
 
  		$scope.createGame = function(game){
  			game = { 
