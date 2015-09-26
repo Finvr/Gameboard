@@ -27,6 +27,24 @@ module.exports = {
         return err;
       })
   },
+
+  deleteGamePost: function(gamepost){
+    console.log("gamepost delete model: ", gamepost)
+    return db.select()
+      .from('gameposts')
+      .where({
+        id:gamepost.id
+      })
+      .del()
+      .then(function(gamepost){
+        console.log("gamepost has been deleted")
+      })
+      .catch(function(err){
+        console.log(err);
+        return err;
+      })
+
+  }
   
 }
 
