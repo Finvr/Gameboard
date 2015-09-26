@@ -19,7 +19,7 @@ module.exports = {
     GamePosts.create(gamepost)
     
       .then(function (data){
-        console.log('gamepost: ', gamepost)
+        console.log('gamepost: ', data)
         res.send(data);
 
       })
