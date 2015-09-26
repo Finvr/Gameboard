@@ -14,11 +14,11 @@ module.exports = {
       })
   },
 
-  create: function(gamepost){
+  create: function (gamepost){
     return db('gameposts')
       .insert(gamepost)
       .returning("id")
-      .then(function(gamepost){
+      .then(function (gamepost){
         console.log(gamepost);
         return gamepost;
       })
@@ -28,7 +28,7 @@ module.exports = {
       })
   },
 
-  deleteGamePost: function(gamepostId, userId){
+  deleteGamePost: function (gamepostId, userId){
     return db('gameposts')
       .where({
         id: gamepostId,
@@ -43,7 +43,7 @@ module.exports = {
   
 }
 
-function fetch(userId) {
+function fetch (userId) {
   if ( userId ) {
     return db.select()
       .from('gameposts')
