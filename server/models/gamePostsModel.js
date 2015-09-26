@@ -28,22 +28,17 @@ module.exports = {
       })
   },
 
-  deleteGamePost: function(gamepost){
-    console.log("gamepost delete model: ", gamepost)
-    return db.select()
-      .from('gameposts')
+  deleteGamePost: function(gamepostId, userId){
+    return db('gameposts')
       .where({
-        id:gamepost.id
+        id: gamepostId,
+        host_id: userId
       })
       .del()
-      .then(function(gamepost){
-        console.log("gamepost has been deleted")
-      })
       .catch(function(err){
         console.log(err);
         return err;
       })
-
   }
   
 }
