@@ -12,7 +12,7 @@ module.exports = {
       })
   },
 
-    getUserRequests: function (req, res){
+  getUserRequests: function (req, res){
   	  var user = req.body
 
       Requests.getRequestsByUserId(user)
@@ -25,8 +25,8 @@ module.exports = {
       })
     },
 
-    getGamepostRequests: function (req, res){
-  	  var gamepost= {id:3, host_id:2, game:'clue'}
+  getGamepostRequests: function (req, res){
+  	  var gamepost= req.body
 
       Requests.getRequestByGameId(gamepost)
       .then(function (data){
@@ -46,13 +46,27 @@ module.exports = {
 
      Requests.create(request)
   	 .then(function(data){
-  		res.send(data);
+  		 res.send(data);
      })
   	 .catch(function(err){
-  		console.log(err);
-  		res.send(err.message);
+  		 console.log(err);
+  		 res.send(err.message);
   	})
+  },
+
+  deleteRequest: function (req, res){
+    var request = req.body;//check this
+    Requests.deleteRequest(request)
+      .then(function (data){
+        res.send(data);
+      })
+      .catch(function(err){
+        console.log(err);
+        res.send(err.message);
+      })
   }
+
+
 
 
 }
