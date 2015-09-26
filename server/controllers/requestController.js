@@ -35,6 +35,27 @@ module.exports = {
         console.log(err);
         res.send(err.message);
       })
+  },
+
+  createRequest: function (req, res){
+  	var userId = req.user;
+  	var gamepostId = req.body.gamepost_id;
+  	var comments = req.body.comments;
+
+
+  	var request = {
+  		user_id: userId,
+  		gamepost_id: gamepostId,
+  		comments: comments
+    }
+  	Requests.create(request)
+  	.then(function(data){
+  		res.send(data);
+  	})
+  	.catch(function(err){
+  		console.log(err);
+  		res.send(err.message);
+  	})
   }
 
 
