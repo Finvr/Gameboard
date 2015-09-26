@@ -5,7 +5,6 @@
       'imgame.createGame',
       'imgame.myGames',
       'imgame.browseGames',
-      'imgame.auth',
       'imgame.service',
       'ui.router',
       'ui.materialize',
@@ -27,14 +26,10 @@
         templateUrl: 'app/templates/myGamesTemplate.html',
         controller: 'MyGamesController'       
       })
-      .when('/signin', {
-        templateUrl: 'app/templates/signin.html',
-        controller: 'AuthController'
-      })
       .when('/logout', {
         templateUrl: 'app/templates/homeTemplate.html',
         url: '/',
-        controller: 'AuthController',
+        controller: 'HomeController',
         resolve: {function (Auth) {
           Auth.signout();
         }}
