@@ -7,6 +7,8 @@
       'imgame.browseGames',
       'imgame.auth',
       'imgame.service',
+      'ui.router',
+      'ui.materialize',
   		'ngRoute',
   	])
   	.config(config);
