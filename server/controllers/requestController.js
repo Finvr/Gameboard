@@ -26,7 +26,7 @@ module.exports = {
     },
 
   getGamepostRequests: function (req, res){
-  	  var gamepost= req.body
+  	  var gamepost= req.data
 
       Requests.getRequestByGameId(gamepost)
       .then(function (data){
@@ -55,7 +55,7 @@ module.exports = {
   },
 
   deleteRequest: function (req, res){
-    var request = req.body;//check this
+    var request = req.data;//check this
     Requests.deleteRequest(request)
       .then(function (data){
         res.send(data);
