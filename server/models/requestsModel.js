@@ -64,9 +64,6 @@ module.exports = {
           id:request.id
       })
       .del()
-      .then(function(request){
-         console.log("request has been deleted")
-      })
       .catch(function(err){
         console.log(err);
         return err;

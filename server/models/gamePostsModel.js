@@ -5,7 +5,6 @@ module.exports = {
   getAll: function (userId){
     return fetch(userId)
       .then(function (gameposts){
-        console.log(gameposts);
         return gameposts;
       })
       .catch(function(err){
@@ -19,7 +18,6 @@ module.exports = {
       .insert(gamepost)
       .returning("id")
       .then(function (gamepost){
-        console.log(gamepost);
         return gamepost;
       })
       .catch(function(err){

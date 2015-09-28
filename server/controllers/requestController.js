@@ -20,7 +20,6 @@ module.exports = {
 
       Requests.getRequestByGameId(gamepostId)
       .then(function (data){
-        console.log(data);
         res.send(data);
        })
       .catch(function(err){

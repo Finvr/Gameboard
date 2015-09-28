@@ -19,7 +19,6 @@ module.exports = {
     GamePosts.create(gamepost)
     
       .then(function (data){
-        console.log('gamepost: ', data)
         res.send(data);
 
       })
