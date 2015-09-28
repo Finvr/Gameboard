@@ -1,11 +1,13 @@
+process.env.NODE_ENV = 'test';
+
 var request = require('supertest');
 var expect = require('chai').expect;
 var userModel = require('../../server/models/userModel.js');
 var userController = require('../../server/controllers/userController.js');
+
  
 var app = require('../../server/server.js');
 
-process.env.NODE_ENV === 'test';
 
 describe('userModel function unit test:  ', function(){
   describe(' find or create function ', function(){
@@ -14,23 +16,16 @@ describe('userModel function unit test:  ', function(){
         username: 'never',
         facebook_id: '1234'
       }
-
+      console.log("env : ", process.env.NODE_ENV)
       userModel.findOrCreate(user)
-        .then(function(results){
-          console.log("user test: results");
+        .then(function(result){
+          expect(result).to.have.property('id')
+          expect(result.username).to.equal('never')
+          console.log("user test: results", result);
           done();
         })
     
-  })
-
-  it(' redirect to create-game after facebook login succeed', function(done){
-    request(app)
-      .get('/auth/facebook/callback')
-      .expect(302)
-      .end(function(err, res) {
-        if (err) throw err;
-        expect(res);
-        done();
-      });
+    })
   });
+
 });
