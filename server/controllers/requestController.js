@@ -1,16 +1,6 @@
 var Requests = require ('../models/requestsModel.js')
 
 module.exports = {
-	getAllRequests: function (req, res){
-      Requests.getAll()
-      .then(function (data){
-        res.send(data);
-      })
-      .catch(function(err){
-        console.log(err);
-        res.send(err.message);
-      })
-  },
 
   getUserRequests: function (req, res){
   	  var user = req.body
@@ -26,9 +16,9 @@ module.exports = {
     },
 
   getGamepostRequests: function (req, res){
-  	  var gamepost= req.data
+  	  var gamepostId = parseInt(req.url.split('/')[2])
 
-      Requests.getRequestByGameId(gamepost)
+      Requests.getRequestByGameId(gamepostId)
       .then(function (data){
         console.log(data);
         res.send(data);
@@ -65,8 +55,4 @@ module.exports = {
         res.send(err.message);
       })
   }
-
-
-
-
 }

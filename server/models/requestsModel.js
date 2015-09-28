@@ -39,24 +39,6 @@ module.exports = {
           })
   },
 
-  getAll: function() {
-    return db.select()
-      .from('requests')
-      .fullOuterJoin('gameposts', 'gamepost_id', 'gameposts.id')
-      .then(function(result) {
-        if ( result.length ) {
-          return result;
-        } 
-        else {
-          return "there are no requests"
-        }
-        })
-      .catch(function(err){
-        console.log("requestsModel getAll Error: ", err);
-        return err;
-      })
-  },
-
   find: function(requestId) {
     return db.select()
       .from('requests')
