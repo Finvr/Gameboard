@@ -37,6 +37,16 @@ module.exports = {
         console.log(err);
         return err;
       })
+  },
+
+  setPending: function (gamepostId) {
+    return db('gameposts')
+      .where({id: gamepostId})
+      .update('has_pending_requests', true)
+      .catch(function(err){
+        console.log(err);
+        return err
+      })
   }
   
 }
