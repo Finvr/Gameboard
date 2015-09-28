@@ -1,56 +1,51 @@
 <div class="myGames" ng-controller="MyGamesController">
- 	<h1 class="orange-text">Scheduled Games</h1>
-
-  <section class="hosting">
-  <!--
-   	<div class="row">
-   		<div ng-repeat="game in myGames"class="col s12 m6 card">
-   			<div class="card-image">
-   				<img src="http://i.imgur.com/R3vAV.jpg">
-     		  <span class="card-title">{{game.game}}</span>
-   		  </div>
-   		  <div class="card-content">
-   		  	  <p>{{game.gamepost_description}}</p>
-            <p>Players: {{game.player_count}}</p>
-   		  </div>
-        <div class="card-action">
-          <a href="#">{{ game.game_location }}</a>
-        </div>
-        <div class="card-action">
-          <a href="#">{{ game.game_date }}</a>
-        </div>
-   		</div>
-   	</div>-->
-      <ul class="collapsible collection with-header">
-        <li class="collection-header"><h4>Game's I'm Hosting</h4></li>
-        <li ng-repeat="game in myGames" class="collection-item">
-          <div class="collapsible-header">
-            {{ game.game}} | {{ game.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}
-          </div>
-          <div class="collapsible-body">
+  <div class="row">
+    <div class="col m6">
+      <section>
+        <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
+          <li class="collection-header">
+            <h2 class="pink-text text-darken-2">Game's I'm Hosting</h2>
+          </li>
+          <li ng-repeat="game in myGames" class="collection-item avatar">
+            <div class="collapsible-header">
+              <i class="material-icons pink">info</i>
+              <span class="title indigo-text text-darkern-2">
+                {{ game.game}}
+              </span>
+              <p>
+                {{ game.game_datetime | date : "MM/d/y" }}, {{ game.game_location }}
+              </p>
+              <a href="#!" class="secondary-content">
+                <ng-md-icon icon="facebook" style="fill: pink"></ng-md-icon>
+              </a>
+            </div>
+            <div class="collapsible-body">
               <p>{{game.gamepost_description}}</p>
               <p>Players: {{game.player_count}}</p>
-              <p><a href="#">{{ game.game_location }}</a></p>
-          </div>
-        </li>
-      </ul>
-  </section>
-  <section class="joined">
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Joined Games</h4></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-    </ul>
-  </section>
-  <section class="pending">
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Pending Games</h4></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-      <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-    </ul>
-  </section>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <div class="col m6">
+      <section class="joined">
+        <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
+          <li class="collection-header"><span class="pink-text text-darken-2">Game's I'm Joining</span></li>
+          <li class="collection-item">
+            <div class="collapsible-header">Alvin
+              <a href="#!" class="secondary-content">
+                <i class="material-icons">send</i>
+              </a>
+            </div>
+            <div class="collapsible-body">
+              Test
+            </div>
+          </li>
+          <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        </ul>
+      </section>
+    </div>
+  </div>
 </div>
