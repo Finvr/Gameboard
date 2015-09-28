@@ -1,4 +1,27 @@
 
-nav .input-field input {
-	height: 80%;
+.collapsible-header{
+	padding-top: 0.1%;
+	font-family: Arial;
+	background-color: #ffb74d;
+}
+
+.collapsible-body {
+	padding-top: 2%;
+	padding-left: 2%;
+}
+
+.collapsible-body .container {
+		padding: 0.5%;
+}
+
+.browse_search textarea.materialize-textarea {
+	padding: 0;
+}
+
+#search_games {
+	font-size:1.2em;
+	color: black;
+  padding-top: 0;
+  background-color: #e0f7fa;
+  border-radius: 5px;
 }

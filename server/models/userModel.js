@@ -23,6 +23,12 @@ module.exports = {
     return db.select()
       .from('users')
       .where({id: userId})      
+  },
+
+  delete: function(userId) {
+    return db('users')
+      .where('id', userId)
+      .del();
   }
 
 };
