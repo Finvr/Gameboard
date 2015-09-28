@@ -26,7 +26,7 @@ module.exports= {
         if (res.length !== 0) {
           next();
         } else {
-          // res.send("User does not exist!")
+          res.send("User does not exist!")
         }
       })
       .catch(function(err) {

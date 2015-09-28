@@ -2,11 +2,15 @@ var db = require('../db.js');
 
 module.exports = {
 
-	getRequestsByUserId: function(user) {
-      return db.select()
+	getRequestsByUserId: function(userId) {
+      return db.select([
+          'gameposts.*',
+          'requests.*',
+          'gameposts.id as gamepost_id'
+        ])
        .from('requests')
-       .where({user_id: user.id})
-       .fullOuterJoin('gameposts', 'gamepost_id', 'gameposts.id')
+       .where({user_id: userId})
+       .join('gameposts', 'gamepost_id', 'gameposts.id')
        .then(function(result) {
         if ( result.length ) {
           return result;
@@ -20,11 +24,15 @@ module.exports = {
        })
   },
 
-  getRequestByGameId: function(gamepost) {
-      return db.select()
+  getRequestByGameId: function(gamepostId) {
+      return db.select([
+          'gameposts.*',
+          'requests.*',
+          'gameposts.id as gamepost_id'
+        ])
         .from('requests')
-        .where({gamepost_id: gamepost.id})
-        .fullOuterJoin('gameposts', 'gamepost_id', 'gameposts.id')
+        .where({gamepost_id: gamepostId})
+        .join('gameposts', 'gamepost_id', 'gameposts.id')
         .then(function(result) {
           if ( result.length ) {
             return result;
@@ -50,7 +58,7 @@ module.exports = {
         .insert(request)
         .returning("id")
         .then(function(requestId){
-          return find(requestId[0])
+          return module.exports.find(requestId[0])
             .then(function(request){
               return request[0];
             })

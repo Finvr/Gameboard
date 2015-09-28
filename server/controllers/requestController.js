@@ -3,9 +3,9 @@ var Requests = require ('../models/requestsModel.js')
 module.exports = {
 
   getUserRequests: function (req, res){
-  	  var user = req.body
+  	  var userId = req.user
 
-      Requests.getRequestsByUserId(user)
+      Requests.getRequestsByUserId(userId)
       .then(function (data){
         res.send(data);
       })
@@ -36,7 +36,7 @@ module.exports = {
 
      Requests.create(request)
   	 .then(function(data){
-  		 res.send(data);
+       res.send(data);
      })
   	 .catch(function(err){
   		 console.log(err);
