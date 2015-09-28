@@ -15,7 +15,7 @@ module.exports = {
       })
     },
 
-  getGamepostRequests: function (req, res){
+  getGamePostRequests: function (req, res){
   	  var gamepostId = parseInt(req.url.split('/')[2])
 
       Requests.getRequestByGameId(gamepostId)
