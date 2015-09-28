@@ -1,29 +1,36 @@
 <div ng-controller="BrowseGameController">
  <h3>Browse All Games</h3>
-   <nav>
-    <div class="nav-wrapper orange lighten-2" id="browse_search">
+    <div class="browse_search">
       <form>
-        <div class="input-field">
-          <input id="search_games" type="search" ng-model="searchText"required>
-          <label for="search"><i class="material-icons">search</i></label>
-        </div>
+         <div class="input-field">
+          <textarea id="search_games" row="1" class="materialize-textarea" ng-model="searchText"required placeholder="  search.."></textarea>
+    		</div>
       </form>
     </div>
-  </nav>
-	<ul class = "collection">
-	  <li class = "collection-item" ng-repeat="game in games | filter:searchText">
-	  <div class = "row">
-	  	<div class = "col s10">
-		  	<h5><strong>{{game.game}}</strong></h5>
-		  	<h6><strong>Location: </strong>{{game.game_location}}</h6>
-		  	<h6><strong> Time: </strong>{{game.game_time}} </h6>
-		  	<h6><strong> Number of Players: </strong>{{game.player_count}}</h6>
-		  	<h6><strong>Description: </strong>{{game.gamepost_description}}</h6>
-		</div>
-		<div class = "col s2 req_btn">
-	  		<button class= "btn cyan waves-effect waves-light" id="request_btn">Request</button>
-	  	</div>
-	  </div>
-	  </li>
-	</ul>
+    
+	  <ul class="collapsible popout" data-collapsible="accordion" watch>
+	    <li ng-repeat="game in games | filter:searchText">
+	      <div class="collapsible-header"><i class="material-icons right">speaker_notes</i><i class="material-icons right">event</i><h5><b>{{game.game}}</b></h5>
+	      {{game.game_datetime | date:"EEEE, MMM d, y ',' h:mma"}}
+	       @ {{game.game_location}}
+	      </div>
+	      <div class="collapsible-body">
+	      	<div class = "row">
+	      		<div class= "col s12"><i> {{game.gamepost_description}} </i> </div>
+	      	</div>
+	      <div class = "container">	
+	     	<div class = "row center">
+	        <div class="input-field">
+	          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="message" placeholder="Enter Message"></textarea>
+	          </div>
+	          <div class = "col s2">
+	           <div class = "btn-floating btn-med waves-effect waves-light cyan" ng-click="showPending()"><i class="material-icons">email</i></div>
+	          </div>
+        </div>
+      </div>
+
+      </div>
+	    </li>
+  </ul>
+  </div>
 </div>
