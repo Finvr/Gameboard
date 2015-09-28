@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var app = require('../../server/server.js');
 
 //To get this test to work, you must paste valid cookies into the line below.
-var cookies = 'imgame2:session=eyJwYXNzcG9ydCI6eyJ1c2VyIjoxfX0=; imgame2:session.sig=jpsf5dALozPDzhxAexSCVfBUMGI'
+var cookies //= PASTE COOKIES HERE
 
 describe('Server - "/" routes test: ', function(){
   it(' "/" respond with 200', function(done){
@@ -59,26 +59,26 @@ describe('Authentication', function() {
 });
 
 describe('Gameposts', function() {
-  // it('should accept gamepost objects', function(done) {
-  //   var testGamePost = {
-  //     game_location: 'Testland', 
-  //     game: 'Testopoly', 
-  //     player_count: 1, 
-  //     gamepost_description: 'A test',
-  //     game_datetime: 'Wed Sep 30 2015 12:20:00'
-  //   };
+  it('should accept gamepost objects', function(done) {
+    var testGamePost = {
+      game_location: 'Testland', 
+      game: 'Testopoly', 
+      player_count: 1, 
+      gamepost_description: 'A test',
+      game_datetime: 'Wed Sep 30 2015 12:20:00'
+    };
 
-  //   request(app)
-  //     .post('/gameposts')
-  //     .set('Cookie', cookies)
-  //     .send(testGamePost)
-  //     .expect(200)
-  //     .end(function(err, res) {
-  //       if (err) throw err;
-  //       expect(res.body[0]);
-  //       done();
-  //     });
-  // });
+    request(app)
+      .post('/gameposts')
+      .set('Cookie', cookies)
+      .send(testGamePost)
+      .expect(200)
+      .end(function(err, res) {
+        if (err) throw err;
+        expect(res.body[0]);
+        done();
+      });
+  });
 
   it('should respond with gamepost objects', function(done) {
     request(app)
@@ -95,19 +95,19 @@ describe('Gameposts', function() {
 })
 
 describe('Requests', function() {
-  // var testRequest = {comments: "I WANNA PLAY"}
-  // it('should create requests', function(done) {
-  //   request(app)
-  //     .post('/gameposts/1/requests')
-  //     .set('Cookie', cookies)
-  //     .send(testRequest)
-  //     .expect(200)
-  //     .end(function(err, res) {
-  //       if (err) throw err;
-  //       expect(res);
-  //       done();
-  //     })
-  // })
+  var testRequest = {comments: "I WANNA PLAY"}
+  it('should create requests', function(done) {
+    request(app)
+      .post('/gameposts/1/requests')
+      .set('Cookie', cookies)
+      .send(testRequest)
+      .expect(200)
+      .end(function(err, res) {
+        if (err) throw err;
+        expect(res);
+        done();
+      })
+  })
 
   it('should get requests by gamepost_id', function(done) {
     request(app)
@@ -116,7 +116,6 @@ describe('Requests', function() {
       .expect(200)
       .end(function(err, res) {
         if (err) throw err;
-        // console.log("Gamepost requests: ", res.body);
         expect(res);
         done();
       })
@@ -129,7 +128,6 @@ describe('Requests', function() {
       .expect(200)
       .end(function(err, res) {
         if (err) throw err;
-        console.log("User requests: ", res.body);
         expect(res);
         done();
       })
