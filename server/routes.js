@@ -33,14 +33,13 @@ router.get('/gameposts', checkAuth, gameController.getAllGameposts);
 router.post('/gameposts', checkAuth, gameController.createGamepost);
 
 router.delete('/gameposts/*', checkAuth, gameController.deleteGamePost);
+//get all requests for a gamepost
+router.get('/gameposts/*/requests', checkAuth, requestController.getGamePostRequests);
+
+//generate a request
+router.post('/gameposts/*/requests', checkAuth, requestController.createRequest);
 
 //requests routes
-//get all requests for a user
-router.get('/requests', checkAuth, requestController.getAll);
-//get all requests for a gamepost
-router.get('/requests/*', checkAuth, requestController.getGamePostRequests);
-//generate a request
-router.post('/requests', checkAuth, requestController.createRequest);
 //delete a request
 router.delete('/requests/*', checkAuth, requestController.deleteRequest)
 

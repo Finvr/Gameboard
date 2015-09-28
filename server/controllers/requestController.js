@@ -30,9 +30,10 @@ module.exports = {
   },
 
   createRequest: function (req, res){
-  	 var userId = req.user;
-  	 var gamepostId = req.body.gamepost_id;
-  	 var comments = req.body.comments;
+  	 var request = req.body;
+     request.user_id = req.user;
+     request.gamepost_id = parseInt(req.url.split('/')[2]);
+     request.status = "pending";
 
      Requests.create(request)
   	 .then(function(data){
