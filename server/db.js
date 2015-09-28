@@ -9,3 +9,4 @@ module.exports = knex;
 //   knex.migrate.latest([config]);
 // }
 // knex migrate:latest // bash command line run this;
+// for testing: NODE_ENV=test knex migrate:latest
