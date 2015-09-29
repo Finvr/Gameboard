@@ -28,7 +28,7 @@ router.get('/me/gameposts', checkAuth, gameController.getUserGamePosts);
 router.get('/me/requests', checkAuth, requestController.getUserRequests);
 
 //GamePosts Routes
-router.get('/gameposts', checkAuth, gameController.getAllGameposts);
+router.get('/gameposts', /*checkAuth,*/ gameController.getAllGameposts);
 
 router.post('/gameposts', checkAuth, gameController.createGamepost);
 

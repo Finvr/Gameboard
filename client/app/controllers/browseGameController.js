@@ -8,7 +8,7 @@
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
 
-		Auth.requireAuth();
+		//Auth.requireAuth();
 		
 		BrowseGames.getGames().then(function(resp) {
 			console.log("inside getGsmes", resp);

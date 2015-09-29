@@ -5,10 +5,10 @@
 		</div>
 		<center>
 			<div class="login">
-			  <a class="btn-large indigo white-text waves-effect waves-light" href="/auth/facebook">Login with Facebook</a>
+			  <a class="btn-large indigo white-text waves-effect waves-light" href="/auth/facebook" ng-if='!loggedIn'>Login with Facebook</a>
 			</div>
 			<div class="browse">
-			  <a class="btn-large indigo white-text waves-effect waves-light" href="/#/browse-games">Browse Games</a>
+			  <a class="btn-large indigo white-text waves-effect waves-light" href="/#/browse-games" ng-if='!loggedIn'>Browse Games</a>
 			</div>
 		</center>
 	</div>
