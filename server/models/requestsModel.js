@@ -47,11 +47,6 @@ module.exports = {
           })
   },
 
-  find: function(requestId) {
-    return db.select()
-      .from('requests')
-      .where({id: requestId})      
-  },
 
   create: function(request) {
     return db('requests')
@@ -91,3 +86,9 @@ module.exports = {
       })
   }
 };
+
+function find(requestId) {
+    return db.select()
+      .from('requests')
+      .where({id: requestId})      
+  },
