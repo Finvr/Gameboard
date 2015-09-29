@@ -15,17 +15,15 @@
               <!-- add ng-if to only show this if there are requests to approve -->
               <a href="#modal1" class="waves-effect waves-light secondary-content" modal><i class="material-icons">add_alert</i></a>
               <p>
-                {{ game.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}<br>
-                {{ game.game_location }}
+                <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                <strong>Location:</strong> {{ game.game_location }}
               </p>
             </div>
             <div class="collapsible-body">
               <p>
-                <span>Name:</span> {{game.game }}<br>
+                <span>Players:</span> {{game.player_count}}
+                <br>
                 <span>Description:</span> {{game.gamepost_description}}<br>
-                <span>Players:</span> {{game.player_count}}<br>
-                <span>Date and time:</span> {{ game.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}<br>
-                <span>Location:</span> {{ game.game_location }}
               </p>
             </div>
           </li>
@@ -37,15 +35,15 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Game's I'm Joining</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar">
+          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status!=='pending'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
                 {{ request.game}}
               </span>
               <p>
-                {{ request.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}<br>
-                {{ request.game_location }}
+                <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                <strong>Location:</strong> {{ request.game_location }}
               </p>
             </div>
             <div class="collapsible-body">
@@ -62,20 +60,20 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>My Pending Requests</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar">
+          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='pending'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
                 {{ request.game}}
               </span>
               <p>
-                {{ request.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}<br>
-                {{ request.game_location }}
+                <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                <strong>Location:</strong> {{ request.game_location }}
               </p>
             </div>
             <div class="collapsible-body">
               <p>
-                <span class="pink-text text-darken-2">Comments: </span> {{ request.comments }}
+                <span class="pink-text text-darken-2">Message sent: </span> {{ request.comments }}
               </p>
             </div>
           </li>
