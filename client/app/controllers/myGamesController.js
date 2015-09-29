@@ -12,13 +12,14 @@
   		return GamePost.myHostedGames()
   			.then(function(games){
           $scope.myGames = games;
+          console.log("myGames: ", $scope.myGames)
   			});
   	};
     var getMyRequests = function(){
       return GamePost.myRequests()
         .then(function(games){
           $scope.myRequests = games;
-          console.log($scope.myRequests);
+          console.log("myRequests: ", $scope.myRequests)
         });
     };
 
