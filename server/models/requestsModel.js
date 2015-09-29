@@ -56,13 +56,32 @@ module.exports = {
   create: function(request) {
     console.log("requests: ", request)
       return db('requests')
-        .insert(request)
-        .returning("id")
-        .then(function(requestId){
-          return module.exports.find(requestId[0])
-            .then(function(request){
-              return request[0];
+        .select()
+        .where({
+          user_id: request.user_id,
+          gamepost_id: request.gamepost_id
+        })
+        .then(function(request){
+          if (request.length > 0) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        .then(function(exist){
+          if (exist) {
+            return "Request already submmited once!"
+          } else {
+            db('requests')
+            .insert(request)
+            .returning("id")
+            .then(function(requestId){
+              return module.exports.find(requestId[0])
+                .then(function(request){
+                  return request[0];
+                })
             })
+          }
         })
   },
 
