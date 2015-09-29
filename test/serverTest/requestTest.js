@@ -20,10 +20,6 @@ describe('request model test',
     facebook_id: '1234'
     }
 
-    // var requestTest = {
-    // 	comments:'this is a test',
-    // 	status:'none'
-    // }
     var userId;
     var gamepostId;
   	beforeEach(function() {
