@@ -11,11 +11,12 @@
 	  <nav>
 	    <div class="nav-wrapper indigo">
 	      <a href="/#/" class="brand-logo center">I'm Game!</a>
-	      <ul id="nav-mobile" class="left hide-on-med-and-down" ng-if="loggedIn">
-	        <li><a href="/#/create-game">Host</a></li>
+	      <ul id="nav-mobile" class="left hide-on-med-and-down">
+	        <li ng-if="loggedIn"><a href="/#/create-game">Host</a></li>
 	        <li><a href="/#/browse-games">Browse</a></li>
-	        <li><a href="/#/my-games">My Games</a></li>
-	        <li><a href='/#/logout'>Logout</a></li>
+	        <li ng-if="loggedIn"><a href="/#/my-games">My Games</a></li>
+	        <li ng-if="loggedIn"><a href='/#/logout'>Logout</a></li>
+	        <li ng-if="!loggedIn "><a href='/#/logout'>Log In</a></li>
 	      </ul>
 	    </div>
   	</nav>
