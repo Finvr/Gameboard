@@ -16,6 +16,8 @@ module.exports = {
   createGamepost: function (req, res){
     var gamepost = req.body;
     gamepost.host_id = req.user;
+    gamepost.has_pending_requests = false;
+    gamepost.accepted_players = 0;
     GamePosts.create(gamepost)
     
       .then(function (data){
@@ -53,6 +55,12 @@ module.exports = {
       })
   },
 
-  
+  setPendingRequests: function (req, res, next){
+    var gamepostId = parseInt(req.url.split('/')[2])
+    GamePosts.setPending(gamepostId)
+      .then(function() {
+        next();
+      })
+  }
 
 }
