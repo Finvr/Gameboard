@@ -31,9 +31,9 @@ describe('Routing', function() {
   });
 
   it('Should have logout (\'/logout\') route that is linked to the auth controller and home template', function(){
-    expect($route.routes['/logout'].controller).toBe('AuthController');
+    expect($route.routes['/logout'].controller).toBe('HomeController');
     expect($route.routes['/logout'].url).toBe('/');
-    expect($route.routes['/logout'].templateUrl).toBe('app/auth/homeTemplate.html'); //write test for resolve
+    expect($route.routes['/logout'].templateUrl).toBe('app/templates/homeTemplate.html'); //write test for resolve
   });
       
 });
