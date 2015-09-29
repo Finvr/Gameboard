@@ -16,8 +16,8 @@ describe('request model test',
     });
 
   	var user = {
-    username: 'never',
-    facebook_id: '1234'
+	    username: 'never',
+	    facebook_id: '1234'
     }
 
     var userId;
@@ -52,10 +52,10 @@ describe('request model test',
 
   	it('create function should create  a request', function(done){
       var requestTest = {
-    	comments:'this is a test',
-    	status:'none',
-    	user_id:userId,
-    	gamepost_id: gamepostId
+	    	comments:'this is a test',
+	    	status:'none',
+	    	user_id:userId,
+	    	gamepost_id: gamepostId
       }
   		requestsModel.create(requestTest)
   		.then(function(request){
@@ -73,10 +73,10 @@ describe('request model test',
 
   	it('should return a request given a gamepost id', function(done){
   		var requestTest = {
-    	comments:'this is a test',
-    	status:'none',
-    	user_id: userId,
-    	gamepost_id: gamepostId,
+	    	comments:'this is a test',
+	    	status:'none',
+	    	user_id: userId,
+	    	gamepost_id: gamepostId
       }
   		requestsModel.create(requestTest)
   		.then(function (request){
@@ -97,10 +97,10 @@ describe('request model test',
     
     it('should return requests for specific user given a user id', function(done){
   		var requestTest = {
-    	comments:'this is a test',
-    	status:'none',
-    	user_id:userId,
-    	gamepost_id: gamepostId
+	    	comments:'this is a test',
+	    	status:'none',
+	    	user_id:userId,
+	    	gamepost_id: gamepostId
       }
   		requestsModel.create(requestTest)
   		.then(function(request){
@@ -122,10 +122,10 @@ describe('request model test',
     it('should delete a request when given a request object', function(done){
   		var requestId;
   		var requestTest = {
-    	comments:'this is a test',
-    	status:'none',
-    	user_id:userId,
-    	gamepost_id: gamepostId
+	    	comments:'this is a test',
+	    	status:'none',
+	    	user_id:userId,
+	    	gamepost_id: gamepostId
       }
   		requestsModel.create(requestTest)
   		.then(function (request){
