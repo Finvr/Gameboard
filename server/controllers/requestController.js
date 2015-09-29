@@ -10,7 +10,9 @@ module.exports = {
       .then(function (data) {
         res.send(data);
       })
-      .catch(helpers.handleError(err, res));
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      })
     },
 
   getGamePostRequests: function (req, res) {
@@ -20,7 +22,9 @@ module.exports = {
       .then(function (data) {
         res.send(data);
        })
-      .catch(helpers.handleError(err, res))
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      })
   },
 
   createRequest: function (req, res) {
@@ -33,7 +37,9 @@ module.exports = {
   	 .then(function (data) {
        res.send(data);
      })
-  	 .catch(helpers.handleError(err, res))
+  	 .catch(function (err) {
+        helpers.handleError(err, res)
+      })
   },
 
   deleteRequest: function (req, res) {
@@ -42,6 +48,8 @@ module.exports = {
       .then(function (data) {
         res.send(data);
       })
-      .catch(helpers.handleError(err, res))
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      })
   }
 }
