@@ -64,7 +64,7 @@ module.exports = {
   },
 
   addPlayer: function (req, res) {
-    var gamepostId = parseInt(req.url.split('/')[2])
+    var gamepostId = req.body.gamepost_id;
     GamePosts.addPlayer(gamepostId)
       .then( function () {
         res.send(200);
@@ -72,7 +72,7 @@ module.exports = {
   },
 
   removePlayer: function (req, res) {
-    var gamepostId = parseInt(req.url.split('/')[2])
+    var gamepostId = req.body.gamepost_id;
     GamePosts.removePlayer(gamepostId)
       .then( function () {
         res.send(200);

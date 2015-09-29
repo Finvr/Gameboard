@@ -54,28 +54,32 @@ module.exports = {
   },
 
   changeStatus: function (req, res, next) {
-    var request = req.data;
-    request.id = parseInt(req.url.split('/')[2]);
-    if ( request.status === 'accepted' ) {
-      Requests.changeStatus(request)
-        .then(function() {
-          //if request is accepted, we need to also modify the accepted_players
-          //attribute in gameposts.
-          next();
-        })
-        .catch(function (err) {
-          helpers.handleError(err, res)
-        })
-    } else if ( request.status === 'declined' ) {
-      Requests.changeStatus(request)
-        .then(function() {
-          res.send(200);
-        })
-        .catch(function (err) {
-          helpers.handleError(err, res)
-        })
+    var request = req.body;
+    if ( request.id !== parseInt(req.url.split('/')[2]) ) {
+      res.send(400, 'Invalid request object');
     } else {
-      res.send(400, 'Invalid status');
+      if ( request.status === 'accepted' ) {
+        Requests.changeStatus(request)
+          .then(function() {
+            //if request is accepted, we need to also modify the accepted_players
+            //attribute in gameposts.
+            next();
+          })
+          .catch(function (err) {
+            helpers.handleError(err, res)
+          })
+      } else if ( request.status === 'declined' ) {
+        Requests.changeStatus(request)
+          .then(function() {
+            res.send(200);
+          })
+          .catch(function (err) {
+            helpers.handleError(err, res)
+          })
+      
+      } else {
+        res.send(400, 'Invalid status');
+      }
     }
   }
 
