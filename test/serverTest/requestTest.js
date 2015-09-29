@@ -6,60 +6,59 @@ var requestsModel = require('../../server/models/requestsModel.js')
 var app = require('../../server/server.js');
 var userModel = require('../../server/models/userModel.js')
 var gamePostsModel = require('../../server/models/gamePostsModel.js')
+var db = require('../../server/db.js')
 
 describe('request model test', 
   function(){
-    describe('getRequestsByUserId function ', 
-      function(){
-       it('should return all requests for a certain user based on userId', 
-      	function(done){
 
-      		before(function() {
-               return db.deleteEverything();
-  			});
-	        
-	        var user = {
-	        	username: 'never',
-	        	facebook_id:'1234',
-	        	id:1
-	        }
-	        var gamepost = {
-	        	host_id:1,
-	        	game_location: 'austin',
-	        	game:'chess',
-	        	player_count:2, 
-	        	gamepost_description:'this is a test',
-	        	game_date: 12-22-15,
-	        	accepted_players: 2, 
-	        	has_pending_requests: false
-	        }
+  	before(function() {
+    return db.deleteEverything();
+    });
 
-	        var testRequest = {
-	        	user_id:1,
-	           // gamepost_id:1,
-	        	comments: 'some test'
-	        }
+  	var user = {
+    username: 'never',
+    facebook_id: '1234'
+    }
 
-	        requestsModel.create(testRequest);
-	        gamePostsModel.create(gamepost);
+    var requestTest = {
+    	comments:'this is a test',
+    	status:'none'
+    }
+  	beforeEach(function() {
+         return db.deleteEverything()
+          .then(function(){
+              return userModel.findOrCreate(user);
+           })      
+          .then(function(user){
+                userId = user.id;
+                gamepost = { 
+                   game_location: '2213 Santa Maria St, Austin, TX 78702, USA',
+                   game: 'clue',
+                   player_count: 20,
+                   game_datetime: '2015-10-01T02:00:00.000Z',
+                   host_id: userId
+                };
+             return gamepost;
+          })
+          .then(function(gamepost){
+          	return gamePostsModel.create(gamepost)
+          })
+          .catch(function(err){
+                console.log("Error: ", err)
+               })
+           });
 
-            userModel.findOrCreate(user)
-	          .then(function (user){
-	          	  console.log('userId: ', user.id)
-	          	  return requestsModel.getRequestsByUserId(user.id);
-	          })
-	          .then(function (requests){
-	          	console.log("requests: ", requests)
-	          	expect(requests).to.have.property('comments')
-	          	//expect(requests).to.have.property('gamepost_id')
-	          	//expect(requests).to.have.property('player_count')
-	          	done();
-	          })
-               
-        }
-       )
-     }
-
-    )
-  
-});
+  	it('create function should create  a request', function(done){
+  		requestsModel.create(requestTest)
+  		.then(function(result){
+  			expect(result).to.be.an('object');
+  			expect(result).to.have.property('user_id')
+  			expect(result.user_id).to.equal('1');
+  			//expect(result.gamepost_id).to.equal('1');
+  			done();
+  		})
+  		.catch(function(err){
+  			console.log('Error: ', err)
+  		})
+  	});
+  })
