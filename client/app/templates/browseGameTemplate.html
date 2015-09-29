@@ -8,32 +8,20 @@
       </form>
     </div>
     
-	  <ul class="collapsible popout" data-collapsible="accordion" watch>
-	    <li ng-repeat="game in games | filter:searchText">
-	      <div class="collapsible-header"><i class="material-icons right">speaker_notes</i><i class="material-icons right">event</i><h5><b>{{game.game}}</b></h5>
+	  <ul class="collection" watch>
+	    <li ng-repeat="game in games | filter:searchText" class="collection-item">
+	      <div class="collapsible-item"><i class="material-icons right">speaker_notes</i><i class="material-icons right">event</i><h5><b>{{game.game}}</b></h5>
 	      {{game.game_datetime | date:"EEEE, MMM d, y ',' h:mma"}}
 	       @ {{game.game_location}}
 	       <div class="col">
-    <a class='btn' href='#demoModal' modal>Show Modal</a>
-</div>
+    				<a class='btn' href='#openRequest' modal>View Details</a>
+				</div>
 <!-- Modal Structure -->
-<div id="demoModal" class="modal">
+<div id="openRequest" class="modal">
     <div class="modal-content">
-        <h4>Modal header</h4>
-        <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-</div>
-	      </div>
-
-	      <div class="collapsible-body" ng-if="loggedIn">
-	      	<div class = "row">
-	      		<div class= "col s12"><i> {{game.gamepost_description}} </i> </div>
-	      	</div>
-
-  	      <div class = "container">	
+        <h4>{{game.game}}</h4>
+        <p>{{game.gamepost_description}}</p>
+        <div class = "container">	
     	     	<div class = "row center">
     	        <div class="input-field">
     	          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
@@ -46,6 +34,10 @@
             </div>
           </div>
         </div>
+    </div>
+</div>
+	      </div>
+
 
 	    </li>
     </ul>
