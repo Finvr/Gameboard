@@ -12,6 +12,7 @@
               <span class="title indigo-text text-darkern-2">
                 {{ game.game}}
               </span>
+              <!-- add ng-if to only show this if there are requests to approve -->
               <a href="#modal1" class="waves-effect waves-light secondary-content" modal><i class="material-icons">add_alert</i></a>
               <p>
                 {{ game.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}<br>
