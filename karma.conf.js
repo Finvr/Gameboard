@@ -16,11 +16,14 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       //library files
+      'client/lib/jquery/dist/jquery.min.js',
       'client/lib/angular/angular.min.js',
       'client/lib/angular-route/angular-route.min.js',
-      'client/lib/jquery/dist/jquery.min.js',
+      'client/lib/angular-ui-router/release/angular-ui-router.min.js',
       'client/lib/Materialize/dist/js/materialize.min.js',
       'client/lib/angular-mocks/angular-mocks.js',
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyB5eGAZmqMYgOJRvbrFNAujmSr8nFCEBnA"',
+      'client/lib/angular-materialize/src/angular-materialize.js',
 
       // our app code
       'client/app/**/*.js',
