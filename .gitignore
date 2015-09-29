@@ -7,5 +7,3 @@ server/oauth.js
 ## bower components ##
 client/lib/
 
-## css ##
-client/styles/main.css
