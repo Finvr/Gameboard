@@ -7,6 +7,11 @@
 
     Auth.requireAuth();
 
+    // set today as the ealiest day user can select
+    $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
+    console.log($scope.now)
+    document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
+
     // google map
     var geocoder;
     $scope.initialize = function () {

@@ -1,14 +1,32 @@
 .createGame {
+
+  margin-left: 80px;
+  margin-right: 80px;
+
+
 	div.half-div {
-		margin: 0 auto;
+		margin: 5 auto;
+    text-align: center;
 	}
 
-  #map {
-    width: 450px;
-    height: 400px;
+  input {
+    color: #616161;
+  }
+
+  #map {    
+    height: 500px;
   }
 
   .help-block {
     color: red;
   }
+
+  .create-form {
+    margin-left: 30px;
+  }
+
+  label.active {
+    font-size: 15px;
+  }
+
 }
