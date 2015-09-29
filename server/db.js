@@ -25,6 +25,8 @@ if (process.env.NODE_ENV  === 'test') {
 
 }
 
+knex.migrate.latest([config]);
+
 module.exports = knex;
 
 // if (process.env.NODE_ENV != 'production') {
