@@ -9,7 +9,7 @@
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
 
-		Auth.requireAuth();
+		Auth.requireAuth('browse');
 		
 		BrowseGames.getGames()
 			.then(function(resp) {
