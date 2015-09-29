@@ -77,6 +77,6 @@ module.exports = {
       .then( function () {
         res.send(200);
       })
-  },
+  }
 
 }
