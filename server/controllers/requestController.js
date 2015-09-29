@@ -53,18 +53,30 @@ module.exports = {
       })
   },
 
-  changeStatus: function (req, res){
+  changeStatus: function (req, res, next) {
     var request = req.data;
     request.id = parseInt(req.url.split('/')[2]);
-    if ( request.status === 'accepted' || request.status === 'declined') {
+    if ( request.status === 'accepted' ) {
       Requests.changeStatus(request)
         .then(function() {
+          //if request is accepted, we need to also modify the accepted_players
+          //attribute in gameposts.
+          next();
+        })
+        .catch(function(err) {
+          console.log(err);
+          res.send(err.message);
+        })
+    } else if ( request.status === 'declined' ) {
+      Requests.changeStatus(request)
+        .then(function() {
+          res.send(200);
         })
         .catch(function (err) {
           helpers.handleError(err, res)
       })
     } else {
-      res.send(401, 'Invalid status');
+      res.send(400, 'Invalid status');
     }
   }
 
