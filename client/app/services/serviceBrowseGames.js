@@ -9,7 +9,6 @@
         url: '/gameposts'
       })
       .then(function(resp) {
-      	console.log("resp",resp.data);
         return resp.data;
       });
 		};
@@ -21,16 +20,17 @@
 				data: message
 			})
 			.then(function(resp){
-				return resp.data
+				return resp.data;
 			})
 			.catch(function(err){
 				console.log("Error from sendRequest http request: ", err)
 			})
-		}
+		};
 		  	
   	return {
   		getGames: getGames,
   		sendRequest: sendRequest
   	};
- 		};
+ 	};
+
 })();

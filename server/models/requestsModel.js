@@ -62,7 +62,7 @@ module.exports = {
       })
       .then(function(requests){
         if (requests.length > 0) {
-          return "Request has already been submmited once!";
+          return "Request has already been submitted once!";
         } else {
           return db('requests')
             .insert(request)

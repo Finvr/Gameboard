@@ -7,18 +7,25 @@
 		$scope.home = "djsaldjaskl";
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
+		$scope.submitError = null;
 
 		Auth.requireAuth();
 		
-		BrowseGames.getGames().then(function(resp) {
-			console.log("inside getGsmes", resp);
-			$scope.games = resp;
-		});
+		BrowseGames.getGames()
+			.then(function(resp) {
+				console.log("BrowseGameController inside getGsmes", resp);
+				$scope.games = resp;
+			});
 
 		$scope.sendRequest = function(game) {
 			BrowseGames.sendRequest($scope.requestMessage, game.id)
-				.then(function(){
-					$location.path('/my-games');
+				.then(function(data){
+					console.log("data", data)
+					if (data.includes('already been submitted')) {
+						$scope.submitError = "You have already submitted your request!";
+					} else {
+						$location.path('/my-games');
+					}
 				})
 		}
 	}
