@@ -44,7 +44,7 @@ module.exports = {
       .where({id: gamepostId})
       .update({
         has_pending_requests: true,
-        updated_at: knex.raw('now()')
+        updated_at: db.raw('now()')
       })
       .catch(function(err){
         console.log(err);
