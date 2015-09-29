@@ -37,7 +37,7 @@ router.delete('/gameposts/*', checkAuth, gameController.deleteGamePost);
 router.get('/gameposts/*/requests', checkAuth, requestController.getGamePostRequests);
 
 //generate a request
-router.post('/gameposts/*/requests', checkAuth, requestController.createRequest);
+router.post('/gameposts/*/requests', checkAuth, gameController.setPendingRequests, requestController.createRequest);
 
 //requests routes
 //delete a request
