@@ -4,17 +4,26 @@
 
   function MyGamesController($scope, $window, $location, Auth, GamePost){
   	$scope.myGames = [];
+    $scope.myRequests = [];
 
     Auth.requireAuth();
 
   	var getMyGames = function(){
-  		return GamePost.myGames()
+  		return GamePost.myHostedGames()
   			.then(function(games){
-  				console.log(games);
           $scope.myGames = games;
   			});
-  	}
+  	};
+    var getMyRequests = function(){
+      return GamePost.myRequests()
+        .then(function(games){
+          $scope.myRequests = games;
+        });
+    };
+
   	getMyGames();
+    getMyRequests();
+
   };
 
 })();
