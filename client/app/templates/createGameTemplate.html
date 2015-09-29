@@ -29,10 +29,10 @@
 				</div>
 
 				<!-- # of players form -->
-				<div class="input-field col s5">
-					<input name="playerNum" type="number" id="num-players" ng-model="game.numPlayers" class="validate" min="2" max="20" placeholder="" required/>
-					<label class="active" for="num-players" data-error="2 - 20">* # of players</label>
-					<p ng-show="createForm.playerNum.$error.required && createForm.playerNum.$dirty" class="help-block">This is required.</p>
+				<div class="input-field col s4">
+					<input type="number" id="num-players" ng-model="game.numPlayers" class="validate" min="2" max="20" placeholder="" required/>
+					<label class="active" for="num-players" data-error="2 - 20">* # of Players</label>
+					<p ng-show="createForm.location.$error.required && createForm.location.$dirty" class="help-block">This is required.</p>
 				</div>
 
 			</div>
