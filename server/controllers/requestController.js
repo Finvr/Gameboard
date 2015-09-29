@@ -13,7 +13,7 @@ module.exports = {
       .catch(function (err) {
         helpers.handleError(err, res)
       })
-    },
+  },
 
   getGamePostRequests: function (req, res) {
   	  var gamepostId = parseInt(req.url.split('/')[2])
@@ -44,6 +44,7 @@ module.exports = {
 
   deleteRequest: function (req, res, next) {
     var request = req.body;
+
     if ( request.id !== parseInt(req.url.split('/')[2]) ) {
       res.send(400, 'Invalid request object');
     } else {
@@ -63,6 +64,7 @@ module.exports = {
 
   changeStatus: function (req, res, next) {
     var request = req.body;
+    
     if ( request.id !== parseInt(req.url.split('/')[2]) ) {
       res.send(400, 'Invalid request object');
     } else if ( request.status === 'accepted' || request.status === 'declined') {

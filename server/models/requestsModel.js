@@ -60,16 +60,17 @@ module.exports = {
       })
   },
 
-  create: function(request) {
+  create: function (request) {
     return db('requests')
       .select()
       .where({
         user_id: request.user_id,
         gamepost_id: request.gamepost_id
       })
-      .then(function(requests){
-        if (requests.length > 0) {
-          return "Request has already been submitted once!";
+
+      .then(function (requests) {
+        if ( requests.length > 0 ) {
+          return "Request has already been submmited once!"
         } else {
           return db('requests')
             .insert(request)
@@ -96,11 +97,12 @@ module.exports = {
         console.log(err);
         return err;
       })
-  }
-};
-
-function find(requestId) {
-    return db.select()
-      .from('requests')
-      .where({id: requestId})      
   },
+
+  find: function (requestId) {
+      return db.select()
+        .from('requests')
+        .where({id: requestId})      
+  }
+
+};

@@ -29,12 +29,15 @@ describe('request model test',
            })      
           .then(function(user){
             userId = user.id;
+            console.log('User ID: ', userId);
             gamepost = { 
                game_location: '2213 Santa Maria St, Austin, TX 78702, USA',
                game: 'clue',
                player_count: 20,
                game_datetime: '2015-10-01T02:00:00.000Z',
-               host_id: userId
+               host_id: userId,
+               accepted_players: 0,
+               has_pending_requests: false
             };
 
             return gamepost;
@@ -54,11 +57,12 @@ describe('request model test',
       var requestTest = {
 	    	comments:'this is a test',
 	    	status:'none',
-	    	user_id:userId,
+	    	user_id: userId,
 	    	gamepost_id: gamepostId
       }
   		requestsModel.create(requestTest)
   		.then(function(request){
+        console.log("request: ", request);
   			expect(request).to.be.an('object');
   			expect(request).to.have.property('user_id');
   			expect(request).to.have.property('gamepost_id');
@@ -129,7 +133,7 @@ describe('request model test',
       }
   		requestsModel.create(requestTest)
   		.then(function (request){
-  			requestId = request.id;
+        requestId = request.id;
   			return requestsModel.deleteRequest(request)
   		})
       .then(function(){
