@@ -18,7 +18,7 @@ router.get('/auth/facebook/callback',
     res.redirect('/#/create-game')
   });
 
-// user routes
+//User routes
 router.get('/me/logout', 
   checkAuth, 
   userController.logout
@@ -68,13 +68,15 @@ router.post('/gameposts/*/requests',
   requestController.createRequest
 );
 
-//requests routes
+//Requests routes
 //delete a request
 router.delete('/requests/*', 
   checkAuth, 
-  requestController.deleteRequest
+  requestController.deleteRequest,
+  gameController.removePlayer
 );
 
+//update the status of a request
 router.put('/requests/*', 
   checkAuth, 
   requestController.changeStatus, 

@@ -42,15 +42,23 @@ module.exports = {
       })
   },
 
-  deleteRequest: function (req, res) {
-    var request = req.data;//check this
-    Requests.deleteRequest(request)
-      .then(function (data) {
-        res.send(data);
-      })
-      .catch(function (err) {
-        helpers.handleError(err, res)
-      })
+  deleteRequest: function (req, res, next) {
+    var request = req.body;
+    if ( request.id !== parseInt(req.url.split('/')[2]) ) {
+      res.send(400, 'Invalid request object');
+    } else {
+      Requests.deleteRequest(request)
+        .then(function () {
+          if ( request.status === 'accepted' ) {
+            next()
+          } else {
+            res.send(200);    
+          }
+        })
+        .catch(function (err) {
+          helpers.handleError(err, res)
+        }) 
+    }
   },
 
   changeStatus: function (req, res, next) {
@@ -60,7 +68,7 @@ module.exports = {
     } else {
       if ( request.status === 'accepted' ) {
         Requests.changeStatus(request)
-          .then(function() {
+          .then(function () {
             //if request is accepted, we need to also modify the accepted_players
             //attribute in gameposts.
             next();
@@ -70,7 +78,7 @@ module.exports = {
           })
       } else if ( request.status === 'declined' ) {
         Requests.changeStatus(request)
-          .then(function() {
+          .then(function () {
             res.send(200);
           })
           .catch(function (err) {

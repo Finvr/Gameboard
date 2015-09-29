@@ -3,7 +3,7 @@ var db = require('../db.js');
 module.exports = {
 
   getAll: function (userId) {
-    return fetch(userId)
+    return fetchAllOrByUser(userId)
       .then(function (gameposts) {
         return gameposts;
       })
@@ -72,7 +72,7 @@ module.exports = {
   
 }
 
-function fetch (userId) {
+function fetchAllOrByUser (userId) {
   if ( userId ) {
     return db.select()
       .from('gameposts')
