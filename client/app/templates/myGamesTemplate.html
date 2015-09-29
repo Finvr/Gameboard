@@ -12,7 +12,7 @@
               <span class="title indigo-text text-darkern-2">
                 {{ game.game}}
               </span>
-              <a href="#!" class="secondary-content"><i class="material-icons">add_alert</i></a>
+              <a href="#modal1" class="waves-effect waves-light secondary-content" modal><i class="material-icons">add_alert</i></a>
               <p>
                 {{ game.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}<br>
                 {{ game.game_location }}
@@ -71,6 +71,17 @@
           </li>
         </ul>
       </section>
+    </div>
+  </div>
+  <div id="modal1" class="modal approve-pending">
+    <div class="modal-header">
+      <h4 class="white-text">Requests to Join Your Game</h4>
+    </div>
+    <div class="modal-content">
+      <p>Here is where the </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
   </div>
 </div>
