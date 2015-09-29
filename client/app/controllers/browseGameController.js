@@ -2,7 +2,7 @@
 	angular.module('imgame.browseGames', [])
 		.controller('BrowseGameController', BrowseGameController);
 
-	function BrowseGameController($scope, BrowseGames, Auth) {
+	function BrowseGameController($scope, BrowseGames, Auth, $location) {
 
 		$scope.home = "djsaldjaskl";
 		$scope.games = [];
@@ -14,10 +14,10 @@
 		});
 
 		$scope.sendRequest = function(game) {
-			console.log("sendRequest games: ", $scope.games)
-			console.log("sendRequest game: ", game)
-			console.log("sendRequest: request ", $scope.requestMessage)
-			BrowseGames.sendRequest()
+			BrowseGames.sendRequest($scope.requestMessage, game.id)
+				.then(function(){
+					$location.path('/my-games');
+				})
 		}
 	}
 })();

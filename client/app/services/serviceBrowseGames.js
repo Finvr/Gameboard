@@ -21,7 +21,10 @@
 				data: message
 			})
 			.then(function(resp){
-				console.log("resp in sendRequest: ", resp)
+				return resp.data
+			})
+			.catch(function(err){
+				console.log("Error from sendRequest http request: ", err)
 			})
 		}
 		  	
