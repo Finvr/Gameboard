@@ -62,24 +62,17 @@ module.exports = {
         })
         .then(function(request){
           if (request.length > 0) {
-            return true;
+            return "Request has already been submmited once!";
           } else {
-            return false;
-          }
-        })
-        .then(function(exist){
-          if (exist) {
-            return "Request has already been submmited once!"
-          } else {
-            db('requests')
-            .insert(request)
-            .returning("id")
-            .then(function(requestId){
-              return module.exports.find(requestId[0])
-                .then(function(request){
-                  return request[0];
-                })
-            })
+            return db('requests')
+              .insert(request)
+              .returning("id")
+              .then(function(requestId){
+                return module.exports.find(requestId[0]);
+              })
+              .then(function(request){
+                return request[0];
+              });
           }
         })
   },
