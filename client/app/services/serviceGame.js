@@ -19,7 +19,17 @@
       });
   	};
 
-    function myGames(){
+    function myRequests(){
+      return $http({
+          method: 'GET',
+          url: '/me/requests'
+      })
+      .then(function(requests){
+        return requests.data;
+      });
+    };
+
+    function myHostedGames(){
       return $http({
         method: 'GET',
         url: '/me/gameposts'
@@ -31,7 +41,8 @@
   	
   	return {
   		create: create,
-      myGames: myGames
+      myHostedGames: myHostedGames,
+      myRequests: myRequests
   	};
   };
 
