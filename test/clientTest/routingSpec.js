@@ -9,7 +9,7 @@ describe('Routing', function() {
   it('Should have root (\'/\') route that is linked to the home controller and home page template', function() {
     expect($route.routes['/'].controller).toBe('HomeController');
     expect($route.routes['/'].templateUrl).toBe(
-      'app/auth/homeTemplate.html');
+      'app/templates/homeTemplate.html');
   });
 
   it('Should have create-game (\'/create-game\') route that is linked to the createGame controller and template', function() {
