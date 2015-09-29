@@ -20,10 +20,10 @@ describe('request model test',
     facebook_id: '1234'
     }
 
-    var requestTest = {
-    	comments:'this is a test',
-    	status:'none'
-    }
+    // var requestTest = {
+    // 	comments:'this is a test',
+    // 	status:'none'
+    // }
     var userId;
     var gamepostId;
   	beforeEach(function() {
@@ -47,25 +47,27 @@ describe('request model test',
           	return gamePostsModel.create(gamepost)
           })
           .then(function(id){
-          	console.log('create gamepost returns: ', id)
           	gamepostId = id[0];
           })
           .catch(function(err){
-                console.log("Error: ", err)
-               })
+            console.log("Error: ", err)
+           })
     });
 
   	it('create function should create  a request', function(done){
-  		requestTest.user_id = userId;
-  		requestTest.gamepost_id = gamepostId;
+      var requestTest = {
+    	comments:'this is a test',
+    	status:'none',
+    	user_id:userId,
+    	gamepost_id: gamepostId
+      }
   		requestsModel.create(requestTest)
-  		.then(function(result){
-  			console.log('result: ', result)
-  			expect(result).to.be.an('object');
-  			expect(result).to.have.property('user_id');
-  			expect(result).to.have.property('gamepost_id');
-  			expect(result).to.have.property('comments');
-  			expect(result).to.have.property('status');
+  		.then(function(request){
+  			expect(request).to.be.an('object');
+  			expect(request).to.have.property('user_id');
+  			expect(request).to.have.property('gamepost_id');
+  			expect(request).to.have.property('comments');
+  			expect(request).to.have.property('status');
   			done();
   		})
   		.catch(function(err){
@@ -73,19 +75,76 @@ describe('request model test',
   		})
   	});
 
-  	it('should return a request given an id', function(done){
-  		console.log('requestId', requestTest.id)
-    requestsModel.find(requestTest.id)
+  	it('should return a request given a gamepost id', function(done){
+  		var requestTest = {
+    	comments:'this is a test',
+    	status:'none',
+    	user_id: userId,
+    	gamepost_id: gamepostId,
+      }
+  		requestsModel.create(requestTest)
+  		.then(function (request){
+  			return requestsModel.getRequestByGameId(request.gamepost_id)
+  		})
       .then(function(request){
-      	expect(result).to.be.an('object');
-  			expect(result).to.have.property('user_id');
-  			expect(result).to.have.property('gamepost_id');
-  			expect(result).to.have.property('comments');
-  			expect(result).to.have.property('status');
+      	expect(request[0]).to.be.an('object');
+  			expect(request[0]).to.have.property('user_id');
+  			expect(request[0]).to.have.property('gamepost_id');
+  			expect(request[0]).to.have.property('comments');
+  			expect(request[0]).to.have.property('status');
         done();
-      })
+       })
+       .catch(function(err){
+        console.log("Error: ", err)
+       })
+    });
+    
+    it('should return requests for specific user given a user id', function(done){
+  		var requestTest = {
+    	comments:'this is a test',
+    	status:'none',
+    	user_id:userId,
+    	gamepost_id: gamepostId
+      }
+  		requestsModel.create(requestTest)
+  		.then(function(request){
+  			return requestsModel.getRequestsByUserId(request.user_id)
+  		})
+      .then(function(request){
+      	expect(request[0]).to.be.an('object');
+  			expect(request[0]).to.have.property('user_id');
+  			expect(request[0]).to.have.property('gamepost_id');
+  			expect(request[0]).to.have.property('comments');
+  			expect(request[0]).to.have.property('status');
+        done();
+       })
       .catch(function(err){
         console.log("Error: ", err)
       })
+    });
+    
+    it('should delete a request when given a request object', function(done){
+  		var requestId;
+  		var requestTest = {
+    	comments:'this is a test',
+    	status:'none',
+    	user_id:userId,
+    	gamepost_id: gamepostId
+      }
+  		requestsModel.create(requestTest)
+  		.then(function (request){
+  			requestId = request.id;
+  			return requestsModel.deleteRequest(request)
+  		})
+      .then(function(){
+      	return requestsModel.find(requestId)
+      })
+      .then(function(response){
+      	expect(response[0]).to.equal(undefined);
+        done();
+       })
+      .catch(function(err){
+        console.log("Error: ", err)
+        })
     });
   })
