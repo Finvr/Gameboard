@@ -2,9 +2,7 @@
 	angular.module('imgame.browseGames', [])
 		.controller('BrowseGameController', BrowseGameController);
 
-	function BrowseGameController($scope, BrowseGames, Auth, $location) {
-
-		$scope.home = "djsaldjaskl";
+	function BrowseGameController($scope, BrowseGames, Auth) {
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
 
