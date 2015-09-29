@@ -47,22 +47,30 @@ module.exports = {
           })
   },
 
-  find: function(requestId) {
-    return db.select()
-      .from('requests')
-      .where({id: requestId})      
+  changeStatus: function(request) {
+    return db('requests')
+      .where({id: request.id})
+      .update({
+        status: request.status,
+        updated_at: db.raw('now()')
+      })
+      .catch(function(err){
+        console.log(err);
+        return err
+      })
   },
 
-  create: function(request) {
+  create: function (request) {
     return db('requests')
       .select()
       .where({
         user_id: request.user_id,
         gamepost_id: request.gamepost_id
       })
-      .then(function(requests){
-        if (requests.length > 0) {
-          return "Request has already been submitted once!";
+
+      .then(function (requests) {
+        if ( requests.length > 0 ) {
+          return "Request has already been submmited once!"
         } else {
           return db('requests')
             .insert(request)
@@ -89,5 +97,12 @@ module.exports = {
         console.log(err);
         return err;
       })
+  },
+
+  find: function (requestId) {
+      return db.select()
+        .from('requests')
+        .where({id: requestId})      
   }
+
 };

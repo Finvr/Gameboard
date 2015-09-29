@@ -18,30 +18,70 @@ router.get('/auth/facebook/callback',
     res.redirect('/#/create-game')
   });
 
-// user routes
-router.get('/me/logout', checkAuth, userController.logout)
+//User routes
+router.get('/me/logout', 
+  checkAuth, 
+  userController.logout
+);
 
-router.get('/me', checkAuth, userController.loggedIn);
+router.get('/me', 
+  checkAuth, 
+  userController.loggedIn
+);
 
-router.get('/me/gameposts', checkAuth, gameController.getUserGamePosts); 
+router.get('/me/gameposts', 
+  checkAuth, 
+  gameController.getUserGamePosts
+); 
 
-router.get('/me/requests', checkAuth, requestController.getUserRequests);
+router.get('/me/requests', 
+  checkAuth, 
+  requestController.getUserRequests
+);
 
 //GamePosts Routes
-router.get('/gameposts', checkAuth, gameController.getAllGameposts);
+router.get('/gameposts', 
+  checkAuth, 
+  gameController.getAllGameposts
+);
 
-router.post('/gameposts', checkAuth, gameController.createGamepost);
+router.post('/gameposts', 
+  checkAuth, 
+  gameController.createGamepost
+);
 
-router.delete('/gameposts/*', checkAuth, gameController.deleteGamePost);
+router.delete('/gameposts/*', 
+  checkAuth, 
+  gameController.deleteGamePost
+);
+
 //get all requests for a gamepost
-router.get('/gameposts/*/requests', checkAuth, requestController.getGamePostRequests);
+router.get('/gameposts/*/requests', 
+  checkAuth, 
+  requestController.getGamePostRequests
+);
 
 //generate a request
-router.post('/gameposts/*/requests', checkAuth, gameController.setPendingRequests, requestController.createRequest);
+router.post('/gameposts/*/requests', 
+  checkAuth, 
+  gameController.setPendingRequests, 
+  requestController.createRequest
+);
 
-//requests routes
+//Requests routes
 //delete a request
-router.delete('/requests/*', checkAuth, requestController.deleteRequest)
+router.delete('/requests/*', 
+  checkAuth, 
+  requestController.deleteRequest,
+  gameController.removePlayer
+);
+
+//update the status of a request
+router.put('/requests/*', 
+  checkAuth, 
+  requestController.changeStatus, 
+  gameController.addPlayer
+);
 
 module.exports = router;
 

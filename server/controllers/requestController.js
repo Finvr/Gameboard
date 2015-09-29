@@ -13,7 +13,7 @@ module.exports = {
       .catch(function (err) {
         helpers.handleError(err, res)
       })
-    },
+  },
 
   getGamePostRequests: function (req, res) {
   	  var gamepostId = parseInt(req.url.split('/')[2])
@@ -42,14 +42,48 @@ module.exports = {
       })
   },
 
-  deleteRequest: function (req, res) {
-    var request = req.data;//check this
-    Requests.deleteRequest(request)
-      .then(function (data) {
-        res.send(data);
-      })
-      .catch(function (err) {
-        helpers.handleError(err, res)
-      })
+  deleteRequest: function (req, res, next) {
+    var request = req.body;
+
+    if ( request.id !== parseInt(req.url.split('/')[2]) ) {
+      res.send(400, 'Invalid request object');
+    } else {
+      Requests.deleteRequest(request)
+        .then(function () {
+          if ( request.status === 'accepted' ) {
+            next()
+          } else {
+            res.send(200);    
+          }
+        })
+        .catch(function (err) {
+          helpers.handleError(err, res)
+        }) 
+    }
+  },
+
+  changeStatus: function (req, res, next) {
+    var request = req.body;
+    
+    if ( request.id !== parseInt(req.url.split('/')[2]) ) {
+      res.send(400, 'Invalid request object');
+    } else if ( request.status === 'accepted' || request.status === 'declined') {
+      Requests.changeStatus(request)
+        .then(function () {
+          if ( request.status === 'accepted' ) {
+            //if request is accepted, we need to also modify the accepted_players
+            //attribute in gameposts.
+            next();
+          } else {
+            res.send(200);
+          }
+        })
+        .catch(function (err) {
+          helpers.handleError(err, res)
+        })
+    } else {
+      res.send(400, 'Invalid status');
+    }
   }
+
 }

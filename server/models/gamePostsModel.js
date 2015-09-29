@@ -3,7 +3,7 @@ var db = require('../db.js');
 module.exports = {
 
   getAll: function (userId) {
-    return fetch(userId)
+    return fetchAllOrByUser(userId)
       .then(function (gameposts) {
         return gameposts;
       })
@@ -50,11 +50,29 @@ module.exports = {
         console.log(err);
         return err;
       })
+  },
+
+  addPlayer: function (gamepostId) {
+    return db('gameposts')
+      .where({id: gamepostId})
+      .update({
+        accepted_players: db.raw('accepted_players + 1'),
+        updated_at: db.raw('now()')
+      });
+  },
+
+  removePlayer: function (gamepostId) {
+    return db('gameposts')
+      .where({id: gamepostId})
+      .update({
+        accepted_players: db.raw('accepted_players - 1'),
+        updated_at: db.raw('now()')
+      });
   }
   
 }
 
-function fetch (userId) {
+function fetchAllOrByUser (userId) {
   if ( userId ) {
     return db.select()
       .from('gameposts')
