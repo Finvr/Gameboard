@@ -54,7 +54,6 @@ module.exports = {
   },
 
   create: function(request) {
-    console.log("requests: ", request)
       return db('requests')
         .select()
         .where({
@@ -70,7 +69,7 @@ module.exports = {
         })
         .then(function(exist){
           if (exist) {
-            return "Request already submmited once!"
+            return "Request has already been submmited once!"
           } else {
             db('requests')
             .insert(request)
