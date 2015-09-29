@@ -19,11 +19,28 @@ describe('userModel function unit test:  ', function(){
     facebook_id: '1234'
   }
 
+  var user2 = {
+    username: 'again',
+    facebook_id: '1234'
+  }
+
   it(' find or create function should create a new user when the user does not exist', function(done){
     userModel.findOrCreate(user)
       .then(function(result){
         expect(result).to.be.an('object');
         expect(result).to.have.any.keys('id', 'username', 'facebook_id');
+        expect(result.username).to.equal('never');
+        expect(result.facebook_id).to.equal('1234');
+        done();
+      })
+      .catch(function(err){
+        console.log("Error: ", err)
+      })
+  });
+
+  it(' find or create function should not create a new user when the user facebook_id exists', function(done){
+    userModel.findOrCreate(user2)
+      .then(function(result){
         expect(result.username).to.equal('never');
         expect(result.facebook_id).to.equal('1234');
         done();
