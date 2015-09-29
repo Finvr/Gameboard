@@ -54,6 +54,7 @@ module.exports = {
   },
 
   create: function(request) {
+    console.log("requests: ", request)
       return db('requests')
         .insert(request)
         .returning("id")
