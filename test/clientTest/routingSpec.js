@@ -27,13 +27,7 @@ describe('Routing', function() {
   it('Should have browse-games (\'/browse-games\') route that is to the browseGames controller and template', function(){
     expect($route.routes['/browse-games'].controller).toBe('BrowseGameController');
     expect($route.routes['/browse-games'].templateUrl).toBe(
-      'app/games/browse/browseGameTemplate.html');
-  });
-
-  it('Should have signin (\'/signin\') route that is linked to the auth controller and signin template', function() {
-    expect($route.routes['/signin'].controller).toBe('AuthController');
-    expect($route.routes['/signin'].templateUrl).toBe(
-      'app/auth/signin.html');
+      'app/templates/browseGameTemplate.html');
   });
 
   it('Should have logout (\'/logout\') route that is linked to the auth controller and home template', function(){
