@@ -2,13 +2,13 @@
   <h3>Browse All Games</h3>
   <div class="browse_search">
     <form>
-       <div class="input-field">
-        <textarea id="search_games" row="1" class="materialize-textarea" ng-model="searchText"required placeholder="  search.."></textarea>
-      </div>
-    </form>
+     <div class="input-field">
+      <textarea id="search_games" row="1" class="materialize-textarea" ng-model="searchText"required placeholder="  search.."></textarea>
+     </div>
+   </form>
   </div>
-    
-  <!-- display all the games -->
+
+<!-- display all the games -->
   <ul class="collection" watch>
     <li ng-repeat="game in games | filter:searchText" class="collection-item">
       <div class="collapsible-item">
@@ -24,8 +24,8 @@
       </div>        
     </li>
   </ul> 
-      
-  <!-- detail Modal for each game -->
+
+<!-- detail Modal for each game -->
   <div id="openRequest" class="modal">
     <div class="modal-content">
       <h4>{{game.game}}</h4>
@@ -43,8 +43,10 @@
           </div>
           <br>
           <div ng-if="submitError" class="error col 12 red-text">{{submitError}}</div>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
+
+
