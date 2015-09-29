@@ -1,66 +1,56 @@
 var GamePosts = require ('../models/gamePostsModel.js');
+var helpers = require ('../utils/helpers.js');
 
 module.exports = {
   
-  getAllGameposts: function (req, res){
+  getAllGameposts: function (req, res) {
     GamePosts.getAll()
-      .then(function (data){
+      .then(function (data) {
         res.send(data);
       })
-      .catch(function(err){
-        console.log(err);
-        res.send(err.message);
-      })
+      .catch(helpers.handleError(err, res))
   },
 
-  createGamepost: function (req, res){
+  createGamepost: function (req, res) {
     var gamepost = req.body;
     gamepost.host_id = req.user;
     gamepost.has_pending_requests = false;
     gamepost.accepted_players = 0;
     GamePosts.create(gamepost)
     
-      .then(function (data){
+      .then(function (data) {
         res.send(data);
 
       })
-      .catch(function(err){
-        console.log(err);
-        res.send(err.message);
-      })
+      .catch(helpers.handleError(err, res))
   },
 
-  getUserGamePosts: function (req, res){
+  getUserGamePosts: function (req, res) {
     var userId = req.user;
     GamePosts.getAll(userId)
-      .then(function(data){
+      .then(function (data) {
         res.send(data);
       })
-      .catch(function(err){
-        console.log(err);
-        res.send(err.message);
-      })
+      .catch(helpers.handleError(err, res))
   },
 
-  deleteGamePost: function (req, res){
+  deleteGamePost: function (req, res) {
     var gamepostId = parseInt(req.url.split('/')[2]) //for "/gameposts/123", gamepostID === 123
     var userId = req.user;
     GamePosts.deleteGamePost(gamepostId, userId)
-      .then(function (){
+      .then(function () {
         res.send(200);
       })
-      .catch(function(err){
-        console.log(err);
-        res.send(err.message);
-      })
+      .catch(helpers.handleError(err, res))
   },
 
-  setPendingRequests: function (req, res, next){
+  setPendingRequests: function (req, res, next) {
     var gamepostId = parseInt(req.url.split('/')[2])
     GamePosts.setPending(gamepostId)
-      .then(function() {
+      .then(function () {
         next();
       })
+      .catch(helpers.handleError(err, res))
   }
 
 }

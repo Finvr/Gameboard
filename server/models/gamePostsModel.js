@@ -2,9 +2,9 @@ var db = require('../db.js');
 
 module.exports = {
 
-  getAll: function (userId){
+  getAll: function (userId) {
     return fetch(userId)
-      .then(function (gameposts){
+      .then(function (gameposts) {
         return gameposts;
       })
       .catch(function(err){
@@ -13,11 +13,11 @@ module.exports = {
       })
   },
 
-  create: function (gamepost){
+  create: function (gamepost) {
     return db('gameposts')
       .insert(gamepost)
       .returning("id")
-      .then(function (gamepost){
+      .then(function (gamepost) {
         return gamepost;
       })
       .catch(function(err){
@@ -26,14 +26,14 @@ module.exports = {
       })
   },
 
-  deleteGamePost: function (gamepostId, userId){
+  deleteGamePost: function (gamepostId, userId) {
     return db('gameposts')
       .where({
         id: gamepostId,
         host_id: userId
       })
       .del()
-      .catch(function(err){
+      .catch(function (err) {
         console.log(err);
         return err;
       })
@@ -46,9 +46,9 @@ module.exports = {
         has_pending_requests: true,
         updated_at: db.raw('now()')
       })
-      .catch(function(err){
+      .catch(function (err) {
         console.log(err);
-        return err
+        return err;
       })
   }
   

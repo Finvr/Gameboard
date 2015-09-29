@@ -1,6 +1,6 @@
 var Users = require ('../models/userModel.js')
 
-module.exports= {
+module.exports = {
 
   // we do not need this yet;
   //
@@ -16,31 +16,31 @@ module.exports= {
   //     })
   // },
 
-  checkAuth: function(req, res, next) {
+  checkAuth: function (req, res, next) {
     console.log("checkAuth req.user: ", req.user)
     if (!req.user) {
       res.status(403).send('User is not logged in!')
     }
     Users.find(req.user)
-      .then(function(res){
+      .then(function (res) {
         if (res.length !== 0) {
           next();
         } else {
           res.send("User does not exist!")
         }
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log("err in checkAuth: ", err);
         res.send("User does not exist!");
       })
   },
 
-  logout: function(req, res) {
+  logout: function (req, res) {
     req.logout();
     res.sendStatus(200);
   },
 
-  loggedIn: function(req, res) {
+  loggedIn: function (req, res) {
     res.sendStatus(200);
   }
 
