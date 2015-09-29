@@ -61,6 +61,22 @@ module.exports = {
       .catch(function (err) {
         helpers.handleError(err, res)
       })
-  }
+  },
+
+  addPlayer: function (req, res) {
+    var gamepostId = parseInt(req.url.split('/')[2])
+    GamePosts.addPlayer(gamepostId)
+      .then( function () {
+        res.send(200);
+      })
+  },
+
+  removePlayer: function (req, res) {
+    var gamepostId = parseInt(req.url.split('/')[2])
+    GamePosts.removePlayer(gamepostId)
+      .then( function () {
+        res.send(200);
+      })
+  },
 
 }
