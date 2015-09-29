@@ -50,6 +50,18 @@ module.exports = {
         console.log(err);
         return err;
       })
+  },
+
+  addPlayer: function (gamepostId) {
+    return db('gameposts')
+      .where({id: gamepostId})
+      .increment('accepted_players', 1);
+  },
+
+  removePlayer: function (gamepostId) {
+    return db('gameposts')
+      .where({id: gamepostId})
+      .decrement('accepted_players', 1);
   }
   
 }

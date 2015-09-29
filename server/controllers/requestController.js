@@ -63,9 +63,8 @@ module.exports = {
           //attribute in gameposts.
           next();
         })
-        .catch(function(err) {
-          console.log(err);
-          res.send(err.message);
+        .catch(function (err) {
+          helpers.handleError(err, res)
         })
     } else if ( request.status === 'declined' ) {
       Requests.changeStatus(request)
@@ -74,7 +73,7 @@ module.exports = {
         })
         .catch(function (err) {
           helpers.handleError(err, res)
-      })
+        })
     } else {
       res.send(400, 'Invalid status');
     }
