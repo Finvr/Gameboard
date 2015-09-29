@@ -26,6 +26,7 @@
 				.then(function(data){
 					console.log("data", data)
 					if (typeof data === 'string' && data.includes('already been submmited')) {
+
 						$scope.submitError = "You have already submitted your request!";
 					} else {
 						$("#openRequest").closeModal();

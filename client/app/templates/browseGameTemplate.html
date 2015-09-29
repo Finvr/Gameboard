@@ -4,49 +4,47 @@
     <form>
      <div class="input-field">
       <textarea id="search_games" row="1" class="materialize-textarea" ng-model="searchText"required placeholder="  search.."></textarea>
-     </div>
-   </form>
-  </div>
+    </div>
+  </form>
+</div>
 
 <!-- display all the games -->
-  <ul class="collection" watch>
-    <li ng-repeat="game in games | filter:searchText" class="collection-item">
-      <div class="collapsible-item">
-        <i class="material-icons right">speaker_notes</i>
-        <i class="material-icons right">event</i>
-        <div class='row'>
-          <h5><b>{{game.game}}</b></h5>
-          {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} @ {{game.game_location}}
-        </div>
-        <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
-          <a class='btn' href='#openRequest' modal>View Details</a>
-        </div>
-      </div>        
-    </li>
-  </ul> 
+<ul class="collection" watch>
+  <li ng-repeat="game in games | filter:searchText" class="collection-item">
+    <div class="collapsible-item">
+      <i class="material-icons right">speaker_notes</i>
+      <i class="material-icons right">event</i>
+      <div class='row'>
+        <h5><b>{{game.game}}</b></h5>
+        {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} @ {{game.game_location}}
+      </div>
+      <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
+        <a class='btn' href='#openRequest' modal>View Details</a>
+      </div>
+    </div>        
+  </li>
+</ul> 
 
 <!-- detail Modal for each game -->
-  <div id="openRequest" class="modal">
-    <div class="modal-content">
-      <h4>{{game.game}}</h4>
-      <p>{{game.gamepost_description}}</p>
-      <div class = "container"> 
-        <div class = "row center">
-          <div class="input-field">
-            <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
-          </div>
-          <div class = "col s2" ng-click="sendRequest(game)">
-            <a class = "btn-floating btn-med waves-effect waves-light cyan">
-              <i class="material-icons">email</i>
-            </a>
-            <br>
-          </div>
-          <br>
-          <div ng-if="submitError" class="error col 12 red-text">{{submitError}}</div>
+<div id="openRequest" class="modal">
+  <div class="modal-content">
+    <h4>{{game.game}}</h4>
+    <p>{{game.gamepost_description}}</p>
+    <div class = "container"> 
+      <div class = "row center">
+        <div class="input-field">
+          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
         </div>
+        <div class = "col s2" ng-click="sendRequest(game)">
+          <a class = "btn-floating btn-med waves-effect waves-light cyan">
+            <i class="material-icons">email</i>
+          </a>
+          <br>
+        </div>
+        <br>
+        <div ng-if="submitError" class="error col 12 red-text">{{submitError}}</div>
       </div>
     </div>
   </div>
 </div>
-
-
+</div>
