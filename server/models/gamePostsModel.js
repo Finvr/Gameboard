@@ -42,7 +42,10 @@ module.exports = {
   setPending: function (gamepostId) {
     return db('gameposts')
       .where({id: gamepostId})
-      .update('has_pending_requests', true)
+      .update({
+        has_pending_requests: true,
+        updated_at: knex.raw('now()')
+      })
       .catch(function(err){
         console.log(err);
         return err
