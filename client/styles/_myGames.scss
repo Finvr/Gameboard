@@ -2,4 +2,16 @@
 	.collapsible-header .material-icons {
 		color: #26a69a;
 	}
+	.collection-header {
+		padding: 2%;
+    text-align: center;
+	}
+  .title {
+  	font-size: 1.25em;
+  }
+  .collapsible-header p {
+  	line-height: 2rem;
+  	padding-left: 10%;
+  	margin: 2% 0;
+  }
 }
