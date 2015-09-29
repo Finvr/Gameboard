@@ -1,4 +1,4 @@
-<div class="browse" ng-controller="BrowseGameController">
+<div class="browse">
  <h3>Browse All Games</h3>
     <div class="browse_search">
       <form>
@@ -14,23 +14,27 @@
 	      {{game.game_datetime | date:"EEEE, MMM d, y ',' h:mma"}}
 	       @ {{game.game_location}}
 	      </div>
-	      <div class="collapsible-body">
+
+	      <div class="collapsible-body" ng-if="loggedIn">
 	      	<div class = "row">
 	      		<div class= "col s12"><i> {{game.gamepost_description}} </i> </div>
 	      	</div>
-	      <div class = "container">	
-	     	<div class = "row center">
-	        <div class="input-field">
-	          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="message" placeholder="Enter Message"></textarea>
-	          </div>
-	          <div class = "col s2">
-	           <div class = "btn-floating btn-med waves-effect waves-light cyan" ng-click="showPending()"><i class="material-icons">email</i></div>
-	          </div>
-        </div>
-      </div>
 
-      </div>
+  	      <div class = "container">	
+    	     	<div class = "row center">
+    	        <div class="input-field">
+    	          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="requestMessage" placeholder="Enter Message"></textarea>
+    	        </div>
+  	          <div class = "col s2" ng-click="sendRequest(game)">
+  	            <div class = "btn-floating btn-med waves-effect waves-light cyan">
+                  <i class="material-icons">email</i>
+                </div>
+  	          </div>
+            </div>
+          </div>
+        </div>
+
 	    </li>
-  </ul>
+    </ul>
   </div>
 </div>
