@@ -47,6 +47,18 @@ module.exports = {
           })
   },
 
+  changeStatus: function(request) {
+    return db('requests')
+      .where({id: request.id})
+      .update({
+        status: request.status,
+        updated_at: db.raw('now()')
+      })
+      .catch(function(err){
+        console.log(err);
+        return err
+      })
+  },
 
   create: function(request) {
     return db('requests')

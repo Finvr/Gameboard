@@ -51,5 +51,21 @@ module.exports = {
       .catch(function (err) {
         helpers.handleError(err, res)
       })
+  },
+
+  changeStatus: function (req, res){
+    var request = req.data;
+    request.id = parseInt(req.url.split('/')[2]);
+    if ( request.status === 'accepted' || request.status === 'declined') {
+      Requests.changeStatus(request)
+        .then(function() {
+        })
+        .catch(function (err) {
+          helpers.handleError(err, res)
+      })
+    } else {
+      res.send(401, 'Invalid status');
+    }
   }
+
 }
