@@ -13,6 +13,19 @@
 	      <div class="collapsible-header"><i class="material-icons right">speaker_notes</i><i class="material-icons right">event</i><h5><b>{{game.game}}</b></h5>
 	      {{game.game_datetime | date:"EEEE, MMM d, y ',' h:mma"}}
 	       @ {{game.game_location}}
+	       <div class="col">
+    <a class='btn' href='#demoModal' modal>Show Modal</a>
+</div>
+<!-- Modal Structure -->
+<div id="demoModal" class="modal">
+    <div class="modal-content">
+        <h4>Modal header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
 	      </div>
 
 	      <div class="collapsible-body" ng-if="loggedIn">
@@ -23,7 +36,7 @@
   	      <div class = "container">	
     	     	<div class = "row center">
     	        <div class="input-field">
-    	          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="requestMessage.comments" placeholder="Enter Message"></textarea>
+    	          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
     	        </div>
   	          <div class = "col s2" ng-click="sendRequest(game)">
   	            <div class = "btn-floating btn-med waves-effect waves-light cyan">
