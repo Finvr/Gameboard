@@ -1,7 +1,12 @@
 
 .createGame {
+
+  margin-left: 80px;
+  margin-right: 80px;
+
+
 	div.half-div {
-		margin: 10 auto;
+		margin: 5 auto;
     text-align: center;
     color: gray;
 	}
@@ -26,7 +31,4 @@
     font-size: 15px;
   }
 
-  div.row {
-    padding-top: 0;
-  }
 }
