@@ -17,13 +17,20 @@
 				$scope.games = resp;
 			});
 
+		$scope.openGame = function(game) {
+			$scope.submitError = null;
+			$scope.requestMessage = {comments: ''};
+			$scope.game = game;
+		};
+
 		$scope.sendRequest = function(game) {
 			BrowseGames.sendRequest($scope.requestMessage, game.id)
 				.then(function(data){
 					console.log("data", data)
-					if (data.includes('already been submitted')) {
+					if (typeof data === 'string' && data.includes('already been submmited')) {
 						$scope.submitError = "You have already submitted your request!";
 					} else {
+						$("#openRequest").closeModal();
 						$location.path('/my-games');
 					}
 				})
