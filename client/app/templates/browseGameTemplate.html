@@ -13,7 +13,7 @@
         <div class="collapsible-item"><i class="material-icons right">speaker_notes</i><i class="material-icons right">event</i><h5><b>{{game.game}}</b></h5>
         {{game.game_datetime | date:"EEEE, MMM d, y ',' h:mma"}}
          @ {{game.game_location}}
-         <div class="col">
+         <div class="col" ng-if="loggedIn">
             <a class='btn' href='#openRequest' modal>View Details</a>
         </div>
 <!-- Modal Structure -->

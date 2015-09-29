@@ -41,7 +41,6 @@ router.get('/me/requests',
 
 //GamePosts Routes
 router.get('/gameposts', 
-  checkAuth, 
   gameController.getAllGameposts
 );
 

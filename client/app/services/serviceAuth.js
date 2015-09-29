@@ -6,7 +6,7 @@
 
   function Auth ($rootScope, $http, $location, $window) {
 
-    function requireAuth () {
+    function requireAuth (url) {
       return $http({
         method: 'GET',
         url: '/me'
@@ -17,7 +17,11 @@
       })
       .catch(function(){
         console.log("User is not logged in! Redirecting to homepage!")
-        $location.path('/');
+        if (url === 'browse') {
+          $location.path('/browse-games');
+        } else {
+          $location.path('/');          
+        }
       });
     };
 
