@@ -18,6 +18,7 @@
       return GamePost.myRequests()
         .then(function(games){
           $scope.myRequests = games;
+          console.log($scope.myRequests);
         });
     };
 
