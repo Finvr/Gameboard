@@ -51,14 +51,21 @@
       <section class="joined">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>My Pending Requests</h5></span></li>
-          <li class="collection-item">
-            <div class="collapsible-header">Alvin
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">send</i>
-              </a>
+          <li ng-repeat="request in myRequests" class="collection-item avatar">
+            <div class="collapsible-header">
+              <i class="material-icons md-light">info</i>
+              <span class="title indigo-text text-darkern-2">
+                {{ request.game}}
+              </span>
+              <p>
+                {{ request.game_datetime | date : "EEEE, MMMM d, y, h:mm a" }}<br>
+                {{ request.game_location }}
+              </p>
             </div>
             <div class="collapsible-body">
-              Test
+              <p>
+                <span class="pink-text text-darken-2">Comments: </span> {{ request.comments }}
+              </p>
             </div>
           </li>
         </ul>
