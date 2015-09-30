@@ -38,9 +38,10 @@ passport.deserializeUser(function(userId, done){
 });
 
 passport.use(new FacebookStrategy ({
-    clientID: config.facebook.FACEBOOK_APP_ID,
-    clientSecret: config.facebook.FACEBOOK_SECRET,
-    callbackURL: config.facebook.callbackURL
+    // clientID: config.facebook.FACEBOOK_APP_ID,
+    clientID: process.env.FACEBOOK_APP_ID || config.facebook.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_SECRET ||config.facebook.FACEBOOK_SECRET,
+    callbackURL: process.env.callbackURL ||config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
     var user = {username: profile.displayName, facebook_id: profile.id}
