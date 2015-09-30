@@ -3,8 +3,6 @@
 		.controller('BrowseGameController', BrowseGameController);
 
 	function BrowseGameController($scope, BrowseGames, Auth, $location) {
-
-		$scope.home = "djsaldjaskl";
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
@@ -28,6 +26,7 @@
 				.then(function(data){
 					console.log("data", data)
 					if (typeof data === 'string' && data.includes('already been submmited')) {
+
 						$scope.submitError = "You have already submitted your request!";
 					} else {
 						$("#openRequest").closeModal();
