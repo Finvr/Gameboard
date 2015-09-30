@@ -38,11 +38,23 @@
         return gamePosts.data;
       });
     };
+
+    function gamepostRequest(gamepostId) {
+      return $http({
+        method: 'GET',
+        url: '/gameposts/' + gamepostId + '/requests'
+      })
+      .then(function(requests){
+        console.log("gamepostRequest resp: ", requests)
+        return requests.data;
+      })
+    }
   	
   	return {
   		create: create,
       myHostedGames: myHostedGames,
-      myRequests: myRequests
+      myRequests: myRequests,
+      gamepostRequest: gamepostRequest
   	};
   };
 

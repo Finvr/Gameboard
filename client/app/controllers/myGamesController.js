@@ -23,6 +23,15 @@
         });
     };
 
+    $scope.getGamepostRequest = function(game){
+      console.log("getGamepostsRequest: ", game);
+      return GamePost.gamepostRequest(game.id)
+        .then(function(requests){
+          $scope.requests = requests;
+          console.log('$scope.requests ', $scope.requests )
+        })
+    }
+
   	getMyGames();
     getMyRequests();
 
