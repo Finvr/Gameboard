@@ -34,8 +34,10 @@
 
     $scope.requestConfirm = function(str, req) {
       console.log("requestConfirm decision: ", str);
-      return GamePost.requestConfirm(str, req)
+      req.status = str;
+      return GamePost.requestConfirm(req)
         .then(function(data){
+          getMyRequests();
           console.log('requestConfirm controller resp: ', data);
         })
     }
