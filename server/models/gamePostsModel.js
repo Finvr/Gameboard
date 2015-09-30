@@ -88,13 +88,21 @@ module.exports = {
 
 function fetchAllOrByUser (userId) {
   if ( userId ) {
-    return db.select()
+    return db.select([
+        'gameposts.*',
+        'username'
+      ])
       .from('gameposts')
+      .join('users', 'host_id', 'users.id')
       .where({
         host_id: userId
       })
   } else {
-    return db.select()
+    return db.select([
+        'gameposts.*',
+        'username'
+      ])
       .from('gameposts')
+      .join('users', 'host_id', 'users.id')
   }
 };
