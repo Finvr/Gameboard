@@ -1,4 +1,5 @@
-var db = require('../db.js');
+var db       = require('../db.js'),
+    Requests = require('./requestsModel.js');
 
 module.exports = {
 
@@ -88,21 +89,27 @@ module.exports = {
 
 function fetchAllOrByUser (userId) {
   if ( userId ) {
-    return db.select([
+    return db('users').select([
         'gameposts.*',
-        'username'
+        'users.username',
+        db.raw("COUNT(CASE requests.status WHEN 'accepted' THEN 1 END) as accepted_count"),
+        db.raw("COUNT(CASE requests.status WHEN 'pending' THEN 1 END) as pending_count")
       ])
-      .from('gameposts')
-      .join('users', 'host_id', 'users.id')
+      .groupBy('gameposts.id', 'users.username')
+      .join('gameposts', 'host_id', 'users.id')
+      .leftOuterJoin('requests', 'gamepost_id', 'gameposts.id')
       .where({
         host_id: userId
       })
   } else {
-    return db.select([
+    return db('users').select([
         'gameposts.*',
-        'username'
+        'users.username',
+        db.raw("COUNT(CASE requests.status WHEN 'accepted' THEN 1 END) as accepted_count"),
+        db.raw("COUNT(CASE requests.status WHEN 'pending' THEN 1 END) as pending_count")
       ])
-      .from('gameposts')
-      .join('users', 'host_id', 'users.id')
+      .groupBy('gameposts.id', 'users.username')
+      .join('gameposts', 'host_id', 'users.id')
+      .leftOuterJoin('requests', 'gamepost_id', 'gameposts.id')
   }
 };

@@ -117,6 +117,21 @@ module.exports = {
         console.log(err);
         return err;
       })
+  },
+
+  acceptedPlayers: function (gamepostId) {
+    return db('requests')
+      .where({
+        gamepost_id: gamepostId,
+        status: 'accepted'
+      })
+      .then(function (data) {
+        return data.length;
+      })
+      .catch(function (err) {
+        console.log(err);
+        return err;
+      })
   }
 
 };
