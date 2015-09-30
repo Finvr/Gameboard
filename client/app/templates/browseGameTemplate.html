@@ -1,12 +1,28 @@
 <div class="browse">
-  <h3 class="center">Browse All Games</h3>
-  <div class = "container" id= "outer">
-    <nav>
-      <div class = "nav-wrapper transparent">
-        <div class="input-field">
-          <input id="search" type="search" ng-model="searchText" required>
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
+  <h3 class="center">Browse All Games</h3
+  <div class="container" id="outer">
+  <div class="row">
+    <div class="col m3">
+      <nav>
+      <div class="nav-wrapper transparent browse-filters-header">
+        <h5>Filters</h5>
+      </div>
+      </nav>
+      <div class="browse-filters">
+        <div class="title indigo-text text-darkern-2">Select a Game</div>
+        <select class="browser-default" ng-model="searchText" material-select watch>
+            <option ng-repeat="value in gamesFilter.choices">{{value}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col m9" id="outer">
+      <nav>
+        <div class="nav-wrapper transparent">
+          <div class="input-field">
+            <input id="search" type="search" ng-model="searchText" required>
+            <label for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i>
+          </div>
         </div>
       </div>
     </nav>
@@ -58,4 +74,5 @@
         <div class="modal-footer"></div>
       </div>
     </div>
-  </div>
+  </div><!-- #outer -->
+</div><!-- .browse -->
