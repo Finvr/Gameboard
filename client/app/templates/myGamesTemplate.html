@@ -12,8 +12,8 @@
               <span class="title indigo-text text-darkern-2">
                 {{ game.game}}
               </span>
-              <!-- add ng-if to only show this if there are requests to approve -->
-              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.has_pending_requests">add_alert</i></a>
+              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
+              <a href="#cancelModal" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
               <p>
                 <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ game.game_location }}
