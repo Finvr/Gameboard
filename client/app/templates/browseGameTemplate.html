@@ -18,10 +18,10 @@
         <i class="material-icons right">speaker_notes</i>
         <i class="material-icons right">event</i>
         <div class='row'>
-          <span class ="pink-text text-darken-2" id="game_title">{{game.game}}</span>
+          <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
           {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
           <div>@ {{game.game_location}}</div>
-          <div>Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}
+          <div class ="pink-text text-darken-2">Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}
         </div>
         <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
           <a class='btn indigo' href='#openRequest' modal>View</a>
