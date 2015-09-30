@@ -44,6 +44,11 @@
         searchBox.setBounds(map.getBounds());
       });
 
+      searchBox.addListener('places_changed', function() {
+        var place = searchBox.getPlaces();
+        marker.setMap && marker.setMap(null);
+        $scope.changeMarker(place.geometry.location, map);
+      });
 
       google.maps.event.addListener(map, 'click', function(event) { 
         marker.setMap && marker.setMap(null);
