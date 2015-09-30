@@ -48,13 +48,30 @@
         console.log("gamepostRequest resp: ", requests)
         return requests.data;
       })
+    };
+
+    function requestConfirm(str, request) {
+      return $http({
+        method: "PUT",
+        url: "/requests/" + request.id,
+        data: str
+      })
+      .then(function(resp) {
+        console.log("requestConfirm service resp: ", resp);
+        return resp.data;
+      })
+      .catch(function(err) {
+        console.log("requestConfirm service Error: ", err);
+        return err.data;
+      });
     }
   	
   	return {
   		create: create,
       myHostedGames: myHostedGames,
       myRequests: myRequests,
-      gamepostRequest: gamepostRequest
+      gamepostRequest: gamepostRequest,
+      requestConfirm: requestConfirm
   	};
   };
 
