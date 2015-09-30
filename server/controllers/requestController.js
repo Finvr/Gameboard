@@ -48,7 +48,7 @@ module.exports = {
   deleteRequest: function (req, res, next) {
     //Cancel a request
     var request = req.body;
-
+    console.log("request serevr", req.data);
     if ( request.id !== parseInt(req.url.split('/')[2]) ) {
       res.send(400, 'Invalid request object');
     } else {
@@ -90,7 +90,7 @@ module.exports = {
   declineAll: function (req, res) {
     //After a gamepost is cancelled, set all associated requests to declined
     var gamepostId = parseInt(req.url.split('/')[2]);
-    Requets.declineAll(gamepostId)
+    Requests.declineAll(gamepostId)
       .then(function () {
         res.send(200);
       })

@@ -65,13 +65,48 @@
         return err.data;
       });
     }
+
+    function requestCancel(request) {
+       console.log("request in service", request);
+      return $http({
+        method: "DELETE",
+        url: "/requests/" + request.id,
+        data: JSON.stringify(request)
+      })
+      .then(function(resp) {
+        console.log("delete request: ", request);
+        console.log("resp", resp);
+        return resp.data;
+      })
+      .catch(function(err) {
+        console.log("requestConfirm service Error: ", err);
+        return err.data;
+      });
+    }
+
+    function deleteGame(game){
+      console.log("game", game);
+      return $http({
+        method: "DELETE",
+        url: "/gameposts/"+ game.id
+      })
+      .then(function(resp) {
+        console.log("deleteresp", resp);
+        return resp.data;
+      })
+      .catch(function(err) {
+        return err.data;
+      })
+    }
   	
   	return {
   		create: create,
       myHostedGames: myHostedGames,
       myRequests: myRequests,
       gamepostRequest: gamepostRequest,
-      requestConfirm: requestConfirm
+      requestConfirm: requestConfirm,
+      requestCancel: requestCancel,
+      deleteGame: deleteGame
   	};
   };
 
