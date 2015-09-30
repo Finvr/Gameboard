@@ -12,12 +12,12 @@
               <span class="title indigo-text text-darkern-2">
                 {{ game.game}}
               </span>
+              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
+              <a href="#cancelModal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
               <p>
                 <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ game.game_location }}
               </p>
-              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
-              <a href="#cancelModal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
             </div>
             <div class="collapsible-body">
               <p>
@@ -115,10 +115,10 @@
       <a href=""><i class="material-icons">close</i></a>
     </div>
     <div class="modal-content container"> 
-        <p>Are you sure you want to cancel this game?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
+        <p>Are you sure you want to cancel this game of {{gameToCancel.game}}?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
     </div>
     <div class="modal-footer">
-      <a ng-click="cancelGame(game)" class="modal-action modal-close waves-effect teal white-text btn-flat">Cancel Game</a>
+      <a ng-click="cancelGame()" class="modal-action modal-close waves-effect teal white-text btn-flat">Cancel Game</a>
     </div>
   </div>
 </div>
