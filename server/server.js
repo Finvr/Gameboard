@@ -38,8 +38,8 @@ passport.deserializeUser(function(userId, done){
 });
 
 passport.use(new FacebookStrategy ({
-    clientID: config.facebook.clientID,
-    clientSecret: config.facebook.clientSecret,
+    clientID: config.facebook.FACEBOOK_APP_ID,
+    clientSecret: config.facebook.FACEBOOK_SECRET,
     callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
