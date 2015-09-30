@@ -9,37 +9,31 @@ describe('Routing', function() {
   it('Should have root (\'/\') route that is linked to the home controller and home page template', function() {
     expect($route.routes['/'].controller).toBe('HomeController');
     expect($route.routes['/'].templateUrl).toBe(
-      'app/auth/homeTemplate.html');
+      'app/templates/homeTemplate.html');
   });
 
   it('Should have create-game (\'/create-game\') route that is linked to the createGame controller and template', function() {
     expect($route.routes['/create-game'].controller).toBe('CreateGameController');
     expect($route.routes['/create-game'].templateUrl).toBe(
-      'app/games/create/createGameTemplate.html');
+      'app/templates/createGameTemplate.html');
   });
 
   it('Should have my-games (\'/my-games\') route that is linked to the myGames controller and template', function() {
     expect($route.routes['/my-games'].controller).toBe('MyGamesController');
     expect($route.routes['/my-games'].templateUrl).toBe(
-      'app/games/my/myGamesTemplate.html');
+      'app/templates/myGamesTemplate.html');
   });
 
   it('Should have browse-games (\'/browse-games\') route that is to the browseGames controller and template', function(){
     expect($route.routes['/browse-games'].controller).toBe('BrowseGameController');
     expect($route.routes['/browse-games'].templateUrl).toBe(
-      'app/games/browse/browseGameTemplate.html');
-  });
-
-  it('Should have signin (\'/signin\') route that is linked to the auth controller and signin template', function() {
-    expect($route.routes['/signin'].controller).toBe('AuthController');
-    expect($route.routes['/signin'].templateUrl).toBe(
-      'app/auth/signin.html');
+      'app/templates/browseGameTemplate.html');
   });
 
   it('Should have logout (\'/logout\') route that is linked to the auth controller and home template', function(){
-    expect($route.routes['/logout'].controller).toBe('AuthController');
+    expect($route.routes['/logout'].controller).toBe('HomeController');
     expect($route.routes['/logout'].url).toBe('/');
-    expect($route.routes['/logout'].templateUrl).toBe('app/auth/homeTemplate.html'); //write test for resolve
+    expect($route.routes['/logout'].templateUrl).toBe('app/templates/homeTemplate.html'); //write test for resolve
   });
       
 });
