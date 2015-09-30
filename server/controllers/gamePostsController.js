@@ -16,7 +16,7 @@ module.exports = {
   createGamepost: function (req, res) {
     var gamepost = req.body;
     gamepost.host_id = req.user;
-    gamepost.has_pending_requests = false;
+    gamepost.pending_requests = 0;
     gamepost.accepted_players = 0;
     GamePosts.create(gamepost)
     
@@ -52,9 +52,9 @@ module.exports = {
       })
   },
 
-  setPendingRequests: function (req, res, next) {
+  addPendingRequests: function (req, res, next) {
     var gamepostId = parseInt(req.url.split('/')[2])
-    GamePosts.setPending(gamepostId)
+    GamePosts.addPending(gamepostId)
       .then(function () {
         next();
       })
@@ -65,18 +65,33 @@ module.exports = {
 
   addPlayer: function (req, res) {
     var gamepostId = req.body.gamepost_id;
-    GamePosts.addPlayer(gamepostId)
-      .then( function () {
-        res.send(200);
+    return GamePosts.reducePending(gamepostId)
+      .then(function () {
+        if ( req.body.status === "accepted" ) {
+          return GamePosts.addPlayer(gamepostId);
+        } else { 
+          return null ;
+        }
+      })
+      .then(function () {
+            res.send(200);         
       })
   },
 
   removePlayer: function (req, res) {
     var gamepostId = req.body.gamepost_id;
-    GamePosts.removePlayer(gamepostId)
-      .then( function () {
-        res.send(200);
-      })
+    var request = req.body;
+    if ( request.status === 'accepted' ) {
+      return GamePosts.removePlayer(gamepostId)
+        .then(function () {
+          res.send(200);
+        })
+    } else {
+      return GamePosts.reducePending(gamepostId)
+        .then(function () {
+          res.send(200);
+        })
+    }
   }
 
 }
