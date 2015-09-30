@@ -21,7 +21,7 @@
             <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
             {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
             <div>@ {{game.game_location}}</div>
-            <div class ="pink-text text-darken-2">Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}
+            <div class ="pink-text text-darken-2">Players: {{game.accepted_players}}/{{game.player_count}}
             </div>
             <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
             <a class='btn indigo' href='#openRequest' modal>Join</a>
@@ -36,8 +36,9 @@
         <div ng-click="close()"><i class="material-icons right close">close</i></div>
         <div class="modal-content">
           <span class= "pink-text text-darken-2"><h4>{{game.game}}</h4></span>
-          <p><i>Description from Host:  </i>{{game.gamepost_description}} </p>
-          <div>Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}</div>
+          <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
+          <p><i>Host:</i> {{game.username}}</p>
+          <div><i>Current players:</i> {{game.accepted_players}}/{{game.player_count}}</div>
           <div class = "row center">
             <div class="input-field">
               <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
