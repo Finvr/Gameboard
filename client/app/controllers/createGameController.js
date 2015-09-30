@@ -10,7 +10,7 @@
 
     // set today as the ealiest day user can select
     $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
-    
+
     document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
 
     $scope.createGame = function(game){
@@ -27,7 +27,6 @@
           $location.path("/my-games")
           // if user is not authrized, data = "User is not logged in!"
           console.log("create gamepost: ", data)
-          console.log(data);
         })
       };
   };
@@ -48,7 +47,6 @@
         }
 
         var mapCanvas = document.getElementById('gmap');
-        console.log("mapCanvas: ", mapCanvas)
         var mapOptions = {
           center: new google.maps.LatLng(30.2500, -97.7500),
           zoom: 14,
