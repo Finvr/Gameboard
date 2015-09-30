@@ -13,7 +13,7 @@
                 {{ game.game}}
               </span>
               <!-- add ng-if to only show this if there are requests to approve -->
-              <a href="#modal1" class="waves-effect waves-light secondary-content" modal><i class="material-icons">add_alert</i></a>
+              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.has_pending_requests">add_alert</i></a>
               <p>
                 <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ game.game_location }}
@@ -83,24 +83,22 @@
   </div>
   <div id="modal1" class="modal approve-pending">
     <div class="modal-header">
-      <h4 class="white-text">Pending</h4>
+      <h4 class="white-text">Pending Request</h4>
     </div>
     <div class="modal-content container">
-        <form action="#">
-          <!-- use ng-repeat, connect to pending requests on gamepost -->
-          <p>
-            <input type="checkbox" id="test5" />
-            <label for="test5">Request # 1</label>
-          </p>
-          <p>
-            <input type="checkbox" id="test6" checked="checked" />
-            <label for="test6">Request # 2</label>
-          </p>
-          <p>
-            <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-            <label for="filled-in-box">Request #3</label>
-          </p>
-        </form>
+       
+      <!-- use ng-repeat, connect to pending requests on gamepost, checked="checked" in input check the request -->
+      <div ng-repeat="request in requests" class="row">
+        <div class="col s6">
+          <h5>Request from {{request.user_id}}</h5>
+          <p><span class="pink-text text-darken-2">Message: </span> {{ request.comments }}</P>
+        </div>
+        <div class="col s6">
+          <i class="material-icons right small">done</i>
+          <i class="material-icons right small">not_interested</i>
+        </div>
+      </div>
+        
     </div>
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect teal white-text btn-flat">I'm Game!</a>
