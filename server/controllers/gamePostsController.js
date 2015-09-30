@@ -17,7 +17,7 @@ module.exports = {
     var gamepost = req.body;
     gamepost.host_id = req.user;
     gamepost.pending_requests = 0;
-    gamepost.accepted_players = 0;
+    gamepost.accepted_players = 1;
     GamePosts.create(gamepost)
     
       .then(function (data) {
