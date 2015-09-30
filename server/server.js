@@ -55,12 +55,12 @@ passport.use(new FacebookStrategy ({
     }
 ));
 
-// router
+// Router
 app.use('/', router); 
 
 module.exports = app;
 
-// listen to port
+// Initialize Server
 var port = 3000
 if(process.env.NODE_ENV === 'test') {
   port = 8000;
