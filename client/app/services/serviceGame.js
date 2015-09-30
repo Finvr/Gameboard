@@ -67,9 +67,10 @@
     }
 
     function deleteGame(game){
+      console.log("game", game);
       return $http({
         method: "DELETE",
-        url: "/gameposts/"+ game.gamepost_id
+        url: "/gameposts/"+ game.id
       })
       .then(function(resp) {
         console.log("deleteresp", resp);
