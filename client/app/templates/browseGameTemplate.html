@@ -1,15 +1,16 @@
 <div class="browse">
-  <h3>Browse All Games</h3>
+  <h3 class="center">Browse All Games</h3>
   <div class = "container">
     <div class="browse_search">
-      <div class = "search-wrapper card">
-       <div class="input-field">
-         <i class="material-icons">search</i>
-         <input id="search_games" ng-model="searchText"required style="border:none">
-       </div>
+      <div class = "card">
+         <div class="input-field">
+           <input id="search_games" type="search"ng-model="searchText"required>
+            <label for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i>
+         </div>
      </div>
    </div>
-
+   
    <!-- display all the games -->
    <ul class="collection" watch>
     <li ng-repeat="game in games | filter:searchText" class="collection-item">

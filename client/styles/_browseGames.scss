@@ -32,7 +32,11 @@
   		border-top: 1px solid #EC407A;
   	}
 
-  h5 .ng-binding {
+  h5 {
   color: #EC407A;
+  }
+
+  input[type=search] {
+  	margin-bottom: 0px;
   }
 }
