@@ -20,8 +20,8 @@ app.use(express.static(__dirname + '/../client'));
 //Passport Middleware
 app.use(sessions({
   name: 'imgame:session',
-  secret: process.env.SESSION_SECRET || 'development',
-  secure: (!! process.env.SESSION_SECRET),
+  secret: process.env.FACEBOOK_APP_ID || 'development',
+  secure: (!! process.env.FACEBOOK_SECRET),
   signed: true
 }));
 app.use(passport.initialize());
@@ -61,7 +61,8 @@ app.use('/', router);
 module.exports = app;
 
 // Initialize Server
-var port = 3000
+var port = process.env.PORT || 3000;
+
 if(process.env.NODE_ENV === 'test') {
   port = 8000;
 }
