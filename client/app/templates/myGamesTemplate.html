@@ -132,7 +132,7 @@
       <a class="modal-action modal-close waves-effect teal white-text btn-flat">I'm Game!</a>
     </div>
   </div>
-  
+
   <!-- Pop-up modal for cancelling of gameposts -->
   <div id="cancelGamepostModal" class="modal approve-pending">
     <div class="modal-header">
@@ -144,6 +144,20 @@
     </div>
     <div class="modal-footer">
       <a ng-click="cancelGame()" class="modal-action modal-close waves-effect teal white-text btn-flat">Cancel Game</a>
+    </div>
+  </div>
+
+  <!-- Pop-up modal for cancelling of requests -->
+  <div id="cancelRequestModal" class="modal approve-pending">
+    <div class="modal-header">
+      <h4 class="white-text">Cancel Request</h4>
+      <!--<a href=""><i class="material-icons">close</i></a>-->
+    </div>
+    <div class="modal-content container"> 
+        <p>Are you sure you want to cancel this request to play {{request.name}}?  The host will be notified and your spot will be freed up for others.</p>
+    </div>
+    <div class="modal-footer">
+      <a ng-click="cancelRequest()" class="modal-action modal-close waves-effect teal white-text btn-flat">Cancel Request</a>
     </div>
   </div>
 </div>
