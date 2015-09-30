@@ -30,8 +30,12 @@
       console.log($scope.gameToCancel);
     }
 
-    $scope.cancelGame = function(){
-      //do stuff to gameToCancel
+    $scope.cancelGame = function(game) {
+      console.log("gameController", game);
+      return GamePost.deleteGame(game)
+        .then(function(){
+          $scope.init();
+        });
     }
 
     $scope.init = function() {
@@ -58,10 +62,6 @@
           console.log('requestConfirm controller resp: ', data);
         })
     };
-
-    $scope.cancelGame(game) {
-      return GamePost.deleteGame(game);
-    }
 
   };
 
