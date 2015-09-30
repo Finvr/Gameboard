@@ -104,9 +104,21 @@
         </li> 
       </ul>
     </div>
-
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect teal white-text btn-flat">I'm Game!</a>
+    </div>
+  </div>
+  <!-- Pop-up modal for cancelling of gameposts -->
+  <div id="cancelModal" class="modal approve-pending">
+    <div class="modal-header">
+      <h4 class="white-text">Cancel Game</h4>
+      <a href=""><i class="material-icons">close</i></a>
+    </div>
+    <div class="modal-content container"> 
+        <p>Are you sure you want to cancel this game?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
+    </div>
+    <div class="modal-footer">
+      <a ng-click="cancelGame(game)" class="modal-action modal-close waves-effect teal white-text btn-flat">Cancel Game</a>
     </div>
   </div>
 </div>
