@@ -1,39 +1,41 @@
 <div class="browse">
   <h3>Browse All Games</h3>
-  <div class="browse_search">
-    <form>
-     <div class="input-field">
-      <textarea id="search_games" row="1" class="materialize-textarea" ng-model="searchText"required placeholder="  search.."></textarea>
-    </div>
-  </form>
-</div>
+  <div class = "container">
+    <div class="browse_search">
+      <div class = "search-wrapper card">
+       <div class="input-field">
+         <i class="material-icons">search</i>
+         <input id="search_games" ng-model="searchText"required style="border:none">
+       </div>
+     </div>
+   </div>
 
-<!-- display all the games -->
-<ul class="collection" watch>
-  <li ng-repeat="game in games | filter:searchText" class="collection-item">
-    <div class="collapsible-item">
-      <i class="material-icons right">speaker_notes</i>
-      <i class="material-icons right">event</i>
-      <div class='row'>
-        <h5><b>{{game.game}}</b></h5>
-        {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} @ {{game.game_location}}
-      </div>
-      <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
-        <a class='btn' href='#openRequest' modal>View Details</a>
-      </div>
-    </div>        
-  </li>
-</ul> 
+   <!-- display all the games -->
+   <ul class="collection" watch>
+    <li ng-repeat="game in games | filter:searchText" class="collection-item">
+      <div class="collapsible-item">
+        <i class="material-icons right">speaker_notes</i>
+        <i class="material-icons right">event</i>
+        <div class='row'>
+          <span class ="pink-text lighten-2"><h5><b>{{game.game}}</b></h5>  </span>
+          {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} @ {{game.game_location}}
+        </div>
+        <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
+          <a class='btn indigo' href='#openRequest' modal>View</a>
+        </div>
+      </div>        
+    </li>
+  </ul> 
 
-<!-- detail Modal for each game -->
-<div id="openRequest" class="modal">
-  <div class="modal-content">
-    <h4>{{game.game}}</h4>
-    <p>{{game.gamepost_description}}</p>
-    <div class = "container"> 
+  <!-- detail Modal for each game -->
+  <div id="openRequest" class="modal">
+    <div class ="modal-header"></div>
+    <div class="modal-content">
+      <span class= "pink-text lighten-2"><h4>{{game.game}}</h4></span>
+      <p>{{game.gamepost_description}}</p>
       <div class = "row center">
         <div class="input-field">
-          <textarea class ="col s9 offset-s1 materialize-textarea" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
+          <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
         </div>
         <div class = "col s2" ng-click="sendRequest(game)">
           <a class = "btn-floating btn-med waves-effect waves-light cyan">
