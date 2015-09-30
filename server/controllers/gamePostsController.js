@@ -18,8 +18,6 @@ module.exports = {
     //Create a new gamepost
     var gamepost = req.body;
     gamepost.host_id = req.user;
-    gamepost.pending_requests = 0;
-    gamepost.accepted_players = 1;
 
     GamePosts.create(gamepost)
       .then(function (data) {
@@ -56,54 +54,6 @@ module.exports = {
       .catch(function (err) {
         helpers.handleError(err, res)
       })
-  },
-
-  addPendingRequests: function (req, res, next) {
-    //Called before requestController.createRequest to increment pending_requests property
-    var gamepostId = parseInt(req.url.split('/')[2]);
-
-    GamePosts.addPending(gamepostId)
-      .then(function () {
-        //Go to requestController.createRequest
-        next();
-      })
-      .catch(function (err) {
-        helpers.handleError(err, res)
-      })
-  },
-
-  addPlayer: function (req, res) {
-    //Decrement pending_requests and then increase accepted_players if request accepted
-    var gamepostId = req.body.gamepost_id;
-    
-    return GamePosts.reducePending(gamepostId)
-      .then(function () {
-        if ( req.body.status === "accepted" ) {
-          return GamePosts.addPlayer(gamepostId);
-        } else { 
-          return null ;
-        }
-      })
-      .then(function () {
-            res.send(200);         
-      })
-  },
-
-  removePlayer: function (req, res) {
-    //Decrement accepted_players or pending_requests after a request is cancelled
-    var gamepostId = req.body.gamepost_id;
-    var request = req.body;
-    if ( request.status === 'accepted' ) {
-      return GamePosts.removePlayer(gamepostId)
-        .then(function () {
-          res.send(200);
-        })
-    } else {
-      return GamePosts.reducePending(gamepostId)
-        .then(function () {
-          res.send(200);
-        })
-    }
   }
 
 }
