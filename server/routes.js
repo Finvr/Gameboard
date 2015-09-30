@@ -19,49 +19,51 @@ router.get('/auth/facebook/callback',
   });
 
 //User routes
+//Logout
 router.get('/me/logout', 
   checkAuth, 
   userController.logout
 );
-
+//Authenticate
 router.get('/me', 
   checkAuth, 
   userController.loggedIn
 );
-
+//Get all gameposts hosted by 'me'
 router.get('/me/gameposts', 
   checkAuth, 
   gameController.getUserGamePosts
 ); 
-
+//Get all requests created by 'me'
 router.get('/me/requests', 
   checkAuth, 
   requestController.getUserRequests
 );
 
 //GamePosts Routes
+//Get all gameposts
 router.get('/gameposts', 
   gameController.getAllGameposts
 );
-
+//Create a new gamepost (host a game)
 router.post('/gameposts', 
   checkAuth, 
   gameController.createGamepost
 );
-
+//Cancel a gamepost
 router.delete('/gameposts/*', 
   checkAuth, 
   gameController.deleteGamePost,
   requestController.declineAll
 );
 
-//get all requests for a gamepost
+//Get all requests for a gamepost
 router.get('/gameposts/*/requests', 
   checkAuth, 
   requestController.getGamePostRequests
 );
 
-//generate a request
+//Submit a request to join a specific gamepost
 router.post('/gameposts/*/requests', 
   checkAuth, 
   gameController.addPendingRequests, 
@@ -69,14 +71,14 @@ router.post('/gameposts/*/requests',
 );
 
 //Requests routes
-//delete a request
+//Cancel a request
 router.delete('/requests/*', 
   checkAuth, 
   requestController.deleteRequest,
   gameController.removePlayer
 );
 
-//update the status of a request
+//Update the status of a request
 router.put('/requests/*', 
   checkAuth, 
   requestController.changeStatus, 
