@@ -1,53 +1,58 @@
 <div class="browse">
   <h3 class="center">Browse All Games</h3>
-  <div class = "container">
-    <div class="browse_search">
-      <div class = "card">
-         <div class="input-field">
-           <input id="search_games" type="search"ng-model="searchText"required>
-            <label for="search"><i class="material-icons">search</i></label>
-            <i class="material-icons">close</i>
-         </div>
-     </div>
-   </div>
-   
-   <!-- display all the games -->
-   <ul class="collection" watch>
-    <li ng-repeat="game in games | filter:searchText" class="collection-item">
-      <div class="collapsible-item">
-        <i class="material-icons right">speaker_notes</i>
-        <i class="material-icons right">event</i>
-        <div class='row'>
-          <span class ="pink-text lighten-2"><h5><b>{{game.game}}</b></h5>  </span>
-          {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} @ {{game.game_location}}
-        </div>
-        <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
-          <a class='btn indigo' href='#openRequest' modal>View</a>
-        </div>
-      </div>        
-    </li>
-  </ul> 
-
-  <!-- detail Modal for each game -->
-  <div id="openRequest" class="modal">
-    <div class ="modal-header"></div>
-    <div class="modal-content">
-      <span class= "pink-text lighten-2"><h4>{{game.game}}</h4></span>
-      <p>{{game.gamepost_description}}</p>
-      <div class = "row center">
+  <div class = "container" id= "outer">
+    <nav>
+      <div class = "nav-wrapper transparent">
         <div class="input-field">
-          <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
+          <input id="search" type="search" ng-model="searchText" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
         </div>
-        <div class = "col s2" ng-click="sendRequest(game)">
-          <a class = "btn-floating btn-med waves-effect waves-light cyan">
-            <i class="material-icons">email</i>
-          </a>
-          <br>
+      </div>
+    </nav>
+
+    <!-- display all the games -->
+    <ul class="collection" watch>
+      <li ng-repeat="game in games | filter:searchText" class="collection-item">
+        <div>
+          <i class="material-icons right">speaker_notes</i>
+          <i class="material-icons right">event</i>
+          <div class='row'>
+            <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
+            {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
+            <div>@ {{game.game_location}}</div>
+            <div class ="pink-text text-darken-2">Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}
+            </div>
+            <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
+            <a class='btn indigo' href='#openRequest' modal>Join</a>
+            </div>
+          </div>        
+        </li>
+      </ul> 
+
+      <!-- detail Modal for each game -->
+      <div id="openRequest" class="modal">
+        <div class ="modal-header"></div>
+        <div ng-click="close()"><i class="material-icons right close">close</i></div>
+        <div class="modal-content">
+          <span class= "pink-text text-darken-2"><h4>{{game.game}}</h4></span>
+          <p><i>Description from Host:  </i>{{game.gamepost_description}} </p>
+          <div>Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}</div>
+          <div class = "row center">
+            <div class="input-field">
+              <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
+            </div>
+            <div class = "col s2" ng-click="sendRequest(game)">
+              <a class = "btn-floating btn-med waves-effect waves-light cyan">
+                <i class="material-icons">email</i>
+              </a>
+              <br>
+            </div>
+            <br>
+            <div ng-if="submitError" class="error col s12 red-text">{{submitError}}</div>
+          </div>
         </div>
-        <br>
-        <div ng-if="submitError" class="error col 12 red-text">{{submitError}}</div>
+        <div class="modal-footer"></div>
       </div>
     </div>
   </div>
-</div>
-</div>
