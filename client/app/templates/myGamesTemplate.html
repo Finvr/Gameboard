@@ -89,16 +89,19 @@
        
       <!-- use ng-repeat, connect to pending requests on gamepost, checked="checked" in input check the request -->
       <div ng-repeat="request in requests" class="row">
-        <div class="col s6">
-          <h5>Request from {{request.user_id}}</h5>
-          <p><span class="pink-text text-darken-2">Message: </span> {{ request.comments }}</P>
+        <div class="col s1">
+          <i class="material-icons left small">email</i>
         </div>
         <div class="col s6">
+          <span class="gamepostrequest">Request from {{request.user_id}}</span>
+          <br>
+          <span class="pink-text text-darken-2">Message: </span> {{ request.comments }}
+        </div>
+        <div class="col s5">
           <i class="material-icons right small">done</i>
           <i class="material-icons right small">not_interested</i>
         </div>
-      </div>
-        
+      </div> 
     </div>
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect teal white-text btn-flat">I'm Game!</a>
