@@ -39,6 +39,8 @@
           <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
           <p><i>Host:</i> {{game.username}}</p>
           <div><i>Current players:</i> {{game.accepted_players}}/{{game.player_count}}</div>
+          <p ng-if="game.gamepost_description!==null"><i>Description from Host:  </i>{{game.gamepost_description}} </p>
+          <p ng-if="game.gamepost_description===null"><i>Description from Host: </i>No description available</p>
           <div class = "row center">
             <div class="input-field">
               <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
