@@ -23,6 +23,12 @@
         });
     };
 
+    $scope.init = function() {
+      getMyGames();
+      getMyRequests();
+    };
+    $scope.init();
+
     $scope.getGamepostRequest = function(game){
       console.log("getGamepostsRequest: ", game);
       return GamePost.gamepostRequest(game.id)
@@ -30,20 +36,17 @@
           $scope.requests = requests;
           console.log('$scope.requests ', $scope.requests )
         })
-    }
+    };
 
     $scope.requestConfirm = function(str, req) {
       console.log("requestConfirm decision: ", str);
       req.status = str;
       return GamePost.requestConfirm(req)
         .then(function(data){
-          getMyRequests();
+          $scope.init();
           console.log('requestConfirm controller resp: ', data);
         })
-    }
-
-  	getMyGames();
-    getMyRequests();
+    };
 
   };
 
