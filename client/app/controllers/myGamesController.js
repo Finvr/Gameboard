@@ -5,6 +5,8 @@
   function MyGamesController($scope, $window, $location, Auth, GamePost){
   	$scope.myGames = [];
     $scope.myRequests = [];
+    $scope.gameToCancel = null;
+
 
     Auth.requireAuth();
 
@@ -22,6 +24,15 @@
           console.log("myRequests: ", $scope.myRequests)
         });
     };
+
+    $scope.setGameToCancel = function(game){
+      $scope.gameToCancel = game;
+      console.log($scope.gameToCancel);
+    }
+
+    $scope.cancelGame = function(){
+      //do stuff to gameToCancel
+    }
 
     $scope.init = function() {
       getMyGames();
