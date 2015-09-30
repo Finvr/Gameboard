@@ -12,8 +12,8 @@
               <span class="title indigo-text text-darkern-2">
                 {{ game.game}}
               </span>
-              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
               <a href="#cancelModal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
               <p>
                 <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ game.game_location }}
@@ -92,9 +92,8 @@
         <li ng-repeat="request in requests" class="collection-item avatar row">
           <i class="material-icons left col s1">email</i>
           <div class="col s10">
-            <span class="gamepostrequest col s8"><strong>Request from {{request.user_id}}</strong></span>
-            <span class="col s3">{{request.status}}</span><br>
-            <span class="col s12"><strong># of Players:</strong> {{request.player_count}}</span><br>
+            <span class="title col s12"><strong>Request from: {{request.username}}</strong></span>
+            <span class="col s12"><strong>Status:</strong> {{request.status}}</span><br>           
             <span class="col s12"><strong>Message:</strong>  {{ request.comments }}</span>
           </div>
           <p class="center row" ng-if="request.status==='pending'">
