@@ -2,7 +2,7 @@
   <h3 class="center">Browse All Games</h3>
   <div class = "container" id= "outer">
   <nav>
-    <div class = "nav-wrapper teal lighten-1">
+    <div class = "nav-wrapper transparent">
         <div class="input-field">
           <input id="search" type="search" ng-model="searchText" required>
           <label for="search"><i class="material-icons">search</i></label>
@@ -18,9 +18,10 @@
         <i class="material-icons right">speaker_notes</i>
         <i class="material-icons right">event</i>
         <div class='row'>
-          <span><h5 class ="pink-text text-darken-2">{{game.game}}</h5>
-          {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} </span>
-          @ {{game.game_location}}
+          <span class ="pink-text text-darken-2" id="game_title">{{game.game}}</span>
+          {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
+          <div>@ {{game.game_location}}</div>
+          <div>Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}
         </div>
         <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
           <a class='btn indigo' href='#openRequest' modal>View</a>
@@ -35,7 +36,8 @@
      <div ng-click="close()"><i class="material-icons right close">close</i></div>
     <div class="modal-content">
       <span class= "pink-text text-darken-2"><h4>{{game.game}}</h4></span>
-      <p>{{game.gamepost_description}}</p>
+      <p><i>Description from Host:  </i>{{game.gamepost_description}} </p>
+      <div>Open spots: {{game.player_count- game.accepted_players}}/{{game.player_count}}</div>
       <div class = "row center">
         <div class="input-field">
           <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
