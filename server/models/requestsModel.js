@@ -28,11 +28,13 @@ module.exports = {
     return db.select([
       'gameposts.*',
       'requests.*',
-      'gameposts.id as gamepost_id'
+      'gameposts.id as gamepost_id',
+      'username'
     ])
       .from('requests')
       .where({gamepost_id: gamepostId})
       .join('gameposts', 'gamepost_id', 'gameposts.id')
+      .join('users', 'user_id', 'users.id')
       .then(function (result) {
         if ( result.length ) {
           return result;
