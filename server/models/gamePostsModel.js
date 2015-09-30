@@ -39,11 +39,24 @@ module.exports = {
       })
   },
 
-  setPending: function (gamepostId) {
+  addPending: function (gamepostId) {
     return db('gameposts')
       .where({id: gamepostId})
       .update({
-        has_pending_requests: true,
+        pending_requests: db.raw('pending_requests + 1'),
+        updated_at: db.raw('now()')
+      })
+      .catch(function (err) {
+        console.log(err);
+        return err;
+      })
+  },
+
+  reducePending: function (gamepostId) {
+    return db('gameposts')
+      .where({id: gamepostId})
+      .update({
+        pending_requests: db.raw('pending_requests - 1'),
         updated_at: db.raw('now()')
       })
       .catch(function (err) {
@@ -57,6 +70,7 @@ module.exports = {
       .where({id: gamepostId})
       .update({
         accepted_players: db.raw('accepted_players + 1'),
+        pending_requests: db.raw('pending_requests - 1'),
         updated_at: db.raw('now()')
       });
   },

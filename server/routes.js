@@ -63,7 +63,7 @@ router.get('/gameposts/*/requests',
 //generate a request
 router.post('/gameposts/*/requests', 
   checkAuth, 
-  gameController.setPendingRequests, 
+  gameController.addPendingRequests, 
   requestController.createRequest
 );
 

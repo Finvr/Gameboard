@@ -50,7 +50,7 @@ module.exports = {
     } else {
       Requests.deleteRequest(request)
         .then(function () {
-          if ( request.status === 'accepted' ) {
+          if ( request.status === 'accepted' || request.status === 'pending' ) {
             next()
           } else {
             res.send(200);    
@@ -70,13 +70,7 @@ module.exports = {
     } else if ( request.status === 'accepted' || request.status === 'declined') {
       Requests.changeStatus(request)
         .then(function () {
-          if ( request.status === 'accepted' ) {
-            //if request is accepted, we need to also modify the accepted_players
-            //attribute in gameposts.
-            next();
-          } else {
-            res.send(200);
-          }
+          next();
         })
         .catch(function (err) {
           helpers.handleError(err, res)
