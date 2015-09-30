@@ -21,6 +21,7 @@
            map.setCenter(initialLocation);
         });
       }
+
       var mapCanvas = document.getElementById('map');
       var mapOptions = {
         center: new google.maps.LatLng(30.2500, -97.7500),
@@ -32,6 +33,16 @@
       
       var map = new google.maps.Map(mapCanvas, mapOptions);
       var GeoMarker = new GeolocationMarker(map);
+
+      // Create the search box and link it to the UI element.
+      var input = document.getElementById('pac-input');
+      var searchBox = new google.maps.places.SearchBox(input);
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+      // Bias the SearchBox results towards current map's viewport.
+      map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+      });
 
 
       google.maps.event.addListener(map, 'click', function(event) { 
