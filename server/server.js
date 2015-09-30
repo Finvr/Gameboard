@@ -20,8 +20,8 @@ app.use(express.static(__dirname + '/../client'));
 //Passport Middleware
 app.use(sessions({
   name: 'imgame:session',
-  secret: process.env.FACEBOOK_APP_ID || 'development',
-  secure: (!! process.env.FACEBOOK_SECRET),
+  secret: process.env.SESSION_SECRET || 'development',
+  secure: (!! process.env.SESSION_SECRET),
   signed: true
 }));
 app.use(passport.initialize());
