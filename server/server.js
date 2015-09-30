@@ -3,8 +3,8 @@ var express           = require('express'),
     Utils             = require('./utils/helpers.js'),
     passport          = require('passport'),
     FacebookStrategy  = require("passport-facebook").Strategy,
-    // for deploy:
-    //config            = require('./oauth.js'),
+    // for deploy, please comments the following line
+    config            = require('./oauth.js'),
     sessions          = require('cookie-session'),
     //logger            = require('morgan'),
     router            = require('./routes.js'),  
