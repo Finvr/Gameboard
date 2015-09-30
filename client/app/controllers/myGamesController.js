@@ -25,6 +25,13 @@
         });
     };
 
+     $scope.init = function() {
+      getMyGames();
+      getMyRequests();
+    };
+    
+    $scope.init();
+
     $scope.setGameToCancel = function(game){
       $scope.gameToCancel = game;
       console.log($scope.gameToCancel);
@@ -38,11 +45,17 @@
         });
     }
 
-    $scope.init = function() {
-      getMyGames();
-      getMyRequests();
-    };
-    $scope.init();
+    $scope.setRequestToCancel = function(request) {
+      console.log("req to cancel", request);
+      $scope.requestToCancel = request;
+    }
+
+    $scope.cancelRequest = function(request) {
+      return GamePost.requestCancel(request)
+      .then(function() {
+        $scope.init();
+      });
+    }
 
     $scope.getGamepostRequest = function(game){
       console.log("getGamepostsRequest: ", game);
@@ -59,6 +72,7 @@
       return GamePost.requestConfirm(req)
         .then(function(data){
           $scope.init();
+          console.log($scope.myGames);
           console.log('requestConfirm controller resp: ', data);
         })
     };

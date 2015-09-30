@@ -48,7 +48,7 @@ module.exports = {
   deleteRequest: function (req, res, next) {
     //Cancel a request
     var request = req.body;
-
+    console.log("request serevr", req.data);
     if ( request.id !== parseInt(req.url.split('/')[2]) ) {
       res.send(400, 'Invalid request object');
     } else {
