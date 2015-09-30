@@ -92,14 +92,14 @@
         <li ng-repeat="request in requests" class="collection-item avatar row">
           <i class="material-icons left col s1">email</i>
           <div class="col s10">
-            <span class="gamepostrequest col s12"><strong>Request from {{request.user_id}}</strong></span>
-            <span class="col s6"><strong>Status:</strong> {{request.status}}</span><br>
-            <span class="col s6"><strong># of Players:</strong> {{request.player_count}}</span><br>
-            <span class="col s6"><strong>Message:</strong>  {{ request.comments }}</span>
+            <span class="gamepostrequest col s8"><strong>Request from {{request.user_id}}</strong></span>
+            <span class="col s3">{{request.status}}</span><br>
+            <span class="col s12"><strong># of Players:</strong> {{request.player_count}}</span><br>
+            <span class="col s12"><strong>Message:</strong>  {{ request.comments }}</span>
           </div>
-          <p class="center row">
-            <button class="col s6 waves-effect waves-light btn-flat btn-medium waves-effect waves-light green white-text" ng-click="requestConfirm(accept)">Accept<i class="material-icons right tiny">done</i></button>
-            <button class="col s6 waves-effect waves-light btn-flat waves-effect waves-light red white-text" ng-click="requestConfirm(decline)">Decline<i class="material-icons right tiny">not_interested</i></button>
+          <p class="center row" ng-if="request.status==='pending'">
+            <button class="col s6 waves-effect waves-light btn-flat btn-medium waves-effect waves-light green white-text" ng-click="requestConfirm('accepted', request)">Accept<i class="material-icons right tiny">done</i></button>
+            <button class="col s6 waves-effect waves-light btn-flat waves-effect waves-light red white-text" ng-click="requestConfirm('declined', request)">Decline<i class="material-icons right tiny">not_interested</i></button>
           </p>
         </li> 
       </ul>

@@ -32,6 +32,14 @@
         })
     }
 
+    $scope.requestConfirm = function(str, req) {
+      console.log("requestConfirm decision: ", str);
+      return GamePost.requestConfirm(str, req)
+        .then(function(data){
+          console.log('requestConfirm controller resp: ', data);
+        })
+    }
+
   	getMyGames();
     getMyRequests();
 
