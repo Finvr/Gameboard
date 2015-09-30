@@ -78,6 +78,17 @@ module.exports = {
     } else {
       res.send(400, 'Invalid status');
     }
+  },
+
+  declineAll: function (req, res) {
+    var gamepostId = parseInt(req.url.split('/')[2]);
+    Requets.declineAll(gamepostId)
+      .then(function () {
+        res.send(200);
+      })
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      });
   }
 
 }
