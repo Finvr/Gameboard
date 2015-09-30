@@ -4,7 +4,7 @@
       <section>
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header">
-            <span class="pink-text text-darken-2"><h5>Game's I'm Hosting</h5></span>
+            <span class="pink-text text-darken-2"><h5>Games I'm Hosting</h5></span>
           </li>
           <li ng-repeat="game in myGames" class="collection-item avatar">
             <div class="collapsible-header">
@@ -33,9 +33,9 @@
     <div class="col m4">
       <section class="joined">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
-          <li class="collection-header"><span class="pink-text text-darken-2"><h5>Game's I'm Joining</h5></span></li>
+          <li class="collection-header"><span class="pink-text text-darken-2"><h5>Games I'm Joining</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status!=='pending'">
+          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='accepted'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
@@ -79,6 +79,29 @@
           </li>
         </ul>
       </section>
+      <section class="declined">
+        <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
+          <li class="collection-header"><span class="pink-text text-darken-2"><h5>Declined Requests</h5></span></li>
+          <!-- must be changed to only request that are pending-->
+          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='declined'">
+            <div class="collapsible-header">
+              <i class="material-icons md-light">info</i>
+              <span class="title indigo-text text-darkern-2">
+                {{ request.game}}
+              </span>
+              <p>
+                <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                <strong>Location:</strong> {{ request.game_location }}
+              </p>
+            </div>
+            <div class="collapsible-body">
+              <p>
+                <span class="pink-text text-darken-2">Comments: </span> {{ request.comments }}
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
     </div>
   </div>
   <!-- Pop-up modal for requests of gameposts -->
@@ -111,7 +134,7 @@
   <div id="cancelModal" class="modal approve-pending">
     <div class="modal-header">
       <h4 class="white-text">Cancel Game</h4>
-      <a href=""><i class="material-icons">close</i></a>
+      <!--<a href=""><i class="material-icons">close</i></a>-->
     </div>
     <div class="modal-content container"> 
         <p>Are you sure you want to cancel this game of {{gameToCancel.game}}?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
