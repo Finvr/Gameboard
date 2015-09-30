@@ -50,11 +50,11 @@
       })
     };
 
-    function requestConfirm(str, request) {
+    function requestConfirm(request) {
       return $http({
         method: "PUT",
         url: "/requests/" + request.id,
-        data: str
+        data: request
       })
       .then(function(resp) {
         console.log("requestConfirm service resp: ", resp);
