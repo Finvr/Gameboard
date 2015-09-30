@@ -37,6 +37,5 @@
 		$scope.close = function() {
 			$("#openRequest").closeModal();
 		}
-
 	}
 })();

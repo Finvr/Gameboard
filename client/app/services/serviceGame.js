@@ -65,13 +65,28 @@
         return err.data;
       });
     }
+
+    function deleteGame(game){
+      return $http({
+        method: "DELETE",
+        url: "/gameposts/"+ game.gamepost_id
+      })
+      .then(function(resp) {
+        console.log("deleteresp", resp);
+        return resp.data;
+      })
+      .catch(function(err) {
+        return err.data;
+      })
+    }
   	
   	return {
   		create: create,
       myHostedGames: myHostedGames,
       myRequests: myRequests,
       gamepostRequest: gamepostRequest,
-      requestConfirm: requestConfirm
+      requestConfirm: requestConfirm,
+      deleteGame: deleteGame
   	};
   };
 

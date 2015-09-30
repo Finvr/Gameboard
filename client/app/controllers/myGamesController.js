@@ -59,6 +59,10 @@
         })
     };
 
+    $scope.cancelGame(game) {
+      return GamePost.deleteGame(game);
+    }
+
   };
 
 })();
