@@ -14,7 +14,7 @@
               <option ng-repeat="value in gamesFilter.choices">{{value}}</option>
             </select>
             <div class = "date_filter">
-              <input type="date" ng-model="filterDate" watch>
+              <input type="date" ng-if="checkDate" ng-model="filterDate" watch>
             </div>
           </div>
         </div>
@@ -44,6 +44,7 @@
           </div>        
         </li>
       </ul>
+
             <!-- detail Modal for each game -->
             <div id="openRequest" class="modal">
               <div class ="modal-header">

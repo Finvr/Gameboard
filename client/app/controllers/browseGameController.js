@@ -2,7 +2,7 @@
 	angular.module('imgame.browseGames', [])
 		.controller('BrowseGameController', BrowseGameController);
 
-	function BrowseGameController($scope, BrowseGames, Auth, $location) {
+	function BrowseGameController($scope, BrowseGames, Auth, $location, $filter) {
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
@@ -39,7 +39,18 @@
 			]
 		};
 
-		$scope.dateFilter = null;
+		//$scope.dateFilter = null;
+		$scope.$watch(function(){return $scope.filterDate},
+			function(){
+				console.log('$scope.filterDate', $scope.filterDate);
+				$scope.filteredDate = $filter('date')($scope.filterDate, "yyyy-MM-dd");
+				console.log('$scope.filteredDate', $scope.filteredDate);
+				console.log('$scope.games[0]', $scope.games[0]);
+				$scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
+				console.log('$scope.now', $scope.now);
+			}, true);
+
+
 
 		Auth.requireAuth('browse');
 		
