@@ -4,7 +4,7 @@ var express           = require('express'),
     passport          = require('passport'),
     FacebookStrategy  = require("passport-facebook").Strategy,
     // for deploy, please comments the following line
-    //config            = require('./oauth.js'),
+    config            = require('./oauth.js'),
     sessions          = require('cookie-session'),
     //logger            = require('morgan'),
     router            = require('./routes.js'),  
