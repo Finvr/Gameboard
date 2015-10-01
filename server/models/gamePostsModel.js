@@ -54,7 +54,8 @@ function fetchAllOrByUser (userId) {
       .join('gameposts', 'host_id', 'users.id')
       .leftOuterJoin('requests', 'gamepost_id', 'gameposts.id')
       .where({
-        host_id: userId
+        host_id: userId,
+        post_status: 'active'
       })
   } else {
     return db('users').select([
@@ -66,5 +67,8 @@ function fetchAllOrByUser (userId) {
       .groupBy('gameposts.id', 'users.username')
       .join('gameposts', 'host_id', 'users.id')
       .leftOuterJoin('requests', 'gamepost_id', 'gameposts.id')
+      .where({
+        post_status: 'active'
+      })
   }
 };
