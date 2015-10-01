@@ -87,11 +87,11 @@ module.exports = {
       })
   },
 
-  deleteRequest: function (request) {
+  deleteRequest: function (requestId) {
     return db.select()
       .from('requests')
       .where({
-          id:request.id
+          id:requestId
       })
       .del()
       .catch(function (err) {
@@ -112,6 +112,21 @@ module.exports = {
       .update({
         status: 'declined',
         updated_at: db.raw('now()')
+      })
+      .catch(function (err) {
+        console.log(err);
+        return err;
+      })
+  },
+
+  acceptedPlayers: function (gamepostId) {
+    return db('requests')
+      .where({
+        gamepost_id: gamepostId,
+        status: 'accepted'
+      })
+      .then(function (data) {
+        return data.length;
       })
       .catch(function (err) {
         console.log(err);
