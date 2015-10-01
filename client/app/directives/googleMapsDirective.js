@@ -9,6 +9,8 @@
       var geocoder;
       var marker = {};    
       var service = new google.maps.DistanceMatrixService;
+      var searchBox;
+      
       function initMap() {
         // get current location
         if (navigator.geolocation) {
@@ -19,6 +21,16 @@
             scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
             // add current location dot
             var GeoMarker = new GeolocationMarker(map);
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            console.log("currPosition2: ", input)
+            searchBox.addListener('places_changed', function() {
+              var place = searchBox.getPlaces();
+              marker.setMap && marker.setMap(null);
+              changeMarker(place[0].geometry.location, map);
+            });
           });
         }
 
@@ -32,18 +44,6 @@
         geocoder = new google.maps.Geocoder();
         
         var map = new google.maps.Map(mapCanvas, mapOptions);
-
-
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        searchBox.addListener('places_changed', function() {
-          var place = searchBox.getPlaces();
-          marker.setMap && marker.setMap(null);
-          changeMarker(place[0].geometry.location, map);
-        });
 
         google.maps.event.addListener(map, 'click', function(event) { 
           marker.setMap && marker.setMap(null);
@@ -94,14 +94,21 @@
               }
             })
         });
-    };
-    
-    initMap();    
-    google.maps.event.addDomListener(window, 'load', initMap);
+      };
+      
+      if (document.getElementById('pac-input')) {
+        console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
+        element.ready(function(){
+          initMap();    
+          google.maps.event.addDomListener(window, 'load', initMap);          
+        })      
+      }
 
     };
 
     return {
+      //restrict: 'AEC',
+      //templateUrl: 'app/templates/createGameTemplate.html',
       link: link
     };
   };
