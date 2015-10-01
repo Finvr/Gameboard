@@ -35,7 +35,7 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Games I'm Joining</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='accepted'">
+          <li ng-repeat="request in myRequests | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='accepted'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
@@ -61,7 +61,7 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>My Pending Requests</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='pending'">
+          <li ng-repeat="request in myRequests | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
@@ -85,7 +85,7 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Declined Requests</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='declined'">
+          <li ng-repeat="request in myRequests | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='declined'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
@@ -117,7 +117,7 @@
     <div class="modal-content container"> 
       <!-- requests list of the gamepost -->
       <ul class="collection">
-        <li ng-repeat="request in requests" class="collection-item avatar row">
+        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item avatar row">
           <i class="material-icons left col s1">email</i>
           <div class="col s10">
             <span class="title col s12"><strong>Request from: {{request.username}}</strong></span>
