@@ -3,14 +3,15 @@ var express           = require('express'),
     Utils             = require('./utils/helpers.js'),
     passport          = require('passport'),
     FacebookStrategy  = require("passport-facebook").Strategy,
-    // for deploy, please comments the following line
-    config            = require('./oauth.js'),
     sessions          = require('cookie-session'),
     //logger            = require('morgan'),
     router            = require('./routes.js'),  
     app               = express(),
     Users             = require ('./models/userModel.js');
 
+if (!process.env.FACEBOOK_APP_ID) {
+  var config = require('./oauth.js');
+}
 
 //Middleware
 app.use(parse.urlencoded({extended: true}));
