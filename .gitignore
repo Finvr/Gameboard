@@ -7,3 +7,5 @@ server/oauth.js
 ## bower components ##
 client/lib/
 
+## debug ##
+npm-debug.log
