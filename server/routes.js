@@ -66,7 +66,6 @@ router.get('/gameposts/*/requests',
 //Submit a request to join a specific gamepost
 router.post('/gameposts/*/requests', 
   checkAuth, 
-  gameController.addPendingRequests, 
   requestController.createRequest
 );
 
@@ -74,15 +73,13 @@ router.post('/gameposts/*/requests',
 //Cancel a request
 router.delete('/requests/*', 
   checkAuth, 
-  requestController.deleteRequest,
-  gameController.removePlayer
+  requestController.deleteRequest
 );
 
 //Update the status of a request
 router.put('/requests/*', 
   checkAuth, 
-  requestController.changeStatus, 
-  gameController.addPlayer
+  requestController.changeStatus
 );
 
 module.exports = router;

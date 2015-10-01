@@ -45,45 +45,31 @@ module.exports = {
       })
   },
 
-  deleteRequest: function (req, res, next) {
+  deleteRequest: function (req, res) {
     //Cancel a request
-    var request = req.body;
-    console.log("request serevr", req.data);
-    if ( request.id !== parseInt(req.url.split('/')[2]) ) {
-      res.send(400, 'Invalid request object');
-    } else {
-      Requests.deleteRequest(request)
-        .then(function () {
-          if ( request.status === 'accepted' || request.status === 'pending' ) {
-            //Go to gamePostsController.removePlayer
-            next()
-          } else {
-            res.send(200);    
-          }
-        })
-        .catch(function (err) {
-          helpers.handleError(err, res)
-        }) 
-    }
+    var requestId = parseInt(req.url.split('/')[2])
+    Requests.deleteRequest(requestId)
+      .then(function () {
+        res.send(200);    
+      })
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      }) 
   },
 
-  changeStatus: function (req, res, next) {
+  changeStatus: function (req, res) {
     //Change the status of a request to accepted or declined
     var request = req.body;
-    
-    if ( request.id !== parseInt(req.url.split('/')[2]) ) {
-      res.send(400, 'Invalid request object');
-    } else if ( request.status === 'accepted' || request.status === 'declined') {
+    if ( request.status === 'accepted' || request.status === 'declined' ) {
       Requests.changeStatus(request)
         .then(function () {
-          //Go to gamePostsController.addPlayer
-          next();
+          res.send(200);
         })
         .catch(function (err) {
           helpers.handleError(err, res)
         })
     } else {
-      res.send(400, 'Invalid status');
+      res.send(400, 'Invalid status message');
     }
   },
 
