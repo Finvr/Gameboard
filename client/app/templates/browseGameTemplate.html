@@ -27,7 +27,7 @@
       </nav>
       <!-- display all the games -->
       <ul class="collection" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText" class="collection-item">
+        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" class="collection-item">
           <div>
             <i class="material-icons right">speaker_notes</i>
             <i class="material-icons right">event</i>
@@ -35,7 +35,7 @@
             <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
             {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
             <div>@ {{game.game_location}}</div>
-            <div class ="pink-text text-darken-2">Players: {{game.accepted_players}}/{{game.player_count}}
+            <div class ="pink-text text-darken-2">Players: {{parseInt(game.accepted_players) + 1}}/{{game.player_count}}
             </div>
             <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
             <a class='btn indigo' href='#openRequest' modal>Join</a>
@@ -46,15 +46,14 @@
 
       <!-- detail Modal for each game -->
       <div id="openRequest" class="modal">
-        <div class ="modal-header"></div>
-        <div ng-click="close()"><i class="material-icons right close">close</i></div>
+        <div class ="modal-header">
+          <div ng-click="close()"><i class="material-icons right close">close</i></div>
+          <span class= "white-text"><h4>{{game.game}}</h4></span>
+        </div>
         <div class="modal-content">
-          <span class= "pink-text text-darken-2"><h4>{{game.game}}</h4></span>
           <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
           <p><i>Host:</i> {{game.username}}</p>
-          <div><i>Current players:</i> {{game.accepted_players}}/{{game.player_count}}</div>
-          <p ng-if="game.gamepost_description!==null"><i>Description from Host:  </i>{{game.gamepost_description}} </p>
-          <p ng-if="game.gamepost_description===null"><i>Description from Host: </i>No description available</p>
+          <div><i>Current players:</i> {{parseInt(game.accepted_players) + 1}}/{{game.player_count}}</div>
           <div class = "row center">
             <div class="input-field">
               <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
@@ -69,7 +68,7 @@
             <div ng-if="submitError" class="error col s12 red-text">{{submitError}}</div>
           </div>
         </div>
-        <div class="modal-footer"></div>
+        <!--<div class="modal-footer"></div>!-->
       </div>
     </div>
   </div><!-- #outer -->
