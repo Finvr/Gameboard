@@ -27,7 +27,7 @@
       </nav>
       <!-- display all the games -->
       <ul class="collection" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText" class="collection-item">
+        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" class="collection-item">
           <div>
             <i class="material-icons right">speaker_notes</i>
             <i class="material-icons right">event</i>
