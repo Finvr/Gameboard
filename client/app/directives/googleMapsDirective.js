@@ -97,15 +97,22 @@
             })
         });
       };
+
+      scope.$watch(
+        function(){return Boolean(document.getElementById('gmap')); },
+        function(){
+          if (document.getElementById('gmap') && document.getElementById('pac-input')) {
+            console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
+            $(document.getElementById('pac-input')).show();
+            element.ready(function(){
+              initMap();    
+              google.maps.event.addDomListener(window, 'load', initMap);          
+            })      
+          }
+          
+        }
+      )
       
-      if (document.getElementById('gmap') && document.getElementById('pac-input')) {
-        console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
-        $(document.getElementById('pac-input')).show();
-        element.ready(function(){
-          initMap();    
-          google.maps.event.addDomListener(window, 'load', initMap);          
-        })      
-      }
 
     };
 
