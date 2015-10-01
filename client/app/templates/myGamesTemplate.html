@@ -91,6 +91,9 @@
               <span class="title indigo-text text-darkern-2">
                 {{ request.game}}
               </span>
+              <a href="#" ng-click="cancelRequest(request)" class="waves-effect waves-light secondary-content" modal>
+                <i class="material-icons">cancel</i>
+              </a>
               <p>
                 <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ request.game_location }}
