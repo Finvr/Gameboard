@@ -1,5 +1,22 @@
 .browse {
 
+  nav {
+    background-color: #F06292;
+    .browse-filters-header h5 {
+      text-align: center;
+      margin: 0;
+      padding-top: 5%;
+    }
+  }
+  .browse-filters {
+    border: 1px solid #e0e0e0;
+    margin: 0.5rem 0 1rem 0;
+    min-height: 100%;
+    .title {
+      text-align: center;
+    }
+  }
+
 	#game_title {
 		font-size: 25px;
 	}
