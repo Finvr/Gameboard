@@ -39,6 +39,8 @@
 			]
 		};
 
+		$scope.dateFilter = null;
+
 		Auth.requireAuth('browse');
 		
 		BrowseGames.getGames()

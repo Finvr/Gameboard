@@ -1,75 +1,77 @@
 <div class="browse">
   <h3 class="center">Browse All Games</h3
-  <div class="container" id="outer">
-  <div class="row">
-    <div class="col m3">
-      <nav>
-      <div class="nav-wrapper transparent browse-filters-header">
-        <h5>Filters</h5>
-      </div>
-      </nav>
-      <div class="browse-filters">
-        <div class="title indigo-text text-darkern-2">Select a Game</div>
-        <select class="browser-default" ng-model="searchText" material-select watch>
-            <option ng-repeat="value in gamesFilter.choices">{{value}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col m9" id="outer">
-      <nav>
-        <div class="nav-wrapper transparent">
-          <div class="input-field">
-            <input id="search" type="search" ng-model="selectText" required>
-            <label for="search"><i class="material-icons">search</i></label>
-            <i class="material-icons">close</i>
-          </div>
+    <div id="outer" class="container">
+      <div class="row">
+        <div class="col m3">
+          <nav>
+            <div class="nav-wrapper transparent browse-filters-header">
+              <h5>Filters</h5>
+            </div>
+          </nav>
+          <div class="browse-filters">
+            <div class="title indigo-text text-darken-2">Select a Game</div>
+            <select class="browser-default" ng-model="searchText" material-select watch>
+              <option ng-repeat="value in gamesFilter.choices">{{value}}</option>
+            </select>
+            <div class = "date_filter">
 
+              <input type="date" ng-model="filterDate" watch>
+            </div>
+          </div>
+        </div>
+        <div class="col m9">
+          <nav>
+            <div class="nav-wrapper transparent">
+              <div class="input-field">
+                <input id="search" type="search" ng-model="selectText" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
       </nav>
       <!-- display all the games -->
       <ul class="collection" watch>
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" class="collection-item">
-          <div>
             <i class="material-icons right">speaker_notes</i>
             <i class="material-icons right">event</i>
           <div class='row'>
-            <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
+            <span><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
             {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
             <div>@ {{game.game_location}}</div>
             <div class ="pink-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
             <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
-            <a class='btn indigo' href='#openRequest' modal>Join</a>
+              <a class='btn indigo' href='#openRequest' modal>Join</a>
             </div>
           </div>        
         </li>
-      </ul> 
-
-      <!-- detail Modal for each game -->
-      <div id="openRequest" class="modal">
-        <div class ="modal-header">
-          <div ng-click="close()"><i class="material-icons right close">close</i></div>
-          <span class= "white-text"><h4>{{game.game}}</h4></span>
-        </div>
-        <div class="modal-content">
-          <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
-          <p><i>Host:</i> {{game.username}}</p>
-          <div><i>Current players:</i> {{parseInt(game.accepted_players) + 1}}/{{game.player_count}}</div>
-          <div class = "row center">
-            <div class="input-field">
-              <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
+      </ul>
+            <!-- detail Modal for each game -->
+            <div id="openRequest" class="modal">
+              <div class ="modal-header">
+                <div ng-click="close()"><i class="material-icons right close">close</i></div>
+                <span class= "white-text"><h4>{{game.game}}</h4></span>
+              </div>
+              <div class="modal-content">
+                <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
+                <p><i>Host:</i> {{game.username}}</p>
+                <div><i>Current players:</i> {{parseInt(game.accepted_players) + 1}}/{{game.player_count}}</div>
+                <div class = "row center">
+                  <div class="input-field">
+                    <textarea class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
+                  </div>
+                  <br>
+                  <div ng-if="submitError" class="error col s12 red-text">{{submitError}}</div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class = "col s6 right" ng-click="sendRequest(game)">
+                  <a class = "btn btn-med waves-effect waves-light teal">
+                    Send Request
+                  </a>
+                  <br>
+                </div>
+              </div>
             </div>
-            <div class = "col s2" ng-click="sendRequest(game)">
-              <a class = "btn-floating btn-med waves-effect waves-light cyan">
-                <i class="material-icons">email</i>
-              </a>
-              <br>
-            </div>
-            <br>
-            <div ng-if="submitError" class="error col s12 red-text">{{submitError}}</div>
           </div>
-        </div>
-        <!--<div class="modal-footer"></div>!-->
-      </div>
-    </div>
-  </div><!-- #outer -->
-</div><!-- .browse -->
+        </div><!-- #outer -->
+      </div><!-- .browse -->
