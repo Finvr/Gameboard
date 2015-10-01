@@ -87,11 +87,11 @@ module.exports = {
       })
   },
 
-  deleteRequest: function (request) {
+  deleteRequest: function (requestId) {
     return db.select()
       .from('requests')
       .where({
-          id:request.id
+          id:requestId
       })
       .del()
       .catch(function (err) {
