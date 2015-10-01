@@ -6,6 +6,38 @@
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
+		$scope.gamesFilter = {
+			choices: [
+				"",
+				"Monopoly",
+				"Go",
+				"Parchesi",
+				"Smallworld",
+				"Risk",
+				"Settlers of Catan",
+				"Scrabble",
+				"Discworld – Ankh-Morpork",
+				"The Golden City",
+				"Trivial Pursuit",
+				"7 Wonders",
+				"Coyote",
+				"Set",
+				"Dominion",
+				"Hearts",
+				"Poker",
+				"Atlantis",
+				"Spades",
+				"Ticket to Ride",
+				"Hanabi",
+				"Pandemic",
+				"Bang",
+				"Alhambra",
+				"Galaxy Trucker",
+				"Carcassonne",
+				"Acquire",
+				"Boomerang"
+			]
+		};
 
 		Auth.requireAuth('browse');
 		
