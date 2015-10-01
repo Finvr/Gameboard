@@ -6,52 +6,94 @@
     // directive link function
     var link = function(scope, element, attrs) {
       // map config function
-      var geocoder;
+      var geocoder = new google.maps.Geocoder();
       var marker = {};    
       var service = new google.maps.DistanceMatrixService;
-      var searchBox;
+
+      var mapCanvas = document.getElementById('gmap');
+      var mapOptions = {
+        center: {lat: 30.2500, lng: -97.7500},
+        zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      var map = new google.maps.Map(mapCanvas, mapOptions);
+      // Create the search box and link it to the UI element.
+      var input = document.getElementById('pac-input');
+      console.log("currPosition2: ", input)
+      var searchBox = new google.maps.places.SearchBox(input);
 
       function initMap() {
+
         if (navigator.geolocation) {
             // get current location
           navigator.geolocation.getCurrentPosition(function (position) {
-            var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            map.setCenter(initialLocation);
-            console.log("currPosition: ", position)
+            // store currentLocation and center map around it and pop up info window
             scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-            
+            map.setCenter(scope.currentLocation);
+
             // add current location dot
             var GeoMarker = new GeolocationMarker(map);
 
-            // Create the search box and link it to the UI element.
-            var input = document.getElementById('pac-input');
-            console.log("currPosition2: ", input)
-            searchBox = new google.maps.places.SearchBox(input);
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-            searchBox.addListener('places_changed', function() {
-              var place = searchBox.getPlaces();
-              marker.setMap && marker.setMap(null);
-              changeMarker(place[0].geometry.location, map);
-            });
+            // needs to be deleted in production
+            console.log("Current Location: ", position)
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
           });
-        }
+        } else {
+          handleLocationError(false, infoWindow, map.getCenter())
+        }; 
 
-        var mapCanvas = document.getElementById('gmap');
-        var mapOptions = {
-          center: new google.maps.LatLng(30.2500, -97.7500),
-          zoom: 14,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+            
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-        geocoder = new google.maps.Geocoder();
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
         
-        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var searchMarkers = [];
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length === 0) {
+            return;
+          }
+
+          searchMarkers.forEach(function(marker){
+            marker.setMap(null);
+          });
+
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            searchMarkers.push(new google.maps.Marker({
+              map: map,
+              position: place.geometry.location
+            }))
+          })
+          marker.setMap && marker.setMap(null);
+          changeMarker(places[0].geometry.location, map);
+        });
+
+
+
+
+        // Bias the SearchBox results towards current map's viewport.
 
         google.maps.event.addListener(map, 'click', function(event) { 
+          searchMarkers.forEach(function(marker){
+            marker.setMap(null);
+          });
           marker.setMap && marker.setMap(null);
           changeMarker(event.latLng, map);
           document.getElementById('pac-input').value = "";
         });
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
       }
       
       function changeMarker (location, map) {
@@ -98,20 +140,13 @@
         });
       };
 
-      scope.$watch(
-        function(){return Boolean(document.getElementById('gmap')); },
-        function(){
-          if (document.getElementById('gmap') && document.getElementById('pac-input')) {
-            console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
-            $(document.getElementById('pac-input')).show();
-            element.ready(function(){
-              initMap();    
-              google.maps.event.addDomListener(window, 'load', initMap);          
-            })      
-          }
-          
-        }
-      )
+      if (document.getElementById('gmap') && document.getElementById('pac-input')) {
+        console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
+        element.ready(function(){
+          initMap();    
+          google.maps.event.addDomListener(window, 'load', initMap);          
+        })      
+      }
       
     };
 
