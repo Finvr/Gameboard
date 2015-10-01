@@ -10,22 +10,24 @@
       var marker = {};    
       var service = new google.maps.DistanceMatrixService;
       var searchBox;
-      
+
       function initMap() {
-        // get current location
         if (navigator.geolocation) {
+            // get current location
           navigator.geolocation.getCurrentPosition(function (position) {
             var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(initialLocation);
             console.log("currPosition: ", position)
             scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+            
             // add current location dot
             var GeoMarker = new GeolocationMarker(map);
+
             // Create the search box and link it to the UI element.
             var input = document.getElementById('pac-input');
+            console.log("currPosition2: ", input)
             searchBox = new google.maps.places.SearchBox(input);
             map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-            console.log("currPosition2: ", input)
             searchBox.addListener('places_changed', function() {
               var place = searchBox.getPlaces();
               marker.setMap && marker.setMap(null);
@@ -96,8 +98,9 @@
         });
       };
       
-      if (document.getElementById('pac-input')) {
+      if (document.getElementById('gmap') && document.getElementById('pac-input')) {
         console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
+        $(document.getElementById('pac-input')).show();
         element.ready(function(){
           initMap();    
           google.maps.event.addDomListener(window, 'load', initMap);          
