@@ -48,6 +48,7 @@
 
         // Bias the SearchBox results towards current map's viewport.
         map.addListener('bounds_changed', function() {
+          map.setCenter(scope.currentLocation);
           searchBox.setBounds(map.getBounds());
         });
         
