@@ -1,10 +1,10 @@
 <div class="myGames">
-  <div ng-hide="myGames.length > 0 || (Array.isArray(myRequests) && myRequests.length > 0)" class="fallback container">
+  <div ng-hide="myGames.length > 0 || myRequests.length > 0" class="fallback container">
     <h2 class="pink-text text-darken-2 center aligned">Welcome!</h2>
     <p>You currently haven't requested to join any game events or posted any new game events you want to host.</p>
     <p>  Go <a class="teal-text" href="/#/browse-games">browse</a> game events happening in your area  or <a class="teal-text" href="/#/create-game">post a new game event</a> you want to host.</p>
   </div>
-  <div ng-show="myGames.length > 0 || Array.isArray(myRequests)" class="row">
+  <div ng-show="myGames.length > 0 || myRequests.length > 0" class="row">
     <div class="col m4">
       <section>
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
