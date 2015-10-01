@@ -37,12 +37,15 @@
       // map config function
       var geocoder;
       var marker = {};    
+      var service = new google.maps.DistanceMatrixService;
       function initMap() {
         // get current location
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (position) {
             var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-             map.setCenter(initialLocation);
+            map.setCenter(initialLocation);
+            console.log("currPosition: ", position)
+            scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
           });
         }
 
@@ -91,12 +94,26 @@
                 marker.address = results[0].formatted_address;
               }
             }
-            var address = new google.maps.InfoWindow({
-              content: marker.address
-            });
-            address.open(map, marker);
+            
             document.getElementById('game-location').value =  marker.address;
-            scope.game.location = marker.address;
+              
+            service.getDistanceMatrix({
+              origins: [scope.currentLocation],
+              destinations: [location],
+              travelMode: google.maps.TravelMode.DRIVING,
+              unitSystem: google.maps.UnitSystem.IMPERIAL
+            }, function(res, status){
+              var distanceObj = res.rows[0].elements[0];
+              console.log("distance res: ", distanceObj)
+              var info = '<div><strong>Distance:</strong> ' + distanceObj.distance.text + '</div>' + 
+                         '<div><strong>Drivetime:</strong> ' + distanceObj.duration.text + '</div>' + 
+                         '<a href="https://www.google.com/maps/dir/' + scope.currentLocation + "/" + marker.address.split(" ").join("+") + '">more info' + '</a>';
+            console.log("scope.game.location: ", scope.game.location)
+            var address = new google.maps.InfoWindow({
+                content: info
+              });
+              address.open(map, marker);
+            })
         });
     };
     
