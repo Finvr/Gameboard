@@ -66,13 +66,24 @@
 
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {
-            searchMarkers.push(new google.maps.Marker({
+            var newMark = new google.maps.Marker({
               map: map,
               position: place.geometry.location
-            }))
+            });
+            searchMarkers.push(newMark);
+
+            // add listener to show info window
+            google.maps.event.addListener(newMark, 'click', function(){
+              var content = "hi";
+              console.log('content', content)
+              scope.infoWindow = new google.maps.InfoWindow({
+                content : content            
+              })
+              scope.infoWindow.open(map, this)
+            })
           })
-          marker.setMap && marker.setMap(null);
-          changeMarker(places[0].geometry.location, map);
+          //marker.setMap && marker.setMap(null);
+          //changeMarker(places[0].geometry.location, map);
         });
 
 
@@ -95,8 +106,9 @@
         infoWindow.setContent(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
-      }
+      };
       
+
       function changeMarker (location, map) {
         // Add the marker at the clicked location, and add the next-available label
         // from the array of alphabetical characters.
