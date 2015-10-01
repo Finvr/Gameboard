@@ -35,13 +35,6 @@ module.exports = {
       .where({gamepost_id: gamepostId})
       .join('gameposts', 'gamepost_id', 'gameposts.id')
       .join('users', 'user_id', 'users.id')
-      .then(function (result) {
-        if ( result.length ) {
-          return result;
-        } else {
-          return "request does not exist";
-        }
-      })
       .catch(function (err) {
         console.log(err);
         return err;
