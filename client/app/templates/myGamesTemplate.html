@@ -1,5 +1,10 @@
 <div class="myGames">
-  <div class="row">
+  <div ng-hide="myGames.length > 0 || Array.isArray(myRequests)" class="fallback container">
+    <h2 class="pink-text text-darken-2 center aligned">Welcome!</h2>
+    <p>You currently haven't requested to join any game events or posted any new game events you want to host.</p>
+    <p>  Go <a class="teal-text" href="/#/browse-games">browse</a> game events happening in your area  or <a class="teal-text" href="/#/create-game">post a new game event</a> you want to host.</p>
+  </div>
+  <div ng-show="myGames.length > 0 || Array.isArray(myRequests)" class="row">
     <div class="col m4">
       <section>
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
@@ -12,8 +17,8 @@
               <span class="title indigo-text text-darkern-2">
                 {{ game.game}}
               </span>
-              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
               <a href="#cancelGamepostModal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
               <p>
                 <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ game.game_location }}
@@ -35,7 +40,7 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Games I'm Joining</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='accepted'">
+          <li ng-repeat="request in myRequests | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='accepted'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
@@ -61,7 +66,7 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>My Pending Requests</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='pending'">
+          <li ng-repeat="request in myRequests | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
@@ -85,12 +90,15 @@
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Declined Requests</h5></span></li>
           <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests" class="collection-item avatar" ng-if="request.status==='declined'">
+          <li ng-repeat="request in myRequests | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='declined'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
               <span class="title indigo-text text-darkern-2">
                 {{ request.game}}
               </span>
+              <a href="#" ng-click="cancelRequest(request)" class="waves-effect waves-light secondary-content" modal>
+                <i class="material-icons">cancel</i>
+              </a>
               <p>
                 <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ request.game_location }}
@@ -114,7 +122,7 @@
     <div class="modal-content container"> 
       <!-- requests list of the gamepost -->
       <ul class="collection">
-        <li ng-repeat="request in requests" class="collection-item avatar row">
+        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item avatar row">
           <i class="material-icons left col s1">email</i>
           <div class="col s10">
             <span class="title col s12"><strong>Request from: {{request.username}}</strong></span>
