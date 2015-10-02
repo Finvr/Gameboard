@@ -17,12 +17,12 @@
     var getMyRequests = function(){
       return GamePost.myRequests()
         .then(function(requests){
-          if (requests = 'request does not exist'){
+          console.log("requests controller: ", requests)
+          if (requests === 'request does not exist'){
             $scope.myRequests = [];
             console.log("myRequests: ", $scope.myRequests)
           } else {
             $scope.myRequests = requests;
-
           }
         });
     };
