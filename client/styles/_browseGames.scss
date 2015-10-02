@@ -57,14 +57,15 @@
   	margin-right: 5%;
   }
 
-  input{
-    border: 1 solid red;
+  textarea {
+    border-color: grey;
+    border: dotted 1px;
+    border-radius: 2px;
+    resize: none;
   }
 
-  textarea {
-  	border-color: grey;
-  	border: dotted 1px;
-  	border-radius: 2px;
-  	resize: none;
+  input[type=date], select{
+    border: 1px dotted lightgray;
+    border-radius: 5px;
   }
 }
