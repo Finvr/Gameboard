@@ -21,7 +21,7 @@ describe('userModel', function(){
 
   var user2 = {
     username: 'again',
-    facebook_id: '1234'
+    facebook_id: '5678'
   }
 
   var user1Id;
@@ -38,7 +38,7 @@ describe('userModel', function(){
         done();
       })
       .catch(function(err){
-        console.log("Error: ", err)
+        console.log("findOrCreate 1 error: ", err.message);
       })
   });
 
@@ -49,7 +49,7 @@ describe('userModel', function(){
         done();
       })
       .catch(function(err){
-        console.log("Error: ", err)
+        console.log("findOrCreate 2 error: ", err.message)
       })
   });
 
@@ -82,7 +82,7 @@ describe('gamePostsModel', function(){
 
   var user2 = {
     username: 'again',
-    facebook_id: '1234'
+    facebook_id: '5678'
   }
 
   var user1Id, user2Id, gamepost1, gamepost2;
@@ -131,11 +131,11 @@ describe('gamePostsModel', function(){
         expect(result.length).to.equal(1);
       })
       .catch(function(err){
-        console.log("Error: ", err)
+        console.log("gamePost create error: ", err.message);
       })
   });
 
-  it('getAll function should return all the gamepost', function(done){
+  it('getAll function should return all gameposts', function(done){
     gamePostsModel.create(gamepost2)
       .then(function(gameId){
         return gamePostsModel.getAll();
@@ -145,7 +145,20 @@ describe('gamePostsModel', function(){
         done();
       })
       .catch(function(err){
-        console.log("Error: ", err)
+        console.log("getAll error: ", err.message);
+      })
+  });
+
+  it('getAll function should return gameposts by userId', function(done){
+    gamePostsModel.getAll(user1Id)
+      .then(function(result){
+        console.log("Result length: ", result.length);
+        expect(result.length).to.equal(1);
+        expect(result[0].game).to.equal('Clue');
+        done();
+      })
+      .catch(function(err){
+        console.log("getAll by userId error: ", err.message);
       })
   });
 
