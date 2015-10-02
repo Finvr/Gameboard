@@ -106,7 +106,7 @@
             // add listener to show info window of the marker that was clicked
             google.maps.event.addListener(newMark, 'click', function(){
               console.log("newMark", newMark)
-              infoWindow.close();
+              infoWindow && infoWindow.close();
               showInfoWindow([place.geometry.location], place, newMark);
             })
           })
