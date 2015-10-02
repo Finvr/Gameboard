@@ -174,10 +174,17 @@ describe('gamePostsModel', function(){
       })
   });
 
-  xit('deleteGamePost function should set status to "canceled"', function(done){
+  it('deleteGamePost function should set status to "cancelled"', function(done){
     gamePostsModel.deleteGamePost(gamepost1Id, user1Id)
       .then(function(delCounts){
         expect(delCounts).to.equal(1);
+      })
+      .then(function() {
+        return gamePostsModel.getAll(user1Id)
+      })
+      .then(function(result) {
+        expect(result.length).to.equal(0);
+        done();
       })
       .catch(function(err){
         console.log("Error: ", err)
