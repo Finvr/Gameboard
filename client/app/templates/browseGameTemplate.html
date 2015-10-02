@@ -14,7 +14,8 @@
               <option ng-repeat="value in gamesFilter.choices">{{value}}</option>
             </select>
             <div class = "date_filter">
-              <input type="date" ng-if="checkDate" ng-model="filterDate" watch>
+              <input type="date" ng-model="filterDateStart" watch>
+              <input type="date" ng-model="filterDateEnd" watch>
             </div>
           </div>
         </div>
@@ -29,7 +30,7 @@
       </nav>
       <!-- display all the games -->
       <ul class="collection" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" class="collection-item">
+        <li ng-repeat="game in games | filter:searchText | filter:selectText | filter: filterStartDate | orderBy:'game_datetime'" class="collection-item">
             <i class="material-icons right">speaker_notes</i>
             <i class="material-icons right">event</i>
           <div class='row'>
@@ -44,7 +45,6 @@
           </div>        
         </li>
       </ul>
-
             <!-- detail Modal for each game -->
             <div id="openRequest" class="modal">
               <div class ="modal-header">
@@ -54,7 +54,7 @@
               <div class="modal-content">
                 <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
                 <p><i>Host:</i> {{game.username}}</p>
-                <div><i>Current players:</i> {{parseInt(game.accepted_players) + 1}}/{{game.player_count}}</div>
+                <div><i>Current players:</i> {{(game.accepted_players) + 1}}/{{game.player_count}}</div>
                 <div class = "row center">
                   <div class="input-field">
                     <textarea class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>

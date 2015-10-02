@@ -42,15 +42,26 @@
 		//$scope.dateFilter = null;
 		$scope.$watch(function(){return $scope.filterDate},
 			function(){
-				console.log('$scope.filterDate', $scope.filterDate);
-				$scope.filteredDate = $filter('date')($scope.filterDate, "yyyy-MM-dd");
-				console.log('$scope.filteredDate', $scope.filteredDate);
-				console.log('$scope.games[0]', $scope.games[0]);
-				$scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
-				console.log('$scope.now', $scope.now);
+						// console.log('$scope.filterDate', $scope.filterDate);
+						$scope.filteredDateStart = $filter('date')($scope.filterDateStart, "yyyy-MM-dd");
+						$scope.filteredDateEnd = $filter('date')($scope.filterDateEnd, "yyyy-MM-dd");
+						// 	console.log('$scope.filteredDate', $scope.filteredDate);
 			}, true);
 
+		$scope.dateFilter = function (game) {
+    	return game.game_datetime >= $scope.filterDateStart && game.game_datetime <= $scope.filterDateEnd;
+		}; 
 
+		$scope.checkDate = function() {
+					//$scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
+					$scope.filteredDateStart = $filter('date')($scope.filterDateStart, "yyyy-MM-dd");
+					console.log('$scope.now', $scope.now);
+					console.log($scope.filteredDate)
+					// if ($scope.now > $scope.filteredDate) {
+					// 				console.log("date has already passed")
+						//return false;
+					}
+					//else return true;
 
 		Auth.requireAuth('browse');
 		
@@ -79,6 +90,7 @@
 					}
 				})
 		}
+
 		$scope.close = function() {
 			$("#openRequest").closeModal();
 		}
