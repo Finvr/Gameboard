@@ -35,7 +35,7 @@
             <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
             {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
             <div>@ {{game.game_location}}</div>
-            <div class ="pink-text text-darken-2">Players: {{parseInt(game.accepted_players) + 1}}/{{game.player_count}}
+            <div class ="pink-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
             <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
             <a class='btn indigo' href='#openRequest' modal>Join</a>
