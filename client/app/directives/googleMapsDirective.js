@@ -22,15 +22,22 @@
       var input = document.getElementById('pac-input');
       console.log("currPosition2: ", input)
       var searchBox = new google.maps.places.SearchBox(input);
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
       function initMap() {
+
+        var bounds;
 
         // get current location, and set current location on map
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (position) {
             // store currentLocation and center map around it and pop up info window
             scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+            // center current location and also make sure current location always show on map
             map.setCenter(scope.currentLocation);
+            bounds = new google.maps.LatLngBounds(scope.currentLocation);
+           // bounds.extend(scope.currentLocation);
 
             // add current location dot
             var GeoMarker = new GeolocationMarker(map);
@@ -42,29 +49,27 @@
           });
         } else {
           handleLocationError(false, infoWindow, map.getCenter())
-        }; 
-
-            
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        };                   
 
         // Bias the SearchBox results towards current map's viewport.
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
         
+        // searchbox listener, place marker on map and listen to clicks
         searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
-
           if (places.length === 0) {
             return;
           }
 
+          // clear all the current markers on the map
           searchMarkers.forEach(function(marker){
             marker.setMap(null);
           });
-          clickMarker && clickMarker.setMap(null);
+          clickMarker && clickMarker.setMap(null);          
 
-          var bounds = new google.maps.LatLngBounds();
+          // add places the match the search ont the map
           places.forEach(function(place) {
             console.log("place", place)
             var newMark = new google.maps.Marker({
@@ -72,13 +77,25 @@
               position: place.geometry.location
             });
             searchMarkers.push(newMark);
-            // add listener to show info window
+
+            // bounds view based on seach
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+
+            // add listener to show info window of the marker that was clicked
             google.maps.event.addListener(newMark, 'click', function(){
               console.log("newMark", newMark)
               infoWindow.close();
               showInfoWindow([place.geometry.location], place, newMark);
             })
           })
+
+          map.fitBounds(bounds);
+          map.panToBounds(bounds); 
         });
 
         // event listener that set the marker as the clicked point on the map
@@ -90,8 +107,12 @@
           changeMarker(event.latLng, map);
           document.getElementById('pac-input').value = "";
         });
-      }
+      };
+      // initMap func complete
 
+      ////////////////
+      // Following are helper functions used in the initMap function
+      ////////////////
       // error handler for getting current location 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
@@ -110,6 +131,7 @@
           '<a href="https://www.google.com/maps/dir/' + scope.currentLocation + "/" +'">more info' + '</a>';
       };
 
+      /////////////
       // get the distance between current location and marker, and initiate infoWindow
       // destinations is an array of locations with latLng
       // makerPlace is an object with name and formatted_address
@@ -125,12 +147,13 @@
           travelMode: google.maps.TravelMode.DRIVING,
           unitSystem: google.maps.UnitSystem.IMPERIAL
         }, function(res, status){
+
           if (status !== google.maps.DistanceMatrixStatus.OK) {
             alert('Error was: ' + status);
           } else {
             var distanceObj = res.rows[0].elements[0];
-            console.log("google distance response: ", distanceObj)
-            var info = makeInfoHtml(markerPlace.name, distanceObj.distance.text)
+            console.log("google distance response: ", distanceObj);
+            var info = makeInfoHtml(markerPlace.name, distanceObj.distance.text);
             // add info window with distance and time for each pin drop on map
             infoWindow = new google.maps.InfoWindow({
                 content: info
@@ -139,8 +162,9 @@
             infoWindow.open(map, marker);
             // add info window complete
           }
-        })
-      }
+
+        });
+      };
 
       // this is for clickMarker only, when click on the map, erase all other markers and only show clicked location with an infoWindow
       function changeMarker (location, map) {
@@ -155,6 +179,7 @@
             position: location,
             map: map
           });
+
           if(status == google.maps.GeocoderStatus.OK) {
             if(results[0]) {
               var markerPlace = results[0];
@@ -164,14 +189,13 @@
         });
       };
 
+      /////////////////////////
       // listen DOM to init MAP;
-      if (document.getElementById('gmap') && document.getElementById('pac-input')) {
-        console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
-        element.ready(function(){
-          //google.maps.event.addDomListener(window, 'load', initMap);          
-          initMap();    
-        })      
-      } 
+      $(window).load(function(){
+        initMap();
+        $('#pac-input').show();
+      });
+
     };
 
     return {
