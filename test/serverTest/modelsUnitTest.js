@@ -88,56 +88,60 @@ describe('gamePostsModel', function(){
   var user1Id, user2Id, gamepost1, gamepost2;
 
   before(function() {
-    return userModel.findOrCreate(user1);
-      })      
+    return userModel.findOrCreate(user1)     
       .then(function(user){
-        userId = user.id;
+        user1Id = user.id;
         gamepost1 = { 
           game_location: '2213 Santa Maria St, Austin, TX 78702, USA',
-          game: 'clue',
+          game: 'Clue',
           player_count: 20,
           game_datetime: '2015-10-12T02:00:00.000Z',
-          host_id: userId
+          host_id: user1Id
         };
       })
       .then(function() {
         return userModel.findOrCreate(user2);
       })      
       .then(function(user){
-        userId = user.id;
+        user2Id = user.id;
         gamepost2 = { 
-          game_location: '2213 Santa Maria St, Austin, TX 78702, USA',
-          game: 'clue',
-          player_count: 20,
-          game_datetime: '2015-10-12T02:00:00.000Z',
-          host_id: userId
+          game_location: '123 Avenue Q, New York, NY 12345, USA',
+          game: 'Chess',
+          player_count: 2,
+          game_datetime: '2015-10-11T02:00:00.000Z',
+          host_id: user2Id
         };
       })
-      }
       .catch(function(err){
         console.log("Error: ", err)
       })
   });
 
 
-  xit('create function should create a gamepost', function(done){
-    gamePostsModel.create(gamepost)
+  it('create should create a gamepost in the db', function(done){
+    gamePostsModel.create(gamepost1)
       .then(function(gameId){
         expect(gameId);
         done();
       })
+      .then(function() {
+        return gamePostsModel.getAll()
+      })
+      .then(function(result) {
+        expect(result.length).to.equal(1);
+      })
       .catch(function(err){
         console.log("Error: ", err)
       })
   });
 
-  xit('getAll function should return all the gamepost', function(done){
-    gamePostsModel.create(gamepost)
+  it('getAll function should return all the gamepost', function(done){
+    gamePostsModel.create(gamepost2)
       .then(function(gameId){
-        return gamePostsModel.getAll(userId);
+        return gamePostsModel.getAll();
       })
-      .then(function(gameposts){
-        expect(gameposts.length).to.equal(1);
+      .then(function(result){
+        expect(result.length).to.equal(2);
         done();
       })
       .catch(function(err){
