@@ -19,6 +19,12 @@
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
       var map;
+
+      var currIcon = {
+        url: 'assets/gpsloc.png',
+        size: new google.maps.Size(34, 34),
+        scaledSize:new google.maps.Size(17,17)
+      };
       // Create the search box and link it to the UI element.
       var input = document.getElementById('pac-input');
       var searchBox = new google.maps.places.SearchBox(input);
@@ -43,21 +49,26 @@
             map.setCenter(scope.currentLocation);
             bounds = new google.maps.LatLngBounds(scope.currentLocation);
             // add current location dot
-            GeoMarker = new GeolocationMarker(map);
-            console.log("GeoMarker:", GeoMarker)                
+            new google.maps.Marker({
+              position: scope.currentLocation,
+              map: map,
+              icon: currIcon
+            });
+           
             // needs to be deleted in production
             console.log("Current Location: ", position)
           });
         } else {
           $('#pac-input').show();
           // center current location and also make sure current location always show on map
-          //GeoMarker.position = scope.currentLocation;  
+          new google.maps.Marker({
+            position: scope.currentLocation,
+            map: map,
+            icon: currIcon
+          });
           map.setCenter(scope.currentLocation);
-          GeoMarker = new GeolocationMarker(map);   
-          GeoMarker.position = {H: 30.2686769,L: -97.74084119999998}//scope.currentLocation;
           bounds = new google.maps.LatLngBounds(scope.currentLocation);
-        }
-        console.log("GeoMarker:", GeoMarker)                
+        }                
 
         // Bias the SearchBox results towards current map's viewport.
         map.addListener('bounds_changed', function() {
@@ -67,9 +78,7 @@
         // searchbox listener, place marker on map and listen to clicks
         searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
-          if (places.length === 0) {
-            return;
-          }
+          if (places.length === 0) return;
 
           // clear all the current markers on the map
           searchMarkers.forEach(function(marker){
@@ -136,6 +145,7 @@
       function showInfoWindow(destinations, markerPlace, marker) {
         // populate the game location form on location input
         document.getElementById('game-location').value =  markerPlace.formatted_address;  
+        scope.game.location = markerPlace.formatted_address;  
 
         // send request to get distance between current location and destination    
         service.getDistanceMatrix({
