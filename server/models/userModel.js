@@ -40,7 +40,7 @@ function create(user) {
     .then(function(userId){
       return module.exports.find(userId[0])
         .then(function(user){
-          return user[0]; //returning gives an array, but facebookId is unique
+          return user[0]; //returning gives an array, but id is unique
         })
     })
 };

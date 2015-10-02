@@ -18,8 +18,8 @@ module.exports = {
     return db('gameposts')
       .insert(gamepost)
       .returning("id")
-      .then(function (gamepost) {
-        return gamepost;
+      .then(function (gamepostId) {
+        return gamepostId;
       })
       .catch(function(err){
         console.log(err);

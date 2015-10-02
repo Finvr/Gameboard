@@ -8,13 +8,13 @@ var db = require('../../server/db.js')
  
 var app = require('../../server/server.js');
 
-describe('userModel function unit test:  ', function(){
+describe('userModel', function(){
 
   before(function() {
     return db.deleteEverything();
   });
   
-  var user = {
+  var user1 = {
     username: 'never',
     facebook_id: '1234'
   }
@@ -24,9 +24,13 @@ describe('userModel function unit test:  ', function(){
     facebook_id: '1234'
   }
 
-  it(' find or create function should create a new user when the user does not exist', function(done){
-    userModel.findOrCreate(user)
+  var user1Id;
+  var user2Id;
+
+  it('findOrCreate should create a new user in the database', function(done){
+    userModel.findOrCreate(user1)
       .then(function(result){
+        user1Id = result.id;
         expect(result).to.be.an('object');
         expect(result).to.have.any.keys('id', 'username', 'facebook_id');
         expect(result.username).to.equal('never');
@@ -38,38 +42,20 @@ describe('userModel function unit test:  ', function(){
       })
   });
 
-  it(' find or create function should not create a new user when the user facebook_id exists', function(done){
+  it('findOrCreate should return an existing user in the database', function(done){
+    userModel.findOrCreate(user1)
+      .then(function(result){
+        expect(result.id).to.equal(user1Id);
+        done();
+      })
+      .catch(function(err){
+        console.log("Error: ", err)
+      })
+  });
+
+  xit('delete should delete a user from the database', function(done){
+    //Note: Schema changes (delete on cascade) will be required to implement this feature
     userModel.findOrCreate(user2)
-      .then(function(result){
-        expect(result.username).to.equal('never');
-        expect(result.facebook_id).to.equal('1234');
-        done();
-      })
-      .catch(function(err){
-        console.log("Error: ", err)
-      })
-  });
-
-  it('find function should find user when user exists', function(done){
-    userModel.findOrCreate(user)
-      .then(function(result){
-        return result.id;
-      })
-      .then(function(userId){
-        return userModel.find(userId);
-      })
-      .then(function(user){
-        expect(user).to.have.length(1);
-        expect(user[0]).to.have.property('id');
-        done();
-      })
-      .catch(function(err){
-        console.log("Error: ", err)
-      })
-  });
-
-  it('delete function should delete user', function(done){
-    userModel.findOrCreate(user)
       .then(function(result){
         return result.id;
       })
@@ -87,39 +73,54 @@ describe('userModel function unit test:  ', function(){
 
 });
 
-describe('gamePostsModel function unit test:  ', function(){
+describe('gamePostsModel', function(){
 
-  var user = {
+  var user1 = {
     username: 'never',
     facebook_id: '1234'
   }
 
-  var userId;
-  var gamepost;
+  var user2 = {
+    username: 'again',
+    facebook_id: '1234'
+  }
 
-  beforeEach(function() {
-    return db.deleteEverything()
-      .then(function(){
-        return userModel.findOrCreate(user);
+  var user1Id, user2Id, gamepost1, gamepost2;
+
+  before(function() {
+    return userModel.findOrCreate(user1);
       })      
       .then(function(user){
         userId = user.id;
-        gamepost = { 
+        gamepost1 = { 
           game_location: '2213 Santa Maria St, Austin, TX 78702, USA',
           game: 'clue',
           player_count: 20,
-          game_datetime: '2015-10-01T02:00:00.000Z',
+          game_datetime: '2015-10-12T02:00:00.000Z',
           host_id: userId
         };
-        return;
       })
+      .then(function() {
+        return userModel.findOrCreate(user2);
+      })      
+      .then(function(user){
+        userId = user.id;
+        gamepost2 = { 
+          game_location: '2213 Santa Maria St, Austin, TX 78702, USA',
+          game: 'clue',
+          player_count: 20,
+          game_datetime: '2015-10-12T02:00:00.000Z',
+          host_id: userId
+        };
+      })
+      }
       .catch(function(err){
         console.log("Error: ", err)
       })
   });
 
 
-  it('create function should create a gamepost', function(done){
+  xit('create function should create a gamepost', function(done){
     gamePostsModel.create(gamepost)
       .then(function(gameId){
         expect(gameId);
@@ -130,7 +131,7 @@ describe('gamePostsModel function unit test:  ', function(){
       })
   });
 
-  it('getAll function should return all the gamepost', function(done){
+  xit('getAll function should return all the gamepost', function(done){
     gamePostsModel.create(gamepost)
       .then(function(gameId){
         return gamePostsModel.getAll(userId);
@@ -144,7 +145,7 @@ describe('gamePostsModel function unit test:  ', function(){
       })
   });
 
-  it('deleteGamePost function should delete all the gameposts for the user', function(done){
+  xit('deleteGamePost function should delete all the gameposts for the user', function(done){
     gamePostsModel.create(gamepost)
       .then(function(gamepostId){
         return gamePostsModel.deleteGamePost(gamepostId[0], userId)
