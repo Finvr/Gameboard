@@ -12,9 +12,9 @@
       <div class="browse-filters">
         <!-- Game select drop down filter -->
         <div>
-          <p class="title indigo-text text-darken-2">Game Type</p>
+          <p class="title indigo-text text-darken-2">Game Name</p>
           <select class="browser-default" ng-model="searchText" material-select watch>
-              <option ng-repeat="value in gamesFilter.choices">{{value}}</option>
+              <option ng-repeat="value in gamesFilter.choices | orderBy: value">{{value}}</option>
           </select>
         </div>
 
