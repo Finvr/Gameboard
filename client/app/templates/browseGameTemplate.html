@@ -1,7 +1,7 @@
 <div class="browse">
   <h3 class="center">Browse All Games</h3>
   <div class="row">
-    <div class="col m3">
+    <div class="col m4">
 
       <nav>
         <div class="nav-wrapper transparent browse-filters-header">
@@ -20,16 +20,16 @@
 
         <!-- Games Date Range  -->
         <div class="row">
-          <span class="title indigo-text text-darken-2 col s6">Start Date:</span>
-          <span class="title indigo-text text-darken-2 col s6">End Date:</span>
-          <input class="col s6" type="date" ng-model="startDateFilter"/>
+          <p class="title indigo-text text-darken-2 col s6">Start Date</p>
+          <p class="title indigo-text text-darken-2 col s6">End Date</p>
+          <input class="col s6 datepicker" type="date" ng-model="startDateFilter"/>
           <input class="col s6" type="date" ng-model="endDateFilter"/>
         </div>
 
       </div>
     </div>
 
-    <div class="col m9" id="outer">
+    <div class="col m8" id="outer">
       <nav>
         <div class="nav-wrapper transparent">
           <div class="input-field">
