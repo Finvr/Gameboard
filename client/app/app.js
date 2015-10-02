@@ -10,7 +10,12 @@
       'ui.materialize',
   		'ngRoute',
   	])
-  	.config(config);
+  	.config(config)
+    .run(function($rootScope) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        $rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+      })
+    });
 
   	function config($routeProvider, $httpProvider) {
 			$routeProvider

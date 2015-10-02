@@ -14,13 +14,13 @@
 
     $scope.createGame = function(game){
       game = { 
-        "game_location": game.location,
-        "game": game.name,
-        "gamepost_description": game.description,
-        "player_count": game.numPlayers,
-        "game_datetime": game.datetime
+        "game_location": $scope.game.location,
+        "game": $scope.game.name,
+        "gamepost_description": $scope.game.description,
+        "player_count": $scope.game.numPlayers,
+        "game_datetime": $scope.game.datetime
       };
-      console.log("create gamepost game: ", game)
+      console.log("create gamepost game: ", $scope.game)
       GamePost.create(game)
         .then(function(data){
           $location.path("/my-games")
