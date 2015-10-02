@@ -113,6 +113,7 @@
             }
             
             document.getElementById('game-location').value =  marker.address;
+            scope.game.location = marker.address;
               
             service.getDistanceMatrix({
               origins: [scope.currentLocation],
