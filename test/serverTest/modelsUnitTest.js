@@ -39,6 +39,8 @@ describe('userModel', function(){
       })
       .catch(function(err){
         console.log("findOrCreate 1 error: ", err.message);
+        expect(err).to.equal('undefined');
+        done();
       })
   });
 
@@ -49,7 +51,9 @@ describe('userModel', function(){
         done();
       })
       .catch(function(err){
-        console.log("findOrCreate 2 error: ", err.message)
+        console.log("findOrCreate 2 error: ", err.message);
+        expect(err).to.equal('undefined');
+        done();
       })
   });
 
@@ -67,7 +71,9 @@ describe('userModel', function(){
         done();
       })
       .catch(function(err){
-        console.log("Error: ", err)
+        console.log("Error: ", err);
+        expect(err).to.equal('undefined');
+        done();
       })
   });
 
@@ -85,7 +91,7 @@ describe('gamePostsModel', function(){
     facebook_id: '5678'
   }
 
-  var user1Id, user2Id, gamepost1, gamepost2;
+  var user1Id, user2Id, gamepost1, gamepost2, gamepost1Id;
 
   before(function() {
     return userModel.findOrCreate(user1)     
@@ -113,7 +119,7 @@ describe('gamePostsModel', function(){
         };
       })
       .catch(function(err){
-        console.log("Error: ", err)
+        console.log("Error: ", err);
       })
   });
 
@@ -122,16 +128,19 @@ describe('gamePostsModel', function(){
     gamePostsModel.create(gamepost1)
       .then(function(gameId){
         expect(gameId);
-        done();
       })
       .then(function() {
         return gamePostsModel.getAll()
       })
       .then(function(result) {
+        gamepost1Id = result[0].id;
         expect(result.length).to.equal(1);
+        done();
       })
       .catch(function(err){
         console.log("gamePost create error: ", err.message);
+        expect(err).to.equal('undefined');
+        done();
       })
   });
 
@@ -146,33 +155,34 @@ describe('gamePostsModel', function(){
       })
       .catch(function(err){
         console.log("getAll error: ", err.message);
+        expect(err).to.equal('undefined');
+        done();
       })
   });
 
   it('getAll function should return gameposts by userId', function(done){
     gamePostsModel.getAll(user1Id)
       .then(function(result){
-        console.log("Result length: ", result.length);
         expect(result.length).to.equal(1);
         expect(result[0].game).to.equal('Clue');
         done();
       })
       .catch(function(err){
         console.log("getAll by userId error: ", err.message);
+        expect(err).to.equal('undefined');
+        done();
       })
   });
 
-  xit('deleteGamePost function should delete all the gameposts for the user', function(done){
-    gamePostsModel.create(gamepost)
-      .then(function(gamepostId){
-        return gamePostsModel.deleteGamePost(gamepostId[0], userId)
-      })
+  xit('deleteGamePost function should set status to "canceled"', function(done){
+    gamePostsModel.deleteGamePost(gamepost1Id, user1Id)
       .then(function(delCounts){
         expect(delCounts).to.equal(1);
-        done();
       })
       .catch(function(err){
         console.log("Error: ", err)
+        expect(err).to.equal('undefined');
+        done();
       })
   });
 
