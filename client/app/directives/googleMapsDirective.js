@@ -1,10 +1,10 @@
 (function(){
  angular.module('imgame.createGame')
-  .directive('googleMaps', googleMaps);
+  .directive('googleMaps', ['$rootScope', googleMaps]);
 
-  function googleMaps() {
+  function googleMaps($rootScope) {
     // directive link function
-    var link = function(scope, element, attrs) {
+    var link = function(scope, element, attrs) {      
       // map config function
       var geocoder = new google.maps.Geocoder();
       var service = new google.maps.DistanceMatrixService;
@@ -12,44 +12,52 @@
       var currInfoMarker;
       var searchMarkers = [];
       var clickMarker = null;
+      var GeoMarker;
       var mapOptions = {
         center: {lat: 30.2500, lng: -97.7500},
         zoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
-      var map = new google.maps.Map(document.getElementById('gmap'), mapOptions);
+      var map;
       // Create the search box and link it to the UI element.
       var input = document.getElementById('pac-input');
-      console.log("currPosition2: ", input)
       var searchBox = new google.maps.places.SearchBox(input);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
       function initMap() {
-
+        console.log("scope: ", $rootScope.currentLocation)
         var bounds;
-
-        // get current location, and set current location on map
-        if (navigator.geolocation) {
+        scope.currentLocation = $rootScope.currentLocation;
+        console.log('scope.currentLocation', scope.currentLocation)
+        map = new google.maps.Map(document.getElementById('gmap'), mapOptions);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        
+        // In case rootscope did not get current location, request current location and set current location on map
+        if (!scope.currentLocation && navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (position) {
+            // add current location dot
+            $('#pac-input').show(); 
             // store currentLocation and center map around it and pop up info window
             scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-
+            $rootScope.currentLocation = scope.currentLocation;
             // center current location and also make sure current location always show on map
             map.setCenter(scope.currentLocation);
             bounds = new google.maps.LatLngBounds(scope.currentLocation);
-           // bounds.extend(scope.currentLocation);
-
             // add current location dot
-            var GeoMarker = new GeolocationMarker(map);
-
+            GeoMarker = new GeolocationMarker(map);
+            console.log("GeoMarker:", GeoMarker)                
             // needs to be deleted in production
             console.log("Current Location: ", position)
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
           });
         } else {
-          handleLocationError(false, infoWindow, map.getCenter())
-        };                   
+          $('#pac-input').show();
+          // center current location and also make sure current location always show on map
+          //GeoMarker.position = scope.currentLocation;  
+          map.setCenter(scope.currentLocation);
+          GeoMarker = new GeolocationMarker(map);   
+          GeoMarker.position = {H: 30.2686769,L: -97.74084119999998}//scope.currentLocation;
+          bounds = new google.maps.LatLngBounds(scope.currentLocation);
+        }
+        console.log("GeoMarker:", GeoMarker)                
 
         // Bias the SearchBox results towards current map's viewport.
         map.addListener('bounds_changed', function() {
@@ -109,22 +117,11 @@
         });
       };
       // initMap func complete
-
-      ////////////////
-      // Following are helper functions used in the initMap function
-      ////////////////
-      // error handler for getting current location 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      };
       
       // make the inforWindow html template
       function makeInfoHtml (name, distance) {
         var nameTag = '';
-        if (name !== 'name') {
+        if (name !== 'name' || name === undefined) {
           nameTag = '<div><strong>'+name+'</strong></div>';
         }
         return nameTag + '<div><strong>Distance:</strong> ' + distance + '</div>' +
@@ -191,10 +188,13 @@
 
       /////////////////////////
       // listen DOM to init MAP;
-      $(window).load(function(){
-        initMap();
-        $('#pac-input').show();
-      });
+      // if (document.getElementById('gmap') && document.getElementById('pac-input')) {
+      //   console.log("document.getElementById('pac-input')", document.getElementById('pac-input'))
+      //   initMap();    
+      //     //google.maps.event.addDomListener(window, 'load', initMap);                       
+      // }
+
+      initMap();              
 
     };
 
