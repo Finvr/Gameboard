@@ -129,12 +129,13 @@
       
       // make the inforWindow html template
       function makeInfoHtml (name, distance) {
-        var nameTag = '';
-        if (name !== 'name' || name === undefined) {
-          nameTag = '<div><strong>'+name+'</strong></div>';
+        var nameTag = name || '';
+        console.log("name: ", scope.currentAddress)
+        if (name !== 'name' || name == undefined) {
+          nameTag = '<div><strong>'+nameTag+'</strong></div>';
         }
         return nameTag + '<div><strong>Distance:</strong> ' + distance + '</div>' +
-          '<a href="https://www.google.com/maps/dir/' + scope.currentLocation + "/" +'">more info' + '</a>';
+          '<a href="https://www.google.com/maps/dir/' + scope.currentAddress.split(" ").join("+") + "/" + scope.game.location.split(" ").join("+")  +'">more info' + '</a>';
       };
 
       /////////////
@@ -154,10 +155,10 @@
           travelMode: google.maps.TravelMode.DRIVING,
           unitSystem: google.maps.UnitSystem.IMPERIAL
         }, function(res, status){
-
           if (status !== google.maps.DistanceMatrixStatus.OK) {
             alert('Error was: ' + status);
           } else {
+            scope.currentAddress = res.originAddresses[0];
             var distanceObj = res.rows[0].elements[0];
             console.log("google distance response: ", distanceObj);
             var info = makeInfoHtml(markerPlace.name, distanceObj.distance.text);
