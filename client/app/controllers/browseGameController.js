@@ -47,6 +47,19 @@
 				$scope.games = resp;
 			});
 
+		$scope.dateFilter = function(gameTime) {
+			gameTime = Date.parse(gameTime);
+			startTime = Date.parse($scope.startDateFilter);
+			endTime = Date.parse($scope.endDateFilter);
+			if (!$scope.startDateFilter || gameTime > startTime) {
+				if (!$scope.endDateFilter || gameTime < endTime) {
+					return true;				
+				}
+			} else {
+				return false;
+			}
+		}
+
 		$scope.openGame = function(game) {
 			$scope.submitError = null;
 			$scope.requestMessage = {comments: ''};
