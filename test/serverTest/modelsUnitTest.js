@@ -21,7 +21,7 @@ describe('userModel', function(){
 
   var user2 = {
     username: 'again',
-    facebook_id: '5678'
+    facebook_id: '1234'
   }
 
   var user1Id;
@@ -56,6 +56,18 @@ describe('userModel', function(){
         done();
       })
   });
+
+  it(' find or create function should not create a new user when the user facebook_id exists', function(done){   
+    userModel.findOrCreate(user2)    
+      .then(function(result){    
+        expect(result.username).to.equal('never');   
+        expect(result.facebook_id).to.equal('1234');   
+         done(); 
+      })
+      .catch(function(err){    
+        console.log("Error: ", err);    
+      })
+  })   
 
   xit('delete should delete a user from the database', function(done){
     //Note: Schema changes (delete on cascade) will be required to implement this feature
