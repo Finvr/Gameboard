@@ -8,7 +8,11 @@
         method: 'GET',
         url: '/gameposts'
       })
-      .then(function(resp) {
+      .then(function(resp) { /* TODO: make this fix less hacky */
+      	resp.data = resp.data.map(function(item) {
+      		item.accepted_players = String(Number(item.accepted_players) + 1);
+      		return item;
+      	});
         return resp.data;
       });
 		};
