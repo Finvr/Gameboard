@@ -53,7 +53,7 @@
         <div class="modal-content">
           <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
           <p><i>Host:</i> {{game.username}}</p>
-          <div><i>Current players:</i> {{parseInt(game.accepted_players) + 1}}/{{game.player_count}}</div>
+          <div><i>Current players:</i> {{game.accepted_players}}/{{game.player_count}}</div>
           <div class = "row center">
             <div class="input-field">
               <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
