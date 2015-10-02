@@ -35,4 +35,8 @@
   		border-top: 1px solid #EC407A;
   	}
   }
+
+  [ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+  }
 }

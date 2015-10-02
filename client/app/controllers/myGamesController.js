@@ -3,10 +3,7 @@
 	  .controller('MyGamesController', MyGamesController);
 
   function MyGamesController($scope, $window, $location, Auth, GamePost){
-  	$scope.myGames = [];
-    $scope.myRequests = [];
     $scope.gameToCancel = null;
-
 
     Auth.requireAuth();
 
@@ -19,9 +16,14 @@
   	};
     var getMyRequests = function(){
       return GamePost.myRequests()
-        .then(function(games){
-          $scope.myRequests = games;
-          console.log("myRequests: ", $scope.myRequests)
+        .then(function(requests){
+          if (requests = 'request does not exist'){
+            $scope.myRequests = [];
+            console.log("myRequests: ", $scope.myRequests)
+          } else {
+            $scope.myRequests = requests;
+
+          }
         });
     };
 
