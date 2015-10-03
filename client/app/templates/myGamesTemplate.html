@@ -25,8 +25,8 @@
             </div>
             <div class="collapsible-body">
               <p>
-                              <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br
-                              <strong>Location:</strong> {{ game.game_location }}
+                <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                <strong>Location:</strong> {{ game.game_location }}<br>
                 <span>Players:</span> {{game.player_count}}
                 <br>
                 <span>Description:</span> {{game.gamepost_description}}<br>
@@ -37,7 +37,27 @@
       <section class="outbox">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Outbox</h5></span></li>
-          </li>
+          <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending'"> 
+            <div class="collapsible-header">
+                <span class="title indigo-text text-darkern-2">
+                  {{ request.game | limitTo: 10 }} ... 
+                </span>
+                <span>
+                    {{ request.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+                </span>
+                <a href="#cancelRequestModal" ng-click="setRequestToCancel(request)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+                <a class="secondary-content"><i class="material-icons md-light ">info</i></a>
+              </div>
+              <div class="collapsible-body">
+                <p>
+                  <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                  <strong>Location:</strong> {{ game.game_location }}<br>
+                  <span>Players:</span> {{request.player_count}}
+                  <br>
+                  <span>Description:</span> {{request.gamepost_description}}<br>
+                </p>
+              </div>
+            </li>
         </ul>
       </section>
     </div>
