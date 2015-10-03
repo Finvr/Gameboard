@@ -1,13 +1,12 @@
 
 .createGame {
 
-  padding: 5%;
+  padding: 1.5%;
 
-  
-	div.half-div {
-		margin: 5 auto;
-    text-align: center;
-	}
+
+  .map-directions {
+    padding: 2%;
+  }
 
   input {
     color: #616161;
@@ -44,16 +43,23 @@
     color: red;
   }
 
-  .create-form {
-    margin-left: 20px;
-  }
-
   label.active {
     font-size: 15px;
   }
 
   [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
+  }
+
+   /* label focus color */
+   .input-field {
+    input:focus + label, textarea:focus + label {
+     color: #3f51b5;
+    }
+     input:focus, textarea:focus {
+     border-bottom: 1px solid #3f51b5;
+     box-shadow: 0 1px 0 0 #3f51b5;
+    }
   }
 
 }
