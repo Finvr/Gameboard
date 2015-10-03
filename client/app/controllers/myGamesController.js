@@ -36,6 +36,12 @@
         });
     };
 
+    var getMyProfile = function(){
+      Profile.getProfile().then(function(profile){
+        $scope.myProfile = profile;
+      });
+    };
+
     $scope.eventSources = [getMyGames];
 
     var getMyRequests = function(){
