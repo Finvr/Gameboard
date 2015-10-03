@@ -5,7 +5,7 @@
     <p>  Go <a class="teal-text" href="/#/browse-games">browse</a> game events happening in your area  or <a class="teal-text" href="/#/create-game">post a new game event</a> you want to host.</p>
   </div>
   <div ng-show="myGames.length > 0 || (myRequests.length > 0 && myRequests[0] !== 'r')" class="row">
-    <div class="col m4">
+    <div class="col m3">
       <section>
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header">
@@ -35,11 +35,11 @@
         </ul>
       </section>
     </div>
-    <div class="col m4">
+    <div ui-calendar="uiConfig.calendar" class="col m6" ng-model="eventSources" watch></div>
+    <!--<div class="col m1">
       <section class="joined">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Games I'm Joining</h5></span></li>
-          <!-- must be changed to only request that are pending-->
           <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='accepted'">
             <div class="collapsible-header">
               <i class="material-icons md-light">info</i>
@@ -60,8 +60,8 @@
           </li>
         </ul>
       </section>
-    </div>
-    <div class="col m4">
+    </div>-->
+    <div class="col m3">
       <section class="joined">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>My Pending Requests</h5></span></li>
@@ -114,6 +114,7 @@
       </section>
     </div>
   </div>
+
   <!-- Pop-up modal for requests of gameposts -->
   <div id="modal1" class="modal approve-pending">
     <div class="modal-header">
