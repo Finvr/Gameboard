@@ -7,22 +7,23 @@
       text-align: justify;
     }
   }
-	.collapsible-header .material-icons {
-		color: #26a69a;
+	.collapsible-header {
+    .secondary-content {
+      width: 30px;
+    }
+    .material-icons {
+		  color: #26a69a;
+    }
+    p {
+      line-height: 2rem;
+      padding-left: 10%;
+      margin: 2% 0;
+    }
 	}
 	.collection-header {
 		padding: 2%;
     text-align: center;
 	}
-  .title {
-  	font-size: 1.25em;
-  }
-
-  .collapsible-header p {
-  	line-height: 2rem;
-  	padding-left: 10%;
-  	margin: 2% 0;
-  }
 
   .approve-pending {
   	.modal-header {
