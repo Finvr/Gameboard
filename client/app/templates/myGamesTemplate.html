@@ -67,23 +67,25 @@
       <h4 class="white-text">{{gameToApprove.game}}</h4>
     </div>
     <div class="modal-content container"> 
-      <!-- requests list of the gamepost -->
       <ul class="collection">
-        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item">
-          <div class="col s10">
-            <span class="title"><strong>Request from: {{request.username}}</strong></span>
-            <span><strong>Status:</strong> {{request.status}}</span>      
-            <span><strong>Message:</strong>  {{ request.comments }}</span>
+        <li class="row">
+          <div class="title col s8">Request</div>
+          <div class="title col s2">Accept</div>
+          <div class="title col s2">Decline</div>
+        </li>
+        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item row" ng-if="request.status==='pending'">
+          <div class="col s8">
+            <div><span>From: </span>{{ request.username }}</div>     
+            <div><span>Message:</span> {{ request.comments }}</div>
           </div>
-          <p class="col s2" ng-if="request.status==='pending'">
-            <button class="col s6 waves-effect waves-light btn-flat btn-medium waves-effect waves-light green white-text" ng-click="requestConfirm('accepted', request)">Accept<i class="material-icons right tiny">done</i></button>
-            <button class="col s6 waves-effect waves-light btn-flat waves-effect waves-light red white-text" ng-click="requestConfirm('declined', request)">Decline<i class="material-icons right tiny">not_interested</i></button>
-          </p>
+          <button class="col s2 btn-flat btn-medium waves-effect waves-light teal lighten-1 white-text" ng-click="requestConfirm('accepted', request)">
+            <i class="material-icons">check</i>
+          </button>
+          <button class="col s2 btn-flat waves-effect waves-light pink white-text" ng-click="requestConfirm('declined', request)">
+            <i class="material-icons">close</i>
+          </button>
         </li> 
       </ul>
-    </div>
-    <div class="modal-footer">
-      <a class="modal-action modal-close waves-effect teal white-text btn-flat">I'm Game!</a>
     </div>
   </div>
 </div>
