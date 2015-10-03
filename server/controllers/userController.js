@@ -4,7 +4,6 @@ var Users   = require ('../models/userModel.js'),
 module.exports = {
 
   checkAuth: function (req, res, next) {
-    console.log("checkAuth req.user: ", req.user)
     if (!req.user.id) {
       res.status(403).send('User is not logged in!')
     }
@@ -32,8 +31,26 @@ module.exports = {
   },
 
   getFacebookInfo: function (req, res, next) {
-    return Users.getToken(req.user.id)
+    console.log(req.user);
+    return r({
+      uri: 'https://graph.facebook.com/v2.2/'
+        + req.user.facebook_id 
+        + '?access_token='
+        + req.user.facebook_token
+        + '&fields=id,name,picture',
+      method: 'GET'
+    })
+      .then(function(response) {
+        response = JSON.parse(response);
+        var profile = {};
+        profile.name = response.name;
+        profile.picture = response.picture.data.url
+        res.send(profile);
       })
-  }
+      .catch(function(err) {
+        console.log(err);
+        res.send(500, err.message);
+      })
+  } 
 
 }

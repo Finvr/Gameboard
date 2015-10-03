@@ -30,7 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done){
-  console.log("serializeUser user: ", user)
   done(null, user.id);
 });
 
@@ -38,7 +37,6 @@ passport.deserializeUser(function(userId, done){
   Users.find(userId)
     .then(function(result) {
       var user = result[0];
-      console.log("Deserialize: ", user);
       done(null, user);
     })
     .catch(function(err) {
