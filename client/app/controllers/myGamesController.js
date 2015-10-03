@@ -2,7 +2,7 @@
 	angular.module('imgame.myGames', [])
 	  .controller('MyGamesController', MyGamesController);
 
-  function MyGamesController($scope, $window, $location, Auth, GamePost){
+  function MyGamesController($scope, $window, $location, Auth, GamePost, Profile){
     $scope.gameToCancel = null;
     $scope.gameToApprove = null;
     $scope.uiConfig = {
@@ -52,6 +52,7 @@
     $scope.init = function() {
       getMyGames(null,null,null,function(){}); //find less hacky solution
       getMyRequests();
+      getMyProfile();
     };
     
     $scope.init();
