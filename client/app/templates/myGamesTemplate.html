@@ -5,26 +5,67 @@
     <p>  Go <a class="teal-text" href="/#/browse-games">browse</a> game events happening in your area  or <a class="teal-text" href="/#/create-game">post a new game event</a> you want to host.</p>
   </div>
   <div ng-show="myGames.length > 0 || (myRequests.length > 0 && myRequests[0] !== 'r')" class="row">
-    <div ui-calendar="uiConfig.calendar" class="col m9" ng-model="eventSources" watch>
+    <div ui-calendar="uiConfig.calendar" class="col m8" ng-model="eventSources" watch>
     </div>
-    <div class="col m3">
+    <div class="col m4">
       <section class="inbox">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Inbox</h5></span></li>
-          <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending'">
-          </li>
+          <li ng-repeat="game in myGames" class="collection-item avatar" ng-if="game.pending_requests > 0">
+            <div class="collapsible-header">
+              <span class="title indigo-text text-darkern-2">
+                {{ game.game}} 
+              </span>
+              <span>
+                  {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+              </span>
+              <a href="#cancelGamepostModal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+              <a href="#approvePending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">add_alert</i></a>
+              <a class="secondary-content"><i class="material-icons md-light ">info</i></a>
+            </div>
+            <div class="collapsible-body">
+              <p>
+                              <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br
+                              <strong>Location:</strong> {{ game.game_location }}
+                <span>Players:</span> {{game.player_count}}
+                <br>
+                <span>Description:</span> {{game.gamepost_description}}<br>
+              </p>
+            </div>
         </ul>
       </section>
       <section class="outbox">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Outbox</h5></span></li>
-          <!-- must be changed to only request that are pending-->
-          <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending'"> 
           </li>
         </ul>
       </section>
     </div>
   </div>
-
+<!-- Pop-up modal for requests of gameposts -->
+  <div id="approvePending" class="modal approve-pending">
+    <div class="modal-header">
+      <h4 class="white-text">Pending Request</h4>
+    </div>
+    <div class="modal-content container"> 
+      <!-- requests list of the gamepost -->
+      <ul class="collection">
+        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item avatar row">
+          <i class="material-icons left col s1">email</i>
+          <div class="col s10">
+            <span class="title col s12"><strong>Request from: {{request.username}}</strong></span>
+            <span class="col s12"><strong>Status:</strong> {{request.status}}</span><br>           
+            <span class="col s12"><strong>Message:</strong>  {{ request.comments }}</span>
+          </div>
+          <p class="center row" ng-if="request.status==='pending'">
+            <button class="col s6 waves-effect waves-light btn-flat btn-medium waves-effect waves-light green white-text" ng-click="requestConfirm('accepted', request)">Accept<i class="material-icons right tiny">done</i></button>
+            <button class="col s6 waves-effect waves-light btn-flat waves-effect waves-light red white-text" ng-click="requestConfirm('declined', request)">Decline<i class="material-icons right tiny">not_interested</i></button>
+          </p>
+        </li> 
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect teal white-text btn-flat">I'm Game!</a>
+    </div>
+  </div>
 </div>
