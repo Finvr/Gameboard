@@ -35,8 +35,15 @@ passport.serializeUser(function(user, done){
 });
 
 passport.deserializeUser(function(userId, done){
-  console.log("deserializeUser id: ", userId)
-  done(null, userId);
+  Users.find(userId)
+    .then(function(result) {
+      var user = result[0];
+      console.log("Deserialize: ", user);
+      done(null, user);
+    })
+    .catch(function(err) {
+      done(null, null);
+    })
 });
 
 passport.use(new FacebookStrategy ({
