@@ -53,7 +53,7 @@
             <div class ="pink-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
             <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
-            <a class='btn indigo' href='#openRequest' modal>Join</a>
+              <a class='btn indigo' href='#openRequest' modal>Join</a>
             </div>
           </div>        
         </li>
@@ -71,21 +71,22 @@
           <div><i>Current players:</i> {{game.accepted_players}}/{{game.player_count}}</div>
           <div class = "row center">
             <div class="input-field">
-              <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
+              <textarea class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
             </div>
-            <div class = "col s2" ng-click="sendRequest(game)">
-              <a class = "btn-floating btn-med waves-effect waves-light cyan">
-                <i class="material-icons">email</i>
-              </a>
-              <br>
-            </div><br>
+            <br>
             <div ng-if="submitError" class="error col s12 red-text">{{submitError}}</div>
           </div>
         </div>
-        <!--<div class="modal-footer"></div>!-->
-      </div>
+        <div class="modal-footer">
+          <div class = "col s6 right" ng-click="sendRequest(game)">
+                  <a class = "btn btn-med waves-effect waves-light teal">
+                    Send
+                  </a>
+          </div>
+        </div>
       <!-- modal complete -->
 
     </div>
   </div><!-- #outer -->
+  </div>
 </div><!-- .browse -->
