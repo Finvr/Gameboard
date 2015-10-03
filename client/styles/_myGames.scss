@@ -33,10 +33,21 @@
 
   .approve-pending {
   	.modal-header {
-  		background-color: #3f51b5;
+  		background-color: black;
   		text-align: center;
   		padding: 1%;
   	}
+
+    .content-header {
+      margin: 0;
+    }
+    .sub-list div {
+      display: inline-block
+    }
+    .content-lead {
+      width: 40%;
+    }
+
   	.modal-footer {
   		background-color: #eee;
   		border-top: 1px solid #EC407A;
