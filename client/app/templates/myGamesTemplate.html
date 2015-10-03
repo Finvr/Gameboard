@@ -76,15 +76,21 @@
     </div>
     <div class="modal-content container"> 
       <ul class="collection">
-        <li class="row">
-          <div class="title col s8">Request</div>
-          <div class="title col s2">Accept</div>
-          <div class="title col s2">Decline</div>
+        <li class="row content-header">
+          <div class="title col s8 indigo-text">Request</div>
+          <div class="title col s2 indigo-text center">Accept</div>
+          <div class="title col s2 indigo-text center">Decline</div>
         </li>
         <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item row" ng-if="request.status==='pending'">
           <div class="col s8">
-            <div><span>From: </span>{{ request.username }}</div>     
-            <div><span>Message:</span> {{ request.comments }}</div>
+            <div class="sub-list">
+              <strong class="content-lead">From: </strong>
+              <div>{{ request.username }}</div>
+            </div>     
+            <div class="sub-list">
+              <strong class="content-lead">Message:</strong>
+              <div> {{ request.comments }}</div>
+            </div>
           </div>
           <button class="col s2 btn-flat btn-medium waves-effect waves-light teal lighten-1 white-text" ng-click="requestConfirm('accepted', request)">
             <i class="material-icons">check</i>
