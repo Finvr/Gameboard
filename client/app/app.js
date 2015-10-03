@@ -9,6 +9,7 @@
       'ui.router',
       'ui.materialize',
   		'ngRoute',
+      'ui.calendar',
   	])
   	.config(config)
     .run(function($rootScope) {
@@ -29,7 +30,7 @@
       })
       .when('/my-games', {
         templateUrl: 'app/templates/myGamesTemplate.html',
-        controller: 'MyGamesController'       
+        controller: 'MyGamesController'      
       })
       .when('/logout', {
         templateUrl: 'app/templates/homeTemplate.html',
