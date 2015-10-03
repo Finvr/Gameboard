@@ -36,7 +36,7 @@
       <section class="outbox">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Outbox</h5></span></li>
-          <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending'"> 
+          <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending' || request.status==='denied' "> 
             <div class="collapsible-header">
                 <span class="title indigo-text text-darkern-2">
                   {{ request.game | limitTo: 10 }} ... 
