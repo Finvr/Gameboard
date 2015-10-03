@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<title>I'm Game</title>
 	<link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css"/>
- 	 <link href="lib/Materialize/dist/css/materialize.min.css" rel="stylesheet">
- 	   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-	 <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+ 	<link href="lib/Materialize/dist/css/materialize.min.css" rel="stylesheet">
+ 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 </head>
 <body ng-app="imgame">
 	<header>
@@ -36,7 +36,6 @@
 		<div ng-view></div>
 	</main>
 
-	<!--<script src="https://maps.googleapis.com/maps/api/js"></script> -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5eGAZmqMYgOJRvbrFNAujmSr8nFCEBnA&libraries=places"></script>
 	<script src="lib/jquery/dist/jquery.min.js"></script>
 	<script src="lib/angular/angular.min.js"></script>
@@ -44,10 +43,12 @@
 	<script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="lib/Materialize/dist/js/materialize.min.js"></script>
 	<script src="lib/angular-materialize/src/angular-materialize.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
+	<script src="lib/moment/min/moment.min.js"></script>
+	<script src="lib/angular-ui-calendar/src/calendar.js"></script>
+	<script src="lib/fullcalendar/dist/fullcalendar.min.js"></script>
+	<script src="lib/fullcalendar/dist/gcal.js"></script>
 	<script src="app/app.js"></script>
 	<script src="app/controllers/homeController.js"></script>
-	<!-- <script src="app/services/mapmarker.js"></script> -->
 	<script src="app/controllers/createGameController.js"></script>
 	<script src="app/directives/googleMapsDirective.js"></script>
 	<script src="app/controllers/myGamesController.js"></script>
@@ -55,9 +56,5 @@
 	<script src="app/services/serviceAuth.js"></script>
 	<script src="app/services/serviceGame.js"></script>
 	<script src="app/services/serviceBrowseGames.js"></script>
-	<script src="lib/moment/min/moment.min.js"></script>
-	<script type="text/javascript" src="lib/angular-ui-calendar/src/calendar.js"></script>
-	<script type="text/javascript" src="lib/fullcalendar/dist/fullcalendar.min.js"></script>
-	<script type="text/javascript" src="lib/fullcalendar/dist/gcal.js"></script>
 </body>
 </html>
