@@ -14,7 +14,7 @@
           <li ng-repeat="game in myGames" class="collection-item avatar" ng-if="game.pending_requests > 0">
             <div class="collapsible-header">
               <span class="title indigo-text text-darkern-2">
-                {{ game.game}} 
+                {{ game.game | limitTo: 10 }} ... 
               </span>
               <span>
                   {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
