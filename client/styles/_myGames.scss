@@ -1,11 +1,17 @@
 .myGames {
 
-  .fallback {
+  .fallback-view {
     padding: 5% 20%;
     p {
       font-size: 1.5em;
       text-align: justify;
     }
+  }
+  .normal-view {
+    padding: 5% 2%;
+  }
+  .close {
+    color: white;
   }
 	.collapsible-header {
     .secondary-content {
