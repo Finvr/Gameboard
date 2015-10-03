@@ -41,18 +41,16 @@
       <!-- display all the games -->
       <ul class="collection" watch>
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item">
-          <div>
-            <i class="material-icons right">speaker_notes</i>
-            <i class="material-icons right">event</i>
-          </div>
           <div class='row'>
-            <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
-            {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
-            <div>@ {{game.game_location}}</div>
-            <div class ="pink-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
+            <div class="left">
+              <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
+              {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
+              <div>@ {{game.game_location}}</div>
+              <div class ="indigo-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
+              </div>
             </div>
-            <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
-              <a class='btn indigo' href='#openRequest' modal>Join</a>
+            <div class="right" ng-if="loggedIn" ng-click="openGame(game)">
+              <a class='btn teal' href='#openRequest' modal>Join</a>
             </div>
           </div>        
         </li>
@@ -79,12 +77,11 @@
         <div class="modal-footer">
           <div class = "col s6 right" ng-click="sendRequest(game)">
                   <a class = "btn btn-med waves-effect waves-light teal">
-                    Send
+                    <i class="material-icons">send</i>
                   </a>
           </div>
         </div>
       <!-- modal complete -->
-
     </div>
   </div><!-- #outer -->
   </div>
