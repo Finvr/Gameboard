@@ -4,6 +4,7 @@
 
   function MyGamesController($scope, $window, $location, Auth, GamePost){
     $scope.gameToCancel = null;
+    $scope.gameToApprove = null;
     $scope.uiConfig = {
       calendar:{
         height: 450,
@@ -80,8 +81,8 @@
     $scope.getGamepostRequest = function(game){
       return GamePost.gamepostRequest(game.id)
         .then(function(requests){
+          $scope.gameToApprove = game;
           $scope.requests = requests;
-          console.log('$scope.requests ', $scope.requests )
         })
     };
 
