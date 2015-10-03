@@ -32,6 +32,15 @@ module.exports = {
     return db('users')
       .where('id', userId)
       .del();
+  },
+
+  getToken: function(userId) {
+    return db.select('facebook_token')
+      .from('users')
+      .where({id: userId})
+      .then(function(result) {
+        return result[0];
+      })
   }
 
 };
