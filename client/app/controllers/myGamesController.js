@@ -9,7 +9,7 @@
         height: 450,
         editable: false,
         header:{
-          left: 'month basicWeek basicDay agendaWeek agendaDay',
+          left: 'month basicWeek basicDay',
           center: 'title',
           right: 'today prev,next'
         },
