@@ -57,23 +57,25 @@
         </ul>
       </section>
     </div>
+    <div ui-calendar="uiConfig.calendar" class="col m8" ng-model="eventSources" watch>
+    </div>
   </div>
 <!-- Pop-up modal for requests of gameposts -->
   <div id="approvePending" class="modal approve-pending">
     <div class="modal-header">
-      <h4 class="white-text">Pending Request</h4>
+      <div ng-click="close()"><i class="material-icons right close">close</i></div>
+      <h4 class="white-text">{{gameToApprove.game}}</h4>
     </div>
     <div class="modal-content container"> 
       <!-- requests list of the gamepost -->
       <ul class="collection">
-        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item avatar row">
-          <i class="material-icons left col s1">email</i>
+        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item">
           <div class="col s10">
-            <span class="title col s12"><strong>Request from: {{request.username}}</strong></span>
-            <span class="col s12"><strong>Status:</strong> {{request.status}}</span><br>           
-            <span class="col s12"><strong>Message:</strong>  {{ request.comments }}</span>
+            <span class="title"><strong>Request from: {{request.username}}</strong></span>
+            <span><strong>Status:</strong> {{request.status}}</span>      
+            <span><strong>Message:</strong>  {{ request.comments }}</span>
           </div>
-          <p class="center row" ng-if="request.status==='pending'">
+          <p class="col s2" ng-if="request.status==='pending'">
             <button class="col s6 waves-effect waves-light btn-flat btn-medium waves-effect waves-light green white-text" ng-click="requestConfirm('accepted', request)">Accept<i class="material-icons right tiny">done</i></button>
             <button class="col s6 waves-effect waves-light btn-flat waves-effect waves-light red white-text" ng-click="requestConfirm('declined', request)">Decline<i class="material-icons right tiny">not_interested</i></button>
           </p>
