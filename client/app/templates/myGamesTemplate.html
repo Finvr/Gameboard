@@ -6,6 +6,14 @@
   </div>
   <div ng-show="myGames.length > 0 || (myRequests.length > 0 && myRequests[0] !== 'r')" class="row normal-view">
    <div class="col m4">
+      <center class="profile-box">
+        <div class="img-wrapper">
+         <img  class="responsive-img" src="{{ myProfile.picture }}">
+        </div>
+        <div class="name">
+          <p watch>{{ myProfile.name }}</p>
+        </div>
+      </center>
       <section class="inbox">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
           <li class="collection-header"><span class="pink-text text-darken-2"><h5>Inbox</h5></span></li>
