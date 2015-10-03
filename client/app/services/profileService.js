@@ -2,15 +2,15 @@
 
   angular.module('imgame.service')
 
-  .factory('Profile', function ProfileFactory($http){
+  .factory('Profile', function Profile($http){
 
     function getProfile(){
-    	return $http.({
-    		method: "GET",
-    		url: get /me/profile
+    	return $http({
+    		method: 'GET',
+    		url: '/me/profile'
     	})
-    	.then(function(profile){
-    		return profile;
+    	.then(function(resp){
+    		return resp.data;
     	});
     }
 
