@@ -4,16 +4,48 @@
 
   function MyGamesController($scope, $window, $location, Auth, GamePost){
     $scope.gameToCancel = null;
+    $scope.uiConfig = {
+      calendar:{
+        height: 450,
+        editable: false,
+        header:{
+          left: 'month basicWeek basicDay agendaWeek agendaDay',
+          center: 'title',
+          right: 'today prev,next'
+        },
+        dayClick: $scope.alertEventOnClick,
+        eventDrop: $scope.alertOnDrop,
+        eventResize: $scope.alertOnResize
+      }
+    };
 
     Auth.requireAuth();
 
-  	var getMyGames = function(){
-  		return GamePost.myHostedGames()
-  			.then(function(games){
+    var getMyGames = function(s,e,t,callback){ //find less hacky solution
+      console.log("Arguments: ", arguments);
+      return GamePost.myHostedGames()
+        .then(function(games){
           $scope.myGames = games;
-          console.log("myGames: ", $scope.myGames)
-  			});
-  	};
+          var events = $scope.myGames.map(function(game) {
+            var newEvent = {};
+            newEvent.title = game.game;
+            newEvent.start = moment(game.game_datetime);
+            return newEvent;
+          });
+          // $scope.eventSources = [$scope.myGames.map(function(game) {
+          //   var newEvent = {};
+          //   newEvent.title = game.game;
+          //   newEvent.start = "2015-10-11";
+          //   return newEvent;
+          // })];
+          // console.log("myGames: ", $scope.myGames);
+          console.log("eventSources: ", $scope.eventSources);
+          callback(events);
+        });
+    };
+
+    $scope.eventSources = [getMyGames];
+
     var getMyRequests = function(){
       return GamePost.myRequests()
         .then(function(requests){
@@ -28,8 +60,9 @@
     };
 
      $scope.init = function() {
-      getMyGames();
+      getMyGames(null,null,null,function(){}); //find less hacky solution
       getMyRequests();
+      console.log($scope.eventSources);
     };
     
     $scope.init();
