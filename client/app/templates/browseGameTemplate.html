@@ -63,9 +63,14 @@
           <span class= "white-text"><h4>{{game.game}}</h4></span>
         </div>
         <div class="modal-content">
-          <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
-          <p><i>Host:</i> {{game.username}}</p>
-          <div><i>Current players:</i> {{game.accepted_players}}/{{game.player_count}}</div>
+          <div>
+            <span>Host:</span> {{game.username}}
+          </div>
+            <span>Details:  </span>{{game.gamepost_description}}
+          </div>
+          <div>
+            <span>Current players:</span> {{game.accepted_players}}/{{game.player_count}}
+          </div>
           <div class = "row center">
             <div class="input-field">
               <textarea class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
