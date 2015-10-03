@@ -91,11 +91,12 @@
       return GamePost.requestConfirm(req)
         .then(function(data){
           $scope.init();
-          console.log($scope.myGames);
-          console.log('requestConfirm controller resp: ', data);
         })
     };
 
+    $scope.close = function() {
+      $("#approvePending").closeModal();
+    }
   };
 
 })();
