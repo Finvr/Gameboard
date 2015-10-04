@@ -1,8 +1,8 @@
 <div class="myGames">
   <div ng-show="myGames.length === 0 && myRequests.length === 0" class="fallback-view container ng-cloak" ng-cloak>
-    <h2 class="pink-text text-darken-2 center aligned">Welcome!</h2>
+    <h2 class="grey-text center aligned">Welcome!</h2>
     <p>You currently haven't requested to join any game events or posted any new game events you want to host.</p>
-    <p>  Go <a class="teal-text" href="/#/browse-games">browse</a> game events happening in your area  or <a class="teal-text" href="/#/create-game">post a new game event</a> you want to host.</p>
+    <p>  Go <a class="grey darken-3-text" href="/#/browse-games">browse</a> game events happening in your area  or <a class="grey darken-3-text" href="/#/create-game">post a new game event</a> you want to host.</p>
   </div>
   <div ng-show="myGames.length > 0 || (myRequests.length > 0 && myRequests[0] !== 'r')" class="row normal-view">
    <div class="col m4">
@@ -11,15 +11,15 @@
          <img  class="responsive-img" src="{{ myProfile.picture }}">
         </div>
         <div class="name">
-          <p class="indigo-text" watch>{{ myProfile.name }}</p>
+          <p class="grey-text" watch>{{ myProfile.name }}</p>
         </div>
       </center>
       <section class="inbox">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
-          <li class="collection-header"><span class="pink-text text-darken-2"><h5>Inbox</h5></span></li>
+          <li class="collection-header"><span class="grey-text"><h5>Inbox</h5></span></li>
           <li ng-repeat="game in myGames" class="collection-item avatar" ng-if="game.pending_requests > 0">
             <div class="collapsible-header">
-              <span class="title indigo-text text-darkern-2">
+              <span class="title grey-text text-darkern-2">
                 {{ game.game | limitTo: 10 }} ... 
               </span>
               <span>
@@ -41,10 +41,10 @@
       </section>
       <section class="outbox">
         <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
-          <li class="collection-header"><span class="pink-text text-darken-2"><h5>Outbox</h5></span></li>
+          <li class="collection-header"><span class="grey-text"><h5>Outbox</h5></span></li>
           <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending' || request.status==='denied' "> 
             <div class="collapsible-header">
-                <span class="title indigo-text text-darkern-2">
+                <span class="title grey-text text-darkern-2">
                   {{ request.game | limitTo: 10 }} ... 
                 </span>
                 <span>
@@ -70,16 +70,16 @@
   </div>
 <!-- Pop-up modal for requests of gameposts -->
   <div id="approvePending" class="modal approve-pending">
-    <div class="modal-header">
+    <div class="modal-header grey">
       <div ng-click="close()"><i class="material-icons right close">close</i></div>
       <h4 class="white-text">{{gameToApprove.game}}</h4>
     </div>
     <div class="modal-content container"> 
       <ul class="collection">
         <li class="row content-header">
-          <div class="title col s8 indigo-text">Request</div>
-          <div class="title col s2 indigo-text center">Accept</div>
-          <div class="title col s2 indigo-text center">Decline</div>
+          <div class="title col s8 grey-text">Request</div>
+          <div class="title col s2 grey-text center">Accept</div>
+          <div class="title col s2 grey-text center">Decline</div>
         </li>
         <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item row" ng-if="request.status==='pending'">
           <div class="col s8">
@@ -92,10 +92,10 @@
               <div> {{ request.comments }}</div>
             </div>
           </div>
-          <button class="col s2 btn-flat btn-medium waves-effect waves-light teal lighten-1 white-text" ng-click="requestConfirm('accepted', request)">
+          <button class="col s2 btn-flat btn-medium waves-effect waves-light grey darken-3 lighten-1 white-text" ng-click="requestConfirm('accepted', request)">
             <i class="material-icons">check</i>
           </button>
-          <button class="col s2 btn-flat waves-effect waves-light pink white-text" ng-click="requestConfirm('declined', request)">
+          <button class="col s2 btn-flat waves-effect waves-light grey white-text" ng-click="requestConfirm('declined', request)">
             <i class="material-icons">close</i>
           </button>
         </li> 
