@@ -40,12 +40,13 @@
       </nav>
       <!-- display all the games -->
       <ul class="collection" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item">
+        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item" watch>
           <div class='row'>
             <div class="left">
               <span style="display:inline"><h5 class ="grey-text text-darken-2" id="game_title">{{game.game}}</h5></span>
               {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
               <div>@ {{game.game_location}}</div>
+              <div ng-if="game.distance"> {{game.distance + " m"}}</div>
               <div class ="grey-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
               </div>
             </div>
