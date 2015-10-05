@@ -21,7 +21,7 @@ router.get('/auth/facebook/callback',
 //User routes
 //Logout
 router.get('/me/logout', 
-  checkAuth, 
+  // checkAuth, 
   userController.logout
 );
 //Authenticate
