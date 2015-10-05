@@ -11,12 +11,13 @@
   		'ngRoute',
       'ui.calendar',
   	])
-  	.config(config)
     .run(function($rootScope) {
       navigator.geolocation.getCurrentPosition(function (position) {
         $rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+        $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
       })
-    });
+    })
+    .config(config);
 
   	function config($routeProvider, $httpProvider) {
 			$routeProvider

@@ -2,7 +2,7 @@
 	angular.module('imgame.browseGames', [])
 		.controller('BrowseGameController', BrowseGameController);
 
-	function BrowseGameController($scope, BrowseGames, Auth, $location) {
+	function BrowseGameController($rootScope, $scope,  BrowseGames, Auth, $location) {
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
@@ -40,6 +40,12 @@
 		};
 
 		Auth.requireAuth('browse');
+
+		$scope.$on("currentLocation", function(event, data){
+			for (var i = 0; i < $scope.games.length; i ++){
+				$scope.games[i].distance = $scope.games[i].H ? distance(data.lat, data.lng, $scope.games[i].H, $scope.games[i].L ) : "N/A";
+			}
+		});
 		
 		BrowseGames.getGames()
 			.then(function(resp) {
