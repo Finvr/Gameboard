@@ -31,7 +31,26 @@ module.exports = {
 
   getMyProfile: function (req, res) {
     delete req.user.facebook_id;
+    delete req.user.facebook_token;
     res.send(req.user);
-  } 
+  }, 
+
+  getProfile: function (req, res) {
+    var userId = parseInt(req.url.split('/')[2]);
+    return Users.find(userId)
+      .then(function (result) {
+        if ( result.length === 0 ) {
+          res.send(404)
+        } else {
+          delete result[0].facebook_id;
+          delete result[0].facebook_token;
+          res.send(result[0]);
+        }
+      })
+      .catch(function (err) {
+        console.log("Get profile error: ", err)
+        res.send(500, err.message);
+      })
+  }
 
 }

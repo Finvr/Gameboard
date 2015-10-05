@@ -39,11 +39,22 @@ router.get('/me/requests',
   checkAuth, 
   requestController.getUserRequests
 );
-
+//Get the logged-in user's profile
 router.get('/me/profile',
   checkAuth,
   userController.getMyProfile
 );
+//Update the user's profile
+router.put('/me/profile',
+  checkAuth,
+  userController.getMyProfile
+);
+//Get a user's profile
+router.get('/users/*',
+  checkAuth,
+  userController.getProfile
+);
+
 //GamePosts Routes
 //Get all gameposts
 router.get('/gameposts', 
