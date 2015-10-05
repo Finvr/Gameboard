@@ -84,9 +84,13 @@
       $scope.gameToCancel = game;
     }
 
-    $scope.cancelGame = function(game) {
-      return GamePost.deleteGame(game)
+    $scope.cancelGame = function() {
+      return GamePost.deleteGame($scope.gameToCancel)
         .then(function(){
+          $scope.close('#cancel-modal');
+          $scope.close('#game-details');
+          $scope.gameToCancel = null;
+          $scope.gameToShowDetails = null;
           $scope.init();
         });
     }
