@@ -11,7 +11,7 @@ module.exports = {
       .where({facebook_id: user.facebook_id})
       .then(function(result) {
         if ( result.length ) {
-          return updateUser(result[0], facebookToken, username);
+          return updateFBInfo(result[0], user);
         } else {
           return create(user);
         }
@@ -43,6 +43,14 @@ module.exports = {
       })
   }
 
+  // updateProfile: function(user) {
+  //   return db('users')
+  //     .where({id: user.id})
+  //     .update({
+  //       //Insert fields to update here
+  //     })
+  // }
+
 };
 
 function create(user) {
@@ -57,12 +65,13 @@ function create(user) {
     })
 };
 
-function updateUser(user, facebookToken, username) {
+function updateFBInfo(user, updatedUser) {
   return db('users')
     .where({id: user.id})
     .update({
-      facebook_token: facebookToken,
-      username: username,
+      facebook_token: updatedUser.facebook_token,
+      username: updatedUser.username,
+      picture: updatedUser.picture,
       updated_at: db.raw('now()')
     })
     .returning('id')

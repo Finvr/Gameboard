@@ -21,7 +21,7 @@ router.get('/auth/facebook/callback',
 //User routes
 //Logout
 router.get('/me/logout', 
-  checkAuth, 
+  // checkAuth, 
   userController.logout
 );
 //Authenticate
@@ -39,11 +39,22 @@ router.get('/me/requests',
   checkAuth, 
   requestController.getUserRequests
 );
-
+//Get the logged-in user's profile
 router.get('/me/profile',
   checkAuth,
-  userController.getFacebookInfo
+  userController.getMyProfile
 );
+//Update the user's profile
+router.put('/me/profile',
+  checkAuth,
+  userController.getMyProfile
+);
+//Get a user's profile
+router.get('/users/*',
+  checkAuth,
+  userController.getProfile
+);
+
 //GamePosts Routes
 //Get all gameposts
 router.get('/gameposts', 

@@ -1,5 +1,4 @@
-var Users   = require ('../models/userModel.js'),
-    r = require('request-promise');
+var Users = require ('../models/userModel.js')
 
 module.exports = {
 
@@ -30,27 +29,28 @@ module.exports = {
     res.sendStatus(200);
   },
 
-  getFacebookInfo: function (req, res, next) {
-    console.log(req.user);
-    return r({
-      uri: 'https://graph.facebook.com/v2.2/'
-        + req.user.facebook_id 
-        + '?access_token='
-        + req.user.facebook_token
-        + '&fields=id,name,picture',
-      method: 'GET'
-    })
-      .then(function(response) {
-        response = JSON.parse(response);
-        var profile = {};
-        profile.name = response.name;
-        profile.picture = response.picture.data.url
-        res.send(profile);
+  getMyProfile: function (req, res) {
+    delete req.user.facebook_id;
+    delete req.user.facebook_token;
+    res.send(req.user);
+  }, 
+
+  getProfile: function (req, res) {
+    var userId = parseInt(req.url.split('/')[2]);
+    return Users.find(userId)
+      .then(function (result) {
+        if ( result.length === 0 ) {
+          res.send(404)
+        } else {
+          delete result[0].facebook_id;
+          delete result[0].facebook_token;
+          res.send(result[0]);
+        }
       })
-      .catch(function(err) {
-        console.log(err);
+      .catch(function (err) {
+        console.log("Get profile error: ", err)
         res.send(500, err.message);
       })
-  } 
+  }
 
 }
