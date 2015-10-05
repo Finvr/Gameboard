@@ -30,27 +30,8 @@ module.exports = {
   },
 
   getMyProfile: function (req, res) {
+    delete req.user.facebook_id;
     res.send(req.user);
-
-    // return r({
-    //   uri: 'https://graph.facebook.com/v2.2/'
-    //     + req.user.facebook_id 
-    //     + '?access_token='
-    //     + req.user.facebook_token
-    //     + '&fields=id,name,picture',
-    //   method: 'GET'
-    // })
-    //   .then(function(response) {
-    //     response = JSON.parse(response);
-    //     var profile = {};
-    //     profile.name = response.name;
-    //     profile.picture = response.picture.data.url
-    //     res.send(profile);
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //     res.send(500, err.message);
-    //   })
   } 
 
 }
