@@ -21,14 +21,15 @@
     "tests"
   ],
   "dependencies": {
+    "allmighty-autocomplete": "*",
     "angular": "~1.4.6",
     "angular-materialize": "*",
     "angular-route": "~1.4.6",
+    "angular-ui-calendar": "~1.0.1",
+    "angular-ui-router": "~0.2.15",
     "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
     "jquery": "~2.1.4",
-    "Materialize": "materialize#~0.97.1",
-    "angular-ui-router": "~0.2.15",
-    "angular-ui-calendar": "~1.0.1"
+    "Materialize": "materialize#~0.97.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.6"

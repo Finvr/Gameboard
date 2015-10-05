@@ -10,6 +10,7 @@
       'ui.materialize',
   		'ngRoute',
       'ui.calendar',
+      'autocomplete'
   	])
     .run(function($rootScope) {
       navigator.geolocation.getCurrentPosition(function (position) {

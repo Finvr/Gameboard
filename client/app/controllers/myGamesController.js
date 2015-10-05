@@ -53,7 +53,6 @@
     $scope.gameToShowDetails = null;
     $scope.gameToCancel = null;
     $scope.gameToApprove = null;
-    
 
     $scope.uiConfig = {
       calendar:{
