@@ -11,7 +11,7 @@
          <img  class="responsive-img" src="{{ myProfile.picture }}">
         </div>
         <div class="name">
-          <p class="grey-text" watch>{{ myProfile.name }}</p>
+          <p class="grey-text" watch>{{ myProfile.username }}</p>
         </div>
       </center>
       <section class="inbox">
@@ -72,7 +72,7 @@
   <div id="approvePending" class="modal approve-pending">
     <div class="modal-header grey">
       <div ng-click="close()"><i class="material-icons right close">close</i></div>
-      <h4 class="white-text">{{gameToApprove.game}}</h4>
+      <span class="white-text"><h4>{{ gameToApprove.game }}</h4></span>
     </div>
     <div class="modal-content container"> 
       <ul class="collection">
@@ -100,6 +100,39 @@
           </button>
         </li> 
       </ul>
+    </div>
+  </div>
+  <!-- Pop-up for game details -->
+  <div id="game-details" class="modal">
+    <div class="modal-header grey">
+      <a ng-click="close('#game-details')"><i class="material-icons right white-text">close</i></a>
+      <h4 class="white-text center">{{ gameToShowDetails.game }}</h4>
+    </div>
+    <div class="modal-content container">
+      <h5 class="center">Details</h5>
+      <p>
+        <div><span>Time:</span> {{ gameToShowDetails.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}</div>
+        <div><span>Location:</span> {{ gameToShowDetails.game_location }}</div>
+        <div><span>Players:</span> {{ gameToShowDetails.player_count}}</div>
+        <div><span>Description:</span> {{ gameToShowDetails.gamepost_description}}</div>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#cancel-modal" ng-click="setGameToCancel(gameToShowDetails)" class="btn btn-med waves-effect waves-light grey darken-3" modal>Cancel Game</i></a>
+    </div>
+  </div>
+
+  <!-- Pop-up modal for cancelling of gameposts -->
+  <div id="cancel-modal" class="modal">
+    <div class="modal-header grey">
+      <div ng-click="close('#cancel-modal')"><i class="material-icons white-text right">close</i></div>
+      <h4 class="white-text">Cancel Game</h4>
+    </div>
+    <div class="modal-content container"> 
+        <p>Are you sure you want to cancel this game of {{gameToCancel.game}}?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
+    </div>
+    <div class="modal-footer">
+      <a ng-click="cancelGame()" class="btn btn-med waves-effect waves-light grey darken-3">Cancel Game</a>
     </div>
   </div>
 </div>

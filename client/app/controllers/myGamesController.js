@@ -3,25 +3,18 @@
 	  .controller('MyGamesController', MyGamesController);
 
   function MyGamesController($scope, $window, $location, Auth, GamePost, Profile){
-    $scope.gameToCancel = null;
-    $scope.gameToApprove = null;
-    $scope.uiConfig = {
-      calendar:{
-        height: 450,
-        editable: false,
-        header:{
-          left: 'month basicWeek basicDay',
-          center: 'title',
-          right: 'today prev,next'
-        },
-        dayClick: $scope.alertEventOnClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize
-      }
-    };
 
-    Auth.requireAuth();
+    /* Modal functions */
+    var showHostedEventModal = function(date){
+      $scope.gameToShowDetails = date.data;
+      $('#game-details').openModal();
+    }
 
+    $scope.close = function(selector) {
+      $(selector).closeModal();
+    }
+
+    /* Service calling functions */
     var getMyGames = function(s,e,t,callback){ //find less hacky solution
       return GamePost.myHostedGames()
         .then(function(games){
@@ -30,6 +23,7 @@
             var newEvent = {};
             newEvent.title = game.game;
             newEvent.start = moment(game.game_datetime);
+            newEvent.data = game;
             return newEvent;
           });
           callback(events);
@@ -42,7 +36,6 @@
       });
     };
 
-    $scope.eventSources = [getMyGames];
 
     var getMyRequests = function(){
       return GamePost.myRequests()
@@ -54,6 +47,30 @@
           }
         });
     };
+
+    /* Scope variables */
+    $scope.eventSources = [getMyGames];
+    $scope.gameToShowDetails = null;
+    $scope.gameToCancel = null;
+    $scope.gameToApprove = null;
+    
+
+    $scope.uiConfig = {
+      calendar:{
+        height: 650,
+        editable: false,
+        header:{
+          left: 'month basicWeek basicDay',
+          center: 'title',
+          right: 'today prev,next'
+        },
+        eventClick: showHostedEventModal,
+      }
+    };
+
+    Auth.requireAuth();
+
+
 
     $scope.init = function() {
       getMyGames(null,null,null,function(){}); //find less hacky solution
@@ -67,9 +84,13 @@
       $scope.gameToCancel = game;
     }
 
-    $scope.cancelGame = function(game) {
-      return GamePost.deleteGame(game)
+    $scope.cancelGame = function() {
+      return GamePost.deleteGame($scope.gameToCancel)
         .then(function(){
+          $scope.close('#cancel-modal');
+          $scope.close('#game-details');
+          $scope.gameToCancel = null;
+          $scope.gameToShowDetails = null;
           $scope.init();
         });
     }
@@ -84,7 +105,6 @@
         $scope.init();
       });
     }
-
     $scope.getGamepostRequest = function(game){
       return GamePost.gamepostRequest(game.id)
         .then(function(requests){
@@ -101,9 +121,6 @@
         })
     };
 
-    $scope.close = function() {
-      $("#approvePending").closeModal();
-    }
   };
 
 })();
