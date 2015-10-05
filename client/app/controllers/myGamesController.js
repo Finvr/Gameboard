@@ -3,26 +3,17 @@
 	  .controller('MyGamesController', MyGamesController);
 
   function MyGamesController($scope, $window, $location, Auth, GamePost, Profile){
-    $scope.gameToCancel = null;
-    $scope.gameToApprove = null;
-    $scope.uiConfig = {
-      calendar:{
-        height: 650,
-        editable: false,
-        header:{
-          left: 'month basicWeek basicDay',
-          center: 'title',
-          right: 'today prev,next'
-        },
-        eventClick: $scope.doClick,
-        dayClick: $scope.alertEventOnClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize
-      }
-    };
 
-    Auth.requireAuth();
+    /* Modal functions */
+    $scope.showHostedEventModal = function(){
+      
+    }
 
+    $scope.close = function() {
+      $("#approvePending").closeModal();
+    }
+
+    /* Service calling functions */
     var getMyGames = function(s,e,t,callback){ //find less hacky solution
       return GamePost.myHostedGames()
         .then(function(games){
@@ -43,7 +34,6 @@
       });
     };
 
-    $scope.eventSources = [getMyGames];
 
     var getMyRequests = function(){
       return GamePost.myRequests()
@@ -55,6 +45,32 @@
           }
         });
     };
+
+    /* Scope variables */
+    $scope.eventSources = [getMyGames];
+    $scope.gameToCancel = null;
+    $scope.gameToApprove = null;
+    
+
+    $scope.uiConfig = {
+      calendar:{
+        height: 650,
+        editable: false,
+        header:{
+          left: 'month basicWeek basicDay',
+          center: 'title',
+          right: 'today prev,next'
+        },
+        eventClick: $scope.doClick,
+        dayClick: $scope.alertEventOnClick,
+        eventDrop: $scope.alertOnDrop,
+        eventResize: $scope.alertOnResize
+      }
+    };
+
+    Auth.requireAuth();
+
+
 
     $scope.init = function() {
       getMyGames(null,null,null,function(){}); //find less hacky solution
@@ -85,7 +101,6 @@
         $scope.init();
       });
     }
-
     $scope.getGamepostRequest = function(game){
       return GamePost.gamepostRequest(game.id)
         .then(function(requests){
@@ -102,9 +117,6 @@
         })
     };
 
-    $scope.close = function() {
-      $("#approvePending").closeModal();
-    }
   };
 
 })();
