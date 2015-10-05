@@ -1,6 +1,6 @@
 <div class="browse">
   <div class="row">
-    <div class="col m4">
+    <div class="col m3">
 
       <nav>
         <div class="nav-wrapper transparent browse-filters-header">
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="col m8" id="outer">
+    <div class="col m9" id="outer">
       <nav>
         <div class="nav-wrapper transparent">
           <div class="input-field">
@@ -43,7 +43,7 @@
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game}}</div>
-            <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m, "}}</span> {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} Players: {{ game.accepted_players }}/{{game.player_count}}
+            <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}} Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
             <div class="right col s3" ng-if="loggedIn" ng-click="openGame(game)">
               <a class='btn grey darken-3' href='#openRequest' modal>Join</a>
@@ -62,7 +62,9 @@
           <div>
             <span class="grey-text">Host:</span> {{game.username}}
           </div>
-          <div>@ {{" | " + game.game_location}}</div>
+          <div>
+            <span class="grey-text">Location:</span> {{game.game_location}}
+          </div>
           <div>
             <span class="grey-text">Details:  </span>{{game.gamepost_description}}
           </div>
