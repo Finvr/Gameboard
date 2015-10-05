@@ -42,7 +42,7 @@ router.get('/me/requests',
 
 router.get('/me/profile',
   checkAuth,
-  userController.getFacebookInfo
+  userController.getMyProfile
 );
 //GamePosts Routes
 //Get all gameposts
