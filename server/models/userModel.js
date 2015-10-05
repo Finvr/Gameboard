@@ -11,7 +11,7 @@ module.exports = {
       .where({facebook_id: user.facebook_id})
       .then(function(result) {
         if ( result.length ) {
-          return updateUser(result[0], user);
+          return updateFBInfo(result[0], user);
         } else {
           return create(user);
         }
@@ -43,6 +43,14 @@ module.exports = {
       })
   }
 
+  // updateProfile: function(user) {
+  //   return db('users')
+  //     .where({id: user.id})
+  //     .update({
+  //       //Insert fields to update here
+  //     })
+  // }
+
 };
 
 function create(user) {
@@ -57,7 +65,7 @@ function create(user) {
     })
 };
 
-function updateUser(user, updatedUser) {
+function updateFBInfo(user, updatedUser) {
   return db('users')
     .where({id: user.id})
     .update({
