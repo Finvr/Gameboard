@@ -37,6 +37,7 @@ passport.deserializeUser(function(userId, done){
   Users.find(userId)
     .then(function(result) {
       var user = result[0];
+      console.log("User: ", user);
       done(null, user);
     })
     .catch(function(err) {
@@ -55,9 +56,9 @@ passport.use(new FacebookStrategy ({
     var user = {
       username: profile.displayName, 
       facebook_id: profile.id, 
-      facebook_token: accessToken
+      facebook_token: accessToken,
+      picture: profile.photos[0].value
     }
-    console.log("Picture: ", profile.photos[0].value)
     Users.findOrCreate(user)
       .then(function(user){
         return done(null, user);
