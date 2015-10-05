@@ -106,7 +106,7 @@
             // add listener to show info window of the marker that was clicked
             google.maps.event.addListener(newMark, 'click', function(){
               console.log("newMark", newMark)
-              infoWindow && infoWindow.close();
+              infoWindow.close && infoWindow.close();
               showInfoWindow([place.geometry.location], place, newMark);
             })
           })
@@ -145,7 +145,11 @@
       // marker is the marker that the infoWindow attached to 
       function showInfoWindow(destinations, markerPlace, marker) {
         // populate the game location form on location input
-        document.getElementById('game-location').value =  markerPlace.formatted_address;  
+        var name = '';
+        if(markerPlace.name) {
+          name = "(" + markerPlace.name + ") ";
+        }
+        document.getElementById('game-location').value =  name + markerPlace.formatted_address;  
         scope.game.location = markerPlace.formatted_address;  
 
         // send request to get distance between current location and destination    

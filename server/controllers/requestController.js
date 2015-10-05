@@ -5,8 +5,7 @@ module.exports = {
 
   getUserRequests: function (req, res) {
     //Return all requests created by the logged-in user
-    var userId = req.user
-
+    var userId = req.user.id;
     Requests.getRequestsByUserId(userId)
       .then(function (data) {
         res.send(data);
@@ -32,7 +31,7 @@ module.exports = {
   createRequest: function (req, res) {
     //Create a new request
     var request = req.body;
-    request.user_id = req.user;
+    request.user_id = req.user.id;
     request.gamepost_id = parseInt(req.url.split('/')[2]);
     request.status = "pending";
 

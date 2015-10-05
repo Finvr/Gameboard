@@ -3,12 +3,15 @@ var db = require ('../db.js')
 module.exports = {
 
   findOrCreate: function(user) {
+    var facebookToken = user.facebook_token;
+    var username = user.username;
+
     return db.select()
       .from('users')
       .where({facebook_id: user.facebook_id})
       .then(function(result) {
         if ( result.length ) {
-          return result[0];
+          return updateFBInfo(result[0], user);
         } else {
           return create(user);
         }
@@ -29,7 +32,24 @@ module.exports = {
     return db('users')
       .where('id', userId)
       .del();
+  },
+
+  getToken: function(userId) {
+    return db.select('facebook_token')
+      .from('users')
+      .where({id: userId})
+      .then(function(result) {
+        return result[0];
+      })
   }
+
+  // updateProfile: function(user) {
+  //   return db('users')
+  //     .where({id: user.id})
+  //     .update({
+  //       //Insert fields to update here
+  //     })
+  // }
 
 };
 
@@ -42,5 +62,26 @@ function create(user) {
         .then(function(user){
           return user[0]; //returning gives an array, but id is unique
         })
+    })
+};
+
+function updateFBInfo(user, updatedUser) {
+  return db('users')
+    .where({id: user.id})
+    .update({
+      facebook_token: updatedUser.facebook_token,
+      username: updatedUser.username,
+      picture: updatedUser.picture,
+      updated_at: db.raw('now()')
+    })
+    .returning('id')
+    .then(function(userId) {
+      return module.exports.find(userId[0])
+    })
+    .then(function(user) {
+      return user[0]
+    })
+    .catch(function(err) {
+      return err;
     })
 };

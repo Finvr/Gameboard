@@ -1,35 +1,51 @@
 .myGames {
-
-  .fallback {
+  .fallback-view {
     padding: 5% 20%;
     p {
       font-size: 1.5em;
       text-align: justify;
     }
   }
-	.collapsible-header .material-icons {
-		color: #26a69a;
+  .normal-view {
+    padding: 5% 2%;
+  }
+  .close {
+    color: white;
+  }
+	.collapsible-header {
+    .secondary-content {
+      width: 30px;
+    }
+    .material-icons {
+		  color: #666;
+    }
+    p {
+      line-height: 2rem;
+      padding-left: 10%;
+      margin: 2% 0;
+    }
 	}
 	.collection-header {
 		padding: 2%;
     text-align: center;
 	}
-  .title {
-  	font-size: 1.25em;
-  }
-
-  .collapsible-header p {
-  	line-height: 2rem;
-  	padding-left: 10%;
-  	margin: 2% 0;
-  }
 
   .approve-pending {
   	.modal-header {
-  		background-color: #3f51b5;
   		text-align: center;
   		padding: 1%;
   	}
+
+    .content-header {
+      margin: 0;
+    }
+    .sub-list div {
+      display: inline-block
+    }
+    .content-lead {
+      width: 40%;
+    }
+
   	.modal-footer {
   		background-color: #eee;
   		border-top: 1px solid #EC407A;

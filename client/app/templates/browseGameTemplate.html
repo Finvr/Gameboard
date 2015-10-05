@@ -1,18 +1,17 @@
 <div class="browse">
-  <h3 class="center">Browse All Games</h3>
   <div class="row">
     <div class="col m4">
 
       <nav>
         <div class="nav-wrapper transparent browse-filters-header">
-          <h5>Filters</h5>
+          <h5 class="grey-text text-darken-2">Filters</h5>
         </div>
       </nav>
 
       <div class="browse-filters">
         <!-- Game select drop down filter -->
         <div>
-          <p class="title indigo-text text-darken-2">Game Name</p>
+          <p class="title grey-text text-darken-2">Game Name</p>
           <select class="browser-default" ng-model="searchText" material-select watch>
               <option ng-repeat="value in gamesFilter.choices | orderBy: value">{{value}}</option>
           </select>
@@ -20,8 +19,8 @@
 
         <!-- Games Date Range  -->
         <div class="row">
-          <p class="title indigo-text text-darken-2 col s6">Start Date</p>
-          <p class="title indigo-text text-darken-2 col s6">End Date</p>
+          <p class="title grey-text text-darken-2 col s6">Start Date</p>
+          <p class="title grey-text text-darken-2 col s6">End Date</p>
           <input class="col s6 datepicker" type="date" ng-model="startDateFilter"/>
           <input class="col s6" type="date" ng-model="endDateFilter"/>
         </div>
@@ -33,7 +32,7 @@
       <nav>
         <div class="nav-wrapper transparent">
           <div class="input-field">
-            <input id="search" type="search" ng-model="selectText" required>
+            <input id="search" type="search" ng-model="selectText" requigrey>
             <label for="search"><i class="material-icons">search</i></label>
             <i class="material-icons">close</i>
           </div>
@@ -42,18 +41,16 @@
       <!-- display all the games -->
       <ul class="collection" watch>
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item">
-          <div>
-            <i class="material-icons right">speaker_notes</i>
-            <i class="material-icons right">event</i>
-          </div>
           <div class='row'>
-            <span style="display:inline"><h5 class ="pink-text text-darken-2" id="game_title">{{game.game}}</h5></span>
-            {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
-            <div>@ {{game.game_location}}</div>
-            <div class ="pink-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
+            <div class="left">
+              <span style="display:inline"><h5 class ="grey-text text-darken-2" id="game_title">{{game.game}}</h5></span>
+              {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
+              <div>@ {{game.game_location}}</div>
+              <div class ="grey-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
+              </div>
             </div>
-            <div class="col" ng-if="loggedIn" ng-click="openGame(game)">
-            <a class='btn indigo' href='#openRequest' modal>Join</a>
+            <div class="right" ng-if="loggedIn" ng-click="openGame(game)">
+              <a class='btn grey darken-3' href='#openRequest' modal>Join</a>
             </div>
           </div>        
         </li>
@@ -61,31 +58,37 @@
 
       <!-- detail Modal for each game -->
       <div id="openRequest" class="modal">
-        <div class ="modal-header">
+        <div class="modal-header grey">
           <div ng-click="close()"><i class="material-icons right close">close</i></div>
           <span class= "white-text"><h4>{{game.game}}</h4></span>
         </div>
         <div class="modal-content">
-          <p><i>Game Details:  </i>{{game.gamepost_description}} </p>
-          <p><i>Host:</i> {{game.username}}</p>
-          <div><i>Current players:</i> {{game.accepted_players}}/{{game.player_count}}</div>
+          <div>
+            <span class="grey-text">Host:</span> {{game.username}}
+          </div>
+          <div>
+            <span class="grey-text">Details:  </span>{{game.gamepost_description}}
+          </div>
+          <div >
+            <span class="grey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
+          </div>
           <div class = "row center">
             <div class="input-field">
-              <textarea class ="col s9 offset-s1" ng-model="requestMessage.comments" placeholder="Contact Host"></textarea>
+              <textarea class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
             </div>
-            <div class = "col s2" ng-click="sendRequest(game)">
-              <a class = "btn-floating btn-med waves-effect waves-light cyan">
-                <i class="material-icons">email</i>
-              </a>
-              <br>
-            </div><br>
-            <div ng-if="submitError" class="error col s12 red-text">{{submitError}}</div>
+            <br>
+            <div ng-if="submitError" class="error col s12 grey-text">{{submitError}}</div>
           </div>
         </div>
-        <!--<div class="modal-footer"></div>!-->
-      </div>
+        <div class="modal-footer">
+          <div class = "col s6 right" ng-click="sendRequest(game)">
+                  <a class = "btn btn-med waves-effect waves-light grey darken-3">
+                    <i class="material-icons">send</i>
+                  </a>
+          </div>
+        </div>
       <!-- modal complete -->
-
     </div>
   </div><!-- #outer -->
+  </div>
 </div><!-- .browse -->

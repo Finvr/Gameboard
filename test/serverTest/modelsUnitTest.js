@@ -16,12 +16,14 @@ describe('userModel', function(){
   
   var user1 = {
     username: 'never',
-    facebook_id: '1234'
+    facebook_id: '1234',
+    facebook_token: 'abc'
   }
 
   var user2 = {
     username: 'again',
-    facebook_id: '1234'
+    facebook_id: '1234',
+    facebook_token: 'abc'
   }
 
   var user1Id;
@@ -57,17 +59,42 @@ describe('userModel', function(){
       })
   });
 
-  it(' find or create function should not create a new user when the user facebook_id exists', function(done){   
-    userModel.findOrCreate(user2)    
-      .then(function(result){    
-        expect(result.username).to.equal('never');   
-        expect(result.facebook_id).to.equal('1234');   
-         done(); 
+  it('findOrCreate should function should update user info on login', function(done){   
+    var userId;
+    userModel.findOrCreate(user1)
+      .then(function(result) {
+        userId = result.id;
       })
-      .catch(function(err){    
-        console.log("Error: ", err);    
+      .then(function() {
+        return userModel.findOrCreate(user2)    
+      })
+      .then(function(result){   
+        expect(result.username).to.equal('again'); 
+        expect(result.id).to.equal(userId);  
+        expect(result.facebook_id).to.equal('1234');   
+        done(); 
+      })
+      .catch(function(err) {    
+        console.log("findOrCreate update error: ", err.message);  
+        done();  
       })
   })   
+
+  it('getToken should return the facebook token for the user', function(done) {
+    userModel.findOrCreate(user1)
+      .then(function(user) {
+        return userModel.getToken(user.id)
+      })
+      .then(function(token) {
+        expect(token).to.equal('abc');
+        done();
+      })
+      .catch(function(err) {
+        console.log("getToken error: ", err.message)
+        done();
+      })
+  })
+
 
   xit('delete should delete a user from the database', function(done){
     //Note: Schema changes (delete on cascade) will be required to implement this feature

@@ -17,7 +17,7 @@ module.exports = {
   createGamepost: function (req, res) {
     //Create a new gamepost
     var gamepost = req.body;
-    gamepost.host_id = req.user;
+    gamepost.host_id = req.user.id;
 
     GamePosts.create(gamepost)
       .then(function (data) {
@@ -30,7 +30,7 @@ module.exports = {
 
   getUserGamePosts: function (req, res) {
     //Get gameposts created by the logged-in user
-    var userId = req.user;
+    var userId = req.user.id;
 
     GamePosts.getAll(userId)
       .then(function (data) {
@@ -44,7 +44,7 @@ module.exports = {
   deleteGamePost: function (req, res, next) {
     //Cancel a gamepost
     var gamepostId = parseInt(req.url.split('/')[2]); //for "/gameposts/123", gamepostID === 123
-    var userId = req.user;
+    var userId = req.user.id;
 
     GamePosts.deleteGamePost(gamepostId, userId)
       .then(function () {

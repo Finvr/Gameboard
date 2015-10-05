@@ -4,7 +4,7 @@ var express           = require('express'),
     passport          = require('passport'),
     FacebookStrategy  = require("passport-facebook").Strategy,
     sessions          = require('cookie-session'),
-    //logger            = require('morgan'),
+    logger            = require('morgan'),
     router            = require('./routes.js'),  
     app               = express(),
     Users             = require ('./models/userModel.js');
@@ -16,7 +16,7 @@ if (!process.env.FACEBOOK_APP_ID) {
 //Middleware
 app.use(parse.urlencoded({extended: true}));
 app.use(parse.json());
-//app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(express.static(__dirname + '/../client'));
 
 //Passport Middleware
@@ -30,23 +30,34 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done){
-  console.log("serializeUser user: ", user)
   done(null, user.id);
 });
 
 passport.deserializeUser(function(userId, done){
-  console.log("deserializeUser id: ", userId)
-  done(null, userId);
+  Users.find(userId)
+    .then(function(result) {
+      var user = result[0];
+      done(null, user);
+    })
+    .catch(function(err) {
+      done(null, null);
+    })
 });
 
 passport.use(new FacebookStrategy ({
     // clientID: config.facebook.FACEBOOK_APP_ID,
     clientID: process.env.FACEBOOK_APP_ID || config.facebook.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_SECRET ||config.facebook.FACEBOOK_SECRET,
-    callbackURL: process.env.callbackURL ||config.facebook.callbackURL
+    callbackURL: process.env.callbackURL ||config.facebook.callbackURL,
+    profileFields: ['id', 'displayName', 'picture.type(large)'],
   },
   function(accessToken, refreshToken, profile, done) {
-    var user = {username: profile.displayName, facebook_id: profile.id}
+    var user = {
+      username: profile.displayName, 
+      facebook_id: profile.id, 
+      facebook_token: accessToken,
+      picture: profile.photos[0].value
+    }
     Users.findOrCreate(user)
       .then(function(user){
         return done(null, user);

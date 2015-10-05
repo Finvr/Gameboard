@@ -2,26 +2,11 @@ var Users = require ('../models/userModel.js')
 
 module.exports = {
 
-  // we do not need this yet;
-  //
-  // findOrCreateUser: function (req, res) {
-  //   var user = req.user;
-  //   Users.findOrCreate(user)
-  //     .then(function (facebookId){
-  //       res.redirect('/#/create-game')
-  //     })
-  //     .catch(function(err){
-  //       console.log("err from findOrCreateUser: ",err);
-  //       res.send(err.message);
-  //     })
-  // },
-
   checkAuth: function (req, res, next) {
-    console.log("checkAuth req.user: ", req.user)
-    if (!req.user) {
+    if (!req.user.id) {
       res.status(403).send('User is not logged in!')
     }
-    Users.find(req.user)
+    Users.find(req.user.id)
       .then(function (res) {
         if (res.length !== 0) {
           next();
@@ -42,6 +27,30 @@ module.exports = {
 
   loggedIn: function (req, res) {
     res.sendStatus(200);
+  },
+
+  getMyProfile: function (req, res) {
+    delete req.user.facebook_id;
+    delete req.user.facebook_token;
+    res.send(req.user);
+  }, 
+
+  getProfile: function (req, res) {
+    var userId = parseInt(req.url.split('/')[2]);
+    return Users.find(userId)
+      .then(function (result) {
+        if ( result.length === 0 ) {
+          res.send(404)
+        } else {
+          delete result[0].facebook_id;
+          delete result[0].facebook_token;
+          res.send(result[0]);
+        }
+      })
+      .catch(function (err) {
+        console.log("Get profile error: ", err)
+        res.send(500, err.message);
+      })
   }
 
 }

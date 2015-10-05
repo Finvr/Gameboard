@@ -2,19 +2,20 @@
 <head>
 	<meta charset="utf-8">
 	<title>I'm Game</title>
- 	 <link href="lib/Materialize/dist/css/materialize.min.css" rel="stylesheet">
- 	   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-	 <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+	<link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css"/>
+ 	<link href="lib/Materialize/dist/css/materialize.min.css" rel="stylesheet">
+ 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 </head>
 <body ng-app="imgame">
 	<header>
 	  <nav>
-	    <div class="nav-wrapper indigo">
+	    <div class="nav-wrapper grey lighten-4">
 	      <ul id="nav-mobile" class="left">
-	        <li><a href="/#/" class="brand-logo center">I'm Game!</a></li>
+	        <li><a href="/#/" class="brand-logo center grey-text">I'm Game!</a></li>
 	        <li>
 	        	<a class="dropdown-button"  href='javascript:void(0);' data-activates="main-navigation" data-constrainwidth="false" data-beloworigin="true" dropdown data-hover="true">
-	        		<i class="material-icons right">menu</i>
+	        		<i class="material-icons right grey-text">menu</i>
 	        	</a>
 	        </li>
 	      </ul>
@@ -26,7 +27,7 @@
 				 	<li ng-if="loggedIn"><a href="/#/my-games">My Games</a></li>
 				</ul>
 	      <ul class="right">
-	      	<li ng-if="loggedIn"><a href='/#/logout'><i class="material-icons tooltipped" data-tooltip="Logout">exit_to_app</i></a></li>
+	      	<li ng-if="loggedIn"><a href='/#/logout'><i class="material-icons tooltipped grey-text" data-tooltip="Logout">exit_to_app</i></a></li>
 	      </ul>
 	    </div>
   	</nav>
@@ -35,7 +36,6 @@
 		<div ng-view></div>
 	</main>
 
-	<!--<script src="https://maps.googleapis.com/maps/api/js"></script> -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5eGAZmqMYgOJRvbrFNAujmSr8nFCEBnA&libraries=places"></script>
 	<script src="lib/jquery/dist/jquery.min.js"></script>
 	<script src="lib/angular/angular.min.js"></script>
@@ -43,16 +43,19 @@
 	<script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="lib/Materialize/dist/js/materialize.min.js"></script>
 	<script src="lib/angular-materialize/src/angular-materialize.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
+	<script src="lib/moment/min/moment.min.js"></script>
+	<script src="lib/angular-ui-calendar/src/calendar.js"></script>
+	<script src="lib/fullcalendar/dist/fullcalendar.min.js"></script>
+	<script src="lib/fullcalendar/dist/gcal.js"></script>
 	<script src="app/app.js"></script>
 	<script src="app/controllers/homeController.js"></script>
-	<!-- <script src="app/services/mapmarker.js"></script> -->
-	<script src="app/controllers/createGameController.js"></script>
+	<script src="app/controllers/createGameController.js"></script><!-- TODO: move dom manipulation out of controller so that load order doesn't matter-->
 	<script src="app/directives/googleMapsDirective.js"></script>
 	<script src="app/controllers/myGamesController.js"></script>
 	<script src="app/controllers/browseGameController.js"></script>
 	<script src="app/services/serviceAuth.js"></script>
 	<script src="app/services/serviceGame.js"></script>
+	<script src="app/services/profileService.js"></script>
 	<script src="app/services/serviceBrowseGames.js"></script>
 </body>
 </html>

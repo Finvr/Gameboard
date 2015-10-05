@@ -1,17 +1,22 @@
 .browse {
+  padding: 5%;
 
   nav {
-    background-color: #F06292;
+    background-color: white;
     .browse-filters-header h5 {
       text-align: center;
       margin: 0;
       padding-top: 5%;
     }
   }
+  
+  nav, nav .input-field label i {
+    color: #bbb;
+  }  
+  
   .browse-filters {
     border: 1px solid #e0e0e0;
     margin: 0.5rem 0 1rem 0;
-    min-height: 100%;
     .title {
       text-align: center;
     }
@@ -22,16 +27,12 @@
 	}
 	
 	.modal-header {
-  		background-color: #3f51b5;
   		text-align: center;
   		padding: 1%;
   }
 
   .modal-footer {
-   	  background-color: #eee;
-			border-top: 1px solid #EC407A;
-  		border-top: 1.5px solid #EC407A;
-  		height: 15px;
+      background-color: #eee;
    }
 
   .btn {

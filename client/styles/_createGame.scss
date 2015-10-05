@@ -1,14 +1,12 @@
 
 .createGame {
 
-  margin-left: 5%;
-  margin-right: 5%;
+  padding: 1.5%;
 
-  
-	div.half-div {
-		margin: 5 auto;
-    text-align: center;
-	}
+
+  .map-directions {
+    padding: 2%;
+  }
 
   input {
     color: #616161;
@@ -43,10 +41,6 @@
 
   .help-block {
     color: red;
-  }
-
-  .create-form {
-    margin-left: 20px;
   }
 
   label.active {
