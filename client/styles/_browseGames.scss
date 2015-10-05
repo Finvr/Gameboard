@@ -1,5 +1,5 @@
 .browse {
-  padding: 5%;
+  padding: 3%;
 
   nav {
     background-color: white;
@@ -23,8 +23,14 @@
   }
 
 	#game_title {
-		font-size: 25px;
+		font-size: 20px;
+    font-weight: bold;
+    color: gray;
 	}
+
+  .game_list{
+    margin-bottom: 0px;
+  }
 	
 	.modal-header {
   		text-align: center;
@@ -36,7 +42,11 @@
    }
 
   .btn {
-  	margin-top: 10px;
+  	margin-top: 0px;
+    height: 25px;
+    line-height: 25px;
+    width: 80%;
+    padding: 0px;
   }
 
  .close {
