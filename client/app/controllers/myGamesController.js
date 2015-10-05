@@ -5,12 +5,13 @@
   function MyGamesController($scope, $window, $location, Auth, GamePost, Profile){
 
     /* Modal functions */
-    $scope.showHostedEventModal = function(){
-      
+    var showHostedEventModal = function(date){
+      $scope.gameToShowDetails = date.data;
+      $('#game-details').openModal();
     }
 
     $scope.close = function() {
-      $("#approvePending").closeModal();
+      $('.modal').closeModal();
     }
 
     /* Service calling functions */
@@ -22,6 +23,7 @@
             var newEvent = {};
             newEvent.title = game.game;
             newEvent.start = moment(game.game_datetime);
+            newEvent.data = game;
             return newEvent;
           });
           callback(events);
@@ -48,6 +50,7 @@
 
     /* Scope variables */
     $scope.eventSources = [getMyGames];
+    $scope.gameToShowDetails = null;
     $scope.gameToCancel = null;
     $scope.gameToApprove = null;
     
@@ -61,10 +64,7 @@
           center: 'title',
           right: 'today prev,next'
         },
-        eventClick: $scope.doClick,
-        dayClick: $scope.alertEventOnClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize
+        eventClick: showHostedEventModal,
       }
     };
 
