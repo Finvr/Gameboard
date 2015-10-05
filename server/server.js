@@ -30,13 +30,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done){
-  console.log("serializeUser user: ", user)
   done(null, user.id);
 });
 
 passport.deserializeUser(function(userId, done){
-  console.log("deserializeUser id: ", userId)
-  done(null, userId);
+  Users.find(userId)
+    .then(function(result) {
+      var user = result[0];
+      done(null, user);
+    })
+    .catch(function(err) {
+      done(null, null);
+    })
 });
 
 passport.use(new FacebookStrategy ({
@@ -46,7 +51,11 @@ passport.use(new FacebookStrategy ({
     callbackURL: process.env.callbackURL ||config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-    var user = {username: profile.displayName, facebook_id: profile.id}
+    var user = {
+      username: profile.displayName, 
+      facebook_id: profile.id, 
+      facebook_token: accessToken
+    }
     Users.findOrCreate(user)
       .then(function(user){
         return done(null, user);

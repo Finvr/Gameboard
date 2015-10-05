@@ -1,12 +1,8 @@
 <div class="row createGame">
-	<div class="half-div col m12">
-		<h3>Host a Game</h3>
-	</div>
-
 	<!-- google map -->
 	<div google-maps  class="half-div col m6 s12">
-	 	<div>
-			 <em class="pink-text text-darken-2">Search locations or drop a pin where you would like to host your game.</em>
+	 	<div class="map-directions">
+			 <em class="teal-text">Search locations or drop a pin where you would like to host your game.</em>
 		</div>
 			<input id="pac-input" class="controls ng-cloak" type="text" placeholder="Search" ng-cloak>
 	 	<div id="gmap">
@@ -63,7 +59,7 @@
 			<!-- create game button -->
 			<div class="row">
 				<div class="input-field col s12">
-					<button type="submit" class="btn orange white-text waves-effect waves-light" ng-click="createGame(game)" ng-disabled="createForm.$invalid">Create Game</button>
+					<button type="submit" class="btn white-text waves-effect waves-light" ng-click="createGame(game)" ng-disabled="createForm.$invalid">Create Game</button>
 				</div>
 			</div>
 

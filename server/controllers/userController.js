@@ -1,27 +1,13 @@
-var Users = require ('../models/userModel.js')
+var Users   = require ('../models/userModel.js'),
+    r = require('request-promise');
 
 module.exports = {
 
-  // we do not need this yet;
-  //
-  // findOrCreateUser: function (req, res) {
-  //   var user = req.user;
-  //   Users.findOrCreate(user)
-  //     .then(function (facebookId){
-  //       res.redirect('/#/create-game')
-  //     })
-  //     .catch(function(err){
-  //       console.log("err from findOrCreateUser: ",err);
-  //       res.send(err.message);
-  //     })
-  // },
-
   checkAuth: function (req, res, next) {
-    console.log("checkAuth req.user: ", req.user)
-    if (!req.user) {
+    if (!req.user.id) {
       res.status(403).send('User is not logged in!')
     }
-    Users.find(req.user)
+    Users.find(req.user.id)
       .then(function (res) {
         if (res.length !== 0) {
           next();
@@ -42,6 +28,29 @@ module.exports = {
 
   loggedIn: function (req, res) {
     res.sendStatus(200);
-  }
+  },
+
+  getFacebookInfo: function (req, res, next) {
+    console.log(req.user);
+    return r({
+      uri: 'https://graph.facebook.com/v2.2/'
+        + req.user.facebook_id 
+        + '?access_token='
+        + req.user.facebook_token
+        + '&fields=id,name,picture',
+      method: 'GET'
+    })
+      .then(function(response) {
+        response = JSON.parse(response);
+        var profile = {};
+        profile.name = response.name;
+        profile.picture = response.picture.data.url
+        res.send(profile);
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.send(500, err.message);
+      })
+  } 
 
 }
