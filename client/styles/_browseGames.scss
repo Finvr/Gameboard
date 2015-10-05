@@ -1,5 +1,5 @@
 .browse {
-  padding: 5%;
+  padding: 2%;
 
   nav {
     background-color: white;
@@ -16,15 +16,21 @@
   
   .browse-filters {
     border: 1px solid #e0e0e0;
-    margin: 0.5rem 0 1rem 0;
+    margin: 0px;
     .title {
       text-align: center;
     }
   }
 
 	#game_title {
-		font-size: 25px;
+		font-size: 20px;
+    font-weight: bold;
+    color: gray;
 	}
+
+  .game_list{
+    margin-bottom: 0px;
+  }
 	
 	.modal-header {
   		text-align: center;
@@ -36,7 +42,11 @@
    }
 
   .btn {
-  	margin-top: 10px;
+  	margin-top: 0px;
+    height: 25px;
+    line-height: 25px;
+    width: 80%;
+    padding: 0px;
   }
 
  .close {
@@ -54,8 +64,6 @@
   	nav {
   		height: 52px;
   	}
-  	margin-left: 5%;
-  	margin-right: 5%;
   }
 
   textarea {

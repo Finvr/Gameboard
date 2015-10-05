@@ -43,8 +43,9 @@
 
 		$scope.$on("currentLocation", function(event, data){
 			for (var i = 0; i < $scope.games.length; i ++){
-				$scope.games[i].distance = $scope.games[i].H ? distance(data.lat, data.lng, $scope.games[i].H, $scope.games[i].L ) : "N/A";
+				$scope.games[i].distance = $scope.games[i].H ? distance(data.lat, data.lng, $scope.games[i].H, $scope.games[i].L ) : null;
 			}
+			$scope.$apply();
 		});
 		
 		BrowseGames.getGames()
@@ -64,7 +65,7 @@
 			dist = Math.acos(dist)
 			dist = dist * 180/Math.PI
 			dist = dist * 60 * 1.1515
-			return Math.round(dist*100)/100;
+			return Math.round(dist*10)/10;
 		}
 
 		$scope.dateFilter = function(gameTime) {
