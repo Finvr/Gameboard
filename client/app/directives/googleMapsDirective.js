@@ -135,7 +135,7 @@
           nameTag = '<div><strong>'+nameTag+'</strong></div>';
         }
         return nameTag + '<div><strong>Distance:</strong> ' + distance + '</div>' +
-          '<a href="https://www.google.com/maps/dir/' + scope.currentAddress.split(" ").join("+") + "/" + scope.game.location.split(" ").join("+")  +'">more info' + '</a>';
+          '<a target="_blank" href="https://www.google.com/maps/dir/' + scope.currentAddress.split(" ").join("+") + "/" + scope.game.location.split(" ").join("+")  +'">more info' + '</a>';
       };
 
       /////////////
