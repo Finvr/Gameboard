@@ -7,13 +7,14 @@
     $scope.gameToApprove = null;
     $scope.uiConfig = {
       calendar:{
-        height: 450,
+        height: 650,
         editable: false,
         header:{
           left: 'month basicWeek basicDay',
           center: 'title',
           right: 'today prev,next'
         },
+        eventClick: $scope.doClick,
         dayClick: $scope.alertEventOnClick,
         eventDrop: $scope.alertOnDrop,
         eventResize: $scope.alertOnResize
