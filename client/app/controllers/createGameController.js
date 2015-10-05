@@ -18,7 +18,10 @@
         "game": $scope.game.name,
         "gamepost_description": $scope.game.description,
         "player_count": $scope.game.numPlayers,
-        "game_datetime": $scope.game.datetime
+        "game_datetime": $scope.game.datetime,
+        "business": $scope.game.business,
+        "H": $scope.game.H,
+        "L": $scope.game.L,
       };
       console.log("create gamepost game: ", $scope.game)
       GamePost.create(game)

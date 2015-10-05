@@ -147,10 +147,13 @@
         // populate the game location form on location input
         var name = '';
         if(markerPlace.name) {
-          name = "(" + markerPlace.name + ") ";
+          scope.game.business = markerPlace.name;
         }
-        document.getElementById('game-location').value =  name + markerPlace.formatted_address;  
+        scope.game.H = markerPlace.geometry.location.H;
+        scope.game.L = markerPlace.geometry.location.L;
         scope.game.location = markerPlace.formatted_address;  
+
+        document.getElementById('game-location').value = markerPlace.formatted_address;  
 
         // send request to get distance between current location and destination    
         service.getDistanceMatrix({
