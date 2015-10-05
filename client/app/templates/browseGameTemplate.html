@@ -40,17 +40,12 @@
       </nav>
       <!-- display all the games -->
       <ul class="collection" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item" watch>
-          <div class='row'>
-            <div class="left">
-              <span style="display:inline"><h5 class ="grey-text text-darken-2" id="game_title">{{game.game}}</h5></span>
-              {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}}
-              <div>@ {{game.game_location}}</div>
-              <div ng-if="game.distance"> {{game.distance + " m"}}</div>
-              <div class ="grey-text text-darken-2">Players: {{ game.accepted_players }}/{{game.player_count}}
-              </div>
+        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item " watch>
+          <div class='row game_list'>
+            <div class="left col s4" id="game_title" style="display:inline">{{game.game}}</div>
+            <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m, "}}</span> {{game.game_datetime | date:"EEE, MMM d, y ',' h:mma"}} Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
-            <div class="right" ng-if="loggedIn" ng-click="openGame(game)">
+            <div class="right col s3" ng-if="loggedIn" ng-click="openGame(game)">
               <a class='btn grey darken-3' href='#openRequest' modal>Join</a>
             </div>
           </div>        
@@ -67,6 +62,7 @@
           <div>
             <span class="grey-text">Host:</span> {{game.username}}
           </div>
+          <div>@ {{" | " + game.game_location}}</div>
           <div>
             <span class="grey-text">Details:  </span>{{game.gamepost_description}}
           </div>

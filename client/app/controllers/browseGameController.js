@@ -43,7 +43,7 @@
 
 		$scope.$on("currentLocation", function(event, data){
 			for (var i = 0; i < $scope.games.length; i ++){
-				$scope.games[i].distance = $scope.games[i].H ? distance(data.lat, data.lng, $scope.games[i].H, $scope.games[i].L ) : "N/A";
+				$scope.games[i].distance = $scope.games[i].H ? distance(data.lat, data.lng, $scope.games[i].H, $scope.games[i].L ) : null;
 			}
 			$scope.$apply();
 		});
