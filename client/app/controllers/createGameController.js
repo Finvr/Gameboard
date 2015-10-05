@@ -4,7 +4,8 @@
 
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {};
-
+    $scope.gamesArray = GamePost.gamesArray;
+    
     Auth.requireAuth();
 
     // set today as the ealiest day user can select
