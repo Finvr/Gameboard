@@ -10,8 +10,8 @@
       $('#game-details').openModal();
     }
 
-    $scope.close = function() {
-      $('.modal').closeModal();
+    $scope.close = function(selector) {
+      $(selector).closeModal();
     }
 
     /* Service calling functions */
