@@ -25,8 +25,8 @@
               <span>
                   {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
               </span>
-              <a href="#cancelGamepostModal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
-              <a href="#approvePending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">open_in_new</i></a>
+              <a href="#cancel-modal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+              <a href="#approve-pending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">open_in_new</i></a>
             </div>
             <div class="collapsible-body">
               <p>
@@ -50,7 +50,7 @@
                 <span>
                     {{ request.game_datetime | date : "M/d/yyyy @ h:mm a" }}
                 </span>
-                <a href="#cancelRequestModal" ng-click="setRequestToCancel(request)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+                <a href="#cancel-modal" ng-click="setRequestToCancel(request)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
               </div>
               <div class="collapsible-body">
                 <p>
@@ -69,9 +69,9 @@
     </div>
   </div>
 <!-- Pop-up modal for requests of gameposts -->
-  <div id="approvePending" class="modal approve-pending">
+  <div id="approve-pending" class="modal">
     <div class="modal-header grey">
-      <div ng-click="close('#approvePending')"><i class="material-icons right close">close</i></div>
+      <div ng-click="close('#approve-pending')"><i class="material-icons right close">close</i></div>
       <span class="white-text"><h4>{{ gameToApprove.game }}</h4></span>
     </div>
     <div class="modal-content container"> 
