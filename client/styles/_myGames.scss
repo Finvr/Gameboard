@@ -8,7 +8,11 @@
   }
 
   .normal-view {
-    padding: 5% 2%;
+    padding: 1% 2%;
+
+    .profile {
+      padding-top: 4%;
+    }
   }
 
  .close {
@@ -30,14 +34,31 @@
       margin: 2% 0;
     }
 	}
+
 	.collection-header {
 		padding: 2%;
     text-align: center;
 	}
 
   #agenda {
-    margin: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-right: 5%;
     float: right;
+  }
+
+  #agendaList, #calendar {
+    padding-right: 5%
+
+  }
+
+  .collection .collection-item.avatar{
+    min-height: 15%;
+    padding-left: 5%;
+  }
+
+  .agendaListGameName {
+    cursor: pointer;
   }
 
   .modal {

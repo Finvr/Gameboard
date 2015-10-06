@@ -56,14 +56,14 @@
 
     $scope.uiConfig = {
       calendar:{
-        height: 650,
+        height: 530,
         editable: false,
         header:{
           left: 'month basicWeek basicDay',
           center: 'title',
           right: 'today prev,next'
         },
-        eventClick: showHostedEventModal
+        eventClick: $scope.showHostedEventModal
       }
     };
 
