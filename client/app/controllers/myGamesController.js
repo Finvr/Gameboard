@@ -5,7 +5,7 @@
   function MyGamesController($scope, $window, $location, Auth, GamePost, Profile){
 
     /* Modal functions */
-    var showHostedEventModal = function(date){
+    $scope.showHostedEventModal = function(date){
       $scope.gameToShowDetails = date.data;
       $('#game-details').openModal();
     }
