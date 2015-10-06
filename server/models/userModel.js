@@ -41,15 +41,21 @@ module.exports = {
       .then(function(result) {
         return result[0];
       })
-  }
+  },
 
-  // updateProfile: function(user) {
-  //   return db('users')
-  //     .where({id: user.id})
-  //     .update({
-  //       //Insert fields to update here
-  //     })
-  // }
+  updateProfile: function(user) {
+    return db('users')
+      .where({id: user.id})
+      .update({
+        about_me: user.about_me,
+        games_list: user.games_list,
+        location: user.location
+      })
+      .catch(function (err) {
+        console.log("Update profile error: ", err.message);
+        return err;
+      })
+  }
 
 };
 
