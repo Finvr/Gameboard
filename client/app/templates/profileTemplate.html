@@ -5,16 +5,42 @@
 		    <div class="img-wrapper">
 		     <img  class="responsive-img" src="{{ myProfile.picture }}">
 		    </div>
-		    <div class="name">
-		      <p class="grey-text" watch>{{ myProfile.username }}</p>
-		    </div>
 		  </center>
-	  	<div>
-	    	<div><span>About Me: </span> Miami born and raised, here play and here to stay</div>
-	    	<div><span>Games I Like: </span> Canasta, Dominos, Poker, Scrabble, Power Grid</div>
-	    	<div><span>Reliability: </span> 33%</div>
-	    	<div><span>Rating: </span></div> <!-- add stars http://codepen.io/TepigMC/pen/FIdHb -->
-	    </div>
+	  	<table>
+	    	<tbody>
+	    		<tr class="profile-field username">
+	    			<td>Name: </td>
+	    			<td>{{ myProfile.username }}</td>
+	    		</tr>
+	    		<tr class="profile-field location">
+	    			<td>Location: </td>
+		      	<td class="read">{{ myProfile.location }}</td>
+		      	<td class="write"><input type="text" ng-model="myProfile.location" />
+		      	<td><a ng-click="showInput('.location')">Edit</a></td>
+		      </tr>
+	    		<tr class="profile-field about-me">
+	    			<td>About Me: </td>
+	    			<td class="read">{{ myProfile.about_me }}</td>
+		      	<td class="write"><input type="text" ng-model="myProfile.about_me" ng-model-options="{ updateOn: 'blur' }"  /></td>
+	    			<td><a ng-click="showInput('.about-me')">Edit</a>
+	    		</tr>
+	    		<tr class="profile-field games-i-like">
+	    			<td>Games I Like: </td>
+	    			<td class="read">{{ myProfile.games_list }}</td>
+		      	<td class="write"><input type="text" ng-model="myProfile.games_list" />
+	    			<td><a ng-click="showInput('.games-i-like')">Edit</a>
+	    		</tr>
+	    		<tr class="profile-field reliability">
+	    			<td>Reliability: </td>
+	    			<td> 33%</td>
+	    		</tr>
+	    		<tr class="profile-field rating">
+	    			<td>Rating: </td>
+	    			<td> *******</td>
+	    		</tr>
+	    	</tbody> <!-- add stars http://codepen.io/TepigMC/pen/FIdHb -->
+	    </table>
+	   	<a ng-click="updateProfile(myProfile)" class="right btn">Save Changes</a>
 		</div>
 		<div class="col m8">
 				<ul>

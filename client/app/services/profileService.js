@@ -14,8 +14,19 @@
     	});
     }
 
+    function updateProfile(profileData){
+      return $http({
+        method: 'PUT',
+        url: '/me/profile',
+        data: profileData
+      }).then(function(resp){
+        return resp.data;
+      });
+    }
+
     return {
-      getProfile: getProfile
+      getProfile: getProfile,
+      updateProfile: updateProfile
     };
   });
 
