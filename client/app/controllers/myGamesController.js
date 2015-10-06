@@ -36,7 +36,6 @@
       });
     };
 
-
     var getMyRequests = function(){
       return GamePost.myRequests()
         .then(function(requests){
