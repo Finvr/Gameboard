@@ -16,6 +16,15 @@
     height: 500px;
   }
 
+  .create-form {
+    margin-top: 5%;
+    border: 3px solid lightgray;
+
+    .row {
+      margin-top: 10px;
+    }
+  }
+
   .controls {
     margin-top: 10px;
     border: 1px solid transparent;
