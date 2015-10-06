@@ -1,3 +1,27 @@
 <div class="profile">
-	<p>hello {{name}}</p>
+	<div class="row container">
+		<div class="col m4">
+		   <center class="profile-box">
+		    <div class="img-wrapper">
+		     <img  class="responsive-img" src="{{ myProfile.picture }}">
+		    </div>
+		    <div class="name">
+		      <p class="grey-text" watch>{{ myProfile.username }}</p>
+		    </div>
+		  </center>
+	  	<div>
+	    	<div><span>About Me: </span> Miami born and raised, here play and here to stay</div>
+	    	<div><span>Games I Like: </span> Canasta, Dominos, Poker, Scrabble, Power Grid</div>
+	    	<div><span>Reliability: </span> 33%</div>
+	    	<div><span>Rating: </span></div>
+	    </div>
+		</div>
+		<div class="col m8">
+				<ul>
+					<li>Review # 1</li>
+					<li>Review # 2</li>
+					<li>Review # 3</li>
+				</ul>
+		</div>
+	</div>
 </div>
