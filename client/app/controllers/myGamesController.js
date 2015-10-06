@@ -63,21 +63,18 @@
           center: 'title',
           right: 'today prev,next'
         },
-        eventClick: showHostedEventModal,
-        views: {
-          agendaFourDay: {
-            type: 'basic',
-            //duration: { days: 100 },
-            buttonText: 'agenda'
-          }
-        }
+        eventClick: showHostedEventModal
       }
     };
 
     $("#agenda").click(function(){
-      console.log("hihihi")
-      $(".fc-view-container").toggle();
-      $(".fc-center").toggle();
+      console.log('$("#agenda").text', $("#agenda").text())
+      if ($("#agenda").text() === "Calendar View") {
+        $("#agenda").text("Agenda View");        
+      } else {
+        $("#agenda").text("Calendar View");
+      }
+      $("#calendar").toggle();
       $("#agendaList").toggle();
     })
 
