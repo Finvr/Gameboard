@@ -40,7 +40,10 @@ module.exports = {
   update: function (notId) {
     return db('notifications')
       .where('id', notId)
-      .update('viewed', true)
+      .update({
+        'viewed': true,
+        'updated_at': db.raw('now()')
+      })
       .catch(function (err) {
         return err;
       })
