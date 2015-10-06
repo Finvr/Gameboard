@@ -37,6 +37,15 @@
 			return Math.round(dist*10)/10;
 		}
 
+		$scope.disFilter = function(dis) { 
+			var disSelect = $scope.distance_choices[$scope.distance];
+			if (dis && disSelect) {
+				return dis < disSelect;
+			} else {
+				return true;				
+			}
+		}
+
 		$scope.dateFilter = function(gameTime) {
 			gameTime = Date.parse(gameTime);
 			startTime = Date.parse($scope.startDateFilter);
