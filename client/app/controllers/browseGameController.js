@@ -7,6 +7,12 @@
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
 		$scope.gamesArray = GamePost.gamesArray;
+		$scope.distance_choices = {
+			"Within 1 mile": 1,
+			"Within 5 miles": 5,
+			"Within 10 miles": 10,
+			"More than 10 miles": Infinity
+		}
 
 		Auth.requireAuth('browse');
 
