@@ -5,6 +5,7 @@
       'imgame.createGame',
       'imgame.myGames',
       'imgame.browseGames',
+      'imgame.profile',
       'imgame.service',
       'ui.router',
       'ui.materialize',
