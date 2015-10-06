@@ -31,6 +31,10 @@
         templateUrl: 'app/templates/createGameTemplate.html',
         controller: 'CreateGameController'
       })
+      .when('/profile', {
+        templateUrl: 'app/templates/profileTemplate.html',
+        controller: 'ProfileController'
+      })
       .when('/my-games', {
         templateUrl: 'app/templates/myGamesTemplate.html',
         controller: 'MyGamesController'      
