@@ -5,19 +5,40 @@
 		    <div class="img-wrapper">
 		     <img  class="responsive-img" src="{{ myProfile.picture }}">
 		    </div>
-		    <div class="name">
-		      <p class="grey-text">
-		      	{{ myProfile.username }}<br>
-		      	{{ myProfile.location }}
-		      </p>
-		    </div>
 		  </center>
-	  	<div>
-	    	<div><span>About Me: </span> {{ myProfile.about_me }}</div>
-	    	<div><span>Games I Like: </span> {{ myProfile.games_list }}</div>
-	    	<div><span>Reliability: </span> 33%</div>
-	    	<div><span>Rating: </span></div> <!-- add stars http://codepen.io/TepigMC/pen/FIdHb -->
-	    </div>
+	  	<table>
+	    	<tbody>
+	    		<tr>
+	    			<td>Name: </td>
+	    			<td>{{ myProfile.username }}</td>
+	    		</tr>
+	    		<tr>
+	    			<td>Location: </td>
+		      	<td>{{ myProfile.location }}</td>
+		      	<td><a href="">Edit</a></td>
+		      </tr>
+		    </div>
+	    		<tr>
+	    			<td>About Me: </td>
+	    			<td>{{ myProfile.about_me }}</td>
+	    			<td><a href="">Edit</a>
+	    		</tr>
+	    		<tr>
+	    			<td>Games I Like: </td>
+	    			<td>{{ myProfile.games_list }}</td>
+	    			<td><a href="">Edit</a>
+	    		</tr>
+	    		<tr>
+	    			<td>Reliability: </td>
+	    			<td> 33%</td>
+	    		</tr>
+	    		<tr>
+	    			<td>Rating: </td>
+	    			<td> *******</td>
+	    		</tr>
+	    	</tbody> <!-- add stars http://codepen.io/TepigMC/pen/FIdHb -->
+	    </table>
+	   	<a href="updateProfile(myProfile)" class="right btn">Save Changes</a>
 		</div>
 		<div class="col m8">
 				<ul>
