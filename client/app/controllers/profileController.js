@@ -10,6 +10,10 @@ angular.module('imgame.profile', [])
       });
     };
 
+    $scope.updateProfile = function(profileData){
+    	
+    };
+
     getMyProfile();
 	};
 
