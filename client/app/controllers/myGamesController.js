@@ -64,17 +64,30 @@
           right: 'today prev,next'
         },
         eventClick: showHostedEventModal,
+        views: {
+          agendaFourDay: {
+            type: 'basic',
+            //duration: { days: 100 },
+            buttonText: 'agenda'
+          }
+        }
       }
     };
 
+    $("#agenda").click(function(){
+      console.log("hihihi")
+      $(".fc-view-container").toggle();
+      $(".fc-center").toggle();
+      $("#agendaList").toggle();
+    })
+
     Auth.requireAuth();
-
-
 
     $scope.init = function() {
       getMyGames(null,null,null,function(){}); //find less hacky solution
       getMyRequests();
       getMyProfile();
+      $("#agendaList").hide();
     };
     
     $scope.init();
