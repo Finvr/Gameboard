@@ -56,25 +56,35 @@
 
     $scope.uiConfig = {
       calendar:{
-        height: 650,
+        height: 530,
         editable: false,
         header:{
           left: 'month basicWeek basicDay',
           center: 'title',
           right: 'today prev,next'
         },
-        eventClick: showHostedEventModal,
+        eventClick: $scope.showHostedEventModal
       }
     };
 
+    $("#agenda").click(function(){
+      console.log('$("#agenda").text', $("#agenda").text())
+      if ($("#agenda").text() === "Calendar View") {
+        $("#agenda").text("Agenda View");        
+      } else {
+        $("#agenda").text("Calendar View");
+      }
+      $("#calendar").toggle();
+      $("#agendaList").toggle();
+    })
+
     Auth.requireAuth();
-
-
 
     $scope.init = function() {
       getMyGames(null,null,null,function(){}); //find less hacky solution
       getMyRequests();
       getMyProfile();
+      $("#agendaList").hide();
     };
     
     $scope.init();
