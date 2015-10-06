@@ -51,6 +51,20 @@ module.exports = {
         console.log("Get profile error: ", err)
         res.send(500, err.message);
       })
+  },
+
+  updateProfile: function (req, res) {
+    if ( req.user.id !== req.body.id ) {
+      res.send(403)
+    } else {
+      Users.updateProfile(req.body)
+        .then(function () {
+          res.send(200);
+        })
+        .catch(function (err) {
+          res.send(500, err);
+        });
+    }
   }
 
 }
