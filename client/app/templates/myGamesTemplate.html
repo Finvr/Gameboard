@@ -65,8 +65,46 @@
         </ul>
       </section>
     </div>
-    <div ui-calendar="uiConfig.calendar" class="col m8" ng-model="eventSources" watch>
+
+    <!-- button for agenda view -->
+    <button type="button" id="agenda" class="btn">Agenda View</button>
+
+    <!-- calendar div -->
+    <div ui-calendar="uiConfig.calendar" class="col m8" ng-model="eventSources" id="calendar" watch>    
     </div>
+
+    <!-- game List -->
+    <div id="agendaList" class="col m8">
+      <section>
+        <ul class="collapsible popout with-header" data-collapsible="accordion" watch>
+          <li class="collection-header">
+            <span class="pink-text text-darken-2"><h5>Games I'm Hosting</h5></span>
+          </li>
+          <li ng-repeat="game in myGames" class="collection-item avatar">
+            <div class="collapsible-header">
+              <i class="material-icons md-light">info</i>
+              <span class="title indigo-text text-darkern-2">
+                {{ game.game}}
+              </span>
+              <a href="#cancelGamepostModal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+              <a href="#modal1" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i></a>
+              <p>
+                <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                <strong>Location:</strong> {{ game.game_location }}
+              </p>
+            </div>
+            <div class="collapsible-body">
+              <p>
+                <span>Players:</span> {{game.player_count}}
+                <br>
+                <span>Description:</span> {{game.gamepost_description}}<br>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+
   </div>
 <!-- Pop-up modal for requests of gameposts -->
   <div id="approve-pending" class="modal">
