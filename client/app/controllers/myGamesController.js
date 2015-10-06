@@ -47,11 +47,18 @@
         });
     };
 
-    /* Scope variables */
-    $scope.eventSources = [getMyGames];
-    $scope.gameToShowDetails = null;
-    $scope.gameToCancel = null;
-    $scope.gameToApprove = null;
+    $("#agenda").click(function(){
+      console.log('$("#agenda").text', $("#agenda").text())
+      if ($("#agenda").text() === "Calendar View") {
+        $("#agenda").text("Agenda View");        
+      } else {
+        $("#agenda").text("Calendar View");
+      }
+      $("#calendar").toggle();
+      $("#agendaList").toggle();
+    })
+
+    $("#agendaList").hide();
 
     $scope.uiConfig = {
       calendar:{
@@ -66,24 +73,16 @@
       }
     };
 
-    $("#agenda").click(function(){
-      console.log('$("#agenda").text', $("#agenda").text())
-      if ($("#agenda").text() === "Calendar View") {
-        $("#agenda").text("Agenda View");        
-      } else {
-        $("#agenda").text("Calendar View");
-      }
-      $("#calendar").toggle();
-      $("#agendaList").toggle();
-    })
-
-    Auth.requireAuth();
-
     $scope.init = function() {
+      Auth.requireAuth();
       getMyGames(null,null,null,function(){}); //find less hacky solution
       getMyRequests();
       getMyProfile();
-      $("#agendaList").hide();
+      /* Scope variables */
+      $scope.eventSources = [getMyGames];
+      $scope.gameToShowDetails = null;
+      $scope.gameToCancel = null;
+      $scope.gameToApprove = null;
     };
     
     $scope.init();
@@ -110,6 +109,10 @@
     $scope.cancelRequest = function(request) {
       return GamePost.requestCancel(request)
       .then(function() {
+        $scope.close('#cancelRequestModal');
+        $scope.close('#game-details');
+        $scope.requestToCancel = null;
+        $scope.gameToShowDetails = null;
         $scope.init();
       });
     }
