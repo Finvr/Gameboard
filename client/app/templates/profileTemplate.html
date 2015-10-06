@@ -6,12 +6,15 @@
 		     <img  class="responsive-img" src="{{ myProfile.picture }}">
 		    </div>
 		    <div class="name">
-		      <p class="grey-text" watch>{{ myProfile.username }}</p>
+		      <p class="grey-text">
+		      	{{ myProfile.username }}<br>
+		      	{{ myProfile.location }}
+		      </p>
 		    </div>
 		  </center>
 	  	<div>
-	    	<div><span>About Me: </span> Miami born and raised, here play and here to stay</div>
-	    	<div><span>Games I Like: </span> Canasta, Dominos, Poker, Scrabble, Power Grid</div>
+	    	<div><span>About Me: </span> {{ myProfile.about_me }}</div>
+	    	<div><span>Games I Like: </span> {{ myProfile.games_list }}</div>
 	    	<div><span>Reliability: </span> 33%</div>
 	    	<div><span>Rating: </span></div> <!-- add stars http://codepen.io/TepigMC/pen/FIdHb -->
 	    </div>
