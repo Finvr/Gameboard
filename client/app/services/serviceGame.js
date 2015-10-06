@@ -52,7 +52,7 @@
       "Cry Havoc",
       "Deadlands: Doomtown",
       "De Bellis Antiquitatis",
-      "De Bellis Multitudinis"
+      "De Bellis Multitudinis",
       "Descent: Journeys in the Dark",
       "Discworld – Ankh-Morpork",
       "Diplomacy",
@@ -98,13 +98,13 @@
       "Legend of the Five Rings",
       "Lord of The Rings",
       "The Lord of the Rings TGC",
-      "Mage Knights"
+      "Mage Knight",
       "Magic: The Gathering",
       "Mahjong",
       "Malifaux",
       "Mancala",
       "Man O' War",
-      "Mars Attacks"
+      "Mars Attacks",
       "Mastermind",
       "Maurice",
       "Mechwarrior",
@@ -115,6 +115,7 @@
       "Napoleon's Battles",
       "Necromunda",
       "Netrunner",
+      "Nippon",
       "Operation",
       "Othello",
       "Pandemic",
