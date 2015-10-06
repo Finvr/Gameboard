@@ -49,8 +49,22 @@ module.exports = {
       })
       .catch(function (err) {
         console.log("Get profile error: ", err)
-        res.send(500, err.message);
+        res.status(500).send(err.message);
       })
+  },
+
+  updateProfile: function (req, res) {
+    if ( req.user.id !== req.body.id ) {
+      res.status(403).send("Invalid user object")
+    } else {
+      Users.updateProfile(req.body)
+        .then(function () {
+          res.send(200);
+        })
+        .catch(function (err) {
+          res.status(500).send(err.message);
+        });
+    }
   }
 
 }

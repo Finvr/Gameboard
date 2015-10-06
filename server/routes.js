@@ -47,7 +47,7 @@ router.get('/me/profile',
 //Update the user's profile
 router.put('/me/profile',
   checkAuth,
-  userController.getMyProfile
+  userController.updateProfile
 );
 //Get a user's profile
 router.get('/users/*',
