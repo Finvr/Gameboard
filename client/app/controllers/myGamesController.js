@@ -89,13 +89,13 @@
 
     $scope.setGameToCancel = function(game){
       $scope.gameToCancel = game;
+      $scope.close('#game-details');
     }
 
     $scope.cancelGame = function() {
       return GamePost.deleteGame($scope.gameToCancel)
         .then(function(){
           $scope.close('#cancel-modal');
-          $scope.close('#game-details');
           $scope.gameToCancel = null;
           $scope.gameToShowDetails = null;
           $scope.init();
@@ -104,13 +104,13 @@
 
     $scope.setRequestToCancel = function(request) {
       $scope.requestToCancel = request;
+      $scope.close('#game-details');
     }
 
     $scope.cancelRequest = function(request) {
       return GamePost.requestCancel(request)
       .then(function() {
         $scope.close('#cancelRequestModal');
-        $scope.close('#game-details');
         $scope.requestToCancel = null;
         $scope.gameToShowDetails = null;
         $scope.init();
