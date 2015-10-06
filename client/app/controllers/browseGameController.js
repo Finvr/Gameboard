@@ -21,6 +21,7 @@
 			.then(function(resp) {
 				console.log("BrowseGameController inside getGsmes", resp);
 				$scope.games = resp;
+				Auth.getCurrentLocation();
 			});
 
 		function distance(lat1, lon1, lat2, lon2) {
@@ -35,6 +36,15 @@
 			dist = dist * 180/Math.PI
 			dist = dist * 60 * 1.1515
 			return Math.round(dist*10)/10;
+		}
+
+		$scope.disFilter = function(dis) { 
+			var disSelect = $scope.distance ? $scope.distance_choices[$scope.distance] : null;
+			if (dis && disSelect) {
+				return dis < disSelect;
+			} else {
+				return true;				
+			}
 		}
 
 		$scope.dateFilter = function(gameTime) {

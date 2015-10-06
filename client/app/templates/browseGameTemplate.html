@@ -9,10 +9,18 @@
       </nav>
 
       <div class="browse-filters">
-        <!-- Game select drop down filter -->
+        <!-- Game select autocomplete filter -->
         <div>
           <p class="title grey-text text-darken-2">Game Name</p>
-          <autocomplete attr-input-class="center" attr-input-id="game-name" attr-placeholder="start typing game name..." data="gamesArray" ng-model="searchText"></autocomplete>
+          <autocomplete attr-input-class="center" attr-input-id="game-name" attr-placeholder="" data="gamesArray" ng-model="searchText"></autocomplete>
+        </div>
+
+        <!-- Distance filter -->
+        <div>
+          <p class="title grey-text text-darken-2">Distance</p>
+          <select class="browser-default" ng-model="distance" material-select watch>
+            <option ng-repeat="(key, value) in distance_choices">{{key}}</option>
+          </select>
         </div>
 
         <!-- Games Date Range  -->
@@ -38,7 +46,7 @@
       </nav>
       <!-- display all the games -->
       <ul class="collection" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime)" class="collection-item " watch>
+        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance)" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game}}</div>
             <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}} Players: {{ game.accepted_players }}/{{game.player_count}}

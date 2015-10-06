@@ -39,12 +39,23 @@
         console.log("Signout Error: ", resp.data)
         $location.path('/');
       });
+    };
 
+    function getCurrentLocation () {
+      if ($rootScope.currentLocation) {
+        $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
+      } else {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          $rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+          $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
+        })
+      }
     };
 
     return {
       requireAuth: requireAuth,
-      signout: signout
+      signout: signout,
+      getCurrentLocation: getCurrentLocation
     }
 
   };

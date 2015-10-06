@@ -13,11 +13,8 @@
       'ui.calendar',
       'autocomplete'
   	])
-    .run(function($rootScope) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        $rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-        $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
-      })
+    .run(function($rootScope, Auth) {
+      Auth.getCurrentLocation();
     })
     .config(config);
 
