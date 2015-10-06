@@ -45,6 +45,7 @@
       if ($rootScope.currentLocation) {
         $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
       } else {
+        
         navigator.geolocation.getCurrentPosition(function (position) {
           $rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
           $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
