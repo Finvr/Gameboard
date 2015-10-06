@@ -55,16 +55,18 @@
 	    }
     }
 
-    $scope.getRequestStatus = function(gameId) {
+    $scope.getRequestInfo = function(gameId) {
     	if($scope.myRequests) {
 	    	for (var i = 0; i < $scope.myRequests.length; i++) {
 	    		if ($scope.myRequests[i].gamepost_id === gameId) {
 	    			console.log("status is ",  $scope.myRequests[i].status);
 	    			$scope.reqStatus = $scope.myRequests[i].status;
+	    			$scope.reqComments = $scope.myRequests[i].comments;
 	    		}
 	    	}
 	    }
     }
+
 
 		function distance(lat1, lon1, lat2, lon2) {
 			var radlat1 = Math.PI * lat1/180
