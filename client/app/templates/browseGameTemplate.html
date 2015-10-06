@@ -80,8 +80,8 @@
           </div>
           <div class = "row center">
             <div class="input-field">
-              <textarea ng-if="hasPendingRequest(game.id) === false" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
-              <div ng-if="hasPendingRequest(game.id) === true">
+              <textarea ng-if="!hasPendingRequest(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
+              <div ng-if="hasPendingRequest(game.id)">
                 <div> Your request is: {{reqStatus}} </div>
                 <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}} </div>
               </div>
@@ -89,9 +89,9 @@
             <div ng-if="submitError" class="error col s12 grey-text">{{submitError}}</div>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" ng-if="!hasPendingRequest(game.id)">
           <div class = "col s4 right" ng-click="sendRequest(game)">
-                  <a ng-if="hasPendingRequest(game.id) === false" class = "btn btn-med waves-effect waves-light grey darken-3">
+                  <a class = "btn btn-med waves-effect waves-light grey darken-3">
                     <i class="material-icons">send</i>
                   </a>
           </div>
