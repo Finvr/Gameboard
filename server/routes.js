@@ -1,6 +1,7 @@
 var userController    = require('./controllers/userController.js'),
     gameController    = require('./controllers/gamePostsController.js'),
     requestController = require('./controllers/requestController.js'),
+    notesController   = require('./controllers/notificationsController.js'),
     passport          = require('passport');
 
 var express = require('express');
@@ -95,6 +96,19 @@ router.delete('/requests/:id',
 router.put('/requests/:id', 
   checkAuth, 
   requestController.changeStatus
+);
+
+//Notifications routes
+//Get notifications
+router.get('/me/notifications',
+  checkAuth,
+  notesController.getNotifications
+);
+
+//Set notifications to viewed
+router.post('/me/notifications',
+  checkAuth,
+  notesController.updateNotifications
 );
 
 module.exports = router;
