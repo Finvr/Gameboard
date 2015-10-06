@@ -60,4 +60,10 @@
     display: none !important;
   }
 
+  .autocomplete ul{
+    height: 50px;
+    border: none;
+    z-index: 10;
+  }
+
 }
