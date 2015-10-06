@@ -12,9 +12,7 @@
         <!-- Game select drop down filter -->
         <div>
           <p class="title grey-text text-darken-2">Game Name</p>
-          <select class="browser-default" ng-model="searchText" material-select watch>
-              <option ng-repeat="value in gamesFilter.choices | orderBy: value">{{value}}</option>
-          </select>
+          <autocomplete attr-input-class="center" attr-input-id="game-name" attr-placeholder="start typing game name..." data="gamesArray" ng-model="searchText"></autocomplete>
         </div>
 
         <!-- Games Date Range  -->
