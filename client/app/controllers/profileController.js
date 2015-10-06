@@ -3,7 +3,13 @@ angular.module('imgame.profile', [])
 	.controller('ProfileController', ProfileController);
 
 	function ProfileController($scope, Profile){
-		$scope.name = "Ignacio Prado"
-;	};
+    var getMyProfile = function(){
+      Profile.getProfile().then(function(profile){
+        $scope.myProfile = profile;
+      });
+    };
+
+    getMyProfile();
+	};
 
 })();
