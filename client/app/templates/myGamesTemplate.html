@@ -91,7 +91,7 @@
 
       <div class="collection col m5 offset-m1" data-collapsible="accordion" watch>
         <div class="darkgray-text text-darken-2 collection-item"><h5>Games I'm Joining</h5></div>
-        <div ng-repeat="request in myRequests | orderBy: 'game_datetime'" class="collection-item row">
+        <div ng-repeat="request in myRequests | orderBy: 'game_datetime'" ng-if="request.status === 'accepted'" class="collection-item row">
           <p class="agendaListGameName col m8" ng-click="showHostedEventModal({data:request})">
             <span class="title indigo-text text-darkern-2">
               {{request.game}}
