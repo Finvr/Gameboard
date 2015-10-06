@@ -6,6 +6,7 @@ angular.module('imgame.profile', [])
     var getMyProfile = function(){
       Profile.getProfile().then(function(profile){
         $scope.myProfile = profile;
+        console.log($scope.myProfile);
       });
     };
 
