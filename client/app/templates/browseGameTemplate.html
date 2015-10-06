@@ -52,7 +52,8 @@
             <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}} Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
             <div class="right col s3" ng-if="loggedIn" ng-click="openGame(game); getMyRequests()">
-              <a class='btn grey darken-3' href='#openRequest' modal>Join</a>
+              <a class='btn grey darken-3' ng-if="hasPendingRequest(game.id) === false" href='#openRequest' modal>Join</a>
+              <a class='btn grey darken-3' ng-if="hasPendingRequest(game.id) === true" href='#openRequest' modal>View Details</a>
             </div>
           </div>        
         </li>
@@ -79,7 +80,8 @@
           </div>
           <div class = "row center">
             <div class="input-field">
-              <textarea class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
+              <textarea ng-if="hasPendingRequest(game.id) === false" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
+              <div ng-if="hasPendingRequest(game.id) === true"></div>
             </div>
             <br>
             <div ng-if="submitError" class="error col s12 grey-text">{{submitError}}</div>

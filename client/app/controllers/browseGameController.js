@@ -22,13 +22,39 @@
 			}
 			$scope.$apply();
 		});
-		
-		BrowseGames.getGames()
+
+		$scope.getMyRequests = function(){
+      return GamePost.myRequests()
+        .then(function(requests){
+          if (requests === 'request does not exist'){
+            $scope.myRequests = [];
+            console.log('$scope.myRequests', $scope.myRequests);
+          } else {
+            $scope.myRequests = requests;
+            console.log('$scope.myRequests', $scope.myRequests);
+          }
+        });
+    };
+
+    BrowseGames.getGames()
 			.then(function(resp) {
 				console.log("BrowseGameController inside getGsmes", resp);
 				$scope.games = resp;
 				Auth.getCurrentLocation();
+				$scope.getMyRequests();
 			});
+
+    $scope.hasPendingRequest = function(gameId) {
+    	if($scope.myRequests) {
+	    	for (var i = 0; i < $scope.myRequests.length; i++) {
+	    		if ($scope.myRequests[i].gamepost_id === gameId) {
+	    			return true;
+	    		}
+	    	}
+	    	return false;
+	    }
+    }
+
 
 		function distance(lat1, lon1, lat2, lon2) {
 			var radlat1 = Math.PI * lat1/180
@@ -66,19 +92,6 @@
 			}
 		}
 
-		$scope.getMyRequests = function(){
-      return GamePost.myRequests()
-        .then(function(requests){
-          if (requests === 'request does not exist'){
-            $scope.myRequests = [];
-            console.log('$scope.myRequests', $scope.myRequests);
-          } else {
-            $scope.myRequests = requests;
-            console.log('$scope.myRequests', $scope.myRequests);
-          }
-        });
-    };
-
 
 		$scope.openGame = function(game) {
 			$scope.submitError = null;
@@ -91,7 +104,6 @@
 				.then(function(data){
 					console.log("data", data)
 					if (typeof data === 'string' && data.includes('already been submmited')) {
-
 						$scope.submitError = "You have already submitted your request!";
 					} else {
 						$("#openRequest").closeModal();
@@ -99,6 +111,7 @@
 					}
 				})
 		}
+
 		$scope.close = function() {
 			$("#openRequest").closeModal();
 		}
