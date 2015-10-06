@@ -8,10 +8,10 @@
   }
 
   .normal-view {
-    padding: 1% 2%;
 
     .profile {
       padding-top: 4%;
+      padding-left: 4%;
     }
   }
 
@@ -52,9 +52,13 @@
 
   }
 
-  .collection .collection-item.avatar{
+  .collection .collection-item {
     min-height: 15%;
-    padding-left: 5%;
+    padding: 0%;
+
+    a {
+      margin-top: 5%;
+    }
   }
 
   .agendaListGameName {

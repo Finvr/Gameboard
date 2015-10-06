@@ -36,7 +36,6 @@
       });
     };
 
-
     var getMyRequests = function(){
       return GamePost.myRequests()
         .then(function(requests){
@@ -48,11 +47,18 @@
         });
     };
 
-    /* Scope variables */
-    $scope.eventSources = [getMyGames];
-    $scope.gameToShowDetails = null;
-    $scope.gameToCancel = null;
-    $scope.gameToApprove = null;
+    $("#agenda").click(function(){
+      console.log('$("#agenda").text', $("#agenda").text())
+      if ($("#agenda").text() === "Calendar View") {
+        $("#agenda").text("Agenda View");        
+      } else {
+        $("#agenda").text("Calendar View");
+      }
+      $("#calendar").toggle();
+      $("#agendaList").toggle();
+    })
+
+    $("#agendaList").hide();
 
     $scope.uiConfig = {
       calendar:{
@@ -67,37 +73,29 @@
       }
     };
 
-    $("#agenda").click(function(){
-      console.log('$("#agenda").text', $("#agenda").text())
-      if ($("#agenda").text() === "Calendar View") {
-        $("#agenda").text("Agenda View");        
-      } else {
-        $("#agenda").text("Calendar View");
-      }
-      $("#calendar").toggle();
-      $("#agendaList").toggle();
-    })
-
-    Auth.requireAuth();
-
     $scope.init = function() {
+      Auth.requireAuth();
       getMyGames(null,null,null,function(){}); //find less hacky solution
       getMyRequests();
       getMyProfile();
-      $("#agendaList").hide();
+      /* Scope variables */
+      $scope.eventSources = [getMyGames];
+      $scope.gameToShowDetails = null;
+      $scope.gameToCancel = null;
+      $scope.gameToApprove = null;
     };
     
     $scope.init();
 
     $scope.setGameToCancel = function(game){
       $scope.gameToCancel = game;
+      $scope.close('#game-details');
     }
 
     $scope.cancelGame = function() {
       return GamePost.deleteGame($scope.gameToCancel)
         .then(function(){
           $scope.close('#cancel-modal');
-          $scope.close('#game-details');
           $scope.gameToCancel = null;
           $scope.gameToShowDetails = null;
           $scope.init();
@@ -106,11 +104,15 @@
 
     $scope.setRequestToCancel = function(request) {
       $scope.requestToCancel = request;
+      $scope.close('#game-details');
     }
 
     $scope.cancelRequest = function(request) {
       return GamePost.requestCancel(request)
       .then(function() {
+        $scope.close('#cancelRequestModal');
+        $scope.requestToCancel = null;
+        $scope.gameToShowDetails = null;
         $scope.init();
       });
     }
