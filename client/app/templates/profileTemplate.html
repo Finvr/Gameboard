@@ -8,37 +8,39 @@
 		  </center>
 	  	<table>
 	    	<tbody>
-	    		<tr>
+	    		<tr class="profile-field username">
 	    			<td>Name: </td>
 	    			<td>{{ myProfile.username }}</td>
 	    		</tr>
-	    		<tr>
+	    		<tr class="profile-field location">
 	    			<td>Location: </td>
-		      	<td>{{ myProfile.location }}</td>
-		      	<td><a href="">Edit</a></td>
+		      	<td class="read">{{ myProfile.location }}</td>
+		      	<td class="write"><input type="text" ng-model="myProfile.location" />
+		      	<td><a ng-click="showInput()">Edit</a></td>
 		      </tr>
-		    </div>
-	    		<tr>
+	    		<tr class="profile-field about-me">
 	    			<td>About Me: </td>
-	    			<td>{{ myProfile.about_me }}</td>
-	    			<td><a href="">Edit</a>
+	    			<td class="read">{{ myProfile.about_me }}</td>
+		      	<td class="write"><input type="text" ng-model="myProfile.location" />
+	    			<td><a ng-click="showInput()">Edit</a>
 	    		</tr>
-	    		<tr>
+	    		<tr class="profile-field games-i-like">
 	    			<td>Games I Like: </td>
-	    			<td>{{ myProfile.games_list }}</td>
-	    			<td><a href="">Edit</a>
+	    			<td class="read">{{ myProfile.games_list }}</td>
+		      	<td class="write"><input type="text" ng-model="myProfile.location" />
+	    			<td><a ng-click="showInput()">Edit</a>
 	    		</tr>
-	    		<tr>
+	    		<tr class="profile-field reliability">
 	    			<td>Reliability: </td>
 	    			<td> 33%</td>
 	    		</tr>
-	    		<tr>
+	    		<tr class="profile-field rating">
 	    			<td>Rating: </td>
 	    			<td> *******</td>
 	    		</tr>
 	    	</tbody> <!-- add stars http://codepen.io/TepigMC/pen/FIdHb -->
 	    </table>
-	   	<a href="updateProfile(myProfile)" class="right btn">Save Changes</a>
+	   	<a ng-if="savedProfile != myProfile" href="updateProfile(myProfile)" class="right btn">Save Changes</a>
 		</div>
 		<div class="col m8">
 				<ul>
