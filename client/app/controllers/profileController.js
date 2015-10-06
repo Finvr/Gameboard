@@ -7,6 +7,7 @@ angular.module('imgame.profile', [])
       Profile.getProfile()
       	.then(function(profile){
         	$scope.myProfile = profile;
+        	$scope.savedProfile = $scope.myProfile;
         	console.log($scope.myProfile);
       	});
     };
@@ -15,7 +16,7 @@ angular.module('imgame.profile', [])
     	profileData = {
     		id: 1,
     		location: "Miami Shores, FL",
-    		about_me: "I'm the greatest at this",
+    		about_me: "I'm the greatest at this.",
     		games_list: "Stratego, Dominos, Risk, Canasta"
     	}
     	Profile.updateProfile(profileData)
