@@ -66,6 +66,20 @@
 			}
 		}
 
+		$scope.getMyRequests = function(){
+      return GamePost.myRequests()
+        .then(function(requests){
+          if (requests === 'request does not exist'){
+            $scope.myRequests = [];
+            console.log('$scope.myRequests', $scope.myRequests);
+          } else {
+            $scope.myRequests = requests;
+            console.log('$scope.myRequests', $scope.myRequests);
+          }
+        });
+    };
+
+
 		$scope.openGame = function(game) {
 			$scope.submitError = null;
 			$scope.requestMessage = {comments: ''};
