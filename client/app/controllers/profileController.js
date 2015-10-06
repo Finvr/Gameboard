@@ -13,19 +13,24 @@ angular.module('imgame.profile', [])
     };
 
     $scope.updateProfile = function(profileData){
-    	profileData = {
-    		id: 1,
-    		location: "Miami Shores, FL",
-    		about_me: "I'm the greatest at this.",
-    		games_list: "Stratego, Dominos, Risk, Canasta"
-    	}
     	Profile.updateProfile(profileData)
     		.then(function(data){
+    			init();
+    			$('.profile-field').find('.write').hide();
+    			$('.profile-field').find('.read').show();
     			console.log(data);
     		});
     };
 
-    getMyProfile();
+    $scope.showInput = function(selector){
+    	$(selector).find('.read').hide();
+    	$(selector).find('.write').show();
+    };
+
+    var init = function(){
+    	getMyProfile();
+    }
+    init();
     //$scope.updateProfile({});
 	};
 
