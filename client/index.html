@@ -26,6 +26,7 @@
 				  <li><a href="/#/browse-games">Browse</a></li>
 				  <li class="divider"></li>
 				 	<li ng-if="loggedIn"><a href="/#/my-games">My Games</a></li>
+				 	<li ng-if="loggedIn"><a href="/#/profile">Profile</a></li>
 				</ul>
 	      <ul class="right">
 	      	<li ng-if="loggedIn"><a href='/#/logout'><i class="material-icons tooltipped grey-text" data-tooltip="Logout">exit_to_app</i></a></li>
@@ -53,6 +54,7 @@
 	<script src="app/controllers/homeController.js"></script>
 	<script src="app/controllers/createGameController.js"></script><!-- TODO: move dom manipulation out of controller so that load order doesn't matter-->
 	<script src="app/directives/googleMapsDirective.js"></script>
+	<script src="app/controllers/profileController.js"></script>
 	<script src="app/controllers/myGamesController.js"></script>
 	<script src="app/controllers/browseGameController.js"></script>
 	<script src="app/services/serviceAuth.js"></script>
