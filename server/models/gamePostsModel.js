@@ -38,6 +38,18 @@ module.exports = {
         console.log(err);
         return err;
       })
+  },
+
+  checkForExpired: function () {
+    return db('gameposts')
+      .where('post_status', 'active')
+      .andWhere('game_datetime', '<', db.raw('now()'))
+      .update('post_status', 'expired')
+      .returning('id')
+      .catch(function (err) {
+        console.log(err);
+        return err;
+      });
   }
 
 }
