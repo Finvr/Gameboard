@@ -26,6 +26,24 @@ module.exports = {
           return err;
         });
     }
+  },
+
+  getAll: function (userId) {
+    return db.select()
+      .from('notifications')
+      .where('user_id', userId)
+      .catch(function (err) {
+        return err;
+      });
+  },
+
+  update: function (notId) {
+    return db('notifications')
+      .where('id', notId)
+      .update('viewed', true)
+      .catch(function (err) {
+        return err;
+      })
   }
 
 };
