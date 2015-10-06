@@ -126,20 +126,17 @@
 				 Number(time.toString().slice(11,13)) > 6 ){
 				  //calculate time in milliseconds that has passed for the day
 				  var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 - 21600000
-				  console.log('game startTime before noon 12pm-12am', startTime, " :filter start: ", startMS, " :filter end: ", endMS);
 			}
 
 		  //time is between 12 and 6pm
 			if(Number(time.toString().slice(11,13)) >= 18){
 			     //calculate time in milliseconds that has passed for the day
 			     var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 - 21600000
-			     console.log('game startTime after noon 12-6pm', startTime, " :filter start: ", startMS, " :filter end: ", endMS);
 			}
 			//time is between 6pm and 12pm
 			if(Number(time.toString().slice(11,13)) <= 6){
 			     //calculate time in milliseconds that has passed for the day
 			     var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 + 43200000
-			     console.log('game startTime after noon 6-12pm', startTime, " :filter start: ", startMS, " :filter end: ", endMS);
 			}
 
 
