@@ -61,6 +61,9 @@
 	    		if ($scope.myRequests[i].gamepost_id === gameId) {
 	    			console.log("status is ",  $scope.myRequests[i].status);
 	    			$scope.reqStatus = $scope.myRequests[i].status;
+	    			if ($scope.reqStatus === 'declined') {
+	    				$scope.reqStatus = 'canceled';
+	    			}
 	    			$scope.reqComments = $scope.myRequests[i].comments;
 	    		}
 	    	}
