@@ -20,7 +20,7 @@ describe('MyGamesController', function() {
     	expect(scope.init).toBeDefined();
     });
     it("should initialize gameToShowDetails to null", function(){
-    	expect(scope.gameToShowDetails).toBeNull();
+    	expect(scope.gameToShowDetails).toEqual(null);
     });
     it("should initialize gameToCancel to null", function(){
     	expect(scope.gameToCancel).toBeNull();
@@ -28,6 +28,11 @@ describe('MyGamesController', function() {
     it("should initialize gameToApprove to null", function(){
     	expect(scope.gameToApprove).toBeNull();
     });
-    
+  });
+
+  describe("$scope.setGameToCancel", function(){
+  	it("should be defined", function(){
+  		expect(scope.setGameToCancel).toBeDefined();
+  	});
   });
 });
