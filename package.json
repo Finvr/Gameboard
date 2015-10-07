@@ -26,7 +26,7 @@
     "passport": "^0.3.0",
     "passport-facebook": "^2.0.0",
     "pg": "^4.4.2",
-    "morgan": "^1.6.1",    
+    "morgan": "^1.6.1",
     "request": "^2.64.0",
     "unicorn": "0.0.1"
   },
@@ -44,6 +44,7 @@
     "karma-nyan-reporter": "^0.2.2",
     "karma-spec-reporter": "0.0.20",
     "mocha": "^2.3.3",
+    "protractor": "^2.4.0",
     "request": "^2.63.0",
     "sassdoc": "^2.1.15",
     "superagent": "^1.4.0",

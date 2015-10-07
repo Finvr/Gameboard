@@ -7,7 +7,6 @@ describe('BrowseGamesController', function() {
     $controller = _$controller_;
   }));
 
-  it("should understand truth", function(){
-    expect(true).toBe(true);
+  describe('$scope.disFilter', function(){
   });
 });

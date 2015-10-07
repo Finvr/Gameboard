@@ -17,15 +17,21 @@ module.exports = function(config) {
     files: [
       //library files
       'client/lib/jquery/dist/jquery.min.js',
-      'client/lib/angular/angular.min.js',
+      'client/lib/angular/angular.js',
       'client/lib/angular-route/angular-route.min.js',
       'client/lib/angular-ui-router/release/angular-ui-router.min.js',
       'client/lib/Materialize/dist/js/materialize.min.js',
-      'client/lib/angular-mocks/angular-mocks.js',
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyB5eGAZmqMYgOJRvbrFNAujmSr8nFCEBnA"',
       'client/lib/angular-materialize/src/angular-materialize.js',
+      'client/lib/moment/min/moment.min.js',
+      'client/lib/angular-ui-calendar/src/calendar.js',
+      'client/lib/fullcalendar/dist/fullcalendar.min.js',
+      'client/lib/fullcalendar/dist/gcal.js',
+      'client/lib/allmighty-autocomplete/script/autocomplete.js',
+      'client/lib/angular-mocks/angular-mocks.js',
 
       // our app code
+      'client/app/services/serviceAuth.js',
       'client/app/**/*.js',
       'client/app/app.js',
 
