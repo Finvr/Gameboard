@@ -2,7 +2,10 @@
 angular.module('imgame.profile', [])
 	.controller('ProfileController', ProfileController);
 
-	function ProfileController($scope, Profile){
+	function ProfileController($scope, Profile, Auth){
+
+    Auth.requireAuth();
+
     var getMyProfile = function(){
       Profile.getProfile()
       	.then(function(profile){
