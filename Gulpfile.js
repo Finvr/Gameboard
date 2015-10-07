@@ -22,7 +22,7 @@ var sassdocOptions = { dest: 'dist/sassdoc' };
 // Sass compilation
 // -----------------------------------------------------------------------------
 
-gulp.task('sass-single', function () {
+gulp.task('sass', function () {
  return gulp
    .src(input)
    .pipe(sourcemaps.init())
@@ -76,17 +76,15 @@ gulp.task('mocha', function() {
 // Watchers
 // -----------------------------------------------------------------------------
 
-gulp.task('sass', function() {
+gulp.task('watch-sass', function() {
  return gulp
-   // Watch the input folder for change,
-   // and run `sass` task when something happens
-   .watch(input, ['sass-single'])
-   // When there is a change,
-   // log a message in the console
-   .on('change', function(event) {
-     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-   });
+   .watch(input, ['sass'])
 });
+
+gulp.task('watch-mocha', function() {
+   gulp.watch(['server/**', 'test/serverTest/**.js'], ['mocha']);
+});
+
 
 
 // -----------------------------------------------------------------------------
@@ -106,4 +104,4 @@ gulp.task('prod', ['sassdoc'], function () {
 // Default task
 // -----------------------------------------------------------------------------
 
-gulp.task('default', ['sass-single', 'karma', 'mocha', 'sass', 'server']);
+gulp.task('default', ['sass', 'karma', 'mocha', 'watch-sass', 'watch-mocha', 'server']);
