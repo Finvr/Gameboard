@@ -148,7 +148,7 @@
       <p>
         <div><span>Time:</span> {{ gameToShowDetails.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}</div>
         <div><span>Location:</span> {{ gameToShowDetails.game_location }}</div>
-        <div><span>Players:</span> {{ gameToShowDetails.player_count}}</div>
+        <div><span>Players:</span> {{ gameToShowDetails.accepted_players + "/" + gameToShowDetails.player_count}}</div>
         <div><span>Description:</span> {{ gameToShowDetails.gamepost_description}}</div>
         <div ng-if="gameToShowDetails.comments !== undefined"><span>Message sent:</span> {{ gameToShowDetails.comments}}</div>
       </p>
