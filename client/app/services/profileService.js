@@ -11,6 +11,7 @@
           url: '/users/' + id
         })
         .then(function(resp){
+          resp.data.viewId = id;
           return resp.data;
         });
       } else {
