@@ -3,15 +3,16 @@ var db = require('../db.js');
 module.exports = {
 
 	getRequestsByUserId: function (userId) {
-    return db.select([
+    return db('gameposts').select([
         'gameposts.*',
         'requests.*',
-        'gameposts.id as gamepost_id'
-    ])
-     .from('requests')
-     .where({user_id: userId})
-     .join('gameposts', 'gamepost_id', 'gameposts.id')
-     .then(function (result) {
+        'gameposts.id as gamepost_id',
+        db.raw("(SUM(CASE requests.status WHEN 'accepted' THEN 1 ELSE 0 END)+1) as accepted_players")
+      ])
+      .groupBy('gameposts.id', 'requests.id')
+      .where({user_id: userId})
+      .join('requests', 'gameposts.id', 'requests.gamepost_id')
+      .then(function (result) {
         if ( result.length ) {
           return result;
         } else {
@@ -21,7 +22,7 @@ module.exports = {
       .catch(function (err) {
         console.log(err);
         return err;
-      })
+      });
   },
 
   getRequestByGameId: function (gamepostId) {
