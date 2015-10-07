@@ -25,12 +25,20 @@ module.exports = {
     }, 0).then(function () {
       res.send(200);
     })
+  },
+
+  acceptedReq: function (req, res) {
+    var requestId = req.body.id;
+    var userId = req.body.user_id;
+
+    if ( req.body.status === 'accepted' ) {
+      Notes.create(userId, 'request accepted', requestId)
+        .then(function () {
+          res.send(200);
+        })
+    } else {
+      res.send(200);
+    }
   }
-    //Figure out how to do this for-loop in async
-  //   for ( var i = 0; i < updated.length; i++ ) {
-  //     Notes.update(updated[i])
-  //   }
-  //   res.send(200);
-  // }
 
 };

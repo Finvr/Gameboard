@@ -95,7 +95,8 @@ router.delete('/requests/:id',
 //Update the status of a request
 router.put('/requests/:id', 
   checkAuth, 
-  requestController.changeStatus
+  requestController.changeStatus,
+  notesController.acceptedReq
 );
 
 //Notifications routes
