@@ -59,10 +59,11 @@ function fetchAllOrByUser (userId) {
     return db('users').select([
         'gameposts.*',
         'users.username',
+        'users.picture',
         db.raw("(SUM(CASE requests.status WHEN 'accepted' THEN 1 ELSE 0 END)+1) as accepted_players"),
         db.raw("SUM(CASE requests.status WHEN 'pending' THEN 1 ELSE 0 END) as pending_requests")
       ])
-      .groupBy('gameposts.id', 'users.username')
+      .groupBy('gameposts.id', 'users.username','users.picture')
       .join('gameposts', 'host_id', 'users.id')
       .leftOuterJoin('requests', 'gamepost_id', 'gameposts.id')
       .where({
@@ -73,10 +74,11 @@ function fetchAllOrByUser (userId) {
     return db('users').select([
         'gameposts.*',
         'users.username',
+        'users.picture',
         db.raw("(SUM(CASE requests.status WHEN 'accepted' THEN 1 ELSE 0 END)+1) as accepted_players"),
         db.raw("SUM(CASE requests.status WHEN 'pending' THEN 1 ELSE 0 END) as pending_requests")
       ])
-      .groupBy('gameposts.id', 'users.username')
+      .groupBy('gameposts.id', 'users.username', 'users.picture')
       .join('gameposts', 'host_id', 'users.id')
       .leftOuterJoin('requests', 'gamepost_id', 'gameposts.id')
       .where({
