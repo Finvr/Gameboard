@@ -50,7 +50,7 @@ router.put('/me/profile',
   userController.updateProfile
 );
 //Get a user's profile
-router.get('/users/*',
+router.get('/users/:id',
   checkAuth,
   userController.getProfile
 );
@@ -66,33 +66,33 @@ router.post('/gameposts',
   gameController.createGamepost
 );
 //Cancel a gamepost
-router.delete('/gameposts/*', 
+router.delete('/gameposts/:id',
   checkAuth, 
   gameController.deleteGamePost,
   requestController.declineAll
 );
 
 //Get all requests for a gamepost
-router.get('/gameposts/*/requests', 
+router.get('/gameposts/:id/requests', 
   checkAuth, 
   requestController.getGamePostRequests
 );
 
 //Submit a request to join a specific gamepost
-router.post('/gameposts/*/requests', 
+router.post('/gameposts/:id/requests', 
   checkAuth, 
   requestController.createRequest
 );
 
 //Requests routes
 //Cancel a request
-router.delete('/requests/*', 
+router.delete('/requests/:id', 
   checkAuth, 
   requestController.deleteRequest
 );
 
 //Update the status of a request
-router.put('/requests/*', 
+router.put('/requests/:id', 
   checkAuth, 
   requestController.changeStatus
 );
