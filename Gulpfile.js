@@ -1,5 +1,8 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var nodemon = require('gulp-nodemon');
+var mocha = require('gulp-mocha');
+var Server = require('karma').Server;
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var sassdoc = require('sassdoc');
@@ -41,22 +44,47 @@ gulp.task('sassdoc', function () {
    .resume();
 });
 
+//-----------------------------------------------------------------------------
+//  Karma Start
+//-----------------------------------------------------------------------------
+
+gulp.task('karma', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
+});
+
+// -----------------------------------------------------------------------------
+// Development Server Start
+// -----------------------------------------------------------------------------
+gulp.task('server', function () {
+  nodemon({
+    script: 'server/server.js'
+  })
+});
+
+// -----------------------------------------------------------------------------
+// Mocha Tests
+// -----------------------------------------------------------------------------
+
+gulp.task('mocha', function() {
+    return gulp.src(['test/serverTest/*.js'], { read: false })
+        .pipe(mocha({ reporter: 'list' }))
+});
 
 // -----------------------------------------------------------------------------
 // Watchers
 // -----------------------------------------------------------------------------
 
-gulp.task('watch', function() {
+gulp.task('watch-sass', function() {
  return gulp
-   // Watch the input folder for change,
-   // and run `sass` task when something happens
    .watch(input, ['sass'])
-   // When there is a change,
-   // log a message in the console
-   .on('change', function(event) {
-     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-   });
 });
+
+gulp.task('watch-mocha', function() {
+   gulp.watch(['server/**', 'test/serverTest/**.js'], ['mocha']);
+});
+
 
 
 // -----------------------------------------------------------------------------
@@ -76,4 +104,4 @@ gulp.task('prod', ['sassdoc'], function () {
 // Default task
 // -----------------------------------------------------------------------------
 
-gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
+gulp.task('default', ['sass', 'karma', 'mocha', 'watch-sass', 'watch-mocha', 'server']);
