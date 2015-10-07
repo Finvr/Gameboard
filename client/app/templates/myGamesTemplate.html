@@ -32,7 +32,7 @@
               <p>
                 <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ game.game_location }}<br>
-                <span>Players:</span> {{game.player_count}}
+                <span>Players:</span> {{game.accepted_players + "/" + game.player_count}}
                 <br>
                 <span>Description:</span> {{game.gamepost_description}}<br>
               </p>
@@ -77,7 +77,7 @@
     <div id="agendaList" class="col m8">
 
       <div class="collection col m5 offset-m1" data-collapsible="accordion" watch>
-        <div class="darkgray-text text-darken-2 collection-item"><h5>Games I'm Hosting</h5></div>
+        <div class="title darkgray-text text-darken-2 collection-item"><h5>Games I'm Hosting</h5></div>
         <div ng-repeat="game in myGames | orderBy: 'game_datetime'" class="collection-item row">
             <p class="agendaListGameName col m8" ng-click="showHostedEventModal({data:game})">
               <span class="title indigo-text text-darkern-2">
@@ -90,7 +90,7 @@
       </div>
 
       <div class="collection col m5 offset-m1" data-collapsible="accordion" watch>
-        <div class="darkgray-text text-darken-2 collection-item"><h5>Games I'm Joining</h5></div>
+        <div class="title darkgray-text text-darken-2 collection-item"><h5>Games I'm Joining</h5></div>
         <div ng-repeat="request in myRequests | orderBy: 'game_datetime'" ng-if="request.status === 'accepted'" class="collection-item row">
           <p class="agendaListGameName col m8" ng-click="showHostedEventModal({data:request})">
             <span class="title indigo-text text-darkern-2">
