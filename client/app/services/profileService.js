@@ -4,14 +4,25 @@
 
   .factory('Profile', function Profile($http){
 
-    function getProfile(){
-    	return $http({
-    		method: 'GET',
-    		url: '/me/profile'
-    	})
-    	.then(function(resp){
-    		return resp.data;
-    	});
+    function getProfile(id){
+      if (id) {
+        return $http({
+          method: 'GET',
+          url: '/users/' + id
+        })
+        .then(function(resp){
+          resp.data.viewId = id;
+          return resp.data;
+        });
+      } else {
+      	return $http({
+      		method: 'GET',
+      		url: '/me/profile'
+      	})
+      	.then(function(resp){
+      		return resp.data;
+      	});      
+      }
     }
 
     function updateProfile(profileData){

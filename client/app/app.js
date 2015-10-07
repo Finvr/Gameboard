@@ -13,8 +13,13 @@
       'ui.calendar',
       'autocomplete'
   	])
-    .run(function($rootScope, Auth) {
+    .run(function($rootScope, Auth, Profile) {
+      $rootScope.currentLocation;
       Auth.getCurrentLocation();
+      Profile.getProfile()
+        .then(function(data){
+          $rootScope.myInfo = data;
+        });
     })
     .config(config);
 
@@ -29,6 +34,10 @@
         controller: 'CreateGameController'
       })
       .when('/profile', {
+        templateUrl: 'app/templates/profileTemplate.html',
+        controller: 'ProfileController'
+      })
+      .when('/profile/:id', {
         templateUrl: 'app/templates/profileTemplate.html',
         controller: 'ProfileController'
       })
