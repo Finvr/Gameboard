@@ -107,6 +107,7 @@ module.exports = {
         status: 'declined',
         updated_at: db.raw('now()')
       })
+      .returning('id')
       .catch(function (err) {
         console.log(err);
         return err;

@@ -13,7 +13,7 @@ module.exports = {
       return value;
     } else { 
       return action(value)
-        .then(promiseFor.bind(null, condition, action))
+        .then(module.exports.promiseFor.bind(null, condition, action))
     };
   })
 
