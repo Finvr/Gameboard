@@ -108,9 +108,9 @@
 		$scope.dateFilter = function(gameTime) {
 			var gameTime = Date.parse(gameTime);
 			var startTime = Date.parse($scope.startDateFilter);
-			var endTime = Date.parse($scope.endDateFilter);
-			if (!$scope.startDateFilter || gameTime > startTime) {
-				if (!$scope.endDateFilter || gameTime < endTime) {
+			var endTime = Date.parse($scope.endDateFilter) +  1000 * 60 * 60 * 24;
+			if (!$scope.startDateFilter || gameTime > startTime - 1) {
+				if (!$scope.endDateFilter || gameTime < endTime + 1) {
 					return true;				
 				}
 			} else {
