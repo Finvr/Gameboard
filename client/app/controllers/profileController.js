@@ -2,12 +2,12 @@
 angular.module('imgame.profile', [])
 	.controller('ProfileController', ProfileController);
 
-	function ProfileController($scope, Profile, Auth){
+	function ProfileController($scope, Profile, Auth, $route, $location){
 
     Auth.requireAuth();
 
-    var getMyProfile = function(){
-      Profile.getProfile()
+    var getProfile = function(){
+      Profile.getProfile($route.current.params.id)
       	.then(function(profile){
         	$scope.myProfile = profile;
         	$scope.savedProfile = $scope.myProfile;
@@ -31,7 +31,7 @@ angular.module('imgame.profile', [])
     };
 
     var init = function(){
-    	getMyProfile();
+    	getProfile();
     }
     init();
     //$scope.updateProfile({});
