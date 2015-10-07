@@ -59,8 +59,8 @@
             <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}} Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
             <div class="right col s3" ng-if="loggedIn" ng-click="openGame(game); getMyRequests()">
-              <a class='btn grey darken-3' ng-if="hasPendingRequest(game.id) === false" href='#openRequest' modal>Join</a>
-              <a class='btn grey darken-3' ng-if="hasPendingRequest(game.id) === true" ng-click= "getRequestInfo(game.id)" href='#openRequest' modal>View Details</a>
+              <a class='btn grey darken-3' ng-if="!hasPendingRequest(game.id)" href='#openRequest' modal>Join</a>
+              <a class='btn grey darken-3' ng-if="hasPendingRequest(game.id)" ng-click= "getRequestInfo(game.id)" href='#openRequest' modal>View Details</a>
             </div>
           </div>        
         </li>
@@ -96,6 +96,7 @@
             <div ng-if="submitError" class="error col s12 grey-text">{{submitError}}</div>
           </div>
         </div>
+      </div>
         <div class="modal-footer" ng-if="!hasPendingRequest(game.id)">
           <div class = "col s4 right" ng-click="sendRequest(game)">
                   <a class = "btn btn-med waves-effect waves-light grey darken-3">
@@ -104,7 +105,6 @@
           </div>
         </div>
       <!-- modal complete -->
-    </div>
   </div><!-- #outer -->
   </div>
 </div><!-- .browse -->
