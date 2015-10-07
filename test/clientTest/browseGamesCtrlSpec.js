@@ -41,4 +41,19 @@ describe('BrowseGameController', function() {
   		expect(scope.disFilter(dis)).toEqual(true);
   	});
   });
+
+	describe('$scope.dateFilter', function(){
+		it("should be defined", function(){
+			expect(scope.dateFilter).toBeDefined();
+		});
+		it("should return true when there is no start date or end date", function(){
+
+		});
+		it("should return false when the end date is less than the start date", function (){
+
+		});
+		it("should return false game date is less than start date", function(){
+
+		});
+	});
 });
