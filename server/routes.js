@@ -82,6 +82,7 @@ router.get('/gameposts/:id/requests',
 //Submit a request to join a specific gamepost
 router.post('/gameposts/:id/requests', 
   checkAuth, 
+  notesController.newReq,
   requestController.createRequest
 );
 

@@ -1,5 +1,6 @@
-var Notes   = require ('../models/notificationsModel.js'),
-    helpers = require ('../utils/helpers.js');
+var Notes     = require ('../models/notificationsModel.js'),
+    GamePosts = require('../models/gamePostsModel.js'),
+    helpers   = require ('../utils/helpers.js');
 
 module.exports = {
 
@@ -39,6 +40,19 @@ module.exports = {
     } else {
       res.send(200);
     }
+  },
+
+  newReq: function (req, res, next) {
+    var gamepostId = parseInt(req.url.split('/')[2]);
+    GamePosts.fetchById(gamepostId)
+      .then(function (gamepost) {
+        var userId = gamepost.host_id;
+        return Notes.create(userId, 'pending request', gamepostId);
+      })
+      .then(function () {
+        next();
+      })
+
   }
 
 };
