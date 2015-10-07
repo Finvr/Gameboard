@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var Server = require('karma').Server;
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var sassdoc = require('sassdoc');
@@ -41,6 +42,16 @@ gulp.task('sassdoc', function () {
    .resume();
 });
 
+//-----------------------------------------------------------------------------
+//  Karma Start
+//-----------------------------------------------------------------------------
+
+gulp.task('karma', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
+});
+
 
 // -----------------------------------------------------------------------------
 // Watchers
@@ -76,4 +87,4 @@ gulp.task('prod', ['sassdoc'], function () {
 // Default task
 // -----------------------------------------------------------------------------
 
-gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
+gulp.task('default', ['sass', 'watch', 'karma']);
