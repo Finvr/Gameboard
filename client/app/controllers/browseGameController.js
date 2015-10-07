@@ -16,17 +16,6 @@
 
 		Auth.requireAuth('browse');
 
-		$scope.startTimeFilter = null;
-		$scope.endTimeFilter= null;
-
-		$scope.$watchGroup(['$scope.startTimeFilter', '$scope.endTimeFilter'], function(used){
-        if (used) {
-          $scope.used = true;
-        } else {
-          $scope.used = false;
-        } 
-    }, true);
-
 		$scope.$on("currentLocation", function(event, data){
 			for (var i = 0; i < $scope.games.length; i ++){
 				$scope.games[i].distance = $scope.games[i].H ? distance(data.lat, data.lng, $scope.games[i].H, $scope.games[i].L ) : null;
@@ -115,38 +104,6 @@
 			}
 		}
 
-		$scope.timeFilter = function(time){
-
-			var start= (document.getElementById('time').value)
-			var startMS = (Number(start.slice(0,2)) * 3600000) + (Number(start.slice(3,5)) * 6000)
-			var end= (document.getElementById('time2').value)
-			var endMS= (Number(end.slice(0,2)) * 3600000) + (Number(end.slice(3,5)) * 6000)
-			//12am - 12pm
-			if(Number(time.toString().slice(11,13)) < 18 &&
-				 Number(time.toString().slice(11,13)) > 6 ){
-				  //calculate time in milliseconds that has passed for the day
-				  var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 - 21600000
-			}
-
-		  //time is between 12 and 6pm
-			if(Number(time.toString().slice(11,13)) >= 18){
-			     //calculate time in milliseconds that has passed for the day
-			     var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 - 21600000
-			}
-			//time is between 6pm and 12pm
-			if(Number(time.toString().slice(11,13)) <= 6){
-			     //calculate time in milliseconds that has passed for the day
-			     var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 + 43200000
-			}
-
-
-      if(!startMS && !endMS){return true}
-	    if ((startMS <= startTime) && (endMS >= startTime )) {return true}
-		  if ((startMS==0) && (endMS >= startTime)){return true}
-		  if((endMS==0) && startMS <= startTime ){return true}
-      else{return false}
-			
-	  };
 
 		$scope.openGame = function(game) {
 			$scope.submitError = null;
