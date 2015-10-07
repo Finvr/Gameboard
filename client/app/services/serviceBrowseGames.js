@@ -8,7 +8,7 @@
         method: 'GET',
         url: '/gameposts'
       })
-      .then(function(resp) { /* TODO: make this fix less hacky */
+      .then(function(resp) {
         return resp.data;
       });
 		};
