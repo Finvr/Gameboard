@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var nodemon = require('gulp-nodemon');
 var Server = require('karma').Server;
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
@@ -20,7 +21,7 @@ var sassdocOptions = { dest: 'dist/sassdoc' };
 // Sass compilation
 // -----------------------------------------------------------------------------
 
-gulp.task('sass', function () {
+gulp.task('sass-single', function () {
  return gulp
    .src(input)
    .pipe(sourcemaps.init())
@@ -52,16 +53,26 @@ gulp.task('karma', function (done) {
   }, done).start();
 });
 
+// -----------------------------------------------------------------------------
+// Development Server Start
+// -----------------------------------------------------------------------------
+gulp.task('server', function () {
+  nodemon({
+    script: 'server/server.js'
+  })
+});
+
+//------------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
 // Watchers
 // -----------------------------------------------------------------------------
 
-gulp.task('watch', function() {
+gulp.task('sass', function() {
  return gulp
    // Watch the input folder for change,
    // and run `sass` task when something happens
-   .watch(input, ['sass'])
+   .watch(input, ['sass-single'])
    // When there is a change,
    // log a message in the console
    .on('change', function(event) {
@@ -87,4 +98,4 @@ gulp.task('prod', ['sassdoc'], function () {
 // Default task
 // -----------------------------------------------------------------------------
 
-gulp.task('default', ['sass', 'watch', 'karma']);
+gulp.task('default', ['sass-single', 'karma', 'server', "sass"]);
