@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var nodemon = require('gulp-nodemon');
+var mocha = require('gulp-mocha');
 var Server = require('karma').Server;
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
@@ -62,7 +63,14 @@ gulp.task('server', function () {
   })
 });
 
-//------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Mocha Tests
+// -----------------------------------------------------------------------------
+
+gulp.task('mocha', function() {
+    return gulp.src(['test/serverTest/*.js'], { read: false })
+        .pipe(mocha({ reporter: 'list' }))
+});
 
 // -----------------------------------------------------------------------------
 // Watchers
@@ -98,4 +106,4 @@ gulp.task('prod', ['sassdoc'], function () {
 // Default task
 // -----------------------------------------------------------------------------
 
-gulp.task('default', ['sass-single', 'karma', 'server', "sass"]);
+gulp.task('default', ['sass-single', 'karma', 'mocha', 'sass', 'server']);
