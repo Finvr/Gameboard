@@ -14,15 +14,6 @@
 				"gamepost_id": $scope.review.gamepost_id
 			};
 
-			// var review = {
-			// 	"showed_up": true,
-			// 	"rating": 5,
-			// 	"reviewee_id": 1,
-			// 	"reviewer_id": 1,
-			// 	"gameposts_id": 2
-			// };
-
-			console.log("create review: ", $scope.review)
 			Review.createReview(review)
 			.then(function (data){
 				console.log("create review", data)
