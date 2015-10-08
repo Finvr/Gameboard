@@ -1,4 +1,5 @@
 var Users = require ('../models/userModel.js')
+var Reviews = require ('../models/reviewsModel.js')
 
 module.exports = {
 
@@ -32,7 +33,11 @@ module.exports = {
   getMyProfile: function (req, res) {
     delete req.user.facebook_id;
     delete req.user.facebook_token;
-    res.send(req.user);
+    module.exports.getRatingByUserId(req.user.id)
+      .then(function(result){
+        req.user.reviews = result;
+        res.send(req.user);
+      })
   }, 
 
   getProfile: function (req, res) {
@@ -53,6 +58,13 @@ module.exports = {
       })
   },
 
+  getRatingByUserId: function(id) {
+    return Reviews.getRatingByUserId(id)
+      .then(function(result){
+        return result;
+      })  
+  },
+
   updateProfile: function (req, res) {
     if ( req.user.id !== req.body.id ) {
       res.status(403).send("Invalid user object")
@@ -68,3 +80,4 @@ module.exports = {
   }
 
 }
+
