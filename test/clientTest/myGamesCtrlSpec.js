@@ -7,14 +7,10 @@ describe('MyGamesController', function() {
   	scope = $rootScope.$new();
     http = $httpBackend;
   	ctrl = $controller('MyGamesController', {
-  		$scope: scope
+  		$scope: scope,
+      $httpBackend: http
   	}); 
   }));
-
-  /*
-  beforeEach(inject(function(_$controller_){
-    $controller = _$controller_;
-  }));*/
 
   describe("$scope.init", function(){
     it("should be defined", function(){

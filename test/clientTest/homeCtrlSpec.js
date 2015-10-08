@@ -12,7 +12,5 @@ describe('HomeController', function() {
   	});
   }));
 
-  it("should understand truth", function(){
-    expect(true).toBe(true);
-  });
+
 });
