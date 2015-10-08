@@ -54,6 +54,7 @@ describe('MyGamesController', function() {
     it("should be defined", function(){
       expect(scope.close).toBeDefined();
     });
+    //TODO: find way to test that it calls materialize function
   });
 
   describe("$scope.uiConfig", function(){
