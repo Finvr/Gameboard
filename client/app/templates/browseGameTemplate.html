@@ -88,7 +88,7 @@
           </div>
           <div>
             <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" src="{{game.picture || game.host_pic}}">{{game.username}}</a>
-            <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" src="{{requester.picture}}">{{requester.username}}</a>
+            <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}</a>
           </div>
           <div class = "row center">
             <div class="input-field">
