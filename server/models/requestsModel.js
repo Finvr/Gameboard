@@ -45,6 +45,27 @@ module.exports = {
       })
   },
 
+  getRequestersPictures: function(gamepostId) {
+    return db('requests')
+      .join('users', 'user_id', 'users.id')
+      .select([
+        'user_id',
+        'users.username',
+        'users.picture'
+      ])
+      .where({
+        gamepost_id: gamepostId,
+        status: 'accepted'
+      })
+      .then(function(results){
+        return results;
+      })
+      .catch(function(err){
+        console.log("getRequestersPictures model Error: ", err);
+        return err;
+      })
+  },
+
   changeStatus: function (request) {
     return db('requests')
       .where({id: request.id})

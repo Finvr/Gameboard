@@ -83,7 +83,7 @@ router.get('/gameposts/:id/requests',
 //Get all pictures for a gamepost
 router.get('/gameposts/:id/pictures', 
   checkAuth, 
-  gameController.getGamePostPictures
+  requestController.getRequestersPictures
 );
 
 //Submit a request to join a specific gamepost
@@ -121,6 +121,3 @@ router.post('/me/notifications',
 );
 
 module.exports = router;
-
-
-
