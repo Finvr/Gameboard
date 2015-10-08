@@ -16,11 +16,8 @@
 			console.log("create review: ", $scope.review)
 			Review.createReview(review)
 			.then(function (data){
-				
+				console.log("create review", data)
 			})
 		}
 	}
-	return {
-    createReview: createReview
-  } 
 })

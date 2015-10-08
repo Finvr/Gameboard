@@ -7,7 +7,9 @@
         url: '/gameposts/'+review.gamepost_id+ '/reviews',
         data: review
       }).then(function(resp){
+      	console.log("response from review service: ", resp)
         return resp.data;
+
       });
 		}
 	})
