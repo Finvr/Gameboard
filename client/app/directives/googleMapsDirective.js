@@ -149,11 +149,12 @@
         if(markerPlace.name) {
           scope.game.business = markerPlace.name;
         }
-        scope.game.H = markerPlace.geometry.location.H;
-        scope.game.L = markerPlace.geometry.location.L;
+        scope.game.H = markerPlace.geometry.location.J;
+        scope.game.L = markerPlace.geometry.location.M;
         scope.game.location = markerPlace.formatted_address;  
 
         document.getElementById('game-location').value = markerPlace.formatted_address;  
+        console.log("scope.game: ", markerPlace.geometry)
 
         // send request to get distance between current location and destination    
         service.getDistanceMatrix({
