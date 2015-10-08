@@ -49,6 +49,28 @@ describe('MyGamesController', function() {
     it("should be defined", function(){
       expect(scope.uiConfig).toBeDefined();
     });
+    describe("initialization of calendar", function(){
+      it("should set height correctly", function(){
+        expect(scope.uiConfig.calendar.height).toEqual(530);
+      });
+      it("should set editable correctly", function(){
+        expect(scope.uiConfig.calendar.editable).toBe(false);
+      });
+      describe("setting of header", function(){
+        it("should set left correctly", function(){
+          expect(scope.uiConfig.calendar.header.left).toEqual('month basicWeek basicDay');
+        });
+        it("should set center correctly", function(){
+          expect(scope.uiConfig.calendar.header.center).toEqual('title');
+        });
+        it("should set right correctly", function(){
+          expect(scope.uiConfig.calendar.header.right).toEqual('today prev,next');
+        });
+      });
+    });
+
   });
+
+
 
 });
