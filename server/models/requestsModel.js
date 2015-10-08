@@ -33,7 +33,8 @@ module.exports = {
       'gameposts.*',
       'requests.*',
       'gameposts.id as gamepost_id',
-      'username'
+      'username',
+      'users.picture as requester_pic'
     ])
       .from('requests')
       .where({gamepost_id: gamepostId})
