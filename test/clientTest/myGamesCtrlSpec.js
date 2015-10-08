@@ -92,6 +92,11 @@ describe('MyGamesController', function() {
     it("should be defined", function(){
       expect(scope.setRequestToCancel).toBeDefined();
     });
+    it("should correctly set request to cancel", function(){
+      var request = { "bob": "martin", "jimmy": "jones" };
+      scope.setRequestToCancel(request);
+      expect(scope.requestToCancel).toEqual(request);
+    });
   });
 
  describe("$scope.cancelRequest", function(){
