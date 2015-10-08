@@ -6,12 +6,15 @@ module.exports = {
     return db('gameposts').select([
         'gameposts.*',
         'requests.*',
+        'users.picture as host_pic',
+        'users.username as host_name',
         'gameposts.id as gamepost_id',
         db.raw("(SUM(CASE requests.status WHEN 'accepted' THEN 1 ELSE 0 END)+1) as accepted_players")
       ])
-      .groupBy('gameposts.id', 'requests.id')
+      .groupBy('gameposts.id', 'requests.id', 'users.picture', 'users.username')
       .where({user_id: userId})
       .join('requests', 'gameposts.id', 'requests.gamepost_id')
+      .join('users', 'gameposts.host_id', 'users.id')
       .then(function (result) {
         if ( result.length ) {
           return result;
