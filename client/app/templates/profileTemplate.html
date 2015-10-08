@@ -1,53 +1,41 @@
 <div class="profile">
 	<div class="row">
+
+		<!-- left side -->
 		<div class="col m4">
-		   <center class="profile-box">
+		  <center class="profile-box">
 		    <div class="img-wrapper">
-		     <img  class="responsive-img" src="{{ myProfile.picture }}">
+		      <img  class="responsive-img circle profilePic" src="{{ myProfile.picture }}">
 		    </div>
+    		<div class="staticProfile">Rating: *******</div>
+		    <div class="staticProfile">Reliability: 33%</div>
 		  </center>
-	  	<table>
-	    	<tbody>
-	    		<tr class="profile-field username">
-	    			<td>Name: </td>
-	    			<td>{{ myProfile.username }}</td>
-	    		</tr>
-	    		<tr class="profile-field location">
-	    			<td>Location: </td>
-		      	<td class="read">{{ myProfile.location }}</td>
-		      	<td class="write"><input type="text" ng-model="myProfile.location" />
-		      	<td ng-show="!myProfile.viewId"><a ng-click="showInput('.location')">Edit</a></td>
-		      </tr>
-	    		<tr class="profile-field about-me">
-	    			<td>About Me: </td>
-	    			<td class="read">{{ myProfile.about_me }}</td>
-		      	<td class="write"><input type="text" ng-model="myProfile.about_me" ng-model-options="{ updateOn: 'blur' }"  /></td>
-	    			<td ng-show="!myProfile.viewId"><a ng-click="showInput('.about-me')">Edit</a>
-	    		</tr>
-	    		<tr class="profile-field games-i-like">
-	    			<td>Games I Like: </td>
-	    			<td class="read">{{ myProfile.games_list }}</td>
-		      	<td class="write"><input type="text" ng-model="myProfile.games_list" />
-	    			<td ng-show="!myProfile.viewId"><a ng-click="showInput('.games-i-like')">Edit</a>
-	    		</tr>
-	    		<tr class="profile-field reliability">
-	    			<td>Reliability: </td>
-	    			<td> 33%</td>
-	    		</tr>
-	    		<tr class="profile-field rating">
-	    			<td>Rating: </td>
-	    			<td> *******</td>
-	    		</tr>
-	    	</tbody> <!-- add stars http://codepen.io/TepigMC/pen/FIdHb -->
-	    </table>
-	   	<a ng-click="updateProfile(myProfile)" class="right btn" ng-show="!myProfile.viewId">Save Changes</a>
 		</div>
-		<div class="col m8" ng-show="!myProfile.viewId">
-				<ul>
-					<li>Review # 1</li>
-					<li>Review # 2</li>
-					<li>Review # 3</li>
-				</ul>
+
+		<div class="col m7 offset-m1">
+  		<h4 class="collection-item avater profile-field username">{{ myProfile.username }}</h4>
+  		
+			<ul class="collection">
+				<li class="profile-field location">
+    			<span class="title"><strong>Location:</strong> </span>
+    			<p  ng-click="showInput('.location')"><span class="read">{{ myProfile.location }}</span> 
+    				<span class="write"><input type="text" ng-model="myProfile.location"></span> 
+    			</p>
+    		</li>
+    		<li class="profile-field about-me">
+    			<span class="title"><strong>About Me:</strong> </span>
+    			<p  ng-click="showInput('.about-me')"><span class="read">{{ myProfile.about_me  }}</span> 
+    				<span class="write"><input type="text" ng-model="myProfile.about_me" ng-model-options="{ updateOn: 'blur' }"></span> 
+    			</p>
+    		</li>
+    		<li class="profile-field games-i-like">
+    			<span class="title"><strong>Games I Like:</strong> </span>
+    			<p  ng-click="showInput('.games-i-like')"><span class="read">{{ myProfile.games_list }}</span> 
+    				<span class="write"><input type="text" ng-model="myProfile.games_list"></span> 
+    			</p>
+    		</li>
+    	</ul>
+	   	<a ng-if="update" ng-click="updateProfile(myProfile)" class="center btn" ng-show="!myProfile.viewId">Save Changes</a>
 		</div>
 	</div>
 </div>
