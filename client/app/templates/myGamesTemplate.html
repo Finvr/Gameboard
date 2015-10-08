@@ -146,6 +146,8 @@
     </div>
     <div class="modal-content container">
       <p>
+        <div ng-if="gameToShowDetails.host_pic !== undefined"><span>Host:</span>
+          <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank"><img class="hostPic" src="{{gameToShowDetails.host_pic}}">{{gameToShowDetails.host_name}}</a></div>
         <div><span>Time:</span> {{ gameToShowDetails.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}</div>
         <div><span>Location:</span> {{ gameToShowDetails.game_location }}</div>
         <div><span>Players:</span> {{ gameToShowDetails.accepted_players + "/" + gameToShowDetails.player_count}}</div>
