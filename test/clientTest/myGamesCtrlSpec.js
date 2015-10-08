@@ -88,6 +88,12 @@ describe('MyGamesController', function() {
     });
   });
 
+  describe("$scope.setRequestToCancel", function(){
+    it("should be defined", function(){
+      expect(scope.setRequestToCancel).toBeDefined();
+    });
+  });
+
  describe("$scope.cancelRequest", function(){
     it("should be defined", function(){
       expect(scope.cancelRequest).toBeDefined();
