@@ -89,10 +89,11 @@
     $scope.init();
 
     $scope.getGamepostPictures = function(game){
-      console.log("getGamepostPictures: ", game)
-      return GamePost.getPictures(game.gamepost_id:)
+      var gamePostId = game.gamepost_id ? game.gamepost_id : game.id;
+      return GamePost.getPictures(gamePostId)
         .then(function(data){
-          console.log("getGamepostPictures return data: ", gamepost_id:);
+          $scope.gameToShowDetails.playersPictures = data;
+          return data;
         })
     }
 

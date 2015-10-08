@@ -279,11 +279,10 @@
     function getPictures(gamepostId) {
       return $http({
         method: "GET",
-        url: "/gamepost/" + gamepostId + "/pictures"
+        url: "/gameposts/" + gamepostId + "/pictures"
       })
       .then(function(resp){
-        console.log("getPictures resp: ", resp);
-        return resp;
+        return resp.data;
       })
       .catch(function(err){
         console.log("getPictures service error: ", err)
@@ -299,7 +298,8 @@
       gamepostRequest: gamepostRequest,
       requestConfirm: requestConfirm,
       requestCancel: requestCancel,
-      deleteGame: deleteGame
+      deleteGame: deleteGame,
+      getPictures: getPictures
   	};
   };
 
