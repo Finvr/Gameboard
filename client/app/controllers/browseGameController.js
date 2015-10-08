@@ -3,10 +3,13 @@
 		.controller('BrowseGameController', BrowseGameController);
 
 	function BrowseGameController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost) {
+		//Scope variable initialization
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
 		$scope.gamesArray = GamePost.gamesArray;
+		$scope.startTimeFilter = null;
+		$scope.endTimeFilter= null;
 		$scope.distance_choices = {
 			"Within 1 mile": 1,
 			"Within 5 miles": 5,
@@ -16,8 +19,7 @@
 
 		Auth.requireAuth('browse');
 
-		$scope.startTimeFilter = null;
-		$scope.endTimeFilter= null;
+
 
 		$scope.$watchGroup(['$scope.startTimeFilter', '$scope.endTimeFilter'], function(used){
         if (used) {
