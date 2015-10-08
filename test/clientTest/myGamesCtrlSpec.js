@@ -45,4 +45,10 @@ describe('MyGamesController', function() {
     });
   });
 
+  describe("$scope.uiConfig", function(){
+    it("should be defined", function(){
+      expect(scope.uiConfig).toBeDefined();
+    });
+  });
+
 });
