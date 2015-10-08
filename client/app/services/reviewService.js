@@ -1,5 +1,5 @@
 (function(){
-	angular.module(imgame.service)
+	angular.module('imgame.service')
 	.factory('Review', function Review($http){
 		function createReview(review){
 			return $http({
@@ -9,11 +9,12 @@
       }).then(function(resp){
       	console.log("response from review service: ", resp)
         return resp.data;
-
       });
 		}
-	})
-	return {
-		createReview: createReview
-	}
-})
+			return {
+				createReview: createReview
+			}
+	  });
+
+
+})();

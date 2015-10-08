@@ -4,7 +4,7 @@ var Reviews = require ('../models/reviewsModel.js');
 module.exports = {
 	
 	findOrCreateReview: function (req, res){
-		console.log(req)
+		console.log("findOrCreateReview: ", req.body);
 		var review = req.body;
     review.reviewer_id = req.user.id;
     review.reviewee_id = req.body.user_id
@@ -13,7 +13,7 @@ module.exports = {
     // review.showed_up = req.body.showed_up;
 		Reviews.findOrCreateReview(review)
       .then(function (data) {
-      	console.log('test')
+      	console.log('test',data)
         res.send(data);
       })
       .catch(function (err) {
@@ -23,4 +23,4 @@ module.exports = {
 	}
 }
 
- module.exports.findOrCreateReview();
+ //module.exports.findOrCreateReview();
