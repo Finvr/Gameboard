@@ -70,7 +70,8 @@ router.post('/gameposts',
 router.delete('/gameposts/:id',
   checkAuth, 
   gameController.deleteGamePost,
-  requestController.declineAll
+  requestController.declineAll,
+  notesController.cancelledGame
 );
 
 //Get all requests for a gamepost
