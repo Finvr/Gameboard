@@ -82,4 +82,10 @@ describe('MyGamesController', function() {
     });
   });
 
+  describe("$scope.cancelGame", function(){
+    it("should be defined", function(){
+      expect(scope.cancelGame).toBeDefined();
+    });
+  });
+
 });
