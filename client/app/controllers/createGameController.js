@@ -11,7 +11,8 @@
     // set today as the ealiest day user can select
     $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
-    document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
+    //controller should not know anything about the DOM, this makes our tests fail
+    //document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
 
     $scope.createGame = function(game){
       game = { 
