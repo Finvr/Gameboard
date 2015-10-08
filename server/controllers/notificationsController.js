@@ -6,7 +6,7 @@ var Notes     = require('../models/notificationsModel.js'),
 module.exports = {
 
   getNotifications: function (req, res) {
-    Notes.fetchById(req.user.id)
+    Notes.fetchByUserId(req.user.id)
       .then(function (result) {
         res.send(result);
       })
