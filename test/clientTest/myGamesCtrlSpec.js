@@ -68,9 +68,13 @@ describe('MyGamesController', function() {
         });
       });
     });
-
   });
 
+  describe("$scope.getGamepostPictures", function(){
+    it("should be defined", function(){
+      expect(scope.getGamepostPictures).toBeDefined();
+    });
+  });
 
 
 });
