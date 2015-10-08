@@ -16,14 +16,14 @@
 
     $scope.createGame = function(game){
       game = { 
-        "game_location": $scope.game.location,
+        "game_location": $scope.game.location, //start set in template
         "game": $scope.game.name,
         "gamepost_description": $scope.game.description,
         "player_count": $scope.game.numPlayers,
-        "game_datetime": $scope.game.datetime,
-        "business": $scope.game.business,
-        "H": $scope.game.H,
-        "L": $scope.game.L,
+        "game_datetime": $scope.game.datetime, 
+        "business": $scope.game.business, //start set in googleMapsDirective
+        "H": $scope.game.H, 
+        "L": $scope.game.L, 
       };
       console.log("create gamepost game: ", $scope.game)
       GamePost.create(game)
