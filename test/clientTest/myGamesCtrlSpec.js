@@ -42,6 +42,12 @@ describe('MyGamesController', function() {
       scope.showHostedEventModal({ data });
       expect(scope.gameToShowDetails).toEqual(data);
     });
+    it("should call $scope.getGamepostPictures with the value of $scope.gameToShowDetails", function(){
+      spyOn(scope, 'getGamepostPictures');
+      var data = {'bob': 'isMyUncle', "james": "isMyBrother"}
+      scope.showHostedEventModal({ data });
+      expect(scope.getGamepostPictures).toHaveBeenCalledWith(data);
+    });
   });
   
   describe("$scope.close", function(){
