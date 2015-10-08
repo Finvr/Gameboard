@@ -28,18 +28,26 @@ module.exports = {
     }
   },
 
-  getAll: function (userId) {
-    return db.select()
-      .from('notifications')
-      .where('user_id', userId)
+  fetchById: function (userId) {
+    return db('notifications')
+      .select([
+        'notifications.*',
+        'requests.gamepost_id as reqgame_id',
+        'gameposts.game'
+      ])
+      .leftOuterJoin('requests', 'request_id', 'requests.id')
+      .leftOuterJoin('gameposts', function () {
+        this.on('notifications.gamepost_id', '=', 'gameposts.id').orOn('requests.gamepost_id', '=', 'gameposts.id')
+      })
+      .where('notifications.user_id', userId)
       .catch(function (err) {
         return err;
       });
   },
 
-  update: function (notId) {
+  update: function (noteId) {
     return db('notifications')
-      .where('id', notId)
+      .where('id', noteId)
       .update({
         'viewed': true,
         'updated_at': db.raw('now()')
