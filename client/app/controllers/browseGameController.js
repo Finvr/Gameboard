@@ -136,7 +136,17 @@
 			$scope.submitError = null;
 			$scope.requestMessage = {comments: ''};
 			$scope.game = game;
+			$scope.getGamepostPictures(game);
 		};
+
+		$scope.getGamepostPictures = function(game){
+      var gamePostId = game.gamepost_id ? game.gamepost_id : game.id;
+      return GamePost.getPictures(gamePostId)
+        .then(function(data){
+          $scope.game.playersPictures = data;
+          return data;
+        })
+    }
 
 		$scope.sendRequest = function(game) {
 			BrowseGames.sendRequest($scope.requestMessage, game.id)
