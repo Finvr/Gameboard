@@ -32,4 +32,11 @@ describe('MyGamesController', function() {
   		expect(scope.setGameToCancel).toBeDefined();
   	});
   });
+
+  describe("$scope.showHostedEventModal", function(){
+    it("should be defined", function(){
+      expect(scope.showHostedEventModal).toBeDefined();
+    });
+  });
+
 });
