@@ -40,6 +40,7 @@ module.exports = {
         this.on('notifications.gamepost_id', '=', 'gameposts.id').orOn('requests.gamepost_id', '=', 'gameposts.id')
       })
       .where('notifications.user_id', userId)
+      .orderBy('notifications.created_at', 'DESC')
       .catch(function (err) {
         return err;
       });
