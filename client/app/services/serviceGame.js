@@ -275,6 +275,21 @@
         return err.data;
       })
     }
+
+    function getPictures(gamepostId) {
+      return $http({
+        method: "GET",
+        url: "/gamepost/" + gamepostId + "/pictures"
+      })
+      .then(function(resp){
+        console.log("getPictures resp: ", resp);
+        return resp;
+      })
+      .catch(function(err){
+        console.log("getPictures service error: ", err)
+        return err.data;
+      })
+    }
   	
   	return {
       gamesArray: gamesArray,
