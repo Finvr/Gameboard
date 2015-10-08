@@ -30,10 +30,8 @@
       var searchBox = new google.maps.places.SearchBox(input);
 
       function initMap() {
-        console.log("scope: ", $rootScope.currentLocation)
         var bounds;
         scope.currentLocation = $rootScope.currentLocation;
-        console.log('scope.currentLocation', scope.currentLocation)
         map = new google.maps.Map(document.getElementById('gmap'), mapOptions);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
@@ -54,9 +52,6 @@
               map: map,
               icon: currIcon
             });
-           
-            // needs to be deleted in production
-            console.log("Current Location: ", position)
           });
         } else {
           $('#pac-input').show();
@@ -88,7 +83,6 @@
 
           // add places the match the search ont the map
           places.forEach(function(place) {
-            console.log("place", place)
             var newMark = new google.maps.Marker({
               map: map,
               position: place.geometry.location
@@ -105,7 +99,6 @@
 
             // add listener to show info window of the marker that was clicked
             google.maps.event.addListener(newMark, 'click', function(){
-              console.log("newMark", newMark)
               infoWindow.close && infoWindow.close();
               showInfoWindow([place.geometry.location], place, newMark);
             })
@@ -130,7 +123,6 @@
       // make the inforWindow html template
       function makeInfoHtml (name, distance) {
         var nameTag = name || '';
-        console.log("name: ", scope.currentAddress)
         if (name !== 'name' || name == undefined) {
           nameTag = '<div><strong>'+nameTag+'</strong></div>';
         }
@@ -150,12 +142,11 @@
           scope.game.business = markerPlace.name;
         }
 
-        scope.game.H = markerPlace.geometry.location.lat();
-        scope.game.L = markerPlace.geometry.location.lng();
+        scope.game.lat = markerPlace.geometry.location.lat();
+        scope.game.lng = markerPlace.geometry.location.lng();
         scope.game.location = markerPlace.formatted_address;  
 
         document.getElementById('game-location').value = markerPlace.formatted_address;  
-        console.log("scope.game: ", markerPlace.geometry)
 
         // send request to get distance between current location and destination    
         service.getDistanceMatrix({
@@ -169,7 +160,6 @@
           } else {
             scope.currentAddress = res.originAddresses[0];
             var distanceObj = res.rows[0].elements[0];
-            console.log("google distance response: ", distanceObj);
             var info = makeInfoHtml(markerPlace.name, distanceObj.distance.text);
             // add info window with distance and time for each pin drop on map
             infoWindow = new google.maps.InfoWindow({
@@ -190,8 +180,7 @@
 
         // Add the marker at the clicked location, and add the next-available label
         // from the array of alphabetical characters.
-        geocoder.geocode({'latLng': location}, function(results, status) {
-          console.log("Results from getLocation from latLng: ", results)       
+        geocoder.geocode({'latLng': location}, function(results, status) {      
           clickMarker = new google.maps.Marker({
             position: location,
             map: map

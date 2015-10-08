@@ -22,10 +22,9 @@
         "player_count": $scope.game.numPlayers,
         "game_datetime": $scope.game.datetime, 
         "business": $scope.game.business, //start set in googleMapsDirective
-        "H": $scope.game.H, 
-        "L": $scope.game.L, 
+        "lat": $scope.game.lat, 
+        "lng": $scope.game.lng, 
       };
-      console.log("create gamepost game: ", $scope.game)
       GamePost.create(game)
         .then(function(data){
           $location.path("/my-games")
