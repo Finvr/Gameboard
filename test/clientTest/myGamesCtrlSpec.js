@@ -76,5 +76,10 @@ describe('MyGamesController', function() {
     });
   });
 
+  describe("$scope.setGameToCancel", function(){
+    it("should be defined", function(){
+      expect(scope.setGameToCancel).toBeDefined();
+    });
+  });
 
 });
