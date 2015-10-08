@@ -15,6 +15,17 @@ module.exports = {
       })
   },
 
+  getRequestersPictures: function(req, res) {
+    var gamepostId = parseInt(req.url.split('/')[2]);
+    Requests.getRequestersPictures(gamepostId)
+      .then(function(data){
+        res.send(data)
+      })
+      .catch(function(err){
+        helpers.handleError(err, res);
+      })
+  },
+
   getGamePostRequests: function (req, res) {
     //Return all requests for a gamepost
     var gamepostId = parseInt(req.url.split('/')[2])

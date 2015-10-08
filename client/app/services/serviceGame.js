@@ -275,6 +275,20 @@
         return err.data;
       })
     }
+
+    function getPictures(gamepostId) {
+      return $http({
+        method: "GET",
+        url: "/gameposts/" + gamepostId + "/pictures"
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+      .catch(function(err){
+        console.log("getPictures service error: ", err)
+        return err.data;
+      })
+    }
   	
   	return {
       gamesArray: gamesArray,
@@ -284,7 +298,8 @@
       gamepostRequest: gamepostRequest,
       requestConfirm: requestConfirm,
       requestCancel: requestCancel,
-      deleteGame: deleteGame
+      deleteGame: deleteGame,
+      getPictures: getPictures
   	};
   };
 
