@@ -75,20 +75,19 @@
         <div class="modal-content">
           <div>
             <span class="grey-text">Host:</span> 
-            <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" src="{{ game.picture }}">
-            {{game.username}}</a>
+            <a href="#/profile/{{game.host_id}}" target="_blank">{{game.username}}</a>
           </div>
           <div>
             <span class="grey-text">Location:</span> {{game.game_location}}
           </div>
           <div>
-            <span class="grey-text">Details:  </span>{{game.gamepost_description}}
+            <span class="grey-text">Details:  </span>{{game.gamepost_description ? game.gamepost_description : "N/A"}}
           </div>
           <div >
             <span class="grey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
           </div>
           <div>
-            <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" src="{{game.picture || game.host_pic}}"></a>
+            <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" src="{{game.picture || game.host_pic}}">{{game.username}}</a>
             <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" src="{{requester.picture}}">{{requester.username}}</a>
           </div>
           <div class = "row center">

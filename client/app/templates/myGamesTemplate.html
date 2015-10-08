@@ -32,9 +32,9 @@
               <p>
                 <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                 <strong>Location:</strong> {{ game.game_location }}<br>
-                <span>Players:</span> {{game.accepted_players + "/" + game.player_count}}
+                <strong>Players:</strong> {{game.accepted_players + "/" + game.player_count}}
                 <br>
-                <span>Description:</span> {{game.gamepost_description}}<br>
+                <strong>Description:</strong> {{game.gamepost_description ? game.gamepost_description : "N/A"}}<br>
               </p>
             </div>
         </ul>
@@ -56,9 +56,9 @@
                 <p>
                   <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
                   <strong>Location:</strong> {{ game.game_location }}<br>
-                  <span>Players:</span> {{request.player_count}}
+                  <strong>Players:</strong> {{request.player_count}}
                   <br>
-                  <span>Description:</span> {{request.gamepost_description}}<br>
+                  <strong>Description:</strong> {{request.gamepost_description ? request.gamepost_description : "N/A"}}<br>
                 </p>
               </div>
             </li>
@@ -146,18 +146,19 @@
     </div>
     <div class="modal-content container">
       <p>
-        <div ng-if="gameToShowDetails.host_pic !== undefined"><span>Host:</span>
-          <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank"><img class="hostPic" src="{{gameToShowDetails.host_pic}}">{{gameToShowDetails.host_name}}</a>
+        <div ng-if="gameToShowDetails.host_pic !== undefined"><strong>Host:</strong>
+          <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank">{{gameToShowDetails.host_name}}</a>
         </div>
-        <div><span>Time:</span> {{ gameToShowDetails.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}</div>
-        <div><span>Location:</span> {{ gameToShowDetails.game_location }}</div>
-        <div><span>Players:</span> {{ gameToShowDetails.accepted_players + "/" + gameToShowDetails.player_count}}</div>
+        <div><strong>Time:</strong> {{ gameToShowDetails.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}</div>
+        <div><strong>Location:</strong> {{ gameToShowDetails.game_location }}</div>
+        <div><strong>Players:</strong> {{ gameToShowDetails.accepted_players + "/" + gameToShowDetails.player_count}}</div>
         <div>
-          <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank"><img class="hostPic" src="{{gameToShowDetails.picture || gameToShowDetails.host_pic}}"></a>
+          <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank"><img class="hostPic" src="{{gameToShowDetails.picture || gameToShowDetails.host_pic}}">{{gameToShowDetails.host_name}}</a>
           <a ng-repeat="requester in gameToShowDetails.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" src="{{requester.picture}}">{{requester.username}}</a>
         </div>
-        <div><span>Description:</span> {{ gameToShowDetails.gamepost_description}}</div>
-        <div ng-if="gameToShowDetails.comments !== undefined"><span>Message sent:</span> {{ gameToShowDetails.comments}}</div>
+        <div><strong>Description:</strong> {{ gameToShowDetails.gamepost_description ? gameToShowDetails.gamepost_description : "N/A"}}
+        </div>
+        <div ng-if="gameToShowDetails.comments !== undefined"><strong>Message sent:</strong> {{ gameToShowDetails.comments ? gameToShowDetails.comments : "N/A"}}</div>
       </p>
     </div>
     <div class="modal-footer">
