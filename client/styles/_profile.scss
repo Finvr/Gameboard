@@ -1,5 +1,7 @@
 .profile {
 	padding: 10%;
+  padding-top: 5%;
+
 	.star-rating {
     margin: 0;
     padding: 0;
@@ -18,6 +20,24 @@
     &.filled {
       color: #fd0;
     }
+  }
+
+  .collection {
+    border: none;
+    margin-top: 5%;
+
+  }
+
+  .reviewCounts {
+    font-size: 10px;
+  }
+
+  ul li {
+    margin-bottom: 5%;
+  }
+
+  .staticProfile {
+    margin-top: 10%
   }
 
   td.write {

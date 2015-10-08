@@ -16,21 +16,23 @@ angular.module('imgame.profile', [])
     };
 
     $scope.updateProfile = function(profileData){
-    	Profile.updateProfile(profileData)
-    		.then(function(data){
+        Profile.updateProfile(profileData)
+            .then(function(data){
+                $scope.update = null;
     			init();
-    			$('.profile-field').find('.write').hide();
-    			$('.profile-field').find('.read').show();
-    			console.log(data);
-    		});
+                console.log(data);
+            });
     };
 
     $scope.showInput = function(selector){
-    	$(selector).find('.read').hide();
-    	$(selector).find('.write').show();
+        $scope.update = true;
+        $(selector).find('.read').hide();
+        $(selector).find('.write').show();
     };
 
     var init = function(){
+    	$('.profile-field').find('span.write').hide();
+    	$('.profile-field').find('span.read').show();
     	getProfile();
     }
     init();

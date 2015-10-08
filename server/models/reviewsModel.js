@@ -29,8 +29,9 @@ module.exports = {
 
 	getRatingByUserId: function (userId){
 		return db('reviews').select([
-				db.raw("avg(rating) as rating"),
-				db.raw("avg(CASE reviews.showed_up WHEN true THEN 1 ELSE 0 END) as reliability")
+				db.raw("round(avg(rating), 1) as rating"),
+				db.raw("round(avg(CASE reviews.showed_up WHEN true THEN 1 ELSE 0 END), 4) as reliability"),
+				db.raw("count(rating) as reviewCounts")
 				])
 			.where({reviewee_id: userId})
 	 	  .then(function(results){
