@@ -49,7 +49,11 @@ module.exports = {
         } else {
           delete result[0].facebook_id;
           delete result[0].facebook_token;
-          res.send(result[0]);
+          module.exports.getRatingByUserId(userId)
+            .then(function(review){
+              result[0].reviews = review;
+              res.send(result[0]);
+            })
         }
       })
       .catch(function (err) {
