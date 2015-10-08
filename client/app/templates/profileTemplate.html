@@ -7,8 +7,8 @@
 		    <div class="img-wrapper">
 		      <img  class="responsive-img circle profilePic" src="{{ myProfile.picture }}">
 		    </div>
-    		<div class="staticProfile">Rating: *******</div>
-		    <div class="staticProfile">Reliability: 33%</div>
+    		<div class="staticProfile">Rating: {{ myProfile.reviews.rating}}<span class="reviewCounts"> {{"(" + myProfile.reviews.reviewcounts + ")" }}</span></div>
+		    <div class="staticProfile">Reliability: {{ myProfile.reviews.reliability * 100 + "%"}}</div>
 		  </center>
 		</div>
 
