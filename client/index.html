@@ -1,65 +1,76 @@
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>I'm Game</title>
- 	<link rel="stylesheet" href="lib/allmighty-autocomplete/style/autocomplete.css">
-	<link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css"/>
- 	<link rel="stylesheet" href="lib/Materialize/dist/css/materialize.min.css" />
- 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-	<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+  <meta charset="utf-8">
+  <title>I'm Game</title>
+  <link rel="stylesheet" href="lib/allmighty-autocomplete/style/autocomplete.css">
+  <link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css"/>
+  <link rel="stylesheet" href="lib/Materialize/dist/css/materialize.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" type="text/css" href="styles/main.css"/>
 </head>
 <body ng-app="imgame">
-	<header>
-	  <nav>
-	    <div class="nav-wrapper grey lighten-4">
-	      <ul id="nav-mobile" class="left">
-	        <li><a href="/#/" class="brand-logo center grey-text">I'm Game!</a></li>
-	        <li>
-	        	<a class="dropdown-button"  href='javascript:void(0);' data-activates="main-navigation" data-constrainwidth="false" data-beloworigin="true" dropdown data-hover="true">
-	        		<i class="material-icons right grey-text">menu</i>
-	        	</a>
-	        </li>
-	      </ul>
-	      <ul id="main-navigation" class="dropdown-content">
-				  <li ng-if="loggedIn"><a href="/#/create-game">Host</a></li>
-				  <li ng-if="!loggedIn"><a href="/#/">Signin</a></li>
-				  <li><a href="/#/browse-games">Browse</a></li>
-				  <li class="divider"></li>
-				 	<li ng-if="loggedIn"><a href="/#/my-games">My Games</a></li>
-				 	<li ng-if="loggedIn"><a href="/#/profile">Profile</a></li>
-				</ul>
-	      <ul class="right">
-	      	<li ng-if="loggedIn"><a href='/#/logout'><i class="material-icons tooltipped grey-text" data-tooltip="Logout">exit_to_app</i></a></li>
-	      </ul>
-	    </div>
-  	</nav>
-	</header>
-	<main>
-		<div ng-view></div>
-	</main>
+  <header>
+    <nav>
+      <div class="nav-wrapper grey lighten-4">
+        <ul id="nav-mobile" class="left">
+          <li><a href="/#/" class="brand-logo center grey-text">I'm Game!</a></li>
+          <li>
+            <a class="dropdown-button"  href='javascript:void(0);' data-activates="main-navigation" data-constrainwidth="false" data-beloworigin="true" dropdown data-hover="true">
+              <i class="material-icons right grey-text">menu</i>
+            </a>
+          </li>
+        </ul>
+        <ul id="main-navigation" class="dropdown-content">
+          <li ng-if="loggedIn"><a href="/#/create-game">Host</a></li>
+          <li ng-if="loggedIn"class="divider"></li>
+          <li ng-if="!loggedIn"><a href="/#/">Signin</a></li>
+          <li><a href="/#/browse-games">Browse</a></li>
+          <li class="divider"></li>
+          <li ng-if="loggedIn"><a href="/#/my-games">My Games</a></li>
+          <li class="divider"></li>
+          <li ng-if="loggedIn"><a href="/#/profile">Profile</a></li>
+        </ul>
+        <ul class="right">
+          <li ng-if="loggedIn"><a href="/#/profile"><img class="nav-profile-pic" src="{{myInfo.picture}}"></a></li>
+          <li ng-if="loggedIn"><a class="dropdown-button" href='javascript:void(0);' data-activates="notifications" data-beloworigin="true" dropdown data-hover="false"><i class="material-icons tooltipped grey-text" data-tooltip="Logout">add_alert</i></a></li>
+          <li ng-if="loggedIn"><a href='/#/logout'><i class="material-icons tooltipped grey-text" data-tooltip="Logout">exit_to_app</i></a></li>
+        </ul>
+        <ul id='notifications' class='dropdown-content'>
+          <li><a href="javascript:void(0);">one</a></li>
+          <li class="divider"></li>
+          <li><a href="javascript:void(0);">two</a></li>
+          <li class="divider"></li>
+          <li><a href="javascript:void(0);">three</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div ng-view></div>
+  </main>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5eGAZmqMYgOJRvbrFNAujmSr8nFCEBnA&libraries=places"></script>
-	<script src="lib/jquery/dist/jquery.min.js"></script>
-	<script src="lib/angular/angular.min.js"></script>
-	<script src="lib/angular-route/angular-route.min.js"></script>
-	<script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="lib/Materialize/dist/js/materialize.min.js"></script>
-	<script src="lib/angular-materialize/src/angular-materialize.js"></script>
-	<script src="lib/moment/min/moment.min.js"></script>
-	<script src="lib/angular-ui-calendar/src/calendar.js"></script>
-	<script src="lib/fullcalendar/dist/fullcalendar.min.js"></script>
-	<script src="lib/fullcalendar/dist/gcal.js"></script>
-	<script src="lib/allmighty-autocomplete/script/autocomplete.js"></script>
-	<script src="app/app.js"></script>
-	<script src="app/controllers/homeController.js"></script>
-	<script src="app/controllers/createGameController.js"></script><!-- TODO: move dom manipulation out of controller so that load order doesn't matter-->
-	<script src="app/directives/googleMapsDirective.js"></script>
-	<script src="app/controllers/profileController.js"></script>
-	<script src="app/controllers/myGamesController.js"></script>
-	<script src="app/controllers/browseGameController.js"></script>
-	<script src="app/services/serviceAuth.js"></script>
-	<script src="app/services/serviceGame.js"></script>
-	<script src="app/services/profileService.js"></script>
-	<script src="app/services/serviceBrowseGames.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5eGAZmqMYgOJRvbrFNAujmSr8nFCEBnA&libraries=places"></script>
+  <script src="lib/jquery/dist/jquery.min.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-route/angular-route.min.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="lib/Materialize/dist/js/materialize.min.js"></script>
+  <script src="lib/angular-materialize/src/angular-materialize.js"></script>
+  <script src="lib/moment/min/moment.min.js"></script>
+  <script src="lib/angular-ui-calendar/src/calendar.js"></script>
+  <script src="lib/fullcalendar/dist/fullcalendar.min.js"></script>
+  <script src="lib/fullcalendar/dist/gcal.js"></script>
+  <script src="lib/allmighty-autocomplete/script/autocomplete.js"></script>
+  <script src="app/app.js"></script>
+  <script src="app/controllers/homeController.js"></script>
+  <script src="app/controllers/createGameController.js"></script><!-- TODO: move dom manipulation out of controller so that load order doesn't matter-->
+  <script src="app/directives/googleMapsDirective.js"></script>
+  <script src="app/controllers/profileController.js"></script>
+  <script src="app/controllers/myGamesController.js"></script>
+  <script src="app/controllers/browseGameController.js"></script>
+  <script src="app/services/serviceAuth.js"></script>
+  <script src="app/services/serviceGame.js"></script>
+  <script src="app/services/profileService.js"></script>
+  <script src="app/services/serviceBrowseGames.js"></script>
 </body>
 </html>
