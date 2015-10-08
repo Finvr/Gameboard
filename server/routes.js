@@ -1,6 +1,7 @@
 var userController    = require('./controllers/userController.js'),
     gameController    = require('./controllers/gamePostsController.js'),
     requestController = require('./controllers/requestController.js'),
+    notesController   = require('./controllers/notificationsController.js'),
     passport          = require('passport');
 
 var express = require('express');
@@ -81,6 +82,7 @@ router.get('/gameposts/:id/requests',
 //Submit a request to join a specific gamepost
 router.post('/gameposts/:id/requests', 
   checkAuth, 
+  notesController.newReq,
   requestController.createRequest
 );
 
@@ -94,7 +96,21 @@ router.delete('/requests/:id',
 //Update the status of a request
 router.put('/requests/:id', 
   checkAuth, 
-  requestController.changeStatus
+  requestController.changeStatus,
+  notesController.acceptedReq
+);
+
+//Notifications routes
+//Get notifications
+router.get('/me/notifications',
+  checkAuth,
+  notesController.getNotifications
+);
+
+//Set notifications to viewed
+router.post('/me/notifications',
+  checkAuth,
+  notesController.updateNotifications
 );
 
 module.exports = router;

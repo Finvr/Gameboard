@@ -56,13 +56,13 @@ module.exports = {
       }) 
   },
 
-  changeStatus: function (req, res) {
+  changeStatus: function (req, res, next) {
     //Change the status of a request to accepted or declined
     var request = req.body;
     if ( request.status === 'accepted' || request.status === 'declined' ) {
       Requests.changeStatus(request)
         .then(function () {
-          res.send(200);
+          next(); //go to notificationsController.acceptedReq
         })
         .catch(function (err) {
           helpers.handleError(err, res)

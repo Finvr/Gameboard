@@ -107,6 +107,7 @@ module.exports = {
         status: 'declined',
         updated_at: db.raw('now()')
       })
+      .returning('id')
       .catch(function (err) {
         console.log(err);
         return err;
@@ -126,6 +127,21 @@ module.exports = {
         console.log(err);
         return err;
       })
+  },
+
+  fetchById: function (requestId) {
+    return db('requests')
+      .where('id', requestId)
+      .then(function (result) {
+        if ( result.length === 0 ) {
+          return null
+        } else {
+          return result[0]
+        }
+      })
+      .catch(function (err) {
+        return err;
+      });
   }
 
 };
