@@ -97,6 +97,8 @@ describe('MyGamesController', function() {
       scope.setRequestToCancel(request);
       expect(scope.requestToCancel).toEqual(request);
     });
+    //TO DO: should gracefully handle request not being passed
+    //TO DO: should gracefully handle request being of the wrong type
   });
 
  describe("$scope.cancelRequest", function(){
