@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'test';
 var request = require('supertest');
 var expect = require('chai').expect;
 var app = require('../../server/server.js');
