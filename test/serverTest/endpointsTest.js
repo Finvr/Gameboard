@@ -7,7 +7,7 @@ var app = require('../../server/server.js');
 var cookies //= PASTE COOKIES HERE
 
 describe('Server - "/" routes test: ', function(){
-  it(' "/" respond with 200', function(done){
+  xit(' "/" respond with 200', function(done){
     request(app)
       .get('/')
       .expect(200)
@@ -23,7 +23,7 @@ describe('Server - "/" routes test: ', function(){
 });
 
 describe('Authentication', function() {
-  it('Should respond with 403 at /me if not logged in', function(done) {
+  xit('Should respond with 403 at /me if not logged in', function(done) {
     request.agent(app)
       .get('/me')
       .expect(403)
@@ -34,7 +34,7 @@ describe('Authentication', function() {
       });
   });
 
-  it('should prevent sending data if not logged in', function(done) {
+  xit('should prevent sending data if not logged in', function(done) {
     request(app)
       .get('/me/gameposts')
       .expect(403)
@@ -45,7 +45,7 @@ describe('Authentication', function() {
       });
   });
 
-  it('should respond with 200 at /me if logged in', function(done) {
+  xit('should respond with 200 at /me if logged in', function(done) {
     request(app)
       .get('/me')
       .set('Cookie', cookies)
@@ -60,7 +60,7 @@ describe('Authentication', function() {
 });
 
 describe('Gameposts', function() {
-  it('should accept gamepost objects', function(done) {
+  xit('should accept gamepost objects', function(done) {
     var testGamePost = {
       game_location: 'Testland', 
       game: 'Testopoly', 
@@ -81,7 +81,7 @@ describe('Gameposts', function() {
       });
   });
 
-  it('should respond with gamepost objects', function(done) {
+  xit('should respond with gamepost objects', function(done) {
     request(app)
       .get('/gameposts')
       .set('Cookie', cookies)
@@ -97,7 +97,7 @@ describe('Gameposts', function() {
 
 describe('Requests', function() {
   var testRequest = {comments: "I WANNA PLAY"}
-  it('should create requests', function(done) {
+  xit('should create requests', function(done) {
     request(app)
       .post('/gameposts/1/requests')
       .set('Cookie', cookies)
@@ -110,7 +110,7 @@ describe('Requests', function() {
       })
   })
 
-  it('should get requests by gamepost_id', function(done) {
+  xit('should get requests by gamepost_id', function(done) {
     request(app)
       .get('/gameposts/1/requests')
       .set('Cookie', cookies)
@@ -122,7 +122,7 @@ describe('Requests', function() {
       })
   })
 
-  it('should get requests by user', function(done) {
+  xit('should get requests by user', function(done) {
     request(app)
       .get('/me/requests')
       .set('Cookie', cookies)

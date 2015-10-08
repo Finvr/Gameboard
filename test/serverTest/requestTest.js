@@ -75,7 +75,7 @@ describe('request model test',
   		})
   	});
 
-  	it('should return a request given a gamepost id', function(done){
+  	xit('should return a request given a gamepost id', function(done){
   		var requestTest = {
 	    	comments:'this is a test',
 	    	status:'none',
@@ -99,7 +99,7 @@ describe('request model test',
        })
     });
     
-    it('should return requests for specific user given a user id', function(done){
+    xit('should return requests for specific user given a user id', function(done){
   		var requestTest = {
 	    	comments:'this is a test',
 	    	status:'none',
@@ -123,7 +123,7 @@ describe('request model test',
       })
     });
     
-    it('should delete a request when given a request object', function(done){
+    xit('should delete a request when given a request object', function(done){
   		var requestId;
   		var requestTest = {
 	    	comments:'this is a test',
