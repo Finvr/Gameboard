@@ -1,12 +1,14 @@
 describe('BrowseGameController', function() {
   beforeEach(module('imgame'));
 
-  var ctrl, scope; 
+  var ctrl, scope, http; 
 
-  beforeEach(inject(function($controller, $rootScope){
+  beforeEach(inject(function($controller, $rootScope, $httpBackend){
    	scope = $rootScope.$new();
+    http = $httpBackend;
   	ctrl = $controller('BrowseGameController', {
-  		$scope: scope
+  		$scope: scope,
+      $http: http
   	});
   }));
 
