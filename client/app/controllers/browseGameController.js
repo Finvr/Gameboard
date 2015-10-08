@@ -123,8 +123,8 @@
 			var startTime= (document.getElementById('startTime').value) ? (document.getElementById('startTime').value).toString().split(":") : null;
 			var endTime = (document.getElementById('endTime').value) ? (document.getElementById('endTime').value).toString().split(":") : null;
 
-			if (!startTime || Number(startTime[0]) < Number(time[0])) {
-				if (!endTime || Number(endTime[0]) > Number(time[0])) {
+			if (!startTime || Number(startTime[0]) <= Number(time[0])) {
+				if (!endTime || Number(endTime[0]) >= Number(time[0])) {
 					return true;
 				}
 			} else {
