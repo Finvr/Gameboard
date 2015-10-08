@@ -7,6 +7,7 @@
     /* Modal functions */
     $scope.showHostedEventModal = function(date){
       $scope.gameToShowDetails = date.data;
+      $scope.getGamepostPictures($scope.gameToShowDetails);
       $('#game-details').openModal();
     }
 
@@ -86,6 +87,14 @@
     };
     
     $scope.init();
+
+    $scope.getGamepostPictures = function(game){
+      console.log("getGamepostPictures: ", game)
+      return GamePost.getPictures(game.gamepost_id:)
+        .then(function(data){
+          console.log("getGamepostPictures return data: ", gamepost_id:);
+        })
+    }
 
     $scope.setGameToCancel = function(game){
       $scope.gameToCancel = game;
