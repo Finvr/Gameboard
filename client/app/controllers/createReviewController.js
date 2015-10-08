@@ -2,7 +2,7 @@
 	angular.module('imgame.createReview', [])
 	.controller('CreateReviewController', CreateReviewController);
 
-	function CreateReviewController($scope, $window, Auth, Review){
+	function CreateReviewController($scope, $window, $location, Auth, Review){
 		$scope.review = {};
 
 		$scope.createReview = function (review){
@@ -14,6 +14,10 @@
 				"gamepost_id": $scope.review.gamepost_id
 			}
 			console.log("create review: ", $scope.review)
+			Review.createReview(review)
+			.then(function (data){
+				
+			})
 		}
 	}
 	return {
