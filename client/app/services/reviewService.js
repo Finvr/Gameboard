@@ -4,7 +4,7 @@
 		function createReview(review){
 			return $http({
         method: 'POST',
-        url: '/users/:id/reviews',
+        url: '/gameposts/'+review.gamepost_id+ '/reviews',
         data: review
       }).then(function(resp){
         return resp.data;
