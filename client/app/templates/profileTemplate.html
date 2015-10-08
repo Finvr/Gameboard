@@ -7,8 +7,8 @@
 		    <div class="img-wrapper">
 		      <img  class="responsive-img circle profilePic" src="{{ myProfile.picture }}">
 		    </div>
-    		<div class="staticProfile">Rating: {{ myProfile.reviews.rating}}<span class="reviewCounts"> {{"(" + myProfile.reviews.reviewcounts + ")" }}</span></div>
-		    <div class="staticProfile">Reliability: {{ myProfile.reviews.reliability * 100 + "%"}}</div>
+    		<div class="staticProfile">Rating: {{ myProfile.reviews.rating ? myProfile.reviews.rating : "N/A"}}<span class="reviewCounts"> {{"(" + (myProfile.reviews.reviewcounts ? myProfile.reviews.reviewcounts : 0) + ")" }}</span></div>
+		    <div class="staticProfile">Reliability: {{ myProfile.reviews.reliability ? (myProfile.reviews.reliability * 100 + "%") : "N/A"}}</div>
 		  </center>
 		</div>
 
@@ -18,19 +18,19 @@
 			<ul class="collection">
 				<li class="profile-field location">
     			<span class="title"><strong>Location:</strong> </span>
-    			<p  ng-click="showInput('.location')"><span class="read">{{ myProfile.location }}</span> 
+    			<p  ng-click="showInput('.location')"><span class="read">{{ myProfile.location ? myProfile.location : "N/A"}}</span> 
     				<span class="write"><input type="text" ng-model="myProfile.location"></span> 
     			</p>
     		</li>
     		<li class="profile-field about-me">
     			<span class="title"><strong>About Me:</strong> </span>
-    			<p  ng-click="showInput('.about-me')"><span class="read">{{ myProfile.about_me  }}</span> 
+    			<p  ng-click="showInput('.about-me')"><span class="read">{{ myProfile.about_me ? myProfile.about_me : "N/A" }}</span> 
     				<span class="write"><input type="text" ng-model="myProfile.about_me" ng-model-options="{ updateOn: 'blur' }"></span> 
     			</p>
     		</li>
     		<li class="profile-field games-i-like">
     			<span class="title"><strong>Games I Like:</strong> </span>
-    			<p  ng-click="showInput('.games-i-like')"><span class="read">{{ myProfile.games_list }}</span> 
+    			<p  ng-click="showInput('.games-i-like')"><span class="read">{{ myProfile.games_list ? myProfile.games_list : "N/A" }}</span> 
     				<span class="write"><input type="text" ng-model="myProfile.games_list"></span> 
     			</p>
     		</li>
