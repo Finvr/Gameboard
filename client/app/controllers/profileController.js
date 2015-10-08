@@ -25,9 +25,11 @@ angular.module('imgame.profile', [])
     };
 
     $scope.showInput = function(selector){
-        $scope.update = true;
-        $(selector).find('.read').hide();
-        $(selector).find('.write').show();
+        if (!myProfile.viewId) {
+            $scope.update = true;
+            $(selector).find('.read').hide();
+            $(selector).find('.write').show();            
+        }
     };
 
     var init = function(){
