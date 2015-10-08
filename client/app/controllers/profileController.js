@@ -11,7 +11,6 @@ angular.module('imgame.profile', [])
       	.then(function(profile){
         	$scope.myProfile = profile;
         	$scope.savedProfile = $scope.myProfile;
-        	console.log($scope.myProfile);
       	});
     };
 
@@ -20,12 +19,11 @@ angular.module('imgame.profile', [])
             .then(function(data){
                 $scope.update = null;
     			init();
-                console.log(data);
             });
     };
 
     $scope.showInput = function(selector){
-        if (!myProfile.viewId) {
+        if (!$scope.myProfile || !$scope.myProfile.viewId) {
             $scope.update = true;
             $(selector).find('.read').hide();
             $(selector).find('.write').show();            
