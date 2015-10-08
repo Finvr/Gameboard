@@ -97,6 +97,13 @@ describe('MyGamesController', function() {
       scope.setRequestToCancel(request);
       expect(scope.requestToCancel).toEqual(request);
     });
+    it("should call close with the right parameter", function(){
+      var selector = '#game-details';
+      spyOn(scope, 'close');
+      var request = { "bob": "martin", "jimmy": "jones" };
+      scope.setRequestToCancel(request);
+      expect(scope.close).toHaveBeenCalledWith(selector);
+    });
     //TO DO: should gracefully handle request not being passed
     //TO DO: should gracefully handle request being of the wrong type
   });
