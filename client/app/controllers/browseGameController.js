@@ -17,10 +17,17 @@
 			"More than 10 miles": Infinity
 		}
 
+		//Functions called on controller start
 		Auth.requireAuth('browse');
+		BrowseGames.getGames()
+			.then(function(resp) {
+				console.log("BrowseGameController inside getGsmes", resp);
+				$scope.games = resp;
+				Auth.getCurrentLocation();
+				$scope.getMyRequests();
+			});
 
-
-
+		//Event listeners
 		$scope.$watchGroup(['$scope.startTimeFilter', '$scope.endTimeFilter'], function(used){
         if (used) {
           $scope.used = true;
@@ -36,6 +43,7 @@
 			$scope.$apply();
 		});
 
+		//Request functions
 		$scope.getMyRequests = function(){
       return GamePost.myRequests()
         .then(function(requests){
@@ -48,14 +56,6 @@
           }
         });
     };
-
-    BrowseGames.getGames()
-			.then(function(resp) {
-				console.log("BrowseGameController inside getGsmes", resp);
-				$scope.games = resp;
-				Auth.getCurrentLocation();
-				$scope.getMyRequests();
-			});
 
     $scope.hasPendingRequest = function(gameId) {
     	if($scope.myRequests) {
@@ -83,7 +83,20 @@
 	    }
     }
 
+		$scope.sendRequest = function(game) {
+			BrowseGames.sendRequest($scope.requestMessage, game.id)
+				.then(function(data){
+					console.log("data", data)
+					if (typeof data === 'string' && data.includes('already been submmited')) {
+						$scope.submitError = "You have already submitted your request!";
+					} else {
+						$("#openRequest").closeModal();
+						$location.path('/my-games');
+					}
+				})
+		}
 
+		//Distance functions
 		function distance(lat1, lon1, lat2, lon2) {
 			var radlat1 = Math.PI * lat1/180
 			var radlat2 = Math.PI * lat2/180
@@ -107,6 +120,7 @@
 			}
 		}
 
+		//Date and time functions
 		$scope.dateFilter = function(gameDate) {
 			var gameDate = Date.parse(gameDate);
 			var startTime = Date.parse($scope.startDateFilter);
@@ -134,6 +148,7 @@
 			}	
 	  };
 
+	  //Modal functions
 		$scope.openGame = function(game) {
 			$scope.submitError = null;
 			$scope.requestMessage = {comments: ''};
@@ -149,19 +164,6 @@
           return data;
         })
     }
-
-		$scope.sendRequest = function(game) {
-			BrowseGames.sendRequest($scope.requestMessage, game.id)
-				.then(function(data){
-					console.log("data", data)
-					if (typeof data === 'string' && data.includes('already been submmited')) {
-						$scope.submitError = "You have already submitted your request!";
-					} else {
-						$("#openRequest").closeModal();
-						$location.path('/my-games');
-					}
-				})
-		}
 
 		$scope.close = function() {
 			$("#openRequest").closeModal();
