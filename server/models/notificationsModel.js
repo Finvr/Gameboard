@@ -28,7 +28,7 @@ module.exports = {
     }
   },
 
-  fetchById: function (userId) {
+  fetchByUserId: function (userId) {
     return db('notifications')
       .select([
         'notifications.*',
