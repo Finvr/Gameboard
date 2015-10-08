@@ -80,6 +80,12 @@ router.get('/gameposts/:id/requests',
   requestController.getGamePostRequests
 );
 
+//Get all pictures for a gamepost
+router.get('/gameposts/:id/pictures', 
+  checkAuth, 
+  gameController.getGamePostPictures
+);
+
 //Submit a request to join a specific gamepost
 router.post('/gameposts/:id/requests', 
   checkAuth, 
