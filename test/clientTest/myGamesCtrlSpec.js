@@ -37,6 +37,11 @@ describe('MyGamesController', function() {
     it("should be defined", function(){
       expect(scope.showHostedEventModal).toBeDefined();
     });
+    it("should set $scope.gameToShowDetails to data property of paraemeter", function(){
+      var data = {'bob': 'isMyUncle', "james": "isMyBrother"}
+      scope.showHostedEventModal({ data });
+      expect(scope.gameToShowDetails).toEqual(data);
+    });
   });
   
   describe("$scope.close", function(){
