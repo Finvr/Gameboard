@@ -37,12 +37,24 @@ describe('MyGamesController', function() {
     it("should be defined", function(){
       expect(scope.showHostedEventModal).toBeDefined();
     });
+    it("should set $scope.gameToShowDetails to data property of paraemeter", function(){
+      var data = {'bob': 'isMyUncle', "james": "isMyBrother"}
+      scope.showHostedEventModal({ data });
+      expect(scope.gameToShowDetails).toEqual(data);
+    });
+    it("should call $scope.getGamepostPictures with the value of $scope.gameToShowDetails", function(){
+      spyOn(scope, 'getGamepostPictures');
+      var data = {'bob': 'isMyUncle', "james": "isMyBrother"}
+      scope.showHostedEventModal({ data });
+      expect(scope.getGamepostPictures).toHaveBeenCalledWith(data);
+    });
   });
   
   describe("$scope.close", function(){
     it("should be defined", function(){
       expect(scope.close).toBeDefined();
     });
+    //TODO: find way to test that it calls materialize function
   });
 
   describe("$scope.uiConfig", function(){
@@ -86,6 +98,26 @@ describe('MyGamesController', function() {
     it("should be defined", function(){
       expect(scope.cancelGame).toBeDefined();
     });
+  });
+
+  describe("$scope.setRequestToCancel", function(){
+    it("should be defined", function(){
+      expect(scope.setRequestToCancel).toBeDefined();
+    });
+    it("should correctly set request to cancel", function(){
+      var request = { "bob": "martin", "jimmy": "jones" };
+      scope.setRequestToCancel(request);
+      expect(scope.requestToCancel).toEqual(request);
+    });
+    it("should call close with the right parameter", function(){
+      var selector = '#game-details';
+      spyOn(scope, 'close');
+      var request = { "bob": "martin", "jimmy": "jones" };
+      scope.setRequestToCancel(request);
+      expect(scope.close).toHaveBeenCalledWith(selector);
+    });
+    //TO DO: should gracefully handle request not being passed
+    //TO DO: should gracefully handle request being of the wrong type
   });
 
  describe("$scope.cancelRequest", function(){
