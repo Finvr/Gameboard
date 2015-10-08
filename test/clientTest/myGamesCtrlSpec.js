@@ -93,6 +93,11 @@ describe('MyGamesController', function() {
       expect(scope.cancelRequest).toBeDefined();
     });
   });
-
+ 
+  describe("$scope.requestConfirm", function() {
+    it("should be defined", function(){
+      expect(scope.requestConfirm).toBeDefined();
+    });
+  });
 
 });
