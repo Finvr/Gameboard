@@ -120,8 +120,8 @@
 
 		$scope.timeFilter = function(time){
 			var time = new Date(time).toString().split(" ")[4].split(":").slice(0,2);
-			var startTime= (document.getElementById('startTime').value) ? (document.getElementById('startTime').value).toString().split(":") : null;
-			var endTime = (document.getElementById('endTime').value) ? (document.getElementById('endTime').value).toString().split(":") : null;
+			var startTime= (document.getElementById('startTime').value) && (document.getElementById('startTime').value).toString().split(":");
+			var endTime = (document.getElementById('endTime').value) && (document.getElementById('endTime').value).toString().split(":");
 
 			if (!startTime || Number(startTime[0]) <= Number(time[0])) {
 				if (!endTime || Number(endTime[0]) >= Number(time[0])) {

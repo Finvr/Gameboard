@@ -14,6 +14,7 @@ module.exports = {
 					.returning('id')
 					.then(function(id){
 						console.log("review created with Id: ", id);
+						return id;
 					})
 				}
 				else {
@@ -27,11 +28,14 @@ module.exports = {
 	  },
 
 	getRatingByUserId: function (userId){
-		return db.avg('rating')
-		  .from('reviews')
-		  .where({reviewee_id: userId})
+		return db('reviews').select([
+				db.raw("avg(rating) as rating"),
+				db.raw("avg(CASE reviews.showed_up WHEN true THEN 1 ELSE 0 END) as reliability")
+				])
+			.where({reviewee_id: userId})
 	 	  .then(function(results){
-		 	  console.log("get rating by userId: ", results);
+		 	  console.log("get rating by userId: ", results[0]);
+		 	  return results[0];
 		  })
 		  .catch(function(err){
 		 	  console.log("error in getRatingByUserId: ", err);
@@ -39,10 +43,12 @@ module.exports = {
 	}
 
 }
-// module.exports.findOrCreateReview({reviewee_id:1,
-// 			reviewer_id:1,
-// 		 	rating:4,
-// 		 	gameposts_id:4,
-// 		 	showed_up:true});
+// module.exports.findOrCreateReview({
+// 	reviewee_id:2,
+// 	reviewer_id:1,
+//  	rating:4,
+//  	gameposts_id:22,
+//  	showed_up:true
+//   });
 
-// module.exports.getRatingByUserId(1);
+// module.exports.getRatingByUserId(2);
