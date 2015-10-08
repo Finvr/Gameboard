@@ -24,8 +24,7 @@
               </span>
               <span>
                   {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
-              </span>
-              <a href="#cancel-modal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">cancel</i></a>
+              </span>           
               <a href="#approve-pending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">open_in_new</i></a>
             </div>
             <div class="collapsible-body">
