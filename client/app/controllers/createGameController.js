@@ -11,18 +11,19 @@
     // set today as the ealiest day user can select
     $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
-    document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
+    //controller should not know anything about the DOM, this makes our tests fail
+    //document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
 
     $scope.createGame = function(game){
       game = { 
-        "game_location": $scope.game.location,
+        "game_location": $scope.game.location, //start set in template
         "game": $scope.game.name,
         "gamepost_description": $scope.game.description,
         "player_count": $scope.game.numPlayers,
-        "game_datetime": $scope.game.datetime,
-        "business": $scope.game.business,
-        "H": $scope.game.H,
-        "L": $scope.game.L,
+        "game_datetime": $scope.game.datetime, 
+        "business": $scope.game.business, //start set in googleMapsDirective
+        "H": $scope.game.H, 
+        "L": $scope.game.L, 
       };
       console.log("create gamepost game: ", $scope.game)
       GamePost.create(game)

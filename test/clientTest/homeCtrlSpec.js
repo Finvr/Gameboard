@@ -1,13 +1,16 @@
 describe('HomeController', function() {
   beforeEach(module('imgame'));
 
-  var $controller;
+  var ctrl, scope, http;
 
-  beforeEach(inject(function(_$controller_){
-    $controller = _$controller_;
+  beforeEach(inject(function($controller, $rootScope, $httpBackend){
+  	scope = $rootScope.$new();
+  	http: $httpBackend;
+  	ctrl = $controller("HomeController", {
+  		$scope: scope,
+   		$http: http
+  	});
   }));
 
-  it("should understand truth", function(){
-    expect(true).toBe(true);
-  });
+
 });

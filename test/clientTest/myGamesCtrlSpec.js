@@ -1,19 +1,16 @@
 describe('MyGamesController', function() {
   beforeEach(module('imgame'));
 
-  var ctrl, scope;
+  var ctrl, scope, http;
 
-  beforeEach(inject(function($controller, $rootScope){
+  beforeEach(inject(function($controller, $rootScope, $httpBackend){
   	scope = $rootScope.$new();
+    http = $httpBackend;
   	ctrl = $controller('MyGamesController', {
-  		$scope: scope
+  		$scope: scope,
+      $httpBackend: http
   	}); 
   }));
-
-  /*
-  beforeEach(inject(function(_$controller_){
-    $controller = _$controller_;
-  }));*/
 
   describe("$scope.init", function(){
     it("should be defined", function(){
