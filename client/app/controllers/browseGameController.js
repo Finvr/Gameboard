@@ -105,12 +105,12 @@
 			}
 		}
 
-		$scope.dateFilter = function(gameTime) {
-			var gameTime = Date.parse(gameTime);
+		$scope.dateFilter = function(gameDate) {
+			var gameDate = Date.parse(gameDate);
 			var startTime = Date.parse($scope.startDateFilter);
 			var endTime = Date.parse($scope.endDateFilter) +  1000 * 60 * 60 * 24;
-			if (!$scope.startDateFilter || gameTime > startTime - 1) {
-				if (!$scope.endDateFilter || gameTime < endTime + 1) {
+			if (!$scope.startDateFilter || gameDate > startTime - 1) {
+				if (!$scope.endDateFilter || gameDate < endTime + 1) {
 					return true;				
 				}
 			} else {
@@ -119,36 +119,17 @@
 		}
 
 		$scope.timeFilter = function(time){
+			var time = new Date(time).toString().split(" ")[4].split(":").slice(0,2);
+			var startTime= (document.getElementById('startTime').value) ? (document.getElementById('startTime').value).toString().split(":") : null;
+			var endTime = (document.getElementById('endTime').value) ? (document.getElementById('endTime').value).toString().split(":") : null;
 
-			var start= (document.getElementById('time').value)
-			var startMS = (Number(start.slice(0,2)) * 3600000) + (Number(start.slice(3,5)) * 6000)
-			var end= (document.getElementById('time2').value)
-			var endMS= (Number(end.slice(0,2)) * 3600000) + (Number(end.slice(3,5)) * 6000)
-			//12am - 12pm
-			if(Number(time.toString().slice(11,13)) < 18 &&
-				 Number(time.toString().slice(11,13)) > 6 ){
-				  //calculate time in milliseconds that has passed for the day
-				  var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 - 21600000
-			}
-
-		  //time is between 12 and 6pm
-			if(Number(time.toString().slice(11,13)) >= 18){
-			     //calculate time in milliseconds that has passed for the day
-			     var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 - 21600000
-			}
-			//time is between 6pm and 12pm
-			if(Number(time.toString().slice(11,13)) <= 6){
-			     //calculate time in milliseconds that has passed for the day
-			     var startTime= Number(time.toString().slice(11,13))*3600000+ Number(time.toString().slice(14,16))* 6000 + 43200000
-			}
-
-
-      if(!startMS && !endMS){return true}
-	    if ((startMS <= startTime) && (endMS >= startTime )) {return true}
-		  if ((startMS==0) && (endMS >= startTime)){return true}
-		  if((endMS==0) && startMS <= startTime ){return true}
-      else{return false}
-			
+			if (!startTime || Number(startTime[0]) < Number(time[0])) {
+				if (!endTime || Number(endTime[0]) > Number(time[0])) {
+					return true;
+				}
+			} else {
+				return false;
+			}	
 	  };
 
 		$scope.openGame = function(game) {
