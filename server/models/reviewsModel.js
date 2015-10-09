@@ -7,7 +7,7 @@ module.exports = {
 				reviewer_id: review.reviewer_id,
 				gameposts_id: review.gameposts_id
 			})
-			.then(function (results){
+			.then(function (results) {
 				if(!results.length){
 					db('reviews')
 					.insert(review)
@@ -27,7 +27,7 @@ module.exports = {
 			})
 	  },
 
-	getRatingByUserId: function (userId){
+	getRatingByUserId: function (userId) {
 		return db('reviews').select([
 				db.raw("round(avg(rating), 1) as rating"),
 				db.raw("round(avg(CASE reviews.showed_up WHEN true THEN 1 ELSE 0 END), 4) as reliability"),
@@ -41,6 +41,14 @@ module.exports = {
 		  .catch(function(err){
 		 	  console.log("error in getRatingByUserId: ", err);
 		  })
+	},
+
+	getReviewsByReviewerId: function(reviewerId) {
+		return db('reviews').select([
+				'gameposts_id',
+				'reviewer_id'
+			])
+			.where({reviewer_id: reviewerId});
 	}
 
 }
