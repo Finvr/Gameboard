@@ -1,15 +1,19 @@
 describe("Users service", function(){
 
-	var usersService, http; 
+	var Users, http; 
 
-	beforeEach(module('imgame.service'));
+	beforeEach(module('imgame'));
 
-	beforeEach(inject(function(_usersService_, $httpBackend){
-		usersService = _usersService_;
-		http = $httBackend;
+	
+	beforeEach(inject(function(_Users_, $httpBackend){
+		Users = _Users_;
+		http = $httpBackend;
 	}));
-
 	it("should understand truth", function(){
 		expect(true).toBe(true);
+	});
+
+	it("should be defined", function(){
+		expect(Users).toBeDefined;
 	});
 });
