@@ -14,6 +14,15 @@ module.exports = {
       })
   },
 
+  getRecentGames: function(req, res) {
+    var userId = req.user.id;
+    console.log("getRecentGames userId: ", userId)
+    GamePosts.getRecentGames(userId)
+      .then(function(games){
+        res.send(games);
+      })
+  },
+
   createGamepost: function (req, res) {
     //Create a new gamepost
     var gamepost = req.body;
