@@ -16,6 +16,22 @@ function NotificationsController($scope, $rootScope, Auth, Notification, $route,
       })
   }
 
+  $scope.addToViewed = function(note) {
+    if ( !note.viewed ) {
+      $scope.viewed.push(note.id);
+      note.viewed = true;
+    }
+  }
+
+  $scope.updateViewed = function() {
+    if ( $scope.viewed.length > 0 ) {
+      return Notification.updateNotifications($scope.viewed)
+        .then(function() {
+          $scope.viewed = [];
+        });
+    }
+  }
+
   $scope.timeElapsed = function(initialTime) {
     var toTime = new Date();
     var fromTime = new Date(initialTime);
