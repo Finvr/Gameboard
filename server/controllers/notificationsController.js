@@ -75,6 +75,15 @@ module.exports = {
             res.status(500).send(err.message);
           })
       })
+  },
+
+  newInvitiation: function (req, res, next) {
+    var requestId = req.body.id;
+    var userId = req.body.user_id;
+    return Notes.create(userId, 'invitation', requestId)
+      .then(function () {
+        next();
+      })
   }
 
 };
