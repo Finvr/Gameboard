@@ -2,7 +2,7 @@
 angular.module('imgame.profile', [])
 	.controller('ProfileController', ProfileController);
 
-	function ProfileController($scope, Profile, Auth, $route, $location){
+	function ProfileController($scope, Profile, Auth, $route, $location, Review){
 
     Auth.requireAuth();
 
@@ -64,6 +64,38 @@ angular.module('imgame.profile', [])
     	$('.profile-field').find('span.read').show();
     	getProfile();
         $scope.getRecentGames();
+    }
+
+    $scope.sendReviews = function (game){
+       // var game = $scope.currentRateGame
+        console.log('game: ', game)
+        var playersInGame = $scope.currentRateGame.playerPics.length
+        var Aplayer = $scope.currentRateGame.playerPics
+        //var reviewee = 
+        for (var i = 0; i < playersInGame; i++){
+            var player = {}
+            player.reviewer_id = Aplayer[i].user_id,
+            player.skip = Aplayer[i].showed_up;
+            if(!player.skip){
+                player.rating = null;
+            }
+            console.log("player",i,": ", player, "Aplayer[i]: ", Aplayer)
+
+        }
+
+        // }
+        // var review = {
+        //     "showed_up": player.showed_up,
+        //     "rating": player.rating,
+        //     "reviewee_id": review.reviewee_id,
+        //     "reviewer_id": review.reviewer_id,
+        //     "gamepost_id": review.gamepost_id
+        // };
+
+        // Review.createReview(review)
+        // .then(function (data){
+        //     console.log("create review", data)
+        // })
     }
     init();
     //$scope.updateProfile({});
