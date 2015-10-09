@@ -95,6 +95,12 @@ router.get('/me/reviews',
   reviewController.getReviewsByReviewerId
 );
 
+//add new reviews for a gameposts and its players
+router.post('/me/reviews',
+  checkAuth,
+  reviewController.createReviewsByGamePostsId
+);
+
 //Get all requests for a gamepost
 router.get('/gameposts/:id/requests', 
   checkAuth, 
