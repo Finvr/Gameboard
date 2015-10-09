@@ -8,11 +8,17 @@ function NotificationsController($scope, Auth, $route, $location){
 
 	$scope.timeElapsed = function(initialTime) {
 		var toTime = new Date();
+		console.log('current time', toTime);
+		console.log('createdAtTime', initialTime);
 		var fromTime = new Date(initialTime);
+		console.log('fromTime', fromTime);
 		var differenceTravel = toTime.getTime() - fromTime.getTime();
-		console.log('differenceTravel', differenceTravel);
 		var seconds = Math.floor((differenceTravel) / (1000));
-		return seconds;
+		console.log('seconds', seconds);
+		var mins = Math.floor((seconds) / (60));
+
+
+		return mins;
 	}
 }
 })();
