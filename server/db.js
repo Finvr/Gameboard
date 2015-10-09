@@ -7,10 +7,13 @@ if (process.env.NODE_ENV  === 'test') {
   knex.deleteEverything = function () {
     return knex.table('users_games').truncate()
       .then(function(){
-        return knex.table('users_games').select('*');
+        return knex.table('reviews').truncate();
       })
-      .then(function(ug){
-        return knex.table('requests').truncate();
+      .then(function(){
+        return knex.table('notifications').truncate();
+      })
+      .then(function(){
+        return knex.table('requests').delete();
       })
       .then(function(){
         return knex.table("gameposts").delete();
