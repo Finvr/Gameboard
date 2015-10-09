@@ -56,6 +56,21 @@
 				</div>
 			</div>
 
+			<!-- invite players -->
+			<div class="row">
+				<div class="input-field col s12">
+					<div>
+				     <input id="search" type="search" ng-model="searchText" placeholder="Enter name to invite">
+            <label for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i>
+          </div>
+					<div ng-if="searchText !== ''" ng-repeat="user in usersList | filter: searchText">
+    				<input type="checkbox"  id="user-{{user.id}}" ng-model="game.invitees" />
+    				<label for="user-{{user.id}}">{{user.username}}</label>
+    			</div>
+				</div>
+			</div>
+
 			<!-- create game button -->
 			<div class="row">
 				<div class="input-field col s12">
