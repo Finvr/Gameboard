@@ -41,11 +41,11 @@
 
         <ul id='notifications' class='dropdown-content'>
           <div ng-repeat="note in notifications | limitTo:15">
-            <li ng-if="note.type==='game ended'"> {{timeElapsed(note.created_at)}} | Your game of {{note.game}} has ended. You may now submit user reviews.</li>
-            <li ng-if="note.type==='pending request'"> {{timeElapsed(note.created_at)}} | There is a request to join your game of {{note.game}}.</li>
-            <li ng-if="note.type==='game cancelled'"> {{timeElapsed(note.created_at)}} | A game of {{note.game}} that you have joined has been cancelled.</li>
-            <li ng-if="note.type==='request accepted'"> {{timeElapsed(note.created_at)}} | Your request to join {{note.game}} has been accepted.</li>
-            <li ng-if="note.type==='invite'"> {{timeElapsed(note.created_at)}} | You have been invited to play {{note.game}}.</li>
+            <li ng-if="note.type==='game ended'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | Your game of {{note.game}} has ended. You may now submit user reviews.</li>
+            <li ng-if="note.type==='pending request'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | There is a request to join your game of {{note.game}}.</li>
+            <li ng-if="note.type==='game cancelled'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | A game of {{note.game}} that you have joined has been cancelled.</li>
+            <li ng-if="note.type==='request accepted'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | Your request to join {{note.game}} has been accepted.</li>
+            <li ng-if="note.type==='invite'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | You have been invited to play {{note.game}}.</li>
             <li class="divider"></li>
           </div>
         </ul>
