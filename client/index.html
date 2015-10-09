@@ -41,6 +41,7 @@
             <li ng-if="note.type==='pending request'"> {{timeElapsed(note.created_at)}} | There is a request to join your game of {{note.game}}.</li>
             <li ng-if="note.type==='game cancelled'"> {{timeElapsed(note.created_at)}} | A game of {{note.game}} that you have joined has been cancelled.</li>
             <li ng-if="note.type==='request accepted'"> {{timeElapsed(note.created_at)}} | Your request to join {{note.game}} has been accepted.</li>
+            <li ng-if="note.type==='invite'"> {{timeElapsed(note.created_at)}} | You have been invited to play {{note.game}}.</li>
             <li class="divider"></li>
           </div>
         </ul>
