@@ -1,16 +1,55 @@
 var db       = require('../db.js'),
-    Requests = require('./requestsModel.js');
+    Requests = require('./requestsModel.js'),
+    helpers   = require('../utils/helpers.js');
 
 module.exports = {
 
-  getAll: function (userId) {
-    return fetchAllOrByUser(userId)
+  getAll: function (userId, status) {
+    if (!userId) { var userId = null }; 
+    return fetchAllOrByUser(userId, status)
       .then(function (gameposts) {
         return gameposts;
       })
       .catch(function(err){
         console.log(err);
         return err;
+      })
+  },
+
+  getRecentGames: function(userId) {
+    var today = new Date();
+    var gameposts = [];
+    return module.exports.getAll(userId, "active")
+      .then(function(hostGames){
+        var games = hostGames;
+        return Requests.getRequestsByUserId(userId, 'accepted')
+          .then(function(requests){
+            games = games.concat(requests);
+            return games;
+          })
+      })
+      .then(function(games){
+        for (var i = 0; i < games.length; i ++) {
+          if ((games[i].game_datetime < today) && (!(games[i].user_id) || games[i].host_id !== games[i].user_id)) {
+            if (!games[i].gamepost_id) { games[i].gamepost_id = games[i].id }
+            gameposts.push(games[i]);
+          }
+        }
+        return helpers.promiseFor(
+          function(i){
+            return i < gameposts.length;
+          },
+          function(i){
+            return Requests.getRequestersPictures(gameposts[i].gamepost_id)
+            .then(function(pictures){
+              gameposts[i].playerPics = pictures;
+              i ++;
+              return i;
+            })
+          }, 0)
+      })
+      .then(function(){
+        return gameposts;
       })
   },
 
@@ -69,7 +108,7 @@ module.exports = {
 
 }
 
-function fetchAllOrByUser (userId) {
+function fetchAllOrByUser (userId, status) {
   var selectColumns = [
     'gameposts.*',
     'users.username',
@@ -78,7 +117,8 @@ function fetchAllOrByUser (userId) {
     db.raw("SUM(CASE requests.status WHEN 'pending' THEN 1 ELSE 0 END) as pending_requests")
   ];
   var match = {post_status: 'active'};
-  if (userId) { match.host_id = userId; } 
+  if (userId) { match.host_id = userId; };
+  if (status) { match.post_status = status}
   return db('users').select(selectColumns)
     .groupBy('gameposts.id', 'users.username','users.picture')
     .join('gameposts', 'host_id', 'users.id')
