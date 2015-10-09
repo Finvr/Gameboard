@@ -99,10 +99,10 @@ module.exports = {
             .returning("id")
             .then(function (requestId) {
               console.log("create request with requestId: ", requestId);
-              return module.exports.find(requestId[0]);
+              return module.exports.fetchById(requestId[0]);
             })
             .then(function (request) {
-              return request[0];
+              return request;
             });
         }
       })
