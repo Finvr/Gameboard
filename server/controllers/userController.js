@@ -81,6 +81,16 @@ module.exports = {
           res.status(500).send(err.message);
         });
     }
+  },
+
+  getAllUsers: function (req, res) {
+    Users.fetchAll()
+      .then(function (result) {
+        res.status(200).send(result);
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message);
+      })
   }
 
 }

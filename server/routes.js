@@ -55,6 +55,10 @@ router.get('/users/:id',
   checkAuth,
   userController.getProfile
 );
+//Get all user id's, usernames and pictures
+router.get('/users',
+  checkAuth,
+  userController.getAllUsers)
 
 //GamePosts Routes
 //Get all gameposts
