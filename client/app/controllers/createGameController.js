@@ -5,7 +5,6 @@
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {};
     $scope.gamesArray = GamePost.gamesArray;
-    
     Auth.requireAuth();
 
     // set today as the ealiest day user can select
@@ -28,8 +27,6 @@
       GamePost.create(game)
         .then(function(data){
           $location.path("/my-games")
-          // if user is not authrized, data = "User is not logged in!"
-          console.log("create gamepost: ", data)
         })
       };
   };
