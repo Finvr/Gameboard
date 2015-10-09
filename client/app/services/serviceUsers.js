@@ -1,7 +1,12 @@
 angular
 	.module("imgame.service")
-	.factory("Users", function UsersFactory(){
+	.factory("Users", function UsersFactory($http){
+		var all = function(){
+			return $http.get({
+				url: "/users"
+			});
+		}
 		return {
-			user: "Ignacio Prado"
+			all: all
 		}
 	});
