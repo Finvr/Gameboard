@@ -3,7 +3,7 @@ var db = require('../db.js');
 module.exports = {
 
   create: function (userId, type, otherId) {
-    if ( type === "game cancelled" || type === "request accepted" ) {
+    if ( type === "game cancelled" || type === "request accepted" || type === "invitation" ) {
       return db('notifications')
         .insert({
           type: type,

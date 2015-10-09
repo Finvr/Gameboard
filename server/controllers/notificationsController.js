@@ -77,12 +77,12 @@ module.exports = {
       })
   },
 
-  newInvitiation: function (req, res) {
+  newInvitiation: function (req, res, next) {
     var requestId = req.body.id;
     var userId = req.body.user_id;
     return Notes.create(userId, 'invitation', requestId);
       .then(function () {
-        res.sendStatus(200);
+        next();
       })
   }
 
