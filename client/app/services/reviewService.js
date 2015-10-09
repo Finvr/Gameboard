@@ -1,20 +1,20 @@
 (function(){
 	angular.module('imgame.service')
 	.factory('Review', function Review($http){
-		function createReview(review){
+		function createReview(reviews){
 			return $http({
         method: 'POST',
-        url: '/gameposts/'+review.gamepost_id+ '/reviews',
-        data: review
+        url: '/me/reviews',
+        data: reviews
       }).then(function(resp){
       	console.log("response from review service: ", resp)
         return resp.data;
       });
-		}
-			return {
+		};
+		
+    return {
 				createReview: createReview
 			}
 	  });
-
 
 })();

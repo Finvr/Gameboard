@@ -55,10 +55,6 @@ angular.module('imgame.profile', [])
         $scope.currentRateGame = game;
     };
 
-    $scope.sendReview = function(game) {
-        console.log("sendReview: ", game);
-    };
-
     $scope.getReviews = function() {
         Profile.getReviews()
             .then(function(data){
@@ -95,12 +91,15 @@ angular.module('imgame.profile', [])
                 }
             }
              review.reviewee_id = player[i].user_id
-             review.gamepost_id = gamepostId;
+             review.gameposts_id = gamepostId;
+             delete review.skip;
              reviews.push(review)
             }
         }
-        Review.createReview(reviews);
-        console.log("reviews : ", reviews)
+        Review.createReview(reviews)
+            .then(function(reviews){
+                console.log("reviews from profile controller : ", reviews)                
+            });
     }
     init();
 	};
