@@ -1,5 +1,11 @@
 (function() {
 	angular.module('imgame.browseGames', [])
+		.filter('startFrom', function() {
+	    return function(input, start) {
+	        start = +start; //parse to int
+	        return input.slice(start);
+    	}
+		})
 		.controller('BrowseGameController', BrowseGameController);
 
 	function BrowseGameController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost) {
@@ -120,6 +126,13 @@
 						$location.path('/my-games');
 					}
 				})
+		}
+
+		// Pagination 
+		$scope.pageSize = 5;
+		$scope.currentPage = $scope.currentPage || 1;
+		$scope.displayPage = function(page) {
+			$scope.currentPage = page;
 		}
 
 		//Distance functions
