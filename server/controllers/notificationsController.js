@@ -80,7 +80,7 @@ module.exports = {
   newInvitiation: function (req, res, next) {
     var requestId = req.body.id;
     var userId = req.body.user_id;
-    return Notes.create(userId, 'invitation', requestId);
+    return Notes.create(userId, 'invitation', requestId)
       .then(function () {
         next();
       })

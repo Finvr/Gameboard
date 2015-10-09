@@ -110,7 +110,7 @@ router.post('/gameposts/:id/requests',
 //Create an invitation to join a specific gamepost
 router.post('/gameposts/:id/invitations', 
   checkAuth, 
-  notesController.newInvitation,
+  notesController.newInvitiation,
   requestController.createInvitation
 );
 
