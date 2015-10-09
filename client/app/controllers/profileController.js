@@ -38,6 +38,11 @@ angular.module('imgame.profile', [])
         }
     };
 
+    $scope.openRateModal = function(game) {
+        $scope.currentRateGame = game;
+        console.log("$scope.currentRateGame", $scope.currentRateGame)
+    };
+
     var init = function(){
     	$('.profile-field').find('span.write').hide();
     	$('.profile-field').find('span.read').show();
