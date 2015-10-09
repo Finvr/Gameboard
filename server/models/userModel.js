@@ -55,6 +55,15 @@ module.exports = {
         console.log("Update profile error: ", err.message);
         return err;
       })
+  },
+
+  fetchAll: function() {
+    return db.select([id, username, picture])
+      .from('users')
+      .catch(function (err) {
+        console.log("Fetch all users error: ", err.message)
+        return err;
+      })
   }
 
 };
