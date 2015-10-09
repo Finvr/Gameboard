@@ -2,7 +2,8 @@ var userController    = require('./controllers/userController.js'),
     gameController    = require('./controllers/gamePostsController.js'),
     requestController = require('./controllers/requestController.js'),
     notesController   = require('./controllers/notificationsController.js'),
-    passport          = require('passport');
+    passport          = require('passport'),
+    reviewController  = require('./controllers/reviewController.js');
 
 var express = require('express');
 var router = express.Router();
@@ -86,6 +87,12 @@ router.delete('/gameposts/:id',
 router.get('/me/gameposts/recentgames',
   checkAuth,
   gameController.getRecentGames
+);
+
+//get all reviews a user has created
+router.get('/me/reviews',
+  checkAuth,
+  reviewController.getReviewsByReviewerId
 );
 
 //Get all requests for a gamepost
