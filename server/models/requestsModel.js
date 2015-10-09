@@ -163,6 +163,16 @@ module.exports = {
       .catch(function (err) {
         return err;
       });
+  },
+
+  createInvite: function (hostId, inviteeId, gamepostId) {
+    var newRequest = {
+      host_id: hostId, 
+      user_id: inviteeId, 
+      gamepost_id: gamepostId,
+      status: 'invite'
+    };
+    return module.exports.create(newRequest);
   }
 
 };
