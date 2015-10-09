@@ -22,6 +22,10 @@ angular.module('imgame.profile', [])
             })
     };
 
+    $scope.close = function(selector) {
+        $(selector).closeModal();
+    };
+
     $scope.updateProfile = function(profileData){
         Profile.updateProfile(profileData)
             .then(function(data){
@@ -39,8 +43,20 @@ angular.module('imgame.profile', [])
     };
 
     $scope.openRateModal = function(game) {
+        if (game.host_name) {
+            game.playerPics.unshift({picture: game.host_pic,
+                user_id: game.host_id,
+                username: game.host_name
+            });
+        }
+        game.playerPics.forEach(function(player){
+            player.skip = true;
+        })
         $scope.currentRateGame = game;
-        console.log("$scope.currentRateGame", $scope.currentRateGame)
+    };
+
+    $scope.sendReview = function(game) {
+        console.log("sendReview: ", game);
     };
 
     var init = function(){
