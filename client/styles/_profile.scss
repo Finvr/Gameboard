@@ -22,7 +22,7 @@
     }
   }
 
-  .collection {
+  .collection.profile-field {
     border: none;
     margin-top: 10%;
 
@@ -42,6 +42,44 @@
 
   td.write {
     display: none;
+  }
+
+    img.hostPic {
+    width: 7%;
+    height: auto;
+  }
+
+  #game_title {
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
+  }
+
+  .game_list{
+    margin-bottom: 0px;
+  }
+  
+  .modal-header {
+      text-align: center;
+      padding: 1%;
+  }
+
+  .modal-footer {
+      background-color: #eee;
+   }
+
+  .btn {
+    margin-top: 0px;
+    height: 25px;
+    line-height: 25px;
+    width: 80%;
+    padding: 0px;
+  }
+
+ .close {
+    margin: 1.25% 1.75% 0 0;
+    cursor: pointer;
+    color: white;
   }
 
 }
