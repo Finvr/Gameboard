@@ -37,11 +37,10 @@
         </ul>
         <ul id='notifications' class='dropdown-content'>
           <div ng-repeat="note in myInfo.notifications | limitTo:15">
-            <li>{{timeElapsed(note.created_at)}}</li>
-            <li ng-if="note.type==='game ended'">Your game of {{note.game}} has ended. You may now submit user reviews.</li>
-            <li ng-if="note.type==='pending request'">There is a request to join your game of {{note.game}}.</li>
-            <li ng-if="note.type==='game cancelled'">A game of {{note.game}} that you have joined has been cancelled.</li>
-            <li ng-if="note.type==='request accepted'">Your request to join {{note.game}} has been accepted.</li>
+            <li ng-if="note.type==='game ended'"> {{timeElapsed(note.created_at)}} | Your game of {{note.game}} has ended. You may now submit user reviews.</li>
+            <li ng-if="note.type==='pending request'"> {{timeElapsed(note.created_at)}} | There is a request to join your game of {{note.game}}.</li>
+            <li ng-if="note.type==='game cancelled'"> {{timeElapsed(note.created_at)}} | A game of {{note.game}} that you have joined has been cancelled.</li>
+            <li ng-if="note.type==='request accepted'"> {{timeElapsed(note.created_at)}} | Your request to join {{note.game}} has been accepted.</li>
             <li class="divider"></li>
           </div>
         </ul>
