@@ -129,4 +129,10 @@ router.post('/me/notifications',
   notesController.updateNotifications
 );
 
+//post a new review
+router.post('/gamepost/:id/reviews',
+  checkAuth,
+  profileController.sendReviews
+);
+
 module.exports = router;
