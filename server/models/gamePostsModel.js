@@ -19,7 +19,7 @@ module.exports = {
       .insert(gamepost)
       .returning("id")
       .then(function (gamepostId) {
-        return gamepostId;
+        return gamepostId[0];
       })
       .catch(function(err){
         console.log(err);
