@@ -119,12 +119,6 @@ module.exports = {
       })
   },
 
-  find: function (requestId) {
-    return db.select()
-      .from('requests')
-      .where({id: requestId})      
-  },
-
   declineAll: function (gamepostId) {
     return db('requests')
       .where({gamepost_id: gamepostId})
