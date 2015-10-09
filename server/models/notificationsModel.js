@@ -56,6 +56,18 @@ module.exports = {
       .catch(function (err) {
         return err;
       })
+  },
+
+  deleteExpired: function () {
+    return db('notifications')
+      .where('viewed', true)
+      .andWhere('created_at', '<', db.raw("NOW() - INTERVAL '3 days'"))
+      .del()
+      .returning('id')
+      .catch(function (err) {
+        console.log(err);
+        return err;
+      });
   }
 
 };
