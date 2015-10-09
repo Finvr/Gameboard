@@ -6,9 +6,12 @@
         method: 'POST',
         url: '/me/reviews',
         data: reviews
-      }).then(function(resp){
-      	console.log("response from review service: ", resp)
+      })
+      .then(function(resp){
         return resp.data;
+      })
+      .catch(function(err){
+        console.log("createReview service Error: ", err)
       });
 		};
 		
