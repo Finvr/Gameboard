@@ -46,10 +46,22 @@
       })
     }
 
+    function getReviews() {
+      return $http({
+        methos: "GET",
+        url: '/me/reviews'
+      })
+      .then(function(resp){
+        console.log("getReviews from profile service: ", resp.data);
+        return resp.data
+      })
+    }
+
     return {
       getProfile: getProfile,
       updateProfile: updateProfile,
-      getRecentGames: getRecentGames
+      getRecentGames: getRecentGames,
+      getReviews: getReviews
     };
   });
 
