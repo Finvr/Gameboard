@@ -8,6 +8,10 @@ var db = require('../../server/db.js')
  
 var app = require('../../server/server.js');
 
+after(function(){
+  return db.deleteEverything();
+})
+
 describe('userModel', function(){
 
   before(function() {
@@ -41,7 +45,6 @@ describe('userModel', function(){
       })
       .catch(function(err){
         console.log("findOrCreate 1 error: ", err.message);
-        expect(err).to.equal('undefined');
         done();
       })
   });
@@ -54,7 +57,6 @@ describe('userModel', function(){
       })
       .catch(function(err){
         console.log("findOrCreate 2 error: ", err.message);
-        expect(err).to.equal('undefined');
         done();
       })
   });
@@ -96,7 +98,7 @@ describe('userModel', function(){
   })
 
 
-  xit('delete should delete a user from the database', function(done){
+  it('delete should delete a user from the database', function(done){
     //Note: Schema changes (delete on cascade) will be required to implement this feature
     userModel.findOrCreate(user2)
       .then(function(result){
@@ -111,7 +113,6 @@ describe('userModel', function(){
       })
       .catch(function(err){
         console.log("Error: ", err);
-        expect(err).to.equal('undefined');
         done();
       })
   });
@@ -163,7 +164,7 @@ describe('gamePostsModel', function(){
   });
 
 
-  xit('create should create a gamepost in the db', function(done){
+  it('create should create a gamepost in the db', function(done){
     gamePostsModel.create(gamepost1)
       .then(function(gameId){
         expect(gameId);
@@ -178,12 +179,11 @@ describe('gamePostsModel', function(){
       })
       .catch(function(err){
         console.log("gamePost create error: ", err.message);
-        expect(err).to.equal('undefined');
         done();
       })
   });
 
-  xit('getAll function should return all gameposts', function(done){
+  it('getAll function should return all gameposts', function(done){
     gamePostsModel.create(gamepost2)
       .then(function(gameId){
         return gamePostsModel.getAll();
@@ -194,7 +194,6 @@ describe('gamePostsModel', function(){
       })
       .catch(function(err){
         console.log("getAll error: ", err.message);
-        expect(err).to.equal('undefined');
         done();
       })
   });
@@ -208,12 +207,11 @@ describe('gamePostsModel', function(){
       })
       .catch(function(err){
         console.log("getAll by userId error: ", err.message);
-        expect(err).to.equal('undefined');
         done();
       })
   });
 
-  xit('deleteGamePost function should set status to "cancelled"', function(done){
+  it('deleteGamePost function should set status to "cancelled"', function(done){
     gamePostsModel.deleteGamePost(gamepost1Id, user1Id)
       .then(function(delCounts){
         expect(delCounts).to.equal(1);
@@ -227,7 +225,6 @@ describe('gamePostsModel', function(){
       })
       .catch(function(err){
         console.log("Error: ", err)
-        expect(err).to.equal('undefined');
         done();
       })
   });

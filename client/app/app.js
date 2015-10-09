@@ -23,7 +23,6 @@
       Notification.getNotifications()
         .then(function(data){
           $rootScope.myInfo.notifications = data;
-          console.log($rootScope.myInfo);
         })
     })
     .config(config);
