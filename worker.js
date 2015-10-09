@@ -65,4 +65,7 @@ setInterval(function () {
     .then(function (reqIds) {
       return sendUserNotifications(reqIds);
     })
+    .then(function () {
+      return Notes.deleteExpired();
+    })
 }, 5000);
