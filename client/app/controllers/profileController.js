@@ -14,6 +14,14 @@ angular.module('imgame.profile', [])
       	});
     };
 
+    $scope.getRecentGames = function(){
+        Profile.getRecentGames()
+            .then(function(games){
+                console.log("getRecentGames in Profile: ", games);
+                $scope.recentGames = games;
+            })
+    };
+
     $scope.updateProfile = function(profileData){
         Profile.updateProfile(profileData)
             .then(function(data){
@@ -30,10 +38,16 @@ angular.module('imgame.profile', [])
         }
     };
 
+    $scope.openRateModal = function(game) {
+        $scope.currentRateGame = game;
+        console.log("$scope.currentRateGame", $scope.currentRateGame)
+    };
+
     var init = function(){
     	$('.profile-field').find('span.write').hide();
     	$('.profile-field').find('span.read').show();
     	getProfile();
+        $scope.getRecentGames();
     }
     init();
     //$scope.updateProfile({});

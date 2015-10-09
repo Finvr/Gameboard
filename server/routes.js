@@ -73,6 +73,11 @@ router.delete('/gameposts/:id',
   requestController.declineAll,
   notesController.cancelledGame
 );
+//get all games a user has played in the past
+router.get('/gamePosts/recentGames',
+  checkAuth,
+  gameController.getRecentGames
+);
 
 //Get all requests for a gamepost
 router.get('/gameposts/:id/requests', 

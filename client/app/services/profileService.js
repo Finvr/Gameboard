@@ -35,9 +35,21 @@
       });
     }
 
+    function getRecentGames() {
+      return $http({
+        methos: "GET",
+        url: 'gamePosts/recentGames'
+      })
+      .then(function(resp){
+        console.log("getRecentGames from profile service: ", resp.data);
+        return resp.data
+      })
+    }
+
     return {
       getProfile: getProfile,
-      updateProfile: updateProfile
+      updateProfile: updateProfile,
+      getRecentGames: getRecentGames
     };
   });
 
