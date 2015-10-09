@@ -1,17 +1,26 @@
 describe('BrowseGameController', function() {
   beforeEach(module('imgame'));
 
-  var ctrl, scope, http, gamesArray;
+  var ctrl, scope, http, gamesArray, BrowseGames;
 
   beforeEach(inject(function($controller, $rootScope, $httpBackend){
    	scope = $rootScope.$new();
     http = $httpBackend;
+    /*BrowseGames = {
+      getGames: function(){}
+    };*/
+    //spyOn(BrowseGames, "getGames");
     gamesArray = ["Monopoly", "Settlers of Catan", "Puerto Rico"];
   	ctrl = $controller('BrowseGameController', {
   		$scope: scope,
       $http: http
+      //BrowseGames: BrowseGames
   	});
   }));
+
+  xit("should call BrowseGames.getGames", function(){
+    expect(BrowseGames.getGames).toHaveBeenCalled();
+  });
 
   describe("scope initialization", function(){
     it("should initialize $scope.games correctly", function(){
@@ -78,13 +87,20 @@ describe('BrowseGameController', function() {
 			expect(scope.dateFilter).toBeDefined();
 		});
 		it("should return true when there is no start date or end date", function(){
-
+      scope.startDateFilter = undefined;
+      scope.endDateFilter = undefined;
+      expect(scope.dateFilter()).toBe(true);
 		});
 		it("should return false when the end date is less than the start date", function (){
-
+      scope.startDateFilter = "12/31/2015"; 
+      scope.endDateFilter = "12/1/2015";
+      expect(scope.dateFilter()).toBe(false);
 		});
 		it("should return false game date is less than start date", function(){
-
+      scope.startDateFilter = "11/20/2015";
+      scope.endDateFilter = "12/1/2015";
+      var gameDate = "2015-10-23T20:00:00.000Z"
+      expect(scope.dateFilter(gameDate)).toBe(false);
 		});
 	});
 });
