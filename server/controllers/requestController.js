@@ -15,6 +15,18 @@ module.exports = {
       })
   },
 
+  getUserInvitations: function (req, res) {
+    //Return all invitations sent to the logged-in user
+    var userId = req.user.id;
+    Requests.getRequestsByUserId(userId, 'invite')
+      .then(function (data) {
+        res.send(data);
+      })
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      })
+  },
+
   getRequestersPictures: function(req, res) {
     var gamepostId = parseInt(req.url.split('/')[2]);
     Requests.getRequestersPictures(gamepostId)
@@ -93,6 +105,22 @@ module.exports = {
       .catch(function (err) {
         helpers.handleError(err, res)
       });
-  }
+  },
+
+  createInvitation: function (req, res) {
+    //Create a new invite
+    var request = req.body;
+    request.host_id = req.user.id;
+    request.gamepost_id = parseInt(req.url.split('/')[2]);
+    request.status = "invite";
+
+    Requests.create(request)
+      .then(function (data) {
+        res.send(data);
+      })
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      })
+  },
 
 }
