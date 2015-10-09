@@ -329,10 +329,9 @@ describe('requestsModel', function(){
   });
 
   it('find function should find an existing request from database ', function(done){
-    requestsModel.find(request1.id)
+    requestsModel.fetchById(request1.id)
       .then(function(request){
-        expect(request.length).to.equal(1);
-        request = request[0];
+        expect(request);
         expect(request.gamepost_id).to.equal(request1.gamepost_id);
         expect(request.user_id).to.equal(request1.user_id);
         expect(request.comments).to.equal('Can i join?');
