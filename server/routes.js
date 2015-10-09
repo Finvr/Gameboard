@@ -40,6 +40,11 @@ router.get('/me/requests',
   checkAuth, 
   requestController.getUserRequests
 );
+//Get all invites sent to 'me'
+router.get('/me/invitations', 
+  checkAuth, 
+  requestController.getUserInvitations
+);
 //Get the logged-in user's profile
 router.get('/me/profile',
   checkAuth,
@@ -100,6 +105,13 @@ router.post('/gameposts/:id/requests',
   checkAuth, 
   notesController.newReq,
   requestController.createRequest
+);
+
+//Create an invitation to join a specific gamepost
+router.post('/gameposts/:id/invitations', 
+  checkAuth, 
+  // notesController.newReq,
+  requestController.createInvitation
 );
 
 //Requests routes
