@@ -59,11 +59,19 @@ angular.module('imgame.profile', [])
         console.log("sendReview: ", game);
     };
 
+    $scope.getReviews = function() {
+        Profile.getReviews()
+            .then(function(data){
+                console.log("getReviews controller: ", data)
+            })
+    };
+
     var init = function(){
     	$('.profile-field').find('span.write').hide();
     	$('.profile-field').find('span.read').show();
     	getProfile();
         $scope.getRecentGames();
+        $scope.getReviews();
     }
     init();
     //$scope.updateProfile({});
