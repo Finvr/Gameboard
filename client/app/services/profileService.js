@@ -38,7 +38,7 @@
     function getRecentGames() {
       return $http({
         methos: "GET",
-        url: 'gamePosts/recentGames'
+        url: '/me/gameposts/recentgames'
       })
       .then(function(resp){
         console.log("getRecentGames from profile service: ", resp.data);
