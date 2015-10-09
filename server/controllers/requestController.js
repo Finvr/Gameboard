@@ -93,6 +93,22 @@ module.exports = {
       .catch(function (err) {
         helpers.handleError(err, res)
       });
-  }
+  },
+
+  createInvite: function (req, res) {
+    //Create a new invite
+    var request = req.body;
+    request.host_id = req.user.id;
+    request.gamepost_id = parseInt(req.url.split('/')[2]);
+    request.status = "invite";
+
+    Requests.create(request)
+      .then(function (data) {
+        res.send(data);
+      })
+      .catch(function (err) {
+        helpers.handleError(err, res)
+      })
+  },
 
 }
