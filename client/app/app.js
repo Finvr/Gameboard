@@ -14,13 +14,14 @@
       'ui.calendar',
       'autocomplete'
   	])
-    .run(function($rootScope, Auth, Profile, Notification) {
+    .run(function($rootScope, Auth, Profile, Users. Notification) {
       $rootScope.currentLocation;
       Auth.getCurrentLocation();
       Profile.getProfile()
         .then(function(data){
           $rootScope.myInfo = data;
         });
+      Users.all();
       Notification.getNotifications()
         .then(function(data){
           $rootScope.myInfo.notifications = data;
