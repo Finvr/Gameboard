@@ -58,7 +58,7 @@ module.exports = {
   },
 
   fetchAll: function() {
-    return db.select([id, username, picture])
+    return db.select(['id', 'username', 'picture'])
       .from('users')
       .catch(function (err) {
         console.log("Fetch all users error: ", err.message)
