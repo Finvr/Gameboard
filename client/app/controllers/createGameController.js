@@ -4,7 +4,9 @@
 
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
  		$scope.game = {};
+    $scope.searchText = "";
     $scope.gamesArray = GamePost.gamesArray;
+
     Auth.requireAuth();
 
     // set today as the ealiest day user can select
@@ -26,7 +28,7 @@
       };
       GamePost.create(game)
         .then(function(data){
-          $location.path("/my-games")
+          $location.path("/my-games");
         })
       };
   };
