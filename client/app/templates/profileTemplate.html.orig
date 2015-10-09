@@ -56,6 +56,7 @@
     </ul> 
   </div>
 
+<<<<<<< HEAD
   <!-- detail Modal for rating each game -->
   <div id="openRateModal" class="modal">
     <div class="modal-header grey">
@@ -113,10 +114,42 @@
         </table>
       </div>
       <div class="modal-footer" ng-if="currentRateGame.playerPics">
-        <div class = "col s4 right" ng-click="sendReviews(currentRateGame.playerPics)">
+        <div class = "col s4 right" ng-click="sendReview(currentRateGame.playerPics)">
           <a class = "btn btn-med waves-effect center waves-light grey darken-3">
             Complete Rating
           </a>
+=======
+                <tbody>
+                    <tr ng-repeat="player in currentRateGame.playerPics">
+                        <td>
+                            <a href="#/profile/{{player.user_id}}" target="_blank" ><img class="hostPic" ng-src="{{player.picture}}">{{player.username}}</a>
+                        </td>
+                        <td>
+                          <div class="switch" >
+                            <label>
+                              True
+                              <input type="checkbox" ng-model="player.showed_up">
+                              <span class="lever"></span>
+                              False
+                            </label>
+                          </div>
+                          <span watch>{{player.showed_up}}</span>
+                        </td>
+                        <td>
+                            <input type="range" ng-model="player.rating" min="0" max="5" ng-if="!player.showed_up" />
+                            {{player.rating}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer" ng-if="currentRateGame.playerPics">
+          <div class = "col s4 right" ng-click="sendReviews(game)">
+              <a class = "btn btn-med waves-effect center waves-light grey darken-3">
+                Complete Rating
+              </a>
+          </div>
+>>>>>>> client-reviews-working on review controller
         </div>
       </div>
     </div>

@@ -74,39 +74,35 @@ angular.module('imgame.profile', [])
         $scope.getReviews();
     }
 
-    $scope.sendReviews = function (game){
-       // var game = $scope.currentRateGame
-        console.log('game: ', game)
+    $scope.sendReviews = function (){
         var playersInGame = $scope.currentRateGame.playerPics.length
-        var Aplayer = $scope.currentRateGame.playerPics
-        //var reviewee = 
+        var player = $scope.currentRateGame.playerPics
+        var gamepostId = $scope.currentRateGame.gamepost_id;
+        console.log("$scope.currentRateGame: ",$scope.currentRateGame)
+        var reviews = []
         for (var i = 0; i < playersInGame; i++){
-            var player = {}
-            player.reviewer_id = Aplayer[i].user_id,
-            player.skip = Aplayer[i].showed_up;
-            if(!player.skip){
-                player.rating = null;
+          var review = {}
+          review.skip = false || player[i].skip;
+          if(review.skip===false){
+            review.showed_up = player[i].showed_up;
+            if(review.showed_up ===undefined){
+                review.showed_up= false;
             }
-            console.log("player",i,": ", player, "Aplayer[i]: ", Aplayer)
-
+            if(review.showed_up===true){
+                review.rating = player[i].rating;
+                if(review.rating === undefined){
+                    review.rating= 3;
+                }
+            }
+             review.reviewee_id = player[i].user_id
+             review.gamepost_id = gamepostId;
+             reviews.push(review)
+            }
         }
-
-        // }
-        // var review = {
-        //     "showed_up": player.showed_up,
-        //     "rating": player.rating,
-        //     "reviewee_id": review.reviewee_id,
-        //     "reviewer_id": review.reviewer_id,
-        //     "gamepost_id": review.gamepost_id
-        // };
-
-        // Review.createReview(review)
-        // .then(function (data){
-        //     console.log("create review", data)
-        // })
+        Review.createReview(reviews);
+        console.log("reviews : ", reviews)
     }
     init();
-    //$scope.updateProfile({});
 	};
 
 })();
