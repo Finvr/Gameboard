@@ -30,8 +30,12 @@
         method: 'PUT',
         url: '/me/profile',
         data: profileData
-      }).then(function(resp){
+      })
+      .then(function(resp){
         return resp.data;
+      })
+      .catch(function(err){
+        console.log("updateProfile service Error: ", err);
       });
     }
 
@@ -42,8 +46,11 @@
       })
       .then(function(resp){
         console.log("getRecentGames from profile service: ", resp.data);
-        return resp.data
+        return resp.data;
       })
+      .catch(function(err){
+        console.log("getRecentGames service Error: ", err);
+      });
     }
 
     function getReviews() {
@@ -53,8 +60,11 @@
       })
       .then(function(resp){
         console.log("getReviews from profile service: ", resp.data);
-        return resp.data
+        return resp.data;
       })
+      .catch(function(err){
+        console.log("getReviews service Error: ", err);
+      });      
     }
 
     return {

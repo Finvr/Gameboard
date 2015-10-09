@@ -2,79 +2,94 @@
 angular.module('imgame.profile', [])
 	.controller('ProfileController', ProfileController);
 
-	function ProfileController($scope, Profile, Auth, $route, $location){
+	function ProfileController($scope, Profile, Auth, $route, $location, Review){
 
-    Auth.requireAuth();
+        Auth.requireAuth();
 
-    var getProfile = function(){
-      Profile.getProfile($route.current.params.id)
-      	.then(function(profile){
-        	$scope.myProfile = profile;
-        	$scope.savedProfile = $scope.myProfile;
-      	});
-    };
+        var getProfile = function(){
+          Profile.getProfile($route.current.params.id)
+          	.then(function(profile){
+            	$scope.myProfile = profile;
+            	$scope.savedProfile = $scope.myProfile;
+          	});
+        };
 
-    $scope.getRecentGames = function(){
-        Profile.getRecentGames()
-            .then(function(games){
-                console.log("getRecentGames in Profile: ", games);
-                $scope.recentGames = games;
+        $scope.getRecentGames = function(){
+            Profile.getRecentGames()
+                .then(function(games){
+                    console.log("getRecentGames in Profile: ", games);
+                    $scope.recentGames = games;
+                })
+        };
+
+        $scope.close = function(selector) {
+            $(selector).closeModal();
+        };
+
+        $scope.updateProfile = function(profileData){
+            Profile.updateProfile(profileData)
+                .then(function(data){
+                    $scope.update = null;
+        			init();
+                });
+        };
+
+        $scope.showInput = function(selector){
+            if (!$scope.myProfile || !$scope.myProfile.viewId) {
+                $scope.update = true;
+                $(selector).find('.read').hide();
+                $(selector).find('.write').show();            
+            }
+        };
+
+        $scope.openRateModal = function(game) {
+            if (game.host_name) {
+                game.playerPics.unshift({picture: game.host_pic,
+                    user_id: game.host_id,
+                    username: game.host_name
+                });
+            }
+            game.playerPics.forEach(function(player){
+                player.skip = true;
+                player.showed_up
+                player.rating = 3;
             })
-    };
+            $scope.currentRateGame = game;
+        };
 
-    $scope.close = function(selector) {
-        $(selector).closeModal();
-    };
+        $scope.getReviews = function() {
+            Profile.getReviews()
+                .then(function(data){
+                    console.log("getReviews controller: ", data)
+                })
+        };
 
-    $scope.updateProfile = function(profileData){
-        Profile.updateProfile(profileData)
-            .then(function(data){
-                $scope.update = null;
-    			init();
-            });
-    };
-
-    $scope.showInput = function(selector){
-        if (!$scope.myProfile || !$scope.myProfile.viewId) {
-            $scope.update = true;
-            $(selector).find('.read').hide();
-            $(selector).find('.write').show();            
+        var init = function(){
+        	$('.profile-field').find('span.write').hide();
+        	$('.profile-field').find('span.read').show();
+        	getProfile();
+            $scope.getRecentGames();
+            $scope.getReviews();
         }
-    };
 
-    $scope.openRateModal = function(game) {
-        if (game.host_name) {
-            game.playerPics.unshift({picture: game.host_pic,
-                user_id: game.host_id,
-                username: game.host_name
-            });
+        $scope.sendReviews = function (players){
+            var gamepostId = $scope.currentRateGame.gamepost_id;
+            var reviews = [];
+            for (var i = 0; i < players.length; i++){
+                if (!players[i].skip) {
+                    players[i].reviewee_id = players[i].user_id
+                    players[i].gameposts_id = gamepostId;
+                    delete players[i].skip;
+                    reviews.push(players[i])
+                }
+            }
+            Review.createReview(reviews)
+                .then(function(reviews){
+                    console.log("reviews from profile controller : ", reviews)                
+                });
         }
-        game.playerPics.forEach(function(player){
-            player.skip = true;
-        })
-        $scope.currentRateGame = game;
-    };
-
-    $scope.sendReview = function(game) {
-        console.log("sendReview: ", game);
-    };
-
-    $scope.getReviews = function() {
-        Profile.getReviews()
-            .then(function(data){
-                console.log("getReviews controller: ", data)
-            })
-    };
-
-    var init = function(){
-    	$('.profile-field').find('span.write').hide();
-    	$('.profile-field').find('span.read').show();
-    	getProfile();
-        $scope.getRecentGames();
-        $scope.getReviews();
-    }
-    init();
-    //$scope.updateProfile({});
+        
+        init();
 	};
 
 })();
