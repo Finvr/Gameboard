@@ -45,7 +45,7 @@
   <!-- Recent Game List -->
   <div class="recent_game_list" ng-if="!myProfile.viewId">
      <ul class="collection" watch>
-      <li class="collection-header collection-item"><span class="grey-text"><h5>My Recent Games</h5></span></li>
+      <li class="collection-header collection-item"><h5>My Recent Games</h5></li>
       <li class="collection-item" ng-repeat="game in recentGames | orderBy: '-game_datetime'" watch>
         <div class='row game_list'>
           <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : "No Name"}}</div>
