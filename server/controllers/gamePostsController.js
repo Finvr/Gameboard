@@ -1,4 +1,6 @@
 var GamePosts = require ('../models/gamePostsModel.js'),
+    Requests  = require ('../models/requestsModel.js'),
+    Notes     = require ('../models/notificationsModel.js'),
     helpers   = require ('../utils/helpers.js');
 
 module.exports = {
@@ -25,12 +27,24 @@ module.exports = {
 
   createGamepost: function (req, res) {
     //Create a new gamepost
+    var toSend;
+    var invitations;
     var gamepost = req.body;
+    if ( gamepost.invitees ) {
+      invitations = gamepost.invitees;
+      delete gamepost.invitees;
+    }
     gamepost.host_id = req.user.id;
 
     GamePosts.create(gamepost)
       .then(function (data) {
-        res.send(data);
+        toSend = data;
+        if ( invitations ) {
+          return handleInvites(invitations, gamepost);
+        } else return null;
+      })
+      .then(function () {
+        res.send(toSend);
       })
       .catch(function (err) {
         helpers.handleError(err, res)
@@ -65,4 +79,19 @@ module.exports = {
       })
   }
 
+}
+
+function handleInvites (invitations, gamepost) {
+  return Requests.createInvitations(invitations, gamepost)
+    .then(function (inviteIds) {
+      var inviteNotes = [];
+      for ( var i = 0; i < inviteIds.length; i++ ) {
+        inviteNotes.push({
+          request_id: inviteIds[i],
+          type: 'invite',
+          user_id: invitations[i].user_id
+        });
+      };
+      return Notes.createInvitationNotes(inviteNotes);
+    })
 }

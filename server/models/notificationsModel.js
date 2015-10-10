@@ -68,6 +68,15 @@ module.exports = {
         console.log(err);
         return err;
       });
+  },
+
+  createInvitationNotes: function (invitations) {
+    return db('notifications')
+      .insert(invitations)
+      .catch(function (err) {
+        console.log(err);
+        return err;
+      })
   }
 
 };

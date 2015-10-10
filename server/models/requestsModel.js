@@ -163,6 +163,16 @@ module.exports = {
       .catch(function (err) {
         return err;
       });
+  },
+
+  createInvitations: function (invitations, gamepost) {
+    for ( var i = 0; i < invitations.length; i++ ) {
+      invitations[i].gamepost_id = gamepost.id;
+    }
+
+    return db('requests')
+      .insert(invitations)
+      .returning('id');
   }
 
 };
