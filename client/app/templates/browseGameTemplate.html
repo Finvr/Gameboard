@@ -38,6 +38,10 @@
           <input id='endTime' class="col s6" type="time" ng-model="endTimeFilter"/>
         </div>
 
+        <div id="filterButton">
+          <button class="waves-effect waves-light btn center" ng-click="filterMap()">Click to Filter</button>
+        </div>
+
       </div>
     </div>
 
@@ -52,8 +56,8 @@
         </div>
       </nav>
 
-      <div ng-click="mapView()" class="mapViewButton col m12">
-        <button id="mapButton" class="waves-effect waves-light btn left col m3">Map View</button>
+      <div class="mapViewButton col m12">
+        <button ng-click="mapView()" id="mapButton" class="waves-effect waves-light btn left col m3">Map View</button>
       </div>
 
       <!-- display all the games -->
