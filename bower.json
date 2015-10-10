@@ -28,6 +28,7 @@
     "angular-ui-calendar": "~1.0.1",
     "angular-ui-router": "~0.2.15",
     "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
+    "checklist-model": "~0.6.0",
     "jquery": "~2.1.4",
     "Materialize": "materialize#~0.97.1"
   },

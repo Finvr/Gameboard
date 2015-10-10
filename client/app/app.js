@@ -12,7 +12,8 @@
       'ui.materialize',
   		'ngRoute',
       'ui.calendar',
-      'autocomplete'
+      'autocomplete',
+      'checklist-model'
   	])
     .run(function($rootScope, Auth, Profile, Users, Notification) {
       $rootScope.currentLocation;
