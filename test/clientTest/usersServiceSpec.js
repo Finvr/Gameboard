@@ -1,10 +1,9 @@
 describe("Users service", function(){
 
 	var Users, http, users; 
-
+	
 	beforeEach(module('imgame'));
 
-	
 	beforeEach(inject(function(_Users_, $httpBackend){
 		Users = _Users_;
 		http = $httpBackend;
