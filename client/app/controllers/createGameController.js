@@ -27,7 +27,9 @@
       };
 
       if($scope.game.invitees.length > 0){
-        game.invitees = $scope.game.invitees;
+        game.invitees = $scope.game.invitees.map(function(id){
+          return { user_id: id };
+        });
       }
 
       GamePost.create(game)
