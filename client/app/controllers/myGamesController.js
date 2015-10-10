@@ -52,8 +52,7 @@
       Invitations
         .all()
         .then(function(invitations){
-          $scope.invitations = invitations;
-          console.log($scope.invitations);
+          $scope.myInvitations = invitations;
         });
     }
 
