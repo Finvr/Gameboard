@@ -29,6 +29,33 @@ app.use(sessions({
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.use(new FacebookStrategy ({
+    // clientID: config.facebook.FACEBOOK_APP_ID,
+    clientID: process.env.FACEBOOK_APP_ID || config.facebook.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_SECRET ||config.facebook.FACEBOOK_SECRET,
+    callbackURL: process.env.callbackURL ||config.facebook.callbackURL,
+    profileFields: ['id', 'displayName', 'picture.type(large)', 'link'],
+  },
+  function(accessToken, refreshToken, profile, done) {
+    var user = {
+      username: profile.displayName, 
+      facebook_id: profile.id, 
+      facebook_token: accessToken,
+      picture: profile.photos[0].value,
+      link: profile.profileUrl
+    };
+
+    Users.findOrCreate(user)
+      .then(function(user){
+        return done(null, user);
+      })
+      .catch(function(err){
+        console.log("err from findOrCreateUser: ",err);
+        res.send(err.message);
+      })
+    }
+));
+
 passport.serializeUser(function(user, done){
   done(null, user.id);
 });
@@ -43,31 +70,6 @@ passport.deserializeUser(function(userId, done){
       done(null, null);
     })
 });
-
-passport.use(new FacebookStrategy ({
-    // clientID: config.facebook.FACEBOOK_APP_ID,
-    clientID: process.env.FACEBOOK_APP_ID || config.facebook.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_SECRET ||config.facebook.FACEBOOK_SECRET,
-    callbackURL: process.env.callbackURL ||config.facebook.callbackURL,
-    profileFields: ['id', 'displayName', 'picture.type(large)', 'link'],
-  },
-  function(accessToken, refreshToken, profile, done) {
-    var user = {
-      username: profile.displayName, 
-      facebook_id: profile.id, 
-      facebook_token: accessToken,
-      picture: profile.photos[0].value
-    }
-    Users.findOrCreate(user)
-      .then(function(user){
-        return done(null, user);
-      })
-      .catch(function(err){
-        console.log("err from findOrCreateUser: ",err);
-        res.send(err.message);
-      })
-    }
-));
 
 // Router
 app.use('/', router); 
