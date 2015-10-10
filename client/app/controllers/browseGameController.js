@@ -12,12 +12,16 @@
 		$scope.endTimeFilter= null;
 		$scope.distance_choices = {
 			"Within 1 mile": 1,
+			"Within 2 miles": 2,
+			"Within 3 miles": 3,
+			"Within 4 miles": 4,
 			"Within 5 miles": 5,
 			"Within 10 miles": 10,
 			"More than 10 miles": Infinity
 		}
 
 		$("#gmap").hide();
+		$("#filterButton").hide();
 
 		$scope.mapView = function() {
 			if ($("#mapButton").text() === "Map View"){
@@ -28,12 +32,21 @@
 			$("#gmap").toggle();	
 			$("#listView").toggle();
 			$scope.mapActivated = true;
+			$("#filterButton").toggle();
+		}
+
+		$scope.filterMap = function(){
+			$scope.newGames = $scope.games.filter(function(game){
+				return ($scope.dateFilter(game.game_datetime) && $scope.disFilter(game.distance) && $scope.timeFilter(game.game_datetime));
+			})
+			console.log("filterMap newGames: ", $scope.newGames)
 		}
 
 		//Functions called on controller start
 		Auth.requireAuth('browse');
 		BrowseGames.getGames()
 			.then(function(resp) {
+				$scope.newGames = resp.slice();
 				console.log("BrowseGameController inside getGsmes", resp);
 				$scope.games = resp;
 				Auth.getCurrentLocation();
