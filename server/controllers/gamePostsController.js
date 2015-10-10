@@ -1,5 +1,6 @@
 var GamePosts = require ('../models/gamePostsModel.js'),
     Requests  = require ('../models/requestsModel.js'),
+    Notes     = require ('../models/notificationsModel.js'),
     helpers   = require ('../utils/helpers.js');
 
 module.exports = {

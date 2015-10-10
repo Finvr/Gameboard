@@ -167,7 +167,6 @@ module.exports = {
 
   createInvitations: function (invitations, gamepost) {
     for ( var i = 0; i < invitations.length; i++ ) {
-      invitations[i].host_id = gamepost.host_id;
       invitations[i].gamepost_id = gamepost.id;
     }
 
