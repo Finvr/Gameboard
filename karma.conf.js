@@ -28,6 +28,7 @@ module.exports = function(config) {
       'client/lib/fullcalendar/dist/fullcalendar.min.js',
       'client/lib/fullcalendar/dist/gcal.js',
       'client/lib/allmighty-autocomplete/script/autocomplete.js',
+      'client/lib/checklist-model/checklist-model.js',
       'client/lib/angular-mocks/angular-mocks.js',
 
       // our app code
