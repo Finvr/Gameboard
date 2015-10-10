@@ -87,6 +87,7 @@ function updateFBInfo(user, updatedUser) {
       facebook_token: updatedUser.facebook_token,
       username: updatedUser.username,
       picture: updatedUser.picture,
+      link: updatedUser.link,
       updated_at: db.raw('now()')
     })
     .returning('id')
