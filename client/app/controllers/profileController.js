@@ -84,11 +84,14 @@ angular.module('imgame.profile', [])
       var gamepostId = $scope.currentRateGame.gamepost_id;
       var reviews = [];
       for (var i = 0; i < players.length; i++){
+        var player = {}
         if (!players[i].skip) {
-          players[i].reviewee_id = players[i].user_id
-          players[i].gameposts_id = gamepostId;
-          delete players[i].skip;
-          reviews.push(players[i])
+          player.reviewee_id = players[i].user_id
+          player.gameposts_id = gamepostId;
+          player.rating = players[i].rating;
+          player.showed_up = players[i].showed_up;
+          player.skip = players[i].skip;
+          reviews.push(player)
         }
       }
       if (reviews.length > 0) {

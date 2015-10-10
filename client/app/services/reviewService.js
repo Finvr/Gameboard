@@ -2,6 +2,7 @@
 	angular.module('imgame.service')
 	.factory('Review', function Review($http){
 		function createReview(reviews){
+      console.log('reviews',reviews)
 			return $http({
         method: 'POST',
         url: '/me/reviews',
