@@ -143,7 +143,7 @@
                   position: game.location
                 });
                 searchMarkers.push(newMark);
-                if (game.distance < 10) {
+                if (game.distance < 50) {
                   bounds.extend(game.location);
                   map.fitBounds(bounds);                  
                 }
