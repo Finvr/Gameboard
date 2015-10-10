@@ -17,6 +17,19 @@
 			"More than 10 miles": Infinity
 		}
 
+		$("#gmap").hide();
+
+		$scope.mapView = function() {
+			if ($("#mapButton").text() === "Map View"){
+				$("#mapButton").text("Game List")
+			} else {
+				$("#mapButton").text("Map View")
+			}
+			$("#gmap").toggle();	
+			$("#listView").toggle();
+			$scope.mapActivated = true;
+		}
+
 		//Functions called on controller start
 		Auth.requireAuth('browse');
 		BrowseGames.getGames()
