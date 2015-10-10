@@ -11,7 +11,6 @@
     Auth.requireAuth();
 
     // set today as the ealiest day user can select
-
     //controller should not know anything about the DOM, this makes our tests fail
     //document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
 
