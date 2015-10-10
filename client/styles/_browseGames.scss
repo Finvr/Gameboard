@@ -46,8 +46,17 @@
       background-color: #eee;
    }
 
-  .btn {
-  	margin-top: 0px;
+   .btn {
+    margin-top: 0px;
+    height: 40px;
+    line-height: 25px;
+    width: 100%;
+    padding: 0px;
+  }
+
+  #listView .btn {
+    float: right;
+    margin-top: 0px;
     height: 25px;
     line-height: 25px;
     width: 80%;
