@@ -165,14 +165,12 @@ module.exports = {
       });
   },
 
-  createInvitations: function (gamepost) {
-    var invitations = gamepost.invitees;
-
+  createInvitations: function (invitations, gamepost) {
     for ( var i = 0; i < invitations.length; i++ ) {
       invitations[i].host_id = gamepost.host_id;
       invitations[i].gamepost_id = gamepost.id;
     }
-    
+
     return db('requests')
       .insert(invitations);
   }

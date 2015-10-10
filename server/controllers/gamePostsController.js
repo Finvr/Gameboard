@@ -27,14 +27,20 @@ module.exports = {
   createGamepost: function (req, res) {
     //Create a new gamepost
     var toSend;
+    var invitations;
     var gamepost = req.body;
+
+    if ( gamepost.invitees ) {
+      invitations = gamepost.invitees;
+      delete gamepost.invitees;
+    }
     gamepost.host_id = req.user.id;
 
     GamePosts.create(gamepost)
       .then(function (data) {
         toSend = data;
-        if ( gamepost.invitees ) {
-          return Requests.createInvitations(gamepost)
+        if ( invitations ) {
+          return Requests.createInvitations(invitations, gamepost)
         } else return null;
       })
       .then(function () {
