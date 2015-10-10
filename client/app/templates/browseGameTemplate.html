@@ -51,8 +51,20 @@
           </div>
         </div>
       </nav>
+
+      <div ng-click="mapView()" class="mapViewButton col m12">
+        <button id="mapButton" class="waves-effect waves-light btn left col m3">Map View</button>
+      </div>
+
       <!-- display all the games -->
-      <ul class="collection" watch>
+      <!-- map view -->
+      <div google-maps  class="half-div col m12 s12">
+        <div id="gmap"></div>
+      </div>
+
+      <!-- display all the games -->
+      <!-- list view -->
+      <ul class="collection" id="listView" watch>
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : " "}}</div>

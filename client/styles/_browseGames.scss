@@ -90,9 +90,23 @@
     margin: 0px;
   }
 
+  #gmap {
+    height: 500px;
+  }
+
+  .half-div {
+    padding: 0;
+  }
+
   .autocomplete ul{
     height: 50px;
     border: none;
     z-index: 10;
   }
+
+  .mapViewButton {
+    padding-left: 0%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }  
 }
