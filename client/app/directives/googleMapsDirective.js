@@ -143,8 +143,17 @@
                   position: game.location
                 });
                 searchMarkers.push(newMark);
-                bounds.extend(game.location);
-                map.fitBounds(bounds);
+                if (game.distance < 10) {
+                  bounds.extend(game.location);
+                  map.fitBounds(bounds);                  
+                }
+
+                // add listener to show info window of the marker that was clicked
+                google.maps.event.addListener(newMark, 'click', function(){
+                  scope.getRequestInfo(game.id)
+                  $("#openRequest").openModal();
+                  scope.openGame(game);
+                })
                 return true
               } else {
                 return false;
@@ -154,7 +163,6 @@
         });
       };
       // initMap func complete
-
       
       // make the inforWindow html template
       function makeInfoHtml (name, distance) {
