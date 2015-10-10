@@ -130,17 +130,24 @@
         }
 
         // display games markers on map in Browse Game page
-        scope.$watch('games', function() {
-          if (scope.games && scope.games.length > 0) {
+        scope.$watch('newGames', function() {
+          if (scope.newGames && scope.newGames.length > 0) {
+            console.log("directive newGames: ", scope.newGames)
             map.setCenter(scope.currentLocation);
             bounds = new google.maps.LatLngBounds(scope.currentLocation);
             clearMaker(); 
-            scope.games.filter(function(game){
+            scope.newGames.forEach(function(game){              
+              console.log("games each outside: ", game)
               if (game.lat){
+                console.log("games each: ", game)
                 game.location = new google.maps.LatLng(Number(game.lat), Number(game.lng));
+                var image = "<img src='/assets/facebook.png'>";
                 var newMark = new google.maps.Marker({
                   map: map,
-                  position: game.location
+                  animation: google.maps.Animation.DROP,
+                  position: game.location,
+                  title: game.game
+                 // ,icon: image
                 });
                 searchMarkers.push(newMark);
                 if (game.distance < 50) {
