@@ -94,6 +94,7 @@
       $scope.gameToShowDetails = null;
       $scope.gameToCancel = null;
       $scope.gameToApprove = null;
+      $scope.invitationToReview = null;
     };
     
     $scope.init();
@@ -136,6 +137,7 @@
         $scope.init();
       });
     }
+
     $scope.getGamepostRequest = function(game){
       return GamePost.gamepostRequest(game.id)
         .then(function(requests){
@@ -143,6 +145,10 @@
           $scope.requests = requests;
         })
     };
+
+    $scope.setInvitationToReview = function(invitation){
+      $scope.invitationToReview = invitation;
+    }
 
     $scope.requestConfirm = function(str, req) {
       req.status = str;
