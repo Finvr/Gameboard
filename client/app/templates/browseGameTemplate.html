@@ -90,7 +90,13 @@
             <a href="#/profile/{{game.host_id}}" target="_blank">{{game.username}}</a>
           </div>
           <div>
+            <span class="grey-text">Time:</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}
+          </div>
+          <div>
             <span class="grey-text">Location:</span> {{game.game_location}}
+          </div>
+          <div>
+            <span class="grey-text">Distance to current location:</span> {{game.distance + " m"}}
           </div>
           <div>
             <span class="grey-text">Details:  </span>{{game.gamepost_description ? game.gamepost_description : "N/A"}}
