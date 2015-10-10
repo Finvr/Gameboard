@@ -11,12 +11,10 @@
     Auth.requireAuth();
 
     // set today as the ealiest day user can select
-
     //controller should not know anything about the DOM, this makes our tests fail
     //document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
 
     $scope.createGame = function(game){
-      console.log("Create Game", $scope.game.invitees);
       game = { 
         "game_location": $scope.game.location, //start set in template
         "game": $scope.game.name,
@@ -27,6 +25,11 @@
         "lat": $scope.game.lat, 
         "lng": $scope.game.lng, 
       };
+
+      if($scope.game.invitees.length > 0){
+        game.invitees = $scope.game.invitees;
+      }
+
       GamePost.create(game)
         .then(function(data){
           $location.path("/my-games");

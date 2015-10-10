@@ -60,13 +60,20 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<div>
-				     <input id="search" type="search" ng-model="searchText" placeholder="Enter name to invite">
+				    <input id="search" type="search" ng-model="searchText" placeholder="Enter name to invite">
             <label class="active" for="search">Invite Guests</label>
             <i class="material-icons">close</i>
           </div>
-					<div ng-if="searchText !== ''" ng-repeat="user in usersList | filter: searchText">
-    				<input name="invitedPlayers[]" type="checkbox"  id="user-{{user.id}}" checklist-model="game.invitees" checklist-value="user" />
-    				<label for="user-{{user.id}}">{{user.username}}</label>
+					<div class="invitees" ng-repeat="user in usersList | filter: searchText" ng-if="searchText !== ''">
+    				<input name="invitedPlayers[]" type="checkbox"  id="user-{{user.id}}" checklist-model="game.invitees" checklist-value="user.id" />
+    				<label class="invitee" for="user-{{user.id}}">
+    					<div class="invitee-picture">
+    						<img class="circle responsive-img" src="{{user.picture}}" >
+    					</div>
+    					<div class="invitee-name">
+    						{{user.username}}
+    					</div>
+    				</label>
     			</div>
 				</div>
 			</div>

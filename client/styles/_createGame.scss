@@ -2,8 +2,16 @@
 .createGame {
 
   padding: 1.5%;
-
-
+  .invitees {
+    min-height: 30%;
+  }
+  .invitee {
+    background: white;
+    z-index: 100;
+    .invitee-picture img {
+      width: 40px;
+    }
+  }
   .map-directions {
     padding: 2%;
   }
