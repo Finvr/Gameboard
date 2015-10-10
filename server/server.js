@@ -49,7 +49,7 @@ passport.use(new FacebookStrategy ({
     clientID: process.env.FACEBOOK_APP_ID || config.facebook.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_SECRET ||config.facebook.FACEBOOK_SECRET,
     callbackURL: process.env.callbackURL ||config.facebook.callbackURL,
-    profileFields: ['id', 'displayName', 'picture.type(large)'],
+    profileFields: ['id', 'displayName', 'picture.type(large)', 'link'],
   },
   function(accessToken, refreshToken, profile, done) {
     var user = {

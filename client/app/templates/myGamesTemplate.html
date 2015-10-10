@@ -141,7 +141,7 @@
   <div id="game-details" class="modal">
     <div class="modal-header grey">
       <a ng-click="close('#game-details')"><i class="material-icons right white-text">close</i></a>
-      <h4 class="white-text center">{{ gameToShowDetails.game }}</h4>
+      <h4 class="white-text center">{{ gameToShowDetails.game ? gameToShowDetails.game : "No Name" }}</h4>
     </div>
     <div class="modal-content container">
       <p>
