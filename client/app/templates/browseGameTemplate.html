@@ -55,7 +55,7 @@
       <ul class="collection" watch>
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
           <div class='row game_list'>
-            <div class="left col s4" id="game_title" style="display:inline">{{game.game}}</div>
+            <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : " "}}</div>
             <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}, Players: {{ game.accepted_players }}/{{game.player_count}}
             </div>
             <div class="right col s3" ng-if="loggedIn" ng-click="openGame(game); getMyRequests()">
