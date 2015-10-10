@@ -45,11 +45,15 @@
       <li class="collection-header collection-item"><span class="grey-text"><h5>My Recent Games</h5></span></li>
       <li class="collection-item" ng-repeat="game in recentGames | orderBy: '-game_datetime'" watch>
         <div class='row game_list'>
-          <div class="left col s4" id="game_title" style="display:inline">{{game.game}}</div>
+          <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : "No Name"}}</div>
           <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}, Players: {{ game.accepted_players }}/{{game.player_count}}
           </div>
-          <div class="right col s3" ng-if="loggedIn" ng-click="openRateModal(game)">
+
+          <div class="right col s3" ng-if="loggedIn && game.playerPics.length > 0" ng-click="openRateModal(game)">
             <a class='btn grey darken-3' href='#openRateModal' modal>Rate</a>
+          </div>
+          <div class="right col s3" ng-if="loggedIn && game.playerPics.length === 0" ng-click="openRateModal(game)">
+            <a class='btn grey darken-3' href='#openRateModal' modal>View</a>
           </div>
         </div>        
       </li>
@@ -71,7 +75,7 @@
         <span class="grey-text">Location:</span> {{currentRateGame.game_location}}
       </div>
       <div class="row">
-        <table>
+        <table ng-if="currentRateGame.playerPics.length > 0">
           <thead>
             <tr>
               <th class="players">Player</th>

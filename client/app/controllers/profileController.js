@@ -91,10 +91,12 @@ angular.module('imgame.profile', [])
           reviews.push(players[i])
         }
       }
-      Review.createReview(reviews)
-        .then(function(reviews){
-          console.log("reviews from profile controller : ", reviews)                
-        });
+      if (reviews.length > 0) {
+        Review.createReview(reviews)
+          .then(function(reviews){
+            console.log("reviews from profile controller : ", reviews)                
+          });        
+      }
     }
     
     init();
