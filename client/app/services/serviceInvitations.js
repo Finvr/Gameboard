@@ -8,8 +8,8 @@
 		var all = function(){
 			return $http
 								.get('me/invitations')
-								.then(function(data){
-									console.log(data);
+								.then(function(resp){
+									return resp.data;
 								});
 		}
 		return {
