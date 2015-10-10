@@ -29,7 +29,6 @@ module.exports = {
     var toSend;
     var invitations;
     var gamepost = req.body;
-
     if ( gamepost.invitees ) {
       invitations = gamepost.invitees;
       delete gamepost.invitees;
@@ -41,6 +40,17 @@ module.exports = {
         toSend = data;
         if ( invitations ) {
           return Requests.createInvitations(invitations, gamepost)
+            .then(function (inviteIds) {
+              var inviteNotes = [];
+              for ( var i = 0; i < inviteIds.length; i++ ) {
+                inviteNotes.push({
+                  request_id: inviteIds[i],
+                  type: 'invite',
+                  user_id: invitations[i].user_id
+                });
+              };
+              return Notes.createInvitationNotes(inviteNotes);
+            })
         } else return null;
       })
       .then(function () {

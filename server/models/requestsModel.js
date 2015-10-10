@@ -172,7 +172,8 @@ module.exports = {
     }
 
     return db('requests')
-      .insert(invitations);
+      .insert(invitations)
+      .returning('id');
   }
 
 };
