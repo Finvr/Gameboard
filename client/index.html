@@ -8,10 +8,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   <link rel="stylesheet" type="text/css" href="styles/main.css"/>
 </head>
-<body ng-app="imgame" ng-controller="NotificationsController">
+<body ng-app="imgame">
   <header>
     <nav>
-      <div class="nav-wrapper grey lighten-4">
+      <div ng-controller="NotificationsController" class="nav-wrapper grey lighten-4">
+        
         <ul id="nav-mobile" class="left">
           <li><a href="/#/" class="brand-logo center grey-text">I'm Game!</a></li>
           <li>
@@ -20,6 +21,7 @@
             </a>
           </li>
         </ul>
+
         <ul id="main-navigation" class="dropdown-content">
           <li ng-if="loggedIn"><a href="/#/create-game">Host</a></li>
           <li ng-if="loggedIn"class="divider"></li>
@@ -30,20 +32,24 @@
           <li class="divider"></li>
           <li ng-if="loggedIn"><a href="/#/profile">Profile</a></li>
         </ul>
+
         <ul class="right">
           <li ng-if="loggedIn"><a href="/#/profile"><img class="nav-profile-pic" ng-src="{{myInfo.picture}}"></a></li>
           <li ng-if="loggedIn"><a class="dropdown-button" href='javascript:void(0);' data-activates="notifications" data-beloworigin="true" dropdown data-hover="false" data-constrain-width="false"><i class="material-icons tooltipped grey-text" data-tooltip="Logout">add_alert</i></a></li>
           <li ng-if="loggedIn"><a href='/#/logout'><i class="material-icons tooltipped grey-text" data-tooltip="Logout">exit_to_app</i></a></li>
         </ul>
+
         <ul id='notifications' class='dropdown-content'>
-          <div ng-repeat="note in myInfo.notifications | limitTo:15">
-            <li ng-if="note.type==='game ended'"> {{timeElapsed(note.created_at)}} | Your game of {{note.game}} has ended. You may now submit user reviews.</li>
-            <li ng-if="note.type==='pending request'"> {{timeElapsed(note.created_at)}} | There is a request to join your game of {{note.game}}.</li>
-            <li ng-if="note.type==='game cancelled'"> {{timeElapsed(note.created_at)}} | A game of {{note.game}} that you have joined has been cancelled.</li>
-            <li ng-if="note.type==='request accepted'"> {{timeElapsed(note.created_at)}} | Your request to join {{note.game}} has been accepted.</li>
+          <div ng-repeat="note in notifications | limitTo:15">
+            <li ng-if="note.type==='game ended'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | Your game of {{note.game}} has ended. You may now submit user reviews.</li>
+            <li ng-if="note.type==='pending request'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | There is a request to join your game of {{note.game}}.</li>
+            <li ng-if="note.type==='game cancelled'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | A game of {{note.game}} that you have joined has been cancelled.</li>
+            <li ng-if="note.type==='request accepted'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | Your request to join {{note.game}} has been accepted.</li>
+            <li ng-if="note.type==='invite'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | You have been invited to play {{note.game}}.</li>
             <li class="divider"></li>
           </div>
         </ul>
+
       </div>
     </nav>
   </header>

@@ -40,7 +40,7 @@ module.exports = {
       .then(function (data) {
         toSend = data;
         if ( invitations ) {
-          return handleInvites(invitations, gamepost);
+          return handleInvites(invitations, data);
         } else return null;
       })
       .then(function () {
@@ -81,8 +81,8 @@ module.exports = {
 
 }
 
-function handleInvites (invitations, gamepost) {
-  return Requests.createInvitations(invitations, gamepost)
+function handleInvites (invitations, gamepostId) {
+  return Requests.createInvitations(invitations, gamepostId)
     .then(function (inviteIds) {
       var inviteNotes = [];
       for ( var i = 0; i < inviteIds.length; i++ ) {

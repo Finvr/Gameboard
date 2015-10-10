@@ -25,11 +25,7 @@
       Users.all()
         .then(function(data){
           $rootScope.usersList = data; 
-      });
-      Notification.getNotifications()
-        .then(function(data){
-          $rootScope.myInfo.notifications = data;
-        })
+        });
     })
     .config(config);
 
