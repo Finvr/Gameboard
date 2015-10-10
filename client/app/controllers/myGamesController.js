@@ -2,7 +2,7 @@
 	angular.module('imgame.myGames', [])
 	  .controller('MyGamesController', MyGamesController);
 
-  function MyGamesController($scope, $window, $location, Auth, GamePost, Profile){
+  function MyGamesController($scope, $window, $location, Auth, GamePost, Profile, Invitations){
 
     /* Modal functions */
     $scope.showHostedEventModal = function(date){
@@ -48,6 +48,10 @@
         });
     };
 
+    var getMyInvitations = function(){
+      Invitations.all();
+    }
+
     $("#agenda").click(function(){
       console.log('$("#agenda").text', $("#agenda").text())
       if ($("#agenda").text() === "Calendar View") {
@@ -79,6 +83,7 @@
       getMyGames(null,null,null,function(){}); //find less hacky solution
       getMyRequests();
       getMyProfile();
+      getMyInvitations();
       /* Scope variables */
       $scope.eventSources = [getMyGames];
       $scope.gameToShowDetails = null;
