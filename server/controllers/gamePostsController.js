@@ -1,4 +1,5 @@
 var GamePosts = require ('../models/gamePostsModel.js'),
+    Requests  = require ('../models/requestsModel.js'),
     helpers   = require ('../utils/helpers.js');
 
 module.exports = {
@@ -25,12 +26,19 @@ module.exports = {
 
   createGamepost: function (req, res) {
     //Create a new gamepost
+    var toSend;
     var gamepost = req.body;
     gamepost.host_id = req.user.id;
 
     GamePosts.create(gamepost)
       .then(function (data) {
-        res.send(data);
+        toSend = data;
+        if ( gamepost.invitees ) {
+          return Requests.createInvitations(gamepost)
+        } else return null;
+      })
+      .then(function () {
+        res.send(toSend);
       })
       .catch(function (err) {
         helpers.handleError(err, res)
