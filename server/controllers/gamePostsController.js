@@ -39,18 +39,7 @@ module.exports = {
       .then(function (data) {
         toSend = data;
         if ( invitations ) {
-          return Requests.createInvitations(invitations, gamepost)
-            .then(function (inviteIds) {
-              var inviteNotes = [];
-              for ( var i = 0; i < inviteIds.length; i++ ) {
-                inviteNotes.push({
-                  request_id: inviteIds[i],
-                  type: 'invite',
-                  user_id: invitations[i].user_id
-                });
-              };
-              return Notes.createInvitationNotes(inviteNotes);
-            })
+          return handleInvites(invitations, gamepost);
         } else return null;
       })
       .then(function () {
@@ -89,4 +78,19 @@ module.exports = {
       })
   }
 
+}
+
+function handleInvites (invitations, gamepost) {
+  return Requests.createInvitations(invitations, gamepost)
+    .then(function (inviteIds) {
+      var inviteNotes = [];
+      for ( var i = 0; i < inviteIds.length; i++ ) {
+        inviteNotes.push({
+          request_id: inviteIds[i],
+          type: 'invite',
+          user_id: invitations[i].user_id
+        });
+      };
+      return Notes.createInvitationNotes(inviteNotes);
+    })
 }
