@@ -150,10 +150,8 @@
                  // ,icon: image
                 });
                 searchMarkers.push(newMark);
-                if (game.distance < 50) {
-                  bounds.extend(game.location);
-                  map.fitBounds(bounds);                  
-                }
+                bounds.extend(game.location);
+                map.fitBounds(bounds);                  
 
                 // add listener to show info window of the marker that was clicked
                 google.maps.event.addListener(newMark, 'click', function(){
