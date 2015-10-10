@@ -17,14 +17,13 @@ angular.module('imgame.profile', [])
     $scope.getRecentGames = function(){
       Profile.getRecentGames()
         .then(function(games){
-          games = games.filter(function(game){
-            var result = true;
+          games.forEach(function(game){
+            game.user_id = game.user_id ? game.user_id : game.host_id;
             $scope.existingReviews.forEach(function(review){
               if (review.gameposts_id === game.gamepost_id && review.reviewer_id === game.user_id) {
-                result = false;
+                game.reviewed = true;
               }
             })
-            return result;
           })                     
           $scope.recentGames = games;
         })
@@ -90,13 +89,13 @@ angular.module('imgame.profile', [])
           player.gameposts_id = gamepostId;
           player.rating = players[i].rating;
           player.showed_up = players[i].showed_up;
-          player.skip = players[i].skip;
           reviews.push(player)
         }
       }
       if (reviews.length > 0) {
         Review.createReview(reviews)
           .then(function(reviews){
+            $scope.currentRateGame.reviewed = true;
             console.log("reviews from profile controller : ", reviews)                
           });        
       }
