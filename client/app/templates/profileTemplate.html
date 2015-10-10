@@ -52,10 +52,10 @@
           <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}, Players: {{ game.accepted_players }}/{{game.player_count}}
           </div>
 
-          <div class="right col s3" ng-if="loggedIn && game.playerPics.length > 0" ng-click="openRateModal(game)">
+          <div class="right col s3" ng-if="loggedIn && !game.reviewed" ng-click="openRateModal(game)">
             <a class='btn grey darken-3' href='#openRateModal' modal>Rate</a>
           </div>
-          <div class="right col s3" ng-if="loggedIn && game.playerPics.length === 0" ng-click="openRateModal(game)">
+          <div class="right col s3" ng-if="loggedIn && game.reviewed" ng-click="openRateModal(game)">
             <a class='btn grey darken-3' href='#openRateModal' modal>View</a>
           </div>
         </div>        
@@ -93,7 +93,7 @@
               <td class="players">
                 <a href="#/profile/{{player.user_id}}" target="_blank" ><img class="hostPic" ng-src="{{player.picture}}">{{player.username}}</a>
               </td>
-              <td>
+              <td ng-if="!currentRateGame.reviewed">
                 <div class="switch" >
                   <label>
                     <input type="checkbox" ng-model="player.skip" value="false">
@@ -119,7 +119,7 @@
           </tbody>
         </table>
       </div>
-      <div class="modal-footer" ng-if="currentRateGame.playerPics">
+      <div class="modal-footer" ng-if="!currentRateGame.reviewed">
         <div class = "col s4 right" ng-click="sendReviews(currentRateGame.playerPics)">
           <a class = "btn btn-med waves-effect center waves-light grey darken-3" ng-click="close('#openRateModal')">
             Complete Rating
