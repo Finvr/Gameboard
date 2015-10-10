@@ -3,19 +3,20 @@
  	.controller('CreateGameController', CreateGameController);
 
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
- 		$scope.game = {};
+    $scope.game = { invitees: [] };
     $scope.searchText = "";
     $scope.gamesArray = GamePost.gamesArray;
+    $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
     Auth.requireAuth();
 
     // set today as the ealiest day user can select
-    $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
     //controller should not know anything about the DOM, this makes our tests fail
     //document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
 
     $scope.createGame = function(game){
+      console.log("Create Game", $scope.game.invitees);
       game = { 
         "game_location": $scope.game.location, //start set in template
         "game": $scope.game.name,
