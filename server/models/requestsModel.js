@@ -157,7 +157,7 @@ module.exports = {
         if ( result.length === 0 ) {
           return null
         } else {
-          return result[0]
+          return result[0]  
         }
       })
       .catch(function (err) {
@@ -165,11 +165,12 @@ module.exports = {
       });
   },
 
-  createInvitations: function (invitations, gamepost) {
+  createInvitations: function (invitations, gamepostId) {
     for ( var i = 0; i < invitations.length; i++ ) {
-      invitations[i].gamepost_id = gamepost.id;
+      invitations[i].gamepost_id = gamepostId;
+      invitations[i].status = 'invite';
     }
-
+    console.log("Invitations in requestsModel: ", invitations);
     return db('requests')
       .insert(invitations)
       .returning('id');
