@@ -1,4 +1,5 @@
 describe('MyGamesController', function() {
+  
   beforeEach(module('imgame'));
 
   var ctrl, scope, http;
