@@ -1,4 +1,5 @@
 describe('CreateGameController', function() {
+  
   beforeEach(module('imgame'));
 
   var ctrl, scope, http; 
@@ -13,8 +14,8 @@ describe('CreateGameController', function() {
   }));
 
   describe("scope initialization", function(){
-  	it("should set $scope.game to an empty object", function(){
-  		expect(scope.game).toEqual({});
+  	it("should set $scope.game to an object with an invitees array", function(){
+  		expect(scope.game).toEqual({invitees: []});
   	});
   });
   describe("$scope.createGame", function(){
