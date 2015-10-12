@@ -103,13 +103,13 @@
         <div class="modal-content">
           <div>
             <span class="grey-text">Host:</span> 
-            <a href="#/profile/{{game.host_id}}" target="_blank">{{game.username}}</a>
+            <a href="#/profile/{{game.host_id}}" target="_blank">{{loggedIn ? game.username : "Login to see more!"}}</a>
           </div>
           <div>
             <span class="grey-text">Time:</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}
           </div>
           <div>
-            <span class="grey-text">Location:</span> {{game.game_location}}
+            <span class="grey-text">Location:</span> {{loggedIn ? game.game_location : "Login to see more!"}}
           </div>
           <div>
             <span class="grey-text">Distance to current location:</span> {{game.distance + " m"}}
@@ -120,11 +120,11 @@
           <div >
             <span class="grey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
           </div>
-          <div>
+          <div ng-if="loggedIn">
             <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" ng-src="{{game.picture || game.host_pic}}">{{game.username}}</a>
             <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}</a>
           </div>
-          <div class = "row center">
+          <div class = "row center" ng-if="loggedIn">
             <div class="input-field">
               <textarea ng-if="!hasPendingRequest(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
               <div ng-if="hasPendingRequest(game.id)">
@@ -136,7 +136,7 @@
           </div>
         </div>
       </div>
-        <div class="modal-footer" ng-if="!hasPendingRequest(game.id)">
+        <div class="modal-footer" ng-if="!hasPendingRequest(game.id) && loggedIn">
           <div class = "col s4 right" ng-click="sendRequest(game)">
                   <a class = "btn btn-med waves-effect waves-light grey darken-3">
                     <i class="material-icons">send</i>
