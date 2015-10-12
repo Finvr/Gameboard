@@ -20,4 +20,10 @@ describe('ProfileController', function(){
   	}); 
   }));
 
+  describe("$scope.getRecentGames", function(){
+		it("should be defined", function(){
+			expect(scope.getRecentGames).toBeDefined();
+		});
+	});
+
 })
