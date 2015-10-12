@@ -27,6 +27,7 @@
 		}
 
 		$("#gmap").hide();
+		$scope.map = false;
 		$("#filterButton").hide();
 
 		$scope.mapView = function() {
@@ -36,6 +37,7 @@
 				$("#mapButton").text("Map View")
 			}
 			$("#gmap").toggle();	
+			$scope.map = !$scope.map;
 			$("#listView").toggle();
 			$scope.mapActivated = true;
 			$("#filterButton").toggle();
@@ -129,7 +131,7 @@
 		}
 
 		// Pagination 
-		$scope.pageSize = 10;
+		$scope.pageSize = 5;
 		$scope.currentPage = $scope.currentPage || 1;
 		$scope.displayPage = function(page) {
 			$scope.currentPage = page;
