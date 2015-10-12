@@ -40,22 +40,22 @@
 
 
           <!-- begin review list -->
-          <li ng-repeat="game in recentGames track by $index | orderBy:'-game_datetime'" class="collection-item avatar" ng-if="!game.reviewed">
+          <li ng-repeat="gameToReview in recentGames track by $index | orderBy:'-game_datetime'" class="collection-item avatar" ng-if="!gameToReview.reviewed">
              <div class="collapsible-header">
               <span class="title grey-text text-darkern-2">
-                {{ game.game | limitTo: 10 }} ... 
+                {{ gameToReview.game | limitTo: 10 }} ... 
               </span>
               <span>
-                  {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+                  {{ gameToReview.game_datetime | date : "M/d/yyyy @ h:mm a" }}
               </span> 
-              <a href="#approve-pending" ng-click="openRateModal(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">open_in_new</i></a> 
+              <a href="#openRateModal" ng-click="openRateModal(gameToReview)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">open_in_new</i></a> 
              </div>
              <div class="collapsible-body"><p>
-                <strong>Time:</strong> {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
-                <strong>Location:</strong> {{ game.game_location }}<br>
-                <strong>Players:</strong> {{game.accepted_players + "/" + game.player_count}}
+                <strong>Time:</strong> {{ gameToReview.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+                <strong>Location:</strong> {{ gameToReview.game_location }}<br>
+                <strong>Players:</strong> {{gameToReview.accepted_players + "/" + gameToReview.player_count}}
                 <br>
-                <strong>Description:</strong> {{game.gamepost_description ? game.gamepost_description : "N/A"}}<br>
+                <strong>Description:</strong> {{gameToReview.gamepost_description ? gameToReview.gamepost_description : "N/A"}}<br>
               </p></div>
             </li>
             <!-- end review list -->
@@ -185,7 +185,7 @@
     <!-- detail Modal for rating each game -->
   <div id="openRateModal" class="modal">
     <div class="modal-header grey">
-      <div ng-click="close('#openRateModal'); openRateModal()"><i class="material-icons right close">close</i></div>
+      <div ng-click="close('#openRateModal'); "><i class="material-icons right close">close</i></div>
       <span class="white-text"><h4>{{currentRateGame.game ? currentRateGame.game : "No Name"}}</h4></span>
     </div>
     <div class="modal-content">
