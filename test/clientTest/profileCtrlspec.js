@@ -45,6 +45,10 @@ describe('ProfileController', function(){
 		it("should be defined", function(){
 			expect(scope.updateProfile).toBeDefined();
 		});
+		it("should call Profile.updateProfile", function(){
+			scope.updateProfile();
+			expect(Profile.updateProfile).toHaveBeenCalled();
+		})
 	});	
 
 	describe("$scope.showInput", function(){
