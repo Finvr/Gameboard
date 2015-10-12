@@ -35,7 +35,7 @@
 
         <ul class="right">
           <li ng-if="loggedIn"><a href="/#/profile"><img class="nav-profile-pic" ng-src="{{myInfo.picture}}"></a></li>
-          <li ng-if="loggedIn"><a class="dropdown-button" href='javascript:void(0);' data-activates="notifications" data-beloworigin="true" dropdown data-hover="false" data-constrain-width="false"><i class="material-icons tooltipped grey-text" data-tooltip="Logout">add_alert</i></a></li>
+          <li ng-if="loggedIn"><a class="dropdown-button notification" href='javascript:void(0);' data-activates="notifications" data-beloworigin="true" dropdown data-hover="false" data-constrain-width="false"><div class="notification-number">#</div><i class="material-icons tooltipped grey-text" data-tooltip="Logout">add_alert</i></a></li>
           <li ng-if="loggedIn"><a href='/#/logout'><i class="material-icons tooltipped grey-text" data-tooltip="Logout">exit_to_app</i></a></li>
         </ul>
 
