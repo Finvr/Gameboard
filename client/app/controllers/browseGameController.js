@@ -1,5 +1,11 @@
 (function() {
 	angular.module('imgame.browseGames', [])
+		.filter('startFrom', function() {
+	    return function(input, start) {
+		    start = parseInt(start, 10);
+		    return input.slice(start);
+    	}
+		})
 		.controller('BrowseGameController', BrowseGameController);
 
 	function BrowseGameController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost) {
@@ -21,6 +27,7 @@
 		}
 
 		$("#gmap").hide();
+		$scope.map = false;
 		$("#filterButton").hide();
 
 		$scope.mapView = function() {
@@ -30,6 +37,7 @@
 				$("#mapButton").text("Map View")
 			}
 			$("#gmap").toggle();	
+			$scope.map = !$scope.map;
 			$("#listView").toggle();
 			$scope.mapActivated = true;
 			$("#filterButton").toggle();
@@ -120,6 +128,13 @@
 						$location.path('/my-games');
 					}
 				})
+		}
+
+		// Pagination 
+		$scope.pageSize = 10;
+		$scope.currentPage = $scope.currentPage || 1;
+		$scope.displayPage = function(page) {
+			$scope.currentPage = page;
 		}
 
 		//Distance functions
