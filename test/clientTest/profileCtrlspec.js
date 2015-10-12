@@ -38,4 +38,10 @@ describe('ProfileController', function(){
 		})
 	});	
 
+	describe("$scope.showInput", function(){
+		it("should be defined", function(){
+			expect(scope.showInput).toBeDefined();
+		});
+	});
+
 })
