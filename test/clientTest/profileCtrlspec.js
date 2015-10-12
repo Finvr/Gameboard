@@ -56,6 +56,24 @@ describe('ProfileController', function(){
 		it("should be defined", function(){
 			expect(scope.showInput).toBeDefined();
 		});
+		it("should set $scope.update to true if !$scope.myProfile", function(){
+			scope.myProfile = false;
+			scope.showInput();
+			expect(scope.update).toBe(true);
+		});
+		it("should set $scope.update to true if !$scope.myProfile.viewId", function(){
+			scope.myProfile = {};
+			scope.myProfile.viewId = undefined;
+			scope.showInput();
+			expect(scope.update).toBe(true);		
+		});
+		it("it not set $scope.update if $scope.myProfile", function(){
+			scope.update = null;
+			scope.myProfile = {};
+			scope.myProfile.viewId = 1;
+			scope.showInput();
+			expect(scope.update).toBeNull();		
+		})
 	});
 
 	describe("$scope.openRateModal", function(){
