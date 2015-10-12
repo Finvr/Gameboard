@@ -38,6 +38,10 @@
           <input id='endTime' class="col s6" type="time" ng-model="endTimeFilter"/>
         </div>
 
+        <div id="filterButton">
+          <button class="z-depth-0 waves-effect waves-light btn center" ng-click="filterMap()">Click to Filter</button>
+        </div>
+
       </div>
     </div>
 
@@ -51,8 +55,20 @@
           </div>
         </div>
       </nav>
+
+      <div class="mapViewButton col m12 z-depth-0">
+        <button ng-click="mapView()" id="mapButton" class="waves-effect waves-light btn left col m3 z-depth-0">Map View</button>
+      </div>
+
       <!-- display all the games -->
-      <ul class="collection" watch>
+      <!-- map view -->
+      <div google-maps  class="half-div col m12 s12">
+        <div id="gmap"></div>
+      </div>
+
+      <!-- display all the games -->
+      <!-- list view -->
+      <ul class="collection" id="listView" watch>
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : " "}}</div>
@@ -78,7 +94,13 @@
             <a href="#/profile/{{game.host_id}}" target="_blank">{{game.username}}</a>
           </div>
           <div>
+            <span class="grey-text">Time:</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}
+          </div>
+          <div>
             <span class="grey-text">Location:</span> {{game.game_location}}
+          </div>
+          <div>
+            <span class="grey-text">Distance to current location:</span> {{game.distance + " m"}}
           </div>
           <div>
             <span class="grey-text">Details:  </span>{{game.gamepost_description ? game.gamepost_description : "N/A"}}

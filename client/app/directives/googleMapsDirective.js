@@ -1,5 +1,5 @@
 (function(){
- angular.module('imgame.createGame')
+ angular.module('imgame')
   .directive('googleMaps', ['$rootScope', googleMaps]);
 
   function googleMaps($rootScope) {
@@ -25,21 +25,22 @@
         size: new google.maps.Size(34, 34),
         scaledSize:new google.maps.Size(17,17)
       };
+
       // Create the search box and link it to the UI element.
       var input = document.getElementById('pac-input');
-      var searchBox = new google.maps.places.SearchBox(input);
+      var searchBox = input && new google.maps.places.SearchBox(input);
 
       function initMap() {
         var bounds;
         scope.currentLocation = $rootScope.currentLocation;
         map = new google.maps.Map(document.getElementById('gmap'), mapOptions);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        input && map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
         // In case rootscope did not get current location, request current location and set current location on map
         if (!scope.currentLocation && navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (position) {
             // add current location dot
-            $('#pac-input').show(); 
+            $('#pac-input') && $('#pac-input').show();
             // store currentLocation and center map around it and pop up info window
             scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
             $rootScope.currentLocation = scope.currentLocation;
@@ -54,7 +55,7 @@
             });
           });
         } else {
-          $('#pac-input').show();
+          $('#pac-input') && $('#pac-input').show();
           // center current location and also make sure current location always show on map
           new google.maps.Marker({
             position: scope.currentLocation,
@@ -63,59 +64,107 @@
           });
           map.setCenter(scope.currentLocation);
           bounds = new google.maps.LatLngBounds(scope.currentLocation);
-        }                
+        }  
 
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-        
-        // searchbox listener, place marker on map and listen to clicks
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-          if (places.length === 0) return;
-
-          // clear all the current markers on the map
+        function clearMaker () {
           searchMarkers.forEach(function(marker){
-            marker.setMap(null);
-          });
-          clickMarker && clickMarker.setMap(null);          
-
-          // add places the match the search ont the map
-          places.forEach(function(place) {
-            var newMark = new google.maps.Marker({
-              map: map,
-              position: place.geometry.location
+              marker.setMap(null);
             });
-            searchMarkers.push(newMark);
+          clickMarker && clickMarker.setMap(null); 
+        };              
 
-            // bounds view based on seach
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-
-            // add listener to show info window of the marker that was clicked
-            google.maps.event.addListener(newMark, 'click', function(){
-              infoWindow.close && infoWindow.close();
-              showInfoWindow([place.geometry.location], place, newMark);
-            })
-          })
-
-          map.fitBounds(bounds);
-          map.panToBounds(bounds); 
-        });
-
-        // event listener that set the marker as the clicked point on the map
-        google.maps.event.addListener(map, 'click', function(event) { 
-          searchMarkers.forEach(function(marker){
-            marker.setMap(null);
+        ////////
+        // create game page use only
+        ////////
+        if (input) {
+          // Bias the SearchBox results towards current map's viewport.
+          map.addListener('bounds_changed', function() {
+            searchBox.setBounds(map.getBounds());
           });
-          clickMarker && clickMarker.setMap(null);
-          changeMarker(event.latLng, map);
-          document.getElementById('pac-input').value = "";
+          
+          // searchbox listener, place marker on map and listen to clicks
+          searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
+            if (places.length === 0) return;
+
+            // clear all the current markers on the map
+            clearMaker();       
+
+            // add places the match the search ont the map
+            places.forEach(function(place) {
+              var newMark = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+              });
+              searchMarkers.push(newMark);
+
+              // bounds view based on seach
+              if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+              } else {
+                bounds.extend(place.geometry.location);
+              }
+
+              // add listener to show info window of the marker that was clicked
+              google.maps.event.addListener(newMark, 'click', function(){
+                infoWindow.close && infoWindow.close();
+                showInfoWindow([place.geometry.location], place, newMark);
+              })
+            })
+
+            map.fitBounds(bounds);
+            map.panToBounds(bounds); 
+          });
+          // searchBox listener complete
+  
+          // event listener that set the marker as the clicked point on the map
+          google.maps.event.addListener(map, 'click', function(event) { 
+            searchMarkers.forEach(function(marker){
+              marker.setMap(null);
+            });
+            clickMarker && clickMarker.setMap(null);
+            changeMarker(event.latLng, map);
+            document.getElementById('pac-input').value = "";
+          });
+        }
+
+        // display games markers on map in Browse Game page
+        scope.$watch('newGames', function() {
+          if (scope.newGames && scope.newGames.length > 0) {
+            console.log("directive newGames: ", scope.newGames)
+            map.setCenter(scope.currentLocation);
+            bounds = new google.maps.LatLngBounds(scope.currentLocation);
+            clearMaker(); 
+            scope.newGames.forEach(function(game){              
+              console.log("games each outside: ", game)
+              if (game.lat){
+                console.log("games each: ", game)
+                game.location = new google.maps.LatLng(Number(game.lat), Number(game.lng));
+                var image = "<img src='/assets/facebook.png'>";
+                var newMark = new google.maps.Marker({
+                  map: map,
+                  animation: google.maps.Animation.DROP,
+                  position: game.location,
+                  title: game.game
+                 // ,icon: image
+                });
+                searchMarkers.push(newMark);
+                bounds.extend(game.location);
+                map.fitBounds(bounds);                  
+
+                // add listener to show info window of the marker that was clicked
+                google.maps.event.addListener(newMark, 'click', function(){
+                  scope.getRequestInfo(game.id)
+                  $("#openRequest").openModal();
+                  scope.openGame(game);
+                })
+                return true
+              } else {
+                return false;
+              }
+            })            
+          }
         });
       };
       // initMap func complete
@@ -203,7 +252,13 @@
       //     //google.maps.event.addDomListener(window, 'load', initMap);                       
       // }
 
-      initMap();              
+      scope.$watch('mapActivated', function(){
+        if(scope.mapActivated){
+          initMap();          
+        }
+      })
+
+      initMap();                      
 
     };
 

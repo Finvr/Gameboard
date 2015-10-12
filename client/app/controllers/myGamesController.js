@@ -49,10 +49,14 @@
     };
 
     var getMyInvitations = function(){
-      Invitations
-        .all()
+      Invitations.all()
         .then(function(invitations){
-          $scope.myInvitations = invitations;
+          console.log("invitation", invitations)
+          if (typeof invitations === "string") {
+            $scope.myInvitations = [];       
+          } else {
+            $scope.myInvitations = invitations;
+          }
         });
     }
 
