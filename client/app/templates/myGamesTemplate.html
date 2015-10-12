@@ -242,7 +242,7 @@
   <div id="cancelRequestModal" class="modal">
     <div class="modal-header grey">
       <h4 class="darkgray-text">Cancel Request</h4>
-      <!--<a href=""><i class="material-icons">close</i></a>-->
+      <a ng-click="close('#cancelRequestModal')"><i class="material-icons">close</i></a>
     </div>
     <div class="modal-content container"> 
         <p>Are you sure you want to cancel this request to play {{request.name}}?  The host will be notified and your spot will be freed up for others.</p>
@@ -251,7 +251,7 @@
       <a ng-click="cancelRequest(requestToCancel)" class="btn btn-med waves-effect waves-light grey darken-3">Cancel Request</a>
     </div>
   </div>
-  
+
 </div>
 
 
