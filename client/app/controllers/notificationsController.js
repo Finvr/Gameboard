@@ -34,7 +34,10 @@ function NotificationsController($scope, $rootScope, Auth, Notification, $route,
   $scope.$watch(function(scope) {
     return scope.newNotes;
   }, function(newNotes){
-    document.getElementById('notes-bubble').innerHTML = newNotes;
+    var bubble = document.getElementById('notes-bubble');
+    if ( bubble ) {
+      bubble.innerHTML = newNotes;
+    }
   },true);
 
   $scope.updateViewed = function() {
