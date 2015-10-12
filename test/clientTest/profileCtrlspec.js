@@ -22,6 +22,7 @@ describe('ProfileController', function(){
   	});
 
   	spyOn(Profile, "getRecentGames").and.returnValue($q.when({}));
+  	spyOn(Profile, "updateProfile").and.returnValue($q.when({}));
   }));
 
   describe("$scope.getRecentGames", function(){
