@@ -4,14 +4,16 @@ describe('HomeController', function() {
 
   var ctrl, scope, http;
 
-  beforeEach(inject(function($controller, $rootScope, $httpBackend){
+  beforeEach(inject(function($controller, $rootScope, $httpBackend, _Auth_){
   	scope = $rootScope.$new();
-  	http: $httpBackend;
+  	http = $httpBackend;
   	ctrl = $controller("HomeController", {
   		$scope: scope,
    		$http: http
   	});
   }));
+
+
 
 
 });
