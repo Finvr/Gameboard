@@ -32,14 +32,15 @@
 
 		$scope.mapView = function() {
 			if ($("#mapButton").text() === "Map View"){
-				$("#mapButton").text("Game List")
+				$("#mapButton").text("Game List");
+				$scope.mapActivated = true;
 			} else {
-				$("#mapButton").text("Map View")
+				$("#mapButton").text("Map View");
+				$scope.mapActivated = false;
 			}
 			$("#gmap").toggle();	
 			$scope.map = !$scope.map;
-			$("#listView").toggle();
-			$scope.mapActivated = true;
+			$("#listView").toggle();			
 			$("#filterButton").toggle();
 		}
 
