@@ -32,4 +32,10 @@ describe('ProfileController', function(){
 		})
 	});
 
+	describe("$scope.updateProfile", function(){
+		it("should be defined", function(){
+			expect(scope.updateProfile).toBeDefined();
+		})
+	});	
+
 })
