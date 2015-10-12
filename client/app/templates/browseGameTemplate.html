@@ -68,7 +68,7 @@
 
       <!-- display all the games -->
       <ul class="collection" id="listView" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime' | startFrom: currentPage*pageSize | limitTo: pageSize" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
+        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime' | startFrom: currentPage*pageSize - pageSize | limitTo: pageSize" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : " "}}</div>
             <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}, Players: {{ game.accepted_players }}/{{game.player_count}}
@@ -82,7 +82,7 @@
       </ul> 
       <center>
         <pagination
-          page="1"
+          page="currentPage"
           page-size="pageSize"
           total= "games.length"
           show-prev-next="true"
