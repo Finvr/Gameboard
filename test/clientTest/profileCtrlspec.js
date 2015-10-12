@@ -79,7 +79,17 @@ describe('ProfileController', function(){
 	describe("$scope.openRateModal", function(){
 		it("should be defined", function(){
 			expect(scope.openRateModal).toBeDefined();
-		})
+		});
+		it("should set currentRateGame to game argument", function(){
+			var game = {
+				host_id: 1,
+				host_name: "Ignacio Prado",
+				host_pic: "http://ignacio.jpg",
+				playerPics: []
+			}
+			scope.openRateModal(game);
+			expect(scope.currentRateGame).toEqual(game);
+		});
 	});
 
 	describe("$scope.getReviews", function(){
