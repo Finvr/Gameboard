@@ -10,6 +10,7 @@ function NotificationsController($scope, $rootScope, Auth, Notification, $route,
   $scope.notifications;
 
   $scope.init = function() {
+    setInterval($scope.updateViewed, 5000);
     Notification.getNotifications()
       .then(function(data){
         $scope.notifications = data;

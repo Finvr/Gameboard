@@ -61,7 +61,7 @@ module.exports = {
   deleteExpired: function () {
     return db('notifications')
       .where('viewed', true)
-      .andWhere('created_at', '<', db.raw("NOW() - INTERVAL '3 days'"))
+      .andWhere('created_at', '<', db.raw("NOW() - INTERVAL '2 days'"))
       .del()
       .returning('id')
       .catch(function (err) {
