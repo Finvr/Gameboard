@@ -58,8 +58,10 @@
 
     $scope.openRateModal = function(game) {
       console.log('game modal: ', game)
+      // game.host_name=true;
       if (game.host_name) {
-        game.playerPics.unshift({picture: game.host_pic,
+        game.playerPics.unshift({
+          picture: game.host_pic,
           user_id: game.host_id,
           username: game.host_name
         });
