@@ -56,4 +56,10 @@ describe('ProfileController', function(){
 		})
 	});
 
+	describe("$scope.sendReviews", function(){
+		it("should be defined", function(){
+			expect(scope.sendReviews).toBeDefined();
+		});
+	})
+
 })
