@@ -67,7 +67,11 @@ describe('ProfileController', function(){
 	describe("$scope.getReviews", function(){
 		it("should be defined", function(){
 			expect(scope.getReviews).toBeDefined();
-		})
+		});
+		it("should call Profile.getReviews", function(){
+			scope.getReviews();
+			expect(Profile.getReviews).toHaveBeenCalled();
+		});
 	});
 
 	describe("$scope.sendReviews", function(){
