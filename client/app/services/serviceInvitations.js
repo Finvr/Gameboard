@@ -7,10 +7,10 @@
 	function InvitationsFactory($http){
 		var all = function(){
 			return $http
-								.get('me/invitations')
-								.then(function(resp){
-									return resp.data;
-								});
+							.get('me/invitations')
+							.then(function(resp){
+								return resp.data;
+							});
 		}
 		return {
 			all: all
