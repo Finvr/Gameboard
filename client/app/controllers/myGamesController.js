@@ -20,12 +20,12 @@
       return GamePost.myHostedGames()
         .then(function(games){
           $scope.myGames = games;
-            var events = $scope.myGames.map(function(game) {
-              var newEvent = {};
-              newEvent.title = game.game;
-              newEvent.start = moment(game.game_datetime);
-              newEvent.data = game;
-              return newEvent;
+          var events = $scope.myGames.map(function(game) {
+            var newEvent = {};
+            newEvent.title = game.game;
+            newEvent.start = moment(game.game_datetime);
+            newEvent.data = game;
+            return newEvent;
             });
           callback(events);
         });
