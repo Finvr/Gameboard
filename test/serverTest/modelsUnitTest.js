@@ -366,7 +366,7 @@ describe('requestsModel', function(){
     requestsModel.getRequestsByUserId(user1.id)
       .then(function(request){
         expect(request.length).to.equal(1);
-        request = request[0];
+        var request = request[0];
         expect(request.user_id).to.equal(request1.user_id);
         expect(request.comments).to.equal('Can i join?');
         expect(request.status).to.equal('pending');
@@ -376,6 +376,26 @@ describe('requestsModel', function(){
         throw err;
         console.log("getRequestsByUserId Error: ", err)
         done();
+      })
+  });
+
+  it('getRequestersPictures function should return all the pictures of the accepted players of the gamepost', function(done){
+    request1.status = "accepted";
+    requestsModel.changeStatus(request1)
+      .then(function(results){
+        requestsModel.getRequestersPictures(gamepost2.id)
+          .then(function(players){
+            expect(players.length).to.equal(1);
+            var player = players[0];
+            expect(player).has.property("picture");
+            done();
+          })
+          .catch(function(err){
+            throw err;
+            console.log("getRequestersPictures Error: ", err)
+            done();
+          })
+      
       })
   });
 
