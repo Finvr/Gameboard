@@ -33,7 +33,8 @@ describe('ProfileController', function(){
 		it("should call Profile.getRecentGames", function(){
 			scope.getRecentGames();
 			expect(Profile.getRecentGames).toHaveBeenCalled();
-		})
+		});
+		//test that recent games is populated correctly
 	});
 
 	describe("$scope.close", function(){
@@ -50,6 +51,7 @@ describe('ProfileController', function(){
 			scope.updateProfile();
 			expect(Profile.updateProfile).toHaveBeenCalled();
 		})
+		//check that $scope.myProfile & $scope.savedProfile gets set in then
 	});	
 
 	describe("$scope.showInput", function(){
@@ -100,12 +102,14 @@ describe('ProfileController', function(){
 			scope.getReviews();
 			expect(Profile.getReviews).toHaveBeenCalled();
 		});
+		//test that then block populates scope.existingReviews
 	});
 
 	describe("$scope.sendReviews", function(){
 		it("should be defined", function(){
 			expect(scope.sendReviews).toBeDefined();
 		});
+
 	})
 
 })
