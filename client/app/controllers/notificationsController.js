@@ -8,12 +8,18 @@ function NotificationsController($scope, $rootScope, Auth, Notification, $route,
 
   $scope.viewed = [];
   $scope.notifications;
+  $scope.newNotes = 0;
 
   $scope.init = function() {
     setInterval($scope.updateViewed, 5000);
     Notification.getNotifications()
       .then(function(data){
         $scope.notifications = data;
+        for ( var i = 0; i < data.length; i++ ) {
+          if ( !data[i].viewed ) {
+            $scope.newNotes++;
+          }
+        }
       })
   }
 
@@ -21,8 +27,15 @@ function NotificationsController($scope, $rootScope, Auth, Notification, $route,
     if ( !note.viewed ) {
       $scope.viewed.push(note.id);
       note.viewed = true;
+      $scope.newNotes--;
     }
-  }
+  },
+
+  $scope.$watch(function(scope) {
+    return scope.newNotes;
+  }, function(newNotes){
+    document.getElementById('notes-bubble').innerHTML = newNotes;
+  },true);
 
   $scope.updateViewed = function() {
     if ( $scope.viewed.length > 0 ) {
