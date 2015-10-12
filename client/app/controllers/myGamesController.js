@@ -26,7 +26,7 @@
             newEvent.start = moment(game.game_datetime);
             newEvent.data = game;
             return newEvent;
-            });
+          });
           callback(events);
         });
     };
