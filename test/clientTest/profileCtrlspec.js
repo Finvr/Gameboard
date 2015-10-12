@@ -44,4 +44,10 @@ describe('ProfileController', function(){
 		});
 	});
 
+	describe("$scope.openRateModal", function(){
+		it("should be defined", function(){
+			expect(scope.openRateModal).toBeDefined();
+		})
+	});
+
 })
