@@ -40,7 +40,7 @@
 
 
           <!-- begin review list -->
-          <li ng-repeat="game in recentGames track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="!game.reviewed">
+          <li ng-repeat="game in recentGames track by $index | orderBy:'-game_datetime'" class="collection-item avatar" ng-if="!game.reviewed">
              <div class="collapsible-header">
               <span class="title grey-text text-darkern-2">
                 {{ game.game | limitTo: 10 }} ... 
@@ -185,7 +185,7 @@
     <!-- detail Modal for rating each game -->
   <div id="openRateModal" class="modal">
     <div class="modal-header grey">
-      <div ng-click="close('#openRateModal')"><i class="material-icons right close">close</i></div>
+      <div ng-click="close('#openRateModal'); openRateModal()"><i class="material-icons right close">close</i></div>
       <span class="white-text"><h4>{{currentRateGame.game ? currentRateGame.game : "No Name"}}</h4></span>
     </div>
     <div class="modal-content">
