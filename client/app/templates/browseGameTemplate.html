@@ -10,10 +10,10 @@
 
       <div class="browse-filters">
         <!-- Game select autocomplete filter -->
-        <div>
+      <!--   <div>
           <p class="title grey-text text-darken-2">Game Name</p>
           <autocomplete attr-input-class="center" attr-input-id="game-name" attr-placeholder="" data="gamesArray" ng-model="searchText"></autocomplete>
-        </div>
+        </div> -->
 
         <!-- Distance filter -->
         <div>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="col m9" id="outer">
-      <nav>
+      <nav ng-if="!mapActivated">
         <div class="nav-wrapper transparent">
           <div class="input-field">
             <input id="search" type="search" ng-model="selectText" requigrey>
