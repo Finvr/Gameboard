@@ -41,7 +41,7 @@ describe('BrowseGameController', function() {
     it("should initialize $scope.endTimeFilter", function(){
       expect(scope.endTimeFilter).toBeNull();
     });
-    it("should initialize $scope.distance_choices correctly", function(){
+    xit("should initialize $scope.distance_choices correctly", function(){
       var choices = {
         "Within 1 mile": 1,
         "Within 5 miles": 5,
