@@ -62,7 +62,7 @@
 					<div>
 				    <input id="search" type="search" ng-model="searchText" placeholder="Enter name to invite">
             <label class="active" for="search">Invite Guests</label>
-            <i class="material-icons">close</i>
+            <i class="material-icons" ng-click="clearInviteSearch()">close</i>
           </div>
 					<div class="invitees" ng-repeat="user in usersList | filter: searchText" ng-if="searchText !== ''">
     				<input name="invitedPlayers[]" type="checkbox"  id="user-{{user.id}}" checklist-model="game.invitees" checklist-value="user.id" />
