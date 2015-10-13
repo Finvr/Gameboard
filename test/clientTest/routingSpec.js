@@ -18,6 +18,11 @@ describe('Routing', function() {
       'app/templates/createGameTemplate.html');
   });
 
+  it("should have profile route that is linked to the profileTemplate and profileController", function(){
+    expect($route.routes['/profile'].controller).toBe('ProfileController');
+    expect($route.routes['/profile'].templateUrl).toBe('app/templates/profileTemplate.html');
+  });
+
   it('Should have my-games (\'/my-games\') route that is linked to the myGames controller and template', function() {
     expect($route.routes['/my-games'].controller).toBe('MyGamesController');
     expect($route.routes['/my-games'].templateUrl).toBe(
