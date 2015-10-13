@@ -1,21 +1,19 @@
-describe('BrowseGameController', function() {
+describe('BrowseGamesController', function() {
   beforeEach(module('imgame'));
 
   var ctrl, scope, http, gamesArray, BrowseGames;
 
-  beforeEach(inject(function($controller, $rootScope, $httpBackend){
+  beforeEach(inject(function($controller, $rootScope, $httpBackend, _BrowseGames_){
    	scope = $rootScope.$new();
     http = $httpBackend;
-    /*BrowseGames = {
-      getGames: function(){}
-    };*/
-    //spyOn(BrowseGames, "getGames");
+    BrowseGames = _BrowseGames_;
     gamesArray = ["Monopoly", "Settlers of Catan", "Puerto Rico"];
-  	ctrl = $controller('BrowseGameController', {
+  	ctrl = $controller('BrowseGamesController', {
   		$scope: scope,
-      $http: http
-      //BrowseGames: BrowseGames
+      $http: http,
+      BrowseGames: BrowseGames
   	});
+    spyOn(BrowseGames, "getGames");
   }));
 
   xit("should call BrowseGames.getGames", function(){
