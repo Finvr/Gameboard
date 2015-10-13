@@ -3,13 +3,13 @@
 
   padding: 1.5%;
   .invitees {
-    min-height: 30%;
+    min-height: 8%;
   }
   .invitee {
     background: white;
     z-index: 100;
-    .invitee-picture img {
-      width: 40px;
+    img.invitee-picture {
+      width: 8%;
     }
   }
   .map-directions {
