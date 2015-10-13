@@ -131,7 +131,7 @@
 		}
 
 		// Pagination 
-		$scope.pageSize = 10;
+		$scope.pageSize = 8;
 		$scope.currentPage = $scope.currentPage || 1;
 		$scope.displayPage = function(page) {
 			$scope.currentPage = page;
