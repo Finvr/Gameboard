@@ -18,9 +18,14 @@ describe('Routing', function() {
       'app/templates/createGameTemplate.html');
   });
 
-  it("should have profile route that is linked to the profileTemplate and profileController", function(){
+  it("should have a profile route that is linked to the profileTemplate and profileController", function(){
     expect($route.routes['/profile'].controller).toBe('ProfileController');
     expect($route.routes['/profile'].templateUrl).toBe('app/templates/profileTemplate.html');
+  });
+
+  it("should have a profile/:id route that is linked to ProfileController and profile template", function(){
+    expect($route.routes['/profile/:id'].controller).toBe('ProfileController');
+    expect($route.routes['/profile/:id'].templateUrl).toBe('app/templates/profileTemplate.html');
   });
 
   it('Should have my-games (\'/my-games\') route that is linked to the myGames controller and template', function() {
