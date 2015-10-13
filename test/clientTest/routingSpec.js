@@ -34,16 +34,16 @@ describe('Routing', function() {
       'app/templates/myGamesTemplate.html');
   });
 
-  it('Should have browse-games (\'/browse-games\') route that is to the browseGames controller and template', function(){
-    expect($route.routes['/browse-games'].controller).toBe('BrowseGamesController');
-    expect($route.routes['/browse-games'].templateUrl).toBe(
-      'app/templates/browseGamesTemplate.html');
-  });
-
   it('Should have logout (\'/logout\') route that is linked to the auth controller and home template', function(){
     expect($route.routes['/logout'].controller).toBe('HomeController');
     expect($route.routes['/logout'].url).toBe('/');
     expect($route.routes['/logout'].templateUrl).toBe('app/templates/homeTemplate.html'); //write test for resolve
+  });
+
+  it('Should have browse-games (\'/browse-games\') route that is to the browseGames controller and template', function(){
+    expect($route.routes['/browse-games'].controller).toBe('BrowseGamesController');
+    expect($route.routes['/browse-games'].templateUrl).toBe(
+      'app/templates/browseGamesTemplate.html');
   });
       
 });
