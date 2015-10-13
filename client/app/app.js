@@ -64,6 +64,9 @@
         templateUrl: 'app/templates/browseGamesTemplate.html',
         controller: 'BrowseGamesController'
       })
+      .when('/faq', {
+        templateUrl: 'app/templates/faqTemplate.html',
+      })
       .otherwise('/')
   	};
 })();
