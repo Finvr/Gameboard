@@ -123,6 +123,25 @@ describe('userModel', function(){
       })
   });
 
+  it('updateProfile should change user properties', function(done){
+    userModel.findOrCreate(user1)
+      .then(function(result){
+        result.about_me = "Stuff";
+        result.games_list = "Things";
+        result.location = "Somewhere";
+        return userModel.updateProfile(result); 
+      })
+      .then(function() {
+        return userModel.findOrCreate(user1)
+      })
+      .then(function(updated){
+        expect(updated.about_me).to.equal("Stuff");
+        expect(updated.games_list).to.equal("Things");
+        expect(updated.location).to.equal("Somewhere");
+        done();
+      })
+  })
+
 });
 
 describe('gamePostsModel', function(){
