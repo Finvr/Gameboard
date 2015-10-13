@@ -45,4 +45,10 @@ describe("NotificationsController", function(){
 			expect(scope.addToViewed).toBeDefined();
 		});
 	});
+
+	describe("$scope.updateViewed", function(){
+		it("should be defined", function(){
+			expect(scope.updateViewed).toBeDefined();
+		})
+	});
 });
