@@ -61,8 +61,8 @@
         }}
       })
       .when('/browse-games', {
-        templateUrl: 'app/templates/browseGameTemplate.html',
-        controller: 'BrowseGameController'
+        templateUrl: 'app/templates/browseGamesTemplate.html',
+        controller: 'BrowseGamesController'
       })
       .otherwise('/')
   	};

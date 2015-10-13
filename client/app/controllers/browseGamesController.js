@@ -6,9 +6,9 @@
 		    return input.slice(start);
     	}
 		})
-		.controller('BrowseGameController', BrowseGameController);
+		.controller('BrowseGamesController', BrowseGamesController);
 
-	function BrowseGameController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost) {
+	function BrowseGamesController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost) {
 		//Scope variable initialization
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
