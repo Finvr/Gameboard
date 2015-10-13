@@ -46,6 +46,7 @@
   <div class="recent_game_list" ng-if="!myProfile.viewId">
      <ul class="collection" watch>
       <li class="collection-header collection-item"><h5>My Recent Games</h5></li>
+      <li class="collection collection-item red-text center" ng-if="recentGames.length === 0">You have played no games.</li>
       <li class="collection-item" ng-repeat="game in recentGames | orderBy: '-game_datetime'" watch>
         <div class='row game_list'>
           <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : "No Name"}}</div>
