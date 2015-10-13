@@ -33,7 +33,8 @@ describe('ProfileController', function(){
 		it("should call Profile.getRecentGames", function(){
 			scope.getRecentGames();
 			expect(Profile.getRecentGames).toHaveBeenCalled();
-		})
+		});
+		//test that recent games is populated correctly
 	});
 
 	describe("$scope.close", function(){
@@ -50,18 +51,47 @@ describe('ProfileController', function(){
 			scope.updateProfile();
 			expect(Profile.updateProfile).toHaveBeenCalled();
 		})
+		//check that $scope.myProfile & $scope.savedProfile gets set in then
 	});	
 
 	describe("$scope.showInput", function(){
 		it("should be defined", function(){
 			expect(scope.showInput).toBeDefined();
 		});
+		it("should set $scope.update to true if !$scope.myProfile", function(){
+			scope.myProfile = false;
+			scope.showInput();
+			expect(scope.update).toBe(true);
+		});
+		it("should set $scope.update to true if !$scope.myProfile.viewId", function(){
+			scope.myProfile = {};
+			scope.myProfile.viewId = undefined;
+			scope.showInput();
+			expect(scope.update).toBe(true);		
+		});
+		it("it not set $scope.update if $scope.myProfile", function(){
+			scope.update = null;
+			scope.myProfile = {};
+			scope.myProfile.viewId = 1;
+			scope.showInput();
+			expect(scope.update).toBeNull();		
+		})
 	});
 
 	describe("$scope.openRateModal", function(){
 		it("should be defined", function(){
 			expect(scope.openRateModal).toBeDefined();
-		})
+		});
+		it("should set currentRateGame to game argument", function(){
+			var game = {
+				host_id: 1,
+				host_name: "Ignacio Prado",
+				host_pic: "http://ignacio.jpg",
+				playerPics: []
+			}
+			scope.openRateModal(game);
+			expect(scope.currentRateGame).toEqual(game);
+		});
 	});
 
 	describe("$scope.getReviews", function(){
@@ -72,12 +102,14 @@ describe('ProfileController', function(){
 			scope.getReviews();
 			expect(Profile.getReviews).toHaveBeenCalled();
 		});
+		//test that then block populates scope.existingReviews
 	});
 
 	describe("$scope.sendReviews", function(){
 		it("should be defined", function(){
 			expect(scope.sendReviews).toBeDefined();
 		});
+
 	})
 
 })
