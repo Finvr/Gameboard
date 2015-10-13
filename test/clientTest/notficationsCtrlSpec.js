@@ -39,4 +39,10 @@ describe("NotificationsController", function(){
 		});
 		//test that $scope.newNotes and $scope.notifications are correctly set
 	});
+
+	describe("$scope.addToViewed", function(){
+		it("should be defined", function(){
+			expect(scope.addToViewed).toBeDefined();
+		});
+	});
 });
