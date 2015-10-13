@@ -51,4 +51,10 @@ describe("NotificationsController", function(){
 			expect(scope.updateViewed).toBeDefined();
 		})
 	});
+
+	describe("$scope.timeElapseed", function(){
+		it("should be defined", function(){
+			expect(scope.timeElapsed).toBeDefined();
+		});
+	});
 });
