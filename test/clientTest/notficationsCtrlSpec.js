@@ -12,6 +12,15 @@ describe("NotificationsController", function(){
 		});
 	}));
 
+	describe("scope initalization before calling init", function(){
+		it("should set $scope.viewed correctly", function(){
+			expect(scope.viewed).toEqual([]);
+		});
+		it("should set newNotes correctly", function(){
+			expect(scope.newNotes).toEqual(0);
+		});
+	});
+
 	describe("$scope.init", function(){
 		it("should be defined", function(){
 			expect(scope.init).toBeDefined();
