@@ -27,7 +27,6 @@
 		}
 
 		$("#gmap").hide();
-		$scope.map = false;
 		$("#filterButton").hide();
 
 		$scope.mapView = function() {
