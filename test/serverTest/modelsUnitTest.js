@@ -31,6 +31,12 @@ describe('userModel', function(){
     facebook_token: 'abc'
   }
 
+  var user3 = {
+    username: 'last',
+    facebook_id: '4567',
+    facebook_token: 'def'
+  }
+
   var user1Id;
   var user2Id;
 
@@ -140,8 +146,35 @@ describe('userModel', function(){
         expect(updated.location).to.equal("Somewhere");
         done();
       })
+      .catch(function(err){
+        throw err;         
+        console.log("UpdateProfile error: ", err);
+        done();
+      })
   })
 
+  it('fetchAll should return all users in the database', function(done){
+    userModel.findOrCreate(user1)
+      .then(function() {
+        return userModel.findOrCreate(user3);
+      })
+      .then(function() {
+        return userModel.fetchAll();
+      })
+      .then(function(users){
+        expect(users.length).to.equal(2);
+        expect(users[0].username).to.equal('never');
+        expect(users[1].username).to.equal('last');
+        expect(users[1]).to.have.property('picture');
+        expect(users[1]).to.have.property('id');
+        done();
+      })
+      .catch(function(err){
+        throw err;         
+        console.log("FetchAll error: ", err);
+        done();
+      })
+  })
 });
 
 describe('gamePostsModel', function(){
