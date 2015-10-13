@@ -44,6 +44,28 @@ describe("NotificationsController", function(){
 		it("should be defined", function(){
 			expect(scope.addToViewed).toBeDefined();
 		});
+		it("should not do anything if note.viewed is true", function(){
+			scope.newNotes = 4;
+			scope.viewed = [1, 2];
+			var note = {
+				viewed: true
+			}
+			scope.addToViewed(note);
+			expect(scope.newNotes).toEqual(4);
+			expect(scope.viewed.length).toEqual(2);
+		});
+		it("should decrement scope.newNotes and push to notes.viewed if note.viewed is false", function(){
+			scope.newNotes = 4;
+			scope.viewed = [1, 2];
+			var note = {
+				id: 5,
+				viewed: false
+			}
+			scope.addToViewed(note);
+			expect(scope.newNotes).toEqual(3);
+			expect(scope.viewed.length).toEqual(3);
+			expect(scope.viewed).toContain(note.id);
+		});
 	});
 
 	describe("$scope.updateViewed", function(){
