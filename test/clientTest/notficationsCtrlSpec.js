@@ -13,7 +13,8 @@ describe("NotificationsController", function(){
 			Notification: Notification
 		});
 		spyOn(window, "setInterval");
-		spyOn(Notification, "getNotifications").and.returnValue($q.when({}));;
+		spyOn(Notification, "getNotifications").and.returnValue($q.when({}));
+		spyOn(Notification, "updateNotifications").and.returnValue($q.when({}));
 	}));
 
 	describe("scope initalization before calling init", function(){
@@ -71,6 +72,16 @@ describe("NotificationsController", function(){
 	describe("$scope.updateViewed", function(){
 		it("should be defined", function(){
 			expect(scope.updateViewed).toBeDefined();
+		})
+		it("shoudld not call Notification.updateNotifications if none viewed", function(){
+			scope.viewed.length = 0;
+			scope.updateViewed();
+			expect(Notification.updateNotifications).not.toHaveBeenCalled();
+		})
+		it("shoudld call Notification.updateNotifications if viewed", function(){
+			scope.viewed.length = 4;
+			scope.updateViewed();
+			expect(Notification.updateNotifications).toHaveBeenCalled();
 		})
 	});
 
