@@ -14,6 +14,17 @@
 
 .notification {
   position: relative;
+
+}
+
+#notifications {
+  padding: 1%;
+
+  span.noteTime{
+    font-size: 10px;
+    padding: 0px;
+    color: gray;
+  }
 }
 
 .notification-number {

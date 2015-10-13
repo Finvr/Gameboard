@@ -46,11 +46,31 @@
 
         <ul id='notifications' class='dropdown-content'>
           <div ng-repeat="note in notifications | limitTo:15">
-            <li ng-if="note.type==='game ended'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | Your game of {{note.game}} has ended. You may now submit user reviews.</li>
-            <li ng-if="note.type==='pending request'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | There is a request to join your game of {{note.game}}.</li>
-            <li ng-if="note.type==='game cancelled'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | A game of {{note.game}} that you have joined has been cancelled.</li>
-            <li ng-if="note.type==='request accepted'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | Your request to join {{note.game}} has been accepted.</li>
-            <li ng-if="note.type==='invite'" ng-mouseover="addToViewed(note)"> {{timeElapsed(note.created_at)}} | You have been invited to play {{note.game}}.</li>
+            <li ng-if="note.type==='game ended'" ng-mouseover="addToViewed(note)">
+              Your game of {{note.game}} has ended. You may now submit user reviews.
+              <br>
+              <span class="noteTime">{{timeElapsed(note.created_at)}},  {{note.created_at | date:" MMM-d-y '@' h:mma"}}</span>
+            </li>
+            <li ng-if="note.type==='pending request'" ng-mouseover="addToViewed(note)"> 
+              There is a request to join your game of {{note.game}}.
+              <br>
+              <span class="noteTime">{{timeElapsed(note.created_at)}},  {{note.created_at | date:" MMM-d-y '@' h:mma"}}</span>
+            </li>
+            <li ng-if="note.type==='game cancelled'" ng-mouseover="addToViewed(note)">
+              A game of {{note.game}} that you have joined has been cancelled.
+              <br>
+              <span class="noteTime">{{timeElapsed(note.created_at)}},  {{note.created_at | date:" MMM-d-y '@' h:mma"}}</span>
+            </li>
+            <li ng-if="note.type==='request accepted'" ng-mouseover="addToViewed(note)">
+              Your request to join {{note.game}} has been accepted.
+              <br>
+              <span class="noteTime">{{timeElapsed(note.created_at)}},  {{note.created_at | date:" MMM-d-y '@' h:mma"}}</span>
+            </li>
+            <li ng-if="note.type==='invite'" ng-mouseover="addToViewed(note)">
+              You have been invited to play {{note.game}}.
+              <br>
+              <span class="noteTime">{{timeElapsed(note.created_at)}},  {{note.created_at | date:" MMM-d-y '@' h:mma"}}</span>
+            </li>
             <li class="divider"></li>
           </div>
         </ul>
