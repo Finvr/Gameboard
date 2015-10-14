@@ -252,12 +252,6 @@
       //     //google.maps.event.addDomListener(window, 'load', initMap);                       
       // }
 
-      scope.$watch('mapActivated', function(){
-        if(scope.mapActivated){
-          initMap();          
-        }
-      })
-
       initMap();                      
 
     };

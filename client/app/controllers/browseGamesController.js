@@ -26,23 +26,6 @@
 			"More than 10 miles": Infinity
 		}
 
-		$("#gmap").hide();
-		$("#filterButton").hide();
-
-		$scope.mapView = function() {
-			if ($("#mapButton").text() === "Map View"){
-				$("#mapButton").text("Game List");
-				$scope.mapActivated = true;
-			} else {
-				$("#mapButton").text("Map View");
-				$scope.mapActivated = false;
-			}
-			$("#gmap").toggle();	
-			$scope.map = !$scope.map;
-			$("#listView").toggle();			
-			$("#filterButton").toggle();
-		}
-
 		$scope.filterMap = function(){
 			$scope.newGames = $scope.games.filter(function(game){
 				return ($scope.dateFilter(game.game_datetime) && $scope.disFilter(game.distance) && $scope.timeFilter(game.game_datetime));
