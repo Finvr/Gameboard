@@ -1,0 +1,33 @@
+<div id="approve-pending" class="modal">
+  <div class="modal-header grey">
+    <div ng-click="close('#approve-pending')"><i class="material-icons right close">close</i></div>
+    <span class="white-text"><h4>{{ gameToApprove.game }}</h4></span>
+  </div>
+  <div class="modal-content container"> 
+    <ul class="collection">
+      <li class="row content-header">
+        <div class="title col s8 grey-text">Request</div>
+        <div class="title col s2 grey-text center">Accept</div>
+        <div class="title col s2 grey-text center">Decline</div>
+      </li>
+      <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item row" ng-if="request.status==='pending'">
+        <div class="col s8">
+          <div class="sub-list">
+            <strong class="content-lead">From: </strong>
+              <a href="#/profile/{{request.user_id}}" target="_blank"><img class="hostPic" ng-src="{{request.requester_pic}}">{{ request.username }}</a>
+          </div>     
+          <div class="sub-list">
+            <strong class="content-lead">Message:</strong>
+            <div> {{ request.comments }}</div>
+          </div>
+        </div>
+        <button class="col s2 btn-flat btn-medium waves-effect waves-light grey darken-3 lighten-1 white-text" ng-click="requestConfirm('accepted', request)">
+          <i class="material-icons">check</i>
+        </button>
+        <button class="col s2 btn-flat waves-effect waves-light grey white-text" ng-click="requestConfirm('declined', request)">
+          <i class="material-icons">close</i>
+        </button>
+      </li> 
+    </ul>
+  </div>
+</div>
