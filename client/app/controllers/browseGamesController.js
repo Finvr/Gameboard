@@ -1,11 +1,11 @@
 (function() {
 	angular.module('imgame.browseGames', [])
-		.filter('startFrom', function() {
-	    return function(input, start) {
-		    start = parseInt(start, 10);
-		    return input.slice(start);
-    	}
-		})
+		// .filter('startFrom', function() {
+	 //    return function(input, start) {
+		//     start = parseInt(start, 10);
+		//     return input.slice(start);
+  //   	}
+		// })
 		.controller('BrowseGamesController', BrowseGamesController);
 
 	function BrowseGamesController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost) {
@@ -26,30 +26,6 @@
 			"More than 10 miles": Infinity
 		}
 
-		$("#gmap").hide();
-		$("#filterButton").hide();
-
-		$scope.mapView = function() {
-			if ($("#mapButton").text() === "Map View"){
-				$("#mapButton").text("Game List");
-				$scope.mapActivated = true;
-			} else {
-				$("#mapButton").text("Map View");
-				$scope.mapActivated = false;
-			}
-			$("#gmap").toggle();	
-			$scope.map = !$scope.map;
-			$("#listView").toggle();			
-			$("#filterButton").toggle();
-		}
-
-		$scope.filterMap = function(){
-			$scope.newGames = $scope.games.filter(function(game){
-				return ($scope.dateFilter(game.game_datetime) && $scope.disFilter(game.distance) && $scope.timeFilter(game.game_datetime));
-			})
-			console.log("filterMap newGames: ", $scope.newGames)
-		}
-
 		//Functions called on controller start
 		Auth.requireAuth('browse');
 		BrowseGames.getGames()
@@ -60,15 +36,6 @@
 				Auth.getCurrentLocation();
 				$scope.getMyRequests();
 			});
-
-		//Event listeners
-		$scope.$watchGroup(['$scope.startTimeFilter', '$scope.endTimeFilter'], function(used){
-        if (used) {
-          $scope.used = true;
-        } else {
-          $scope.used = false;
-        } 
-    }, true);
 
 		$scope.$on("currentLocation", function(event, data){
 			for (var i = 0; i < $scope.games.length; i ++){
@@ -131,11 +98,11 @@
 		}
 
 		// Pagination 
-		$scope.pageSize = 8;
-		$scope.currentPage = $scope.currentPage || 1;
-		$scope.displayPage = function(page) {
-			$scope.currentPage = page;
-		}
+		// $scope.pageSize = 8;
+		// $scope.currentPage = $scope.currentPage || 1;
+		// $scope.displayPage = function(page) {
+		// 	$scope.currentPage = page;
+		// }
 
 		//Distance functions
 		function distance(lat1, lon1, lat2, lon2) {
