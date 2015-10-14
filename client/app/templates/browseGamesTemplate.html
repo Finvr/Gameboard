@@ -12,7 +12,7 @@
       <div class="browse-filters col m12 row">
         <div class="nameAndDisFilter col m12 row">
           <!-- Game select autocomplete filter -->
-          <p class="title grey-text text-darken-2 col m3">Game</p>
+          <p class="title grey-text text-darken-2 col m3 left">Game</p>
           <autocomplete class="col m3" attr-input-class="center" attr-input-id="game-name" attr-placeholder="" click-activation="true" data="gamesArray" ng-model="searchText"></autocomplete>
         
           <!-- Distance filter -->        
@@ -53,7 +53,10 @@
       </nav> -->
 
       <!-- display all the games -->
-      <ul class="collection col m12" id="listView" ng-if="newGames.length>0" watch>
+      <ul class="collection col m12" id="listView" watch>
+        <!-- no game satisfy filter -->
+        <div ng-if="newGames.length === 0" class="ng-include: 'app/templates/partials/browseGamesFallBackPartial.html'"></div>
+
         <li ng-repeat="game in newGames | orderBy:'game_datetime' | filter: searchText" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : " "}}</div>
@@ -65,7 +68,8 @@
             </div>
           </div>        
         </li>
-      </ul> 
+      </ul>
+
 <!--       <center>
         <pagination
           page="currentPage"

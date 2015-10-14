@@ -1,5 +1,6 @@
 .browse {
 
+  line-height: 1;
   overslow-x: hidden;
   overslow-y: hidden;
 
@@ -26,7 +27,7 @@
 
     .nameAndDisFilter {
       border-bottom: 1px solid #f5f5f5;
-      padding: 3%;
+      padding: 2%;
       margin-bottom: 0px;
     }
 
@@ -114,7 +115,7 @@
     resize: none;
   }
 
-  input[type=date], input[type=time], .autocomplete{
+  input[type=date], input[type=time], .autocomplete, select {
     font-size: 12px;
     color: gray;
     border: 1px dotted lightgray;
@@ -127,10 +128,8 @@
     margin: 0px;
   }
 
-
-
   .autocomplete ul{
-    height: 50px;
+    height: 50%;
     border: none;
     z-index: 10;
   }
