@@ -18,10 +18,12 @@ module.exports = {
   }),
 
   calculateRatings: function (reviews) {
+    //Reviews have gameposts_id, showed_up and rating properties.
     var userRating = 0;
-    var ratingCount = 0;
+    var ratingCount = 0; //separate count needed to find average of ratings since rating prop isn't required
     var reliability;
-    var gameData = {length: 0};
+    var gameData = {length: 0}; //need length property for calculateReliability
+
     // Return default values if not enough reviews
     if ( reviews.length < 5 ) {
       return {
@@ -32,10 +34,12 @@ module.exports = {
     }
 
     for ( var i = 0; i < reviews.length; i++ ) {
+      //rating is required if showed_up is true
       if ( reviews[i].showed_up ) {
         userRating += reviews[i].rating;
         ratingCount++;
       }
+      //rating calculated by individual review, reliabilty by game
       if ( gameData[reviews[i].gameposts_id] ) {
         gameData[reviews[i].gameposts_id].push(reviews[i].showed_up);
       } else {
@@ -43,6 +47,7 @@ module.exports = {
         gameData.length++; 
       }
     }
+    //Math.round to limit decimal places
     userRating = Math.round(userRating/ratingCount*10)/10;
     reliability = Math.round(calculateReliability(gameData)*100)/100;
     console.log("Reliability: ", reliability);
