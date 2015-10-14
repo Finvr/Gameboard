@@ -29,14 +29,14 @@ module.exports = {
 
 	getRatingByUserId: function (userId) {
 		return db('reviews').select([
-				db.raw("round(avg(rating), 1) as rating"),
-				db.raw("round(avg(CASE reviews.showed_up WHEN true THEN 1 ELSE 0 END), 4) as reliability"),
-				db.raw("count(rating) as reviewCounts")
+				'rating',
+				'showed_up',
+				'gameposts_id',
 				])
 			.where({reviewee_id: userId})
 	 	  .then(function(results){
-		 	  console.log("get rating by userId: ", results[0]);
-		 	  return results[0];
+		 	  console.log("get rating by userId: ", results);
+		 	  return results;
 		  })
 		  .catch(function(err){
 		 	  console.log("error in getRatingByUserId: ", err);
@@ -52,12 +52,3 @@ module.exports = {
 	}
 
 }
-// module.exports.findOrCreateReview({
-// 	reviewee_id:2,
-// 	reviewer_id:1,
-//  	rating:4,
-//  	gameposts_id:22,
-//  	showed_up:true
-//   });
-
-// module.exports.getRatingByUserId(2);

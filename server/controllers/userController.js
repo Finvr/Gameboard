@@ -1,5 +1,6 @@
-var Users = require ('../models/userModel.js')
-var Reviews = require ('../models/reviewsModel.js')
+var Users   = require ('../models/userModel.js'),
+    Reviews = require ('../models/reviewsModel.js'),
+    helpers = require ('../utils/helpers.js');
 
 module.exports = {
 
@@ -37,8 +38,8 @@ module.exports = {
         profile = result[0];
         return module.exports.getRatingByUserId(profile.id)
       })
-      .then(function(result){
-        profile.reviews = result;
+      .then(function(reviews){
+        profile.reviews = helpers.calculateRatings(reviews);
         res.send(profile);
       })
   }, 
@@ -53,8 +54,8 @@ module.exports = {
           delete result[0].facebook_id;
           delete result[0].facebook_token;
           module.exports.getRatingByUserId(userId)
-            .then(function(review){
-              result[0].reviews = review;
+            .then(function(reviews){
+              result[0].reviews = helpers.calculateRatings(reviews);
               res.send(result[0]);
             })
         }
