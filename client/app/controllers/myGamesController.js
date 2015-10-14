@@ -113,7 +113,9 @@
           } else {
             $scope.myRequests = requests;
           }
-          var events = $scope.myRequests.map(function(request){
+          var events = $scope.myRequests.filter(function(request){
+            return request.status === 'accepted'
+          }).map(function(request){
             console.log('request: ', request)
             var newEvent = {};
             newEvent.title = request.game;
