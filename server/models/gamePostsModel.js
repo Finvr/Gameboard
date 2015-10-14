@@ -112,16 +112,18 @@ module.exports = {
 }
 
 function fetchAllOrByUser (userId, status) {
+  var matchStatus = status;
+  var status = status || 'accepted';
   var selectColumns = [
     'gameposts.*',
     'users.username',
     'users.picture',
-    db.raw("(SUM(CASE requests.status WHEN 'accepted' THEN 1 ELSE 0 END)+1) as accepted_players"),
+    db.raw("(SUM(CASE requests.status WHEN ? THEN 1 ELSE 0 END)+1) as accepted_players", [status]),
     db.raw("SUM(CASE requests.status WHEN 'pending' THEN 1 ELSE 0 END) as pending_requests")
   ];
   var match = {post_status: 'active'};
   if (userId) { match.host_id = userId; };
-  if (status) { match.post_status = status}
+  if (matchStatus) { match.post_status = matchStatus}
   return db('users').select(selectColumns)
     .groupBy('gameposts.id', 'users.username','users.picture')
     .join('gameposts', 'host_id', 'users.id')
