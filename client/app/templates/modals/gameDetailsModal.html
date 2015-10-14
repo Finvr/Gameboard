@@ -1,0 +1,27 @@
+<div id="game-details" class="modal">
+  <div class="modal-header grey">
+    <a ng-click="close('#game-details')"><i class="material-icons right white-text">close</i></a>
+    <h4 class="white-text center">{{ gameToShowDetails.game ? gameToShowDetails.game : "No Name" }}</h4>
+  </div>
+  <div class="modal-content container">
+    <p>
+      <div ng-if="gameToShowDetails.host_pic !== undefined"><strong>Host:</strong>
+        <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank">{{gameToShowDetails.host_name}}</a>
+      </div>
+      <div><strong>Time:</strong> {{ gameToShowDetails.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}</div>
+      <div><strong>Location:</strong> {{ gameToShowDetails.game_location }}</div>
+      <div><strong>Players:</strong> {{ gameToShowDetails.accepted_players + "/" + gameToShowDetails.player_count}}</div>
+      <div>
+        <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank"><img class="hostPic" ng-src="{{gameToShowDetails.picture || gameToShowDetails.host_pic}}">{{gameToShowDetails.host_name}}</a>
+        <a ng-repeat="requester in gameToShowDetails.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}</a>
+      </div>
+      <div><strong>Description:</strong> {{ gameToShowDetails.gamepost_description ? gameToShowDetails.gamepost_description : "N/A"}}
+      </div>
+      <div ng-if="gameToShowDetails.comments !== undefined"><strong>Message sent:</strong> {{ gameToShowDetails.comments ? gameToShowDetails.comments : "N/A"}}</div>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#cancel-modal" ng-if="gameToShowDetails.pending_requests" ng-click="setGameToCancel(gameToShowDetails)" class="btn btn-med waves-effect waves-light grey darken-3" modal>Cancel Game</i></a>
+    <a href="#cancelRequestModal" ng-if="!gameToShowDetails.pending_requests" ng-click="setRequestToCancel(gameToShowDetails)" class="btn btn-med waves-effect waves-light grey darken-3" modal>Cancel Request</i></a>
+  </div>
+</div>
