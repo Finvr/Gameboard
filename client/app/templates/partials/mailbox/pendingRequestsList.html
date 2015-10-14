@@ -1,0 +1,22 @@
+<li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending' || request.status==='denied' "> 
+  <div class="collapsible-header">
+    <span class="title grey-text text-darkern-2">
+      {{ request.game | limitTo: 10 }} ... 
+    </span>
+    <span>
+      {{ request.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+    </span>
+    <a href="#cancelRequestModal" ng-click="setRequestToCancel(request)" class="waves-effect waves-light secondary-content" modal>
+      <i class="material-icons">cancel</i>
+    </a>
+  </div>
+  <div class="collapsible-body">
+    <p>
+      <strong>Time:</strong> {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+      <strong>Location:</strong> {{ game.game_location }}<br>
+      <strong>Players:</strong> {{request.player_count}}
+      <br>
+      <strong>Description:</strong> {{request.gamepost_description ? request.gamepost_description : "N/A"}}<br>
+    </p>
+  </div>
+</li>

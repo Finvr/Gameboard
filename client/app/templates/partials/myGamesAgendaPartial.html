@@ -1,7 +1,9 @@
 <div class="collection col m5 offset-m1" data-collapsible="accordion" watch>
+
   <div class="title darkgray-text text-darken-2 collection-item">
     <h5>Games I'm Hosting</h5>
   </div>
+
   <div ng-repeat="game in myGames | orderBy: 'game_datetime'" class="collection-item row">
     <p class="agendaListGameName col m8" ng-click="showHostedEventModal({data:game})">
       <span class="title indigo-text text-darkern-2">
@@ -15,11 +17,15 @@
       <i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i>
     </a>
   </div>
+
 </div>
+
 <div class="collection col m5 offset-m1" data-collapsible="accordion" watch>
+
   <div class="title darkgray-text text-darken-2 collection-item">
     <h5>Games I'm Joining</h5>
   </div>
+
   <div ng-repeat="request in myRequests | orderBy: 'game_datetime'" ng-if="request.status === 'accepted'" class="collection-item row">
     <p class="agendaListGameName col m8" ng-click="showHostedEventModal({data:request})">
       <span class="title indigo-text text-darkern-2">
@@ -30,4 +36,5 @@
       <i class="material-icons">cancel</i>
     </a>
   </div>
+
 </div>
