@@ -40,10 +40,6 @@
             <input id='endTime' class="col s6" type="time" ng-model="endTimeFilter"/>
           </div>
         </div>
-
-        <div id="filterButton col m12">
-          <button class="z-depth-0 waves-effect waves-light btn center" ng-click="filterMap()">Click to Filter</button>
-        </div>
       </div>
       <!-- filter complete -->
       
@@ -59,8 +55,8 @@
       </nav> -->
 
       <!-- display all the games -->
-      <ul class="collection col m" id="listView" watch>
-        <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime' | startFrom: currentPage*pageSize - pageSize | limitTo: pageSize" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
+      <ul class="collection col m12" id="listView" watch>
+        <li ng-repeat="game in newGames | orderBy:'game_datetime'" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : " "}}</div>
             <div class="col s5"> <span ng-if="game.distance">{{+ game.distance + " m | "}}</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}, Players: {{ game.accepted_players }}/{{game.player_count}}
@@ -72,71 +68,71 @@
           </div>        
         </li>
       </ul> 
-      <center>
+<!--       <center>
         <pagination
-          ng-if= "!mapActivated"
           page="currentPage"
           page-size="pageSize"
-          total= "games.length"
+          total= "newGames.length"
           show-prev-next="true"
           dots="...."
           hide-if-empty="false"
           adjacent="2"
           scroll-top="false"
           pagination-action="displayPage(page)" />
-      </center>
+      </center> -->
     </div>      
 
-      <!-- detail Modal for each game -->
-      <div id="openRequest" class="modal">
-        <div class="modal-header grey">
-          <div ng-click="close()"><i class="material-icons right close">close</i></div>
-          <span class="white-text"><h4>{{game.game}}</h4></span>
+    <!-- detail Modal for each game -->
+    <div id="openRequest" class="modal">
+      <div class="modal-header grey">
+        <div ng-click="close()"><i class="material-icons right close">close</i></div>
+        <span class="white-text"><h4>{{game.game}}</h4></span>
+      </div>
+      <div class="modal-content">
+        <div>
+          <span class="grey-text">Host:</span> 
+          <a href="#/profile/{{game.host_id}}" target="_blank">{{loggedIn ? game.username : "Login to see more!"}}</a>
         </div>
-        <div class="modal-content">
-          <div>
-            <span class="grey-text">Host:</span> 
-            <a href="#/profile/{{game.host_id}}" target="_blank">{{loggedIn ? game.username : "Login to see more!"}}</a>
-          </div>
-          <div>
-            <span class="grey-text">Time:</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}
-          </div>
-          <div>
-            <span class="grey-text">Location:</span> {{loggedIn ? game.game_location : "Login to see more!"}}
-          </div>
-          <div>
-            <span class="grey-text">Distance to current location:</span> {{game.distance + " m"}}
-          </div>
-          <div>
-            <span class="grey-text">Details:  </span>{{game.gamepost_description ? game.gamepost_description : "N/A"}}
-          </div>
-          <div >
-            <span class="grey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
-          </div>
-          <div ng-if="loggedIn">
-            <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" ng-src="{{game.picture || game.host_pic}}">{{game.username}}</a>
-            <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}</a>
-          </div>
-          <div class = "row center" ng-if="loggedIn">
-            <div class="input-field">
-              <textarea ng-if="!hasPendingRequest(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
-              <div ng-if="hasPendingRequest(game.id)">
-                <div> Your request is: {{reqStatus}} </div>
-                <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}} </div>
-              </div>
+        <div>
+          <span class="grey-text">Time:</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}
+        </div>
+        <div>
+          <span class="grey-text">Location:</span> {{loggedIn ? game.game_location : "Login to see more!"}}
+        </div>
+        <div>
+          <span class="grey-text">Distance to current location:</span> {{game.distance + " m"}}
+        </div>
+        <div>
+          <span class="grey-text">Details:  </span>{{game.gamepost_description ? game.gamepost_description : "N/A"}}
+        </div>
+        <div >
+          <span class="grey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
+        </div>
+        <div ng-if="loggedIn">
+          <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" ng-src="{{game.picture || game.host_pic}}">{{game.username}}</a>
+          <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}</a>
+        </div>
+        <div class = "row center" ng-if="loggedIn">
+          <div class="input-field">
+            <textarea ng-if="!hasPendingRequest(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
+            <div ng-if="hasPendingRequest(game.id)">
+              <div> Your request is: {{reqStatus}} </div>
+              <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}} </div>
+            </div>
             <br>
             <div ng-if="submitError" class="error col s12 grey-text">{{submitError}}</div>
           </div>
         </div>
       </div>
-        <div class="modal-footer" ng-if="!hasPendingRequest(game.id) && loggedIn">
-          <div class = "col s4 right" ng-click="sendRequest(game)">
-                  <a class = "btn btn-med waves-effect waves-light grey darken-3">
-                    <i class="material-icons">send</i>
-                  </a>
-          </div>
+      <div class="modal-footer" ng-if="!hasPendingRequest(game.id) && loggedIn">
+        <div class = "col s4 right" ng-click="sendRequest(game)">
+                <a class = "btn btn-med waves-effect waves-light grey darken-3">
+                  <i class="material-icons">send</i>
+                </a>
         </div>
-      <!-- modal complete -->
-  </div><!-- #outer -->
+      </div>
+    </div>
+    <!-- modal complete -->
+
   </div>
 </div><!-- .browse -->
