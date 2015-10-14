@@ -13,18 +13,24 @@
 }
 
 .notification {
-  position: relative;
-
+  position: relative; 
 }
 
+
 #notifications {
+  
   padding: 1%;
+  height: 300px;
 
   span.noteTime{
     font-size: 10px;
     padding: 0px;
     color: gray;
   }
+
+  .true {
+    background-color: #aeaeae;  
+  }  
 }
 
 .notification-number {

@@ -249,14 +249,15 @@
       //     //google.maps.event.addDomListener(window, 'load', initMap);                       
       // }
 
-      //Event listeners
-      scope.$watchGroup(['startTimeFilter', 'endTimeFilter', 'startDateFilter', 'endDateFilter', 'distance', 'searchText'], function(){
-        scope.newGames = scope.games.filter(function(game){
-          return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime) && scope.nameFilter(game.game));
-        })
-        console.log('game', scope.newGames)
-        initMap();
-      }, true);
+      //Event listeners for browse game
+      if (scope.newGames) {
+        scope.$watchGroup(['startTimeFilter', 'endTimeFilter', 'startDateFilter', 'endDateFilter', 'distance', 'searchText'], function(){
+          scope.newGames = scope.games.filter(function(game){
+            return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime) && scope.nameFilter(game.game));
+          })
+          initMap();
+        }, true); 
+      }
 
       initMap();                      
 
