@@ -26,39 +26,47 @@
 			"More than 10 miles": Infinity
 		}
 
-		//Functions called on controller start
-		Auth.requireAuth('browse');
-		BrowseGames.getGames()
-			.then(function(resp) {
-				$scope.newGames = resp.slice();
-				console.log("BrowseGameController inside getGsmes", resp);
-				$scope.games = resp;
-				Auth.getCurrentLocation();
-				$scope.getMyRequests();
+		//////////////////////////////////////////////////////////////////
+		// initiate the page, get all games and request
+		//////////////////////////////////////////////////////////////////
+		init();
+
+		function init () {
+			//Functions called on controller start
+			Auth.requireAuth('browse');
+			BrowseGames.getGames()
+				.then(function(resp) {
+					$scope.newGames = resp.slice();
+					$scope.games = resp;
+					Auth.getCurrentLocation();
+					$scope.getMyRequests();
+				});
+
+			$scope.$on("currentLocation", function(event, data){
+				for (var i = 0; i < $scope.games.length; i ++){
+					$scope.games[i].distance = $scope.games[i].lat ? distance(data.lat, data.lng, $scope.games[i].lat, $scope.games[i].lng ) : null;
+				}
+				$scope.$apply();
 			});
 
-		$scope.$on("currentLocation", function(event, data){
-			for (var i = 0; i < $scope.games.length; i ++){
-				$scope.games[i].distance = $scope.games[i].lat ? distance(data.lat, data.lng, $scope.games[i].lat, $scope.games[i].lng ) : null;
-			}
-			$scope.$apply();
-		});
+			//Request functions
+			$scope.getMyRequests = function(){
+	      return GamePost.myRequests()
+	        .then(function(requests){
+	          if (requests === 'request does not exist'){
+	            $scope.myRequests = [];
+	            console.log('$scope.myRequests', $scope.myRequests);
+	          } else {
+	            $scope.myRequests = requests;
+	            console.log('$scope.myRequests', $scope.myRequests);
+	          }
+	        });
+	    };
+		}
+		// init complete
 
-		//Request functions
-		$scope.getMyRequests = function(){
-      return GamePost.myRequests()
-        .then(function(requests){
-          if (requests === 'request does not exist'){
-            $scope.myRequests = [];
-            console.log('$scope.myRequests', $scope.myRequests);
-          } else {
-            $scope.myRequests = requests;
-            console.log('$scope.myRequests', $scope.myRequests);
-          }
-        });
-    };
-
-    $scope.hasPendingRequest = function(gameId) {
+    // requestSent func check if the user has sent a request to the game
+    $scope.requestSent = function(gameId) {
     	if($scope.myRequests) {
 	    	for (var i = 0; i < $scope.myRequests.length; i++) {
 	    		if ($scope.myRequests[i].gamepost_id === gameId) {
@@ -69,11 +77,11 @@
 	    }
     }
 
+    // if request has already sent, show details of the request
     $scope.getRequestInfo = function(gameId) {
     	if($scope.myRequests) {
 	    	for (var i = 0; i < $scope.myRequests.length; i++) {
 	    		if ($scope.myRequests[i].gamepost_id === gameId) {
-	    			console.log("status is ",  $scope.myRequests[i].status);
 	    			$scope.reqStatus = $scope.myRequests[i].status;
 	    			if ($scope.reqStatus === 'declined') {
 	    				$scope.reqStatus = 'canceled';
@@ -84,19 +92,6 @@
 	    }
     }
 
-		$scope.sendRequest = function(game) {
-			BrowseGames.sendRequest($scope.requestMessage, game.id)
-				.then(function(data){
-					console.log("data", data)
-					if (typeof data === 'string' && data.includes('already been submmited')) {
-						$scope.submitError = "You have already submitted your request!";
-					} else {
-						$("#openRequest").closeModal();
-						$location.path('/my-games');
-					}
-				})
-		}
-
 		// Pagination 
 		// $scope.pageSize = 8;
 		// $scope.currentPage = $scope.currentPage || 1;
@@ -104,7 +99,11 @@
 		// 	$scope.currentPage = page;
 		// }
 
-		//Distance functions
+		/////////////////////
+		//// filters 
+		/////////////////////
+
+		// Distance functions
 		function distance(lat1, lon1, lat2, lon2) {
 			var radlat1 = Math.PI * lat1/180
 			var radlat2 = Math.PI * lat2/180
@@ -125,6 +124,16 @@
 				return dis < disSelect;
 			} else {
 				return true;				
+			}
+		}
+
+		// name filter
+		$scope.nameFilter = function(name) {
+			console.log("name", name)
+			if (!$scope.searchText || (name && name.toUpperCase().includes($scope.searchText.toUpperCase()))) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 
@@ -156,6 +165,10 @@
 			}	
 	  };
 
+	  ///////////////////////
+	  // modal related func
+	  ///////////////////////
+
 	  //Modal functions
 		$scope.openGame = function(game) {
 			$scope.submitError = null;
@@ -164,6 +177,7 @@
 			$scope.getGamepostPictures(game);
 		};
 
+		// get pictures when modal is open
 		$scope.getGamepostPictures = function(game){
       var gamePostId = game.gamepost_id ? game.gamepost_id : game.id;
       return GamePost.getPictures(gamePostId)
@@ -173,8 +187,24 @@
         })
     }
 
+    // send request to sever when send is clicked in modal
+    $scope.sendRequest = function(game) {
+			BrowseGames.sendRequest($scope.requestMessage, game.id)
+				.then(function(data){
+					console.log("data", data)
+					if (typeof data === 'string' && data.includes('already been submmited')) {
+						$scope.submitError = "You have already submitted your request!";
+					} else {
+						$("#openRequest").closeModal();
+						$location.path('/my-games');
+					}
+				})
+		}
+
+		// modal close func
 		$scope.close = function() {
 			$("#openRequest").closeModal();
 		}
+
 	}
 })();

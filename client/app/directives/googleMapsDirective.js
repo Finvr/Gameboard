@@ -132,14 +132,11 @@
         // display games markers on map in Browse Game page
         scope.$watch('newGames', function() {
           if (scope.newGames && scope.newGames.length > 0) {
-            console.log("directive newGames: ", scope.newGames)
             map.setCenter(scope.currentLocation);
             bounds = new google.maps.LatLngBounds(scope.currentLocation);
             clearMaker(); 
             scope.newGames.forEach(function(game){              
-              console.log("games each outside: ", game)
               if (game.lat){
-                console.log("games each: ", game)
                 game.location = new google.maps.LatLng(Number(game.lat), Number(game.lng));
                 var image = "<img src='/assets/facebook.png'>";
                 var newMark = new google.maps.Marker({
@@ -253,10 +250,11 @@
       // }
 
       //Event listeners
-      scope.$watchGroup(['startTimeFilter', 'endTimeFilter', 'startDateFilter', 'endDateFilter', 'distance'], function(){
+      scope.$watchGroup(['startTimeFilter', 'endTimeFilter', 'startDateFilter', 'endDateFilter', 'distance', 'searchText'], function(){
         scope.newGames = scope.games.filter(function(game){
-          return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime));
+          return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime) && scope.nameFilter(game.game));
         })
+        console.log('game', scope.newGames)
         initMap();
       }, true);
 

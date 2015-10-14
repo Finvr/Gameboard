@@ -12,6 +12,7 @@
   }
 
   .filterAndGames {
+    display: block;
     padding: 0px;
     overflow-y: scroll;
     height: 90%;
@@ -22,6 +23,11 @@
     
     border: none;
     margin: 0px;
+
+    .nameAndDisFilter {
+      padding-top: 5%;
+      margin-bottom: 0px;
+    }
 
     .datetimeFilter {
       margin: 0px;
@@ -35,8 +41,10 @@
 
   #listView {
     padding-top: 2%;
+    padding-bottom: 2%;
     background-color: #f5f5f5;
     border: none;
+    margin-bottom: 0px;
   }
 
   img.hostPic {
