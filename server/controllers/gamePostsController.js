@@ -17,7 +17,7 @@ module.exports = {
   },
 
   getRecentGames: function(req, res) {
-    var userId = req.user.id;
+    var userId = req.user;
     console.log("getRecentGames userId: ", userId)
     GamePosts.getRecentGames(userId)
       .then(function(games){
@@ -34,7 +34,7 @@ module.exports = {
       invitations = gamepost.invitees;
       delete gamepost.invitees;
     }
-    gamepost.host_id = req.user.id;
+    gamepost.host_id = req.user;
 
     GamePosts.create(gamepost)
       .then(function (data) {
@@ -53,7 +53,7 @@ module.exports = {
 
   getUserGamePosts: function (req, res) {
     //Get gameposts created by the logged-in user
-    var userId = req.user.id;
+    var userId = req.user;
 
     GamePosts.getAll(userId)
       .then(function (data) {
@@ -67,7 +67,7 @@ module.exports = {
   deleteGamePost: function (req, res, next) {
     //Cancel a gamepost
     var gamepostId = parseInt(req.url.split('/')[2]); //for "/gameposts/123", gamepostID === 123
-    var userId = req.user.id;
+    var userId = req.user;
 
     GamePosts.deleteGamePost(gamepostId, userId)
       .then(function () {

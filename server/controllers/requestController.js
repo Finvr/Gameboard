@@ -5,7 +5,7 @@ module.exports = {
 
   getUserRequests: function (req, res) {
     //Return all requests created by the logged-in user
-    var userId = req.user.id;
+    var userId = req.user;
     Requests.getRequestsByUserId(userId)
       .then(function (data) {
         res.send(data);
@@ -17,7 +17,7 @@ module.exports = {
 
   getUserInvitations: function (req, res) {
     //Return all invitations sent to the logged-in user
-    var userId = req.user.id;
+    var userId = req.user;
     Requests.getRequestsByUserId(userId, 'invite')
       .then(function (data) {
         res.send(data);
@@ -54,7 +54,7 @@ module.exports = {
   createRequest: function (req, res) {
     //Create a new request
     var request = req.body;
-    request.user_id = req.user.id;
+    request.user_id = req.user;
     request.gamepost_id = parseInt(req.url.split('/')[2]);
     request.status = "pending";
 
@@ -110,7 +110,7 @@ module.exports = {
   createInvitation: function (req, res) {
     //Create a new invite
     var request = req.body;
-    request.host_id = req.user.id;
+    request.host_id = req.user;
     request.gamepost_id = parseInt(req.url.split('/')[2]);
     request.status = "invite";
 

@@ -4,10 +4,10 @@ var Reviews = require ('../models/reviewsModel.js')
 module.exports = {
 
   checkAuth: function (req, res, next) {
-    if (!req.user.id) {
+    if (!req.user) {
       res.status(403).send('User is not logged in!')
     }
-    Users.find(req.user.id)
+    Users.find(req.user)
       .then(function (res) {
         if (res.length !== 0) {
           next();
@@ -31,12 +31,15 @@ module.exports = {
   },
 
   getMyProfile: function (req, res) {
-    delete req.user.facebook_id;
-    delete req.user.facebook_token;
-    module.exports.getRatingByUserId(req.user.id)
+    var profile;
+    Users.find(req.user)
+      .then(function (result) {
+        profile = result[0];
+        return module.exports.getRatingByUserId(profile.id)
+      })
       .then(function(result){
-        req.user.reviews = result;
-        res.send(req.user);
+        profile.reviews = result;
+        res.send(profile);
       })
   }, 
 
@@ -70,7 +73,7 @@ module.exports = {
   },
 
   updateProfile: function (req, res) {
-    if ( req.user.id !== req.body.id ) {
+    if ( req.user !== req.body.id ) {
       res.status(403).send("Invalid user object")
     } else {
       Users.updateProfile(req.body)
