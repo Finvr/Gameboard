@@ -1,51 +1,53 @@
 <div class="browse">
   <div class="row">
-    <div class="col m3">
+    <div class="mapView col m5">
+      <!-- map view -->
+      <div google-maps  class="mapView col m12 s12">
+        <div id="gmap"></div>
+      </div>
+    </div>
 
-      <nav>
-        <div class="nav-wrapper transparent browse-filters-header">
-          <h5 class="grey-text text-darken-2">Filters</h5>
-        </div>
-      </nav>
+    <div class="filterAndGames col m7">
 
-      <div class="browse-filters">
+      <!-- filter -->
+      <div class="browse-filters col m12 row">
         <!-- Game select autocomplete filter -->
-        <div>
+        <div class="col m6">
           <p class="title grey-text text-darken-2">Game Name</p>
           <autocomplete attr-input-class="center" attr-input-id="game-name" attr-placeholder="" click-activation="true" data="gamesArray" ng-model="searchText"></autocomplete>
         </div>
-
         <!-- Distance filter -->
-        <div>
+        <div class="col m6">
           <p class="title grey-text text-darken-2">Distance</p>
           <select class="browser-default" ng-model="distance" material-select watch>
             <option ng-repeat="(key, value) in distance_choices">{{key}}</option>
           </select>
         </div>
-
-        <!-- Games Date Range  -->
-        <div class="row">
-          <p class="title grey-text text-darken-2 col s6">Start Date</p>
-          <p class="title grey-text text-darken-2 col s6">End Date</p>
-          <input class="col s6 datepicker" type="date" ng-model="startDateFilter"/>
-          <input class="col s6" type="date" ng-model="endDateFilter"/>
+        <!-- Games Date and Time Range  -->
+        <div class="col m12 datetimeFilter row">
+          <!-- Games Date Range  -->
+          <div class="col m6">
+            <p class="title grey-text text-darken-2 col s6">Start Date</p>
+            <p class="title grey-text text-darken-2 col s6">End Date</p>
+            <input class="col s6 datepicker" type="date" ng-model="startDateFilter"/>
+            <input class="col s6" type="date" ng-model="endDateFilter"/>
+          </div>
+          <!-- time filter -->
+          <div class="col m6">
+            <p class="title grey-text text-darken-2 col s6">Start Time</p>
+            <p class="title grey-text text-darken-2 col s6">End Time</p>
+            <input id='startTime'class="col s6 datepicker" type="time" ng-model="startTimeFilter"/>
+            <input id='endTime' class="col s6" type="time" ng-model="endTimeFilter"/>
+          </div>
         </div>
 
-        <div class="row">
-          <p class="title grey-text text-darken-2 col s6">Start Time</p>
-          <p class="title grey-text text-darken-2 col s6">End Time</p>
-          <input id='startTime'class="col s6 datepicker" type="time" ng-model="startTimeFilter"/>
-          <input id='endTime' class="col s6" type="time" ng-model="endTimeFilter"/>
-        </div>
-
-        <div id="filterButton">
+        <div id="filterButton col m12">
           <button class="z-depth-0 waves-effect waves-light btn center" ng-click="filterMap()">Click to Filter</button>
         </div>
-
       </div>
-    </div>
-
-    <div class="col m9" id="outer">
+      <!-- filter complete -->
+      
+      <!-- search filter disabled
       <nav ng-hide="mapActivated">
         <div class="nav-wrapper transparent">
           <div class="input-field">
@@ -54,20 +56,10 @@
             <i class="material-icons">close</i>
           </div>
         </div>
-      </nav>
-
-      <div class="mapViewButton col m12 z-depth-0">
-        <button ng-click="mapView()" id="mapButton" class="waves-effect waves-light btn left col m3 z-depth-0">Map View</button>
-      </div>
+      </nav> -->
 
       <!-- display all the games -->
-      <!-- map view -->
-      <div google-maps  class="half-div col m12 s12">
-        <div id="gmap"></div>
-      </div>
-
-      <!-- display all the games -->
-      <ul class="collection" id="listView" watch>
+      <ul class="collection col m" id="listView" watch>
         <li ng-repeat="game in games | filter:searchText | filter:selectText | orderBy:'game_datetime' | startFrom: currentPage*pageSize - pageSize | limitTo: pageSize" ng-if="dateFilter(game.game_datetime) && disFilter(game.distance) && timeFilter(game.game_datetime)" class="collection-item " watch>
           <div class='row game_list'>
             <div class="left col s4" id="game_title" style="display:inline">{{game.game ? game.game : " "}}</div>
@@ -93,6 +85,7 @@
           scroll-top="false"
           pagination-action="displayPage(page)" />
       </center>
+    </div>      
 
       <!-- detail Modal for each game -->
       <div id="openRequest" class="modal">
