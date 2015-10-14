@@ -1,6 +1,6 @@
 var db       = require('../db.js'),
     Requests = require('./requestsModel.js'),
-    helpers   = require('../utils/helpers.js');
+    helpers  = require('../utils/helpers.js');
 
 module.exports = {
 
