@@ -147,201 +147,23 @@
     </div>
   </div>
 
-  <!-- Pop-up modal for requests of gameposts -->
-  <div id="approve-pending" class="modal">
-    <div class="modal-header grey">
-      <div ng-click="close('#approve-pending')"><i class="material-icons right close">close</i></div>
-      <span class="white-text"><h4>{{ gameToApprove.game }}</h4></span>
-    </div>
-    <div class="modal-content container"> 
-      <ul class="collection">
-        <li class="row content-header">
-          <div class="title col s8 grey-text">Request</div>
-          <div class="title col s2 grey-text center">Accept</div>
-          <div class="title col s2 grey-text center">Decline</div>
-        </li>
-        <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item row" ng-if="request.status==='pending'">
-          <div class="col s8">
-            <div class="sub-list">
-              <strong class="content-lead">From: </strong>
-                <a href="#/profile/{{request.user_id}}" target="_blank"><img class="hostPic" ng-src="{{request.requester_pic}}">{{ request.username }}</a>
-            </div>     
-            <div class="sub-list">
-              <strong class="content-lead">Message:</strong>
-              <div> {{ request.comments }}</div>
-            </div>
-          </div>
-          <button class="col s2 btn-flat btn-medium waves-effect waves-light grey darken-3 lighten-1 white-text" ng-click="requestConfirm('accepted', request)">
-            <i class="material-icons">check</i>
-          </button>
-          <button class="col s2 btn-flat waves-effect waves-light grey white-text" ng-click="requestConfirm('declined', request)">
-            <i class="material-icons">close</i>
-          </button>
-        </li> 
-      </ul>
-    </div>
-  </div>
+  <ng-include src="'app/templates/modals/gamepostModal.html'">
+  </ng-include>
 
-    <!-- detail Modal for rating each game -->
-  <div id="openRateModal" class="modal">
-    <div class="modal-header grey">
-      <div ng-click="close('#openRateModal'); "><i class="material-icons right close">close</i></div>
-      <span class="white-text"><h4>{{currentRateGame.game ? currentRateGame.game : "No Name"}}</h4></span>
-    </div>
-    <div class="modal-content">
-      <div>
-        <span class="grey-text">Host:</span> 
-        <a href="#/profile/{{currentRateGame.host_id}}" target="_blank"><img class="hostPic" ng-src="{{currentRateGame.picture || currentRateGame.host_pic}}">{{currentRateGame.host_name || currentRateGame.username}}</a>
-      </div>
-      <div>
-        <span class="grey-text">Location:</span> {{currentRateGame.game_location}}
-      </div>
-      <div class="row">
-        <table ng-if="currentRateGame.playerPics.length > 0">
-          <thead>
-            <tr>
-              <th class="players">Player</th>
-              <th>Skip</th>
-              <th>Showed up</th>
-              <th>Rating</th>
-            </tr>
-          </thead>
+  <ng-include src="'app/templates/modals/gameReviewModal.html'">
+  </ng-include>
 
-          <tbody>
-            <tr ng-repeat="player in currentRateGame.playerPics">
-              <td class="players">
-                <a href="#/profile/{{player.user_id}}" target="_blank" ><img class="hostPic" ng-src="{{player.picture}}">{{player.username}}</a>
-              </td>
-              <td ng-if="!currentRateGame.reviewed">
-                <div class="switch" >
-                  <label>
-                    <input type="checkbox" ng-model="player.skip" value="false">
-                    <span class="lever"></span>
-                  </label>
-                </div>
-                <span class="reviewResults" watch>{{player.skip ? "Don't Rate" : "Rate"}}</span>
-              </td>
-              <td ng-if="!player.skip">               
-                <div class="switch" ng-if="!player.skip">
-                  <label>
-                    <input type="checkbox" ng-model="player.showed_up">
-                    <span class="lever"></span>
-                  </label>
-                </div>
-                <span class="reviewResults"  watch>{{player.showed_up ? "Yes" : "No"}}</span>
-              </td>
-              <td ng-if="!player.skip && player.showed_up">
-                <input type="range" ng-model="player.rating" min="0" max="5" />
-                <span class="reviewResults"  watch>{{player.rating}}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer" ng-if="!currentRateGame.reviewed">
-        <div class = "col s4 right" ng-click="sendReviews(currentRateGame.playerPics)">
-          <a class = "btn btn-med waves-effect center waves-light grey darken-3" ng-click="close('#openRateModal')">
-            Complete Rating
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- modal complete -->
+  <ng-include src="'app/templates/modals/gameInvitationModal.html'">
+  </ng-include>
 
-  <!-- Pop-up modal for requests of invitations -->
-  <div id="approve-invitation" class="modal">
-    <div class="modal-header grey">
-      <div ng-click="close('#approve-invitation')"><i class="material-icons right close">close</i></div>
-      <span class="white-text"><h4>{{ invitationToReview.game }}</h4></span>
-    </div>
-    <div class="modal-content container"> 
-      <ul class="collection">
-        <li class="row content-header">
-          <div class="title col s8 grey-text">Invitation</div>
-          <div class="title col s2 grey-text center">Accept</div>
-          <div class="title col s2 grey-text center">Decline</div>
-        </li>
-        <li class="collection-item row">
-          <div class="col s8">
-            <div class="sub-list">
-              <strong class="content-lead">From: </strong>
-                <a href="#/profile/{{invitationToReview.host_id}}" target="_blank"><img class="hostPic" ng-src="{{invitationToReview.host_pic}}">{{ invitationToReview.host_name }}</a>
-            </div>     
-            <div class="sub-list">
-              <strong class="content-lead">Details:</strong>
-              <div> {{ invitationToReview.game }}</div>
-              <div> {{ invitationToReview.game_datetime }}</div>
-              <div> {{ invitationToReview.game_location }} </div>
-              <div> {{ invitationToReview.game_description}}</div>
-            </div>
-          </div>
-          <button class="col s2 btn-flat btn-medium waves-effect waves-light grey darken-3 lighten-1 white-text" ng-click="requestConfirm('accepted', invitationToReview)">
-            <i class="material-icons">check</i>
-          </button>
-          <button class="col s2 btn-flat waves-effect waves-light grey white-text" ng-click="requestConfirm('declined', invitationToReview)">
-            <i class="material-icons">close</i>
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <ng-include src="'app/templates/modals/gameDetailsModal.html'">
+  </ng-include>
 
-  <!-- Pop-up for game details -->
-  <div id="game-details" class="modal">
-    <div class="modal-header grey">
-      <a ng-click="close('#game-details')"><i class="material-icons right white-text">close</i></a>
-      <h4 class="white-text center">{{ gameToShowDetails.game ? gameToShowDetails.game : "No Name" }}</h4>
-    </div>
-    <div class="modal-content container">
-      <p>
-        <div ng-if="gameToShowDetails.host_pic !== undefined"><strong>Host:</strong>
-          <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank">{{gameToShowDetails.host_name}}</a>
-        </div>
-        <div><strong>Time:</strong> {{ gameToShowDetails.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}</div>
-        <div><strong>Location:</strong> {{ gameToShowDetails.game_location }}</div>
-        <div><strong>Players:</strong> {{ gameToShowDetails.accepted_players + "/" + gameToShowDetails.player_count}}</div>
-        <div>
-          <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank"><img class="hostPic" ng-src="{{gameToShowDetails.picture || gameToShowDetails.host_pic}}">{{gameToShowDetails.host_name}}</a>
-          <a ng-repeat="requester in gameToShowDetails.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}</a>
-        </div>
-        <div><strong>Description:</strong> {{ gameToShowDetails.gamepost_description ? gameToShowDetails.gamepost_description : "N/A"}}
-        </div>
-        <div ng-if="gameToShowDetails.comments !== undefined"><strong>Message sent:</strong> {{ gameToShowDetails.comments ? gameToShowDetails.comments : "N/A"}}</div>
-      </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#cancel-modal" ng-if="gameToShowDetails.pending_requests" ng-click="setGameToCancel(gameToShowDetails)" class="btn btn-med waves-effect waves-light grey darken-3" modal>Cancel Game</i></a>
-      <a href="#cancelRequestModal" ng-if="!gameToShowDetails.pending_requests" ng-click="setRequestToCancel(gameToShowDetails)" class="btn btn-med waves-effect waves-light grey darken-3" modal>Cancel Request</i></a>
-    </div>
-  </div>
-
-  <!-- Pop-up modal for cancelling of gameposts -->
-  <div id="cancel-modal" class="modal">
-    <div class="modal-header grey">
-      <div ng-click="close('#cancel-modal')"><i class="material-icons white-text right">close</i></div>
-      <h4 class="white-text">Cancel Game</h4>
-    </div>
-    <div class="modal-content container"> 
-        <p>Are you sure you want to cancel this game of {{gameToCancel.game}}?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
-    </div>
-    <div class="modal-footer">
-      <a ng-click="cancelGame()" class="btn btn-med waves-effect waves-light grey darken-3">Cancel Game</a>
-    </div>
-  </div>
+  <ng-include src="'app/templates/modals/gamepostCancelModal.html'">
+  </ng-include>
 
   <!-- Pop-up modal for cancelling of requests -->
-  <div id="cancelRequestModal" class="modal">
-    <div class="modal-header grey">
-      <h4 class="darkgray-text">Cancel Request</h4>
-      <a ng-click="close('#cancelRequestModal')"><i class="material-icons">close</i></a>
-    </div>
-    <div class="modal-content container"> 
-        <p>Are you sure you want to cancel this request to play {{request.name}}?  The host will be notified and your spot will be freed up for others.</p>
-    </div>
-    <div class="modal-footer">
-      <a ng-click="cancelRequest(requestToCancel)" class="btn btn-med waves-effect waves-light grey darken-3">Cancel Request</a>
-    </div>
+  <div class="ng-include: 'app/templates/modals/requestCancelModal.html'">
   </div>
 
 </div>
