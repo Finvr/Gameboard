@@ -121,11 +121,11 @@ module.exports = {
       })
   },
 
-  declineAll: function (gamepostId) {
+  updateByGamepost: function (gamepostId, status) {
     return db('requests')
       .where({gamepost_id: gamepostId})
       .update({
-        status: 'declined',
+        status: status,
         updated_at: db.raw('now()')
       })
       .returning('id')

@@ -1,6 +1,6 @@
 var db       = require('../db.js'),
     Requests = require('./requestsModel.js'),
-    helpers   = require('../utils/helpers.js');
+    helpers  = require('../utils/helpers.js');
 
 module.exports = {
 
@@ -17,12 +17,15 @@ module.exports = {
   },
 
   getRecentGames: function(userId) {
+    //This function needs to be refactored to use fewer database calls.
     var today = new Date();
+    var weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate()-30);
     var gameposts = [];
-    return module.exports.getAll(userId, "active")
+    return module.exports.getAll(userId, "expired")
       .then(function(hostGames){
         var games = hostGames;
-        return Requests.getRequestsByUserId(userId, 'accepted')
+        return Requests.getRequestsByUserId(userId, 'expired')
           .then(function(requests){
             games = games.concat(requests);
             return games;
@@ -30,7 +33,7 @@ module.exports = {
       })
       .then(function(games){
         for (var i = 0; i < games.length; i ++) {
-          if ((games[i].game_datetime < today) && (!(games[i].user_id) || games[i].host_id !== games[i].user_id)) {
+          if ((games[i].game_datetime < today) && (games[i].game_datetime > weekAgo) && (!(games[i].user_id) || games[i].host_id !== games[i].user_id)) {
             if (!games[i].gamepost_id) { games[i].gamepost_id = games[i].id }
             gameposts.push(games[i]);
           }

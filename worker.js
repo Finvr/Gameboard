@@ -14,7 +14,7 @@ function findExpired () {
       return helpers.promiseFor(function (i) {
         return i < expiredIds.length;
       }, function (i) {
-        return Requests.declineAll(expiredIds[i])
+        return Requests.updateByGamepost(expiredIds[i], 'expired')
           .then(function (requestIds) {
             reqIds = reqIds.concat(requestIds);
             return ++i;
