@@ -29,7 +29,7 @@ module.exports = {
 
   getRequestersPictures: function(req, res) {
     var gamepostId = parseInt(req.url.split('/')[2]);
-    Requests.getRequestersPictures(gamepostId)
+    Requests.getRequestersPictures(gamepostId, 'accepted')
       .then(function(data){
         res.send(data)
       })
