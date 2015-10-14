@@ -61,14 +61,7 @@ passport.serializeUser(function(user, done){
 });
 
 passport.deserializeUser(function(userId, done){
-  Users.find(userId)
-    .then(function(result) {
-      var user = result[0];
-      done(null, user);
-    })
-    .catch(function(err) {
-      done(null, null);
-    })
+  done(null, userId);
 });
 
 // Router
