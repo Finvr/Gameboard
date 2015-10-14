@@ -30,8 +30,8 @@
     </div>
     <div class = "row center" ng-if="loggedIn">
       <div class="input-field">
-        <textarea ng-if="!hasPendingRequest(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
-        <div ng-if="hasPendingRequest(game.id)">
+        <textarea ng-if="!requestSent(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
+        <div ng-if="requestSent(game.id)">
           <div> Your request is: {{reqStatus}} </div>
           <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}} </div>
         </div>
@@ -40,7 +40,7 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer" ng-if="!hasPendingRequest(game.id) && loggedIn">
+  <div class="modal-footer" ng-if="!requestSent(game.id) && loggedIn">
     <div class = "col s4 right" ng-click="sendRequest(game)">
             <a class = "btn btn-med waves-effect waves-light grey darken-3">
               <i class="material-icons">send</i>
