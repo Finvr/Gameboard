@@ -31,7 +31,6 @@ module.exports = {
       };
     }
 
-    rating, showed_up, gameposts_id
     for ( var i = 0; i < reviews.length; i++ ) {
       if ( reviews[i].showed_up ) {
         userRating += reviews[i].rating;
@@ -44,39 +43,40 @@ module.exports = {
         gameData.length++; 
       }
     }
-    userRating = userRating/ratingCount;
-    reliability = calulateReliability(gameData);
+    userRating = Math.round(userRating/ratingCount*10)/10;
+    reliability = Math.round(calculateReliability(gameData)*100)/100;
+    console.log("Reliability: ", reliability);
     
     return {
       rating: userRating,
       reliability: reliability,
-      reviewCount: reviews.length
+      reviewcounts: reviews.length
     };
 
-  },
-
-  calculateReliability: function (gameData) {
-    var reliability = 0;
-    var played = gameData.length;
-
-    for ( game in gameData ) {
-      if ( game === 'length' ) continue;
-      if ( gameData[game].length === 1 ) {
-        if ( gameData[game][0] ) {
-          reliability += 1/played;
-        }
-      } else {
-        var trueCount = 0;
-        for ( var i = 0; i < gameData[game].length; i++ ) {
-          if ( gameData[game][i] ) { trueCount++; }
-        }
-        if ( trueCount/gameData[game].length >= 0.5 ) {
-          reliability += 1/played;
-        }
-      }
-    }
-
-    return reliability;
   }
 
 };
+
+function calculateReliability (gameData) {
+  var reliability = 0;
+  var played = gameData.length;
+
+  for ( game in gameData ) {
+    if ( game === 'length' ) continue;
+    if ( gameData[game].length === 1 ) {
+      if ( gameData[game][0] ) {
+        reliability += 1/played;
+      }
+    } else {
+      var trueCount = 0;
+      for ( var i = 0; i < gameData[game].length; i++ ) {
+        if ( gameData[game][i] ) { trueCount++; }
+      }
+      if ( trueCount/gameData[game].length >= 0.5 ) {
+        reliability += 1/played;
+      }
+    }
+  }
+
+  return reliability;
+}
