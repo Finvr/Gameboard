@@ -48,7 +48,7 @@ module.exports = {
       })
   },
 
-  getRequestersPictures: function(gamepostId) {
+  getRequestersPictures: function(gamepostId, status) {
     return db('requests')
       .join('users', 'user_id', 'users.id')
       .select([
@@ -58,7 +58,7 @@ module.exports = {
       ])
       .where({
         gamepost_id: gamepostId,
-        status: 'accepted'
+        status: status
       })
       .then(function(results){
         return results;

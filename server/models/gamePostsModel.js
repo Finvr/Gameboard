@@ -43,7 +43,7 @@ module.exports = {
             return i < gameposts.length;
           },
           function(i){
-            return Requests.getRequestersPictures(gameposts[i].gamepost_id)
+            return Requests.getRequestersPictures(gameposts[i].gamepost_id, 'expired')
             .then(function(pictures){
               gameposts[i].playerPics = pictures;
               i ++;
@@ -52,7 +52,9 @@ module.exports = {
           }, 0)
       })
       .then(function(){
-        return gameposts;
+        return gameposts.filter(function(gamepost) {
+          return gamepost.accepted_players > 1;
+        });
       })
   },
 
