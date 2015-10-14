@@ -42,6 +42,7 @@
 					$scope.getMyRequests();
 				});
 
+			// calculate distance between each and user's current location
 			$scope.$on("currentLocation", function(event, data){
 				for (var i = 0; i < $scope.games.length; i ++){
 					$scope.games[i].distance = $scope.games[i].lat ? distance(data.lat, data.lng, $scope.games[i].lat, $scope.games[i].lng ) : null;
@@ -49,7 +50,7 @@
 				$scope.$apply();
 			});
 
-			//Request functions
+			// get all requests of users
 			$scope.getMyRequests = function(){
 	      return GamePost.myRequests()
 	        .then(function(requests){

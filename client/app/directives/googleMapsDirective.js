@@ -254,7 +254,6 @@
         scope.newGames = scope.games.filter(function(game){
           return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime) && scope.nameFilter(game.game));
         })
-        console.log('game', scope.newGames)
         initMap();
       }, true);
 
