@@ -256,6 +256,15 @@
         })
     };
 
+    /* ng-show tests */
+    $scope.showNormal = function(){
+      return $scope.myGames.length > 0 || $scope.myInvitations.length > 0 || ($scope.myRequests.length > 0 && $scope.myRequests[0] !== 'r');
+    }
+
+    $scope.showFallback = function(){
+      return $scope.myGames.length === 0 && ($scope.myRequests.length === 0 || $scope.myRequests[0] === 'r');
+    }
+
   };
 
 })();

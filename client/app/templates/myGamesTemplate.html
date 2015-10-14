@@ -1,12 +1,12 @@
 <div class="myGames">
 
-  <div ng-show="myGames.length === 0 && myRequests.length === 0" class="fallback-view container ng-cloak" ng-cloak>
+  <div ng-show="showFallback()" class="fallback-view container ng-cloak" ng-cloak>
     <!-- my-games fallback -->
     <div class="ng-include: 'app/templates/partials/myGamesFallBackPartial.html'">
     </div>
   </div>
 
-  <div ng-show="myGames.length > 0 || myInvitations.length > 0 || (myRequests.length > 0 && myRequests[0] !== 'r')" class="row normal-view">
+  <div ng-show="showNormal()" class="row normal-view ng-cloak" ng-cloak>
 
     <div class="col profile m4">
       <!-- my-games map -->
