@@ -21,6 +21,7 @@
         .then(function(games){
           $scope.myGames = games;
           var events = $scope.myGames.map(function(game) {
+            console.log("game: ", game)
             var newEvent = {};
             newEvent.title = game.game;
             newEvent.start = moment(game.game_datetime);
@@ -116,7 +117,7 @@
             console.log('request: ', request)
             var newEvent = {};
             newEvent.title = request.game;
-            newEvent.start = request.game_datetime;
+            newEvent.start = moment(request.game_datetime);
             newEvent.data = request;
             return newEvent;
           });
