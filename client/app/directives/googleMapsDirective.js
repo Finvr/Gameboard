@@ -252,6 +252,14 @@
       //     //google.maps.event.addDomListener(window, 'load', initMap);                       
       // }
 
+      //Event listeners
+      scope.$watchGroup(['startTimeFilter', 'endTimeFilter', 'startDateFilter', 'endDateFilter', 'distance'], function(){
+        scope.newGames = scope.games.filter(function(game){
+          return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime));
+        })
+        initMap();
+      }, true);
+
       initMap();                      
 
     };
