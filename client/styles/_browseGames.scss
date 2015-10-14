@@ -1,23 +1,31 @@
 .browse {
 
-  padding: 2%;
+  overslow-x: hidden;
+  overslow-y: hidden;
 
-  nav {
-    background-color: white;
-    .browse-filters-header h5 {
-      text-align: center;
-      margin: 0;
-      padding-top: 5%;
-    }
+  .mapView {
+    padding: 0px;
   }
   
-  nav, nav .input-field label i {
-    color: #bbb;
-  }  
-  
+  #gmap {
+    height: 90%;
+  }
+
+  .filterAndGames {
+    overflow-y: scroll;
+    height: 90%;
+    width: 100%;
+  }
+
   .browse-filters {
-    border: 1px solid #e0e0e0;
+
+    border: none;
     margin: 0px;
+
+    .datetimeFilter {
+      padding: 0px;
+    }
+
     .title {
       text-align: center;
     }
@@ -78,7 +86,7 @@
 
   @media only screen and (min-width: 601px) {
   	nav {
-  		height: 52px;
+  		height: 10%;
   	}
   }
 
@@ -94,6 +102,7 @@
     color: gray;
     border: 1px dotted lightgray;
     border-radius: 5px;
+    margin-bottom: 0px;
   }
 
   input[type=text] {
@@ -101,13 +110,7 @@
     margin: 0px;
   }
 
-  #gmap {
-    height: 500px;
-  }
 
-  .half-div {
-    padding: 0;
-  }
 
   .autocomplete ul{
     height: 50px;
@@ -115,9 +118,4 @@
     z-index: 10;
   }
 
-  .mapViewButton {
-    padding-left: 0%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-  }  
 }
