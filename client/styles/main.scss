@@ -4,6 +4,11 @@
 @import 'browseGames';
 @import 'profile';
 @import 'home';
+@import 'variables';
+
+nav {
+	background-color: $blue;
+}
 
 .nav-profile-pic {
   margin-top: 30%;
