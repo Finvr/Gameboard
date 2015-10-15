@@ -1,22 +1,12 @@
-<li ng-repeat="invitation in myInvitations track by $index | orderBy:'game_datetime'" class="collection-item avatar"> 
-  <div>
-    <span class="title grey-text text-darkern-2">
-      {{ invitation.game | limitTo: 10 }} ... 
-    </span>
-    <span>
-        {{ invitation.game_datetime | date : "M/d/yyyy @ h:mm a" }}
-    </span>
-    <a href="#approve-invitation" ng-click="setInvitationToReview(invitation)" class="waves-effect waves-light secondary-content" modal>
-      <i class="material-icons">open_in_new</i>
-    </a>
-  </div>
-  <div>
-    <p>
-      <strong>Time:</strong> {{ invitation.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
-      <strong>Location:</strong> {{ invitation.game_location }}<br>
-      <strong>Players:</strong> {{invitation.player_count}}
-      <br>
-      <strong>Description:</strong> {{invitation.gamepost_description ? invitation.gamepost_description : "N/A"}}<br>
-    </p>
-  </div>
+<li ng-repeat="invitation in myInvitations track by $index | orderBy:'game_datetime'" class="collection-item avatar">
+  <img class="circle" src="{{invitation.host_pic}}">
+  <span class="title grey-text text-darkern-2">
+    <strong>{{ invitation.game }}</strong> on {{ invitation.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+  </span>
+  <p>
+    {{invitation.host_name}} has invited you to join.
+  </p>
+  <a href="#approve-invitation" ng-click="setInvitationToReview(invitation)" class="waves-effect waves-light secondary-content" modal>
+    <i class="material-icons">open_in_new</i>
+  </a>
 </li>

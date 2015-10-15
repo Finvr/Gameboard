@@ -1,22 +1,9 @@
 <li ng-repeat="gameToReview in recentGames track by $index | orderBy:'-game_datetime'" class="collection-item avatar" ng-if="!gameToReview.reviewed">
-  <div>
+  <img class="circle" src="{{ gameToReview.picture }}">
     <span class="title grey-text text-darkern-2">
-      {{ gameToReview.game | limitTo: 10 }} ... 
-    </span>
-    <span>
-        {{ gameToReview.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+      You can now review {{ gameToReview.game }} from {{ gameToReview.game_datetime | date : "M/d/yyyy @ h:mm a" }}
     </span> 
     <a href="#openRateModal" ng-click="openRateModal(gameToReview)" class="waves-effect waves-light secondary-content" modal>
       <i class="material-icons">open_in_new</i>
-    </a> 
-  </div>
-   <div>
-    <p>
-      <strong>Time:</strong> {{ gameToReview.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
-      <strong>Location:</strong> {{ gameToReview.game_location }}<br>
-      <strong>Players:</strong> {{gameToReview.accepted_players + "/" + gameToReview.player_count}}
-      <br>
-      <strong>Description:</strong> {{gameToReview.gamepost_description ? gameToReview.gamepost_description : "N/A"}}<br>
-    </p>
-  </div>
+    </a>
 </li>
