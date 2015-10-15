@@ -1,4 +1,13 @@
 .myGames {
+  #calendar {
+    h2 {
+      font-size: 1.5em;
+    }
+    thead {
+      border-bottom: none;
+    }
+  }
+
   .fallback-view {
     padding: 5% 20%;
     p {
