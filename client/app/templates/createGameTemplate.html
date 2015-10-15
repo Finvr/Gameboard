@@ -1,90 +1,91 @@
-<div class="row createGame">
-	<!-- google map -->
-	<div google-maps  class="half-div col m6 s12">
-	 	<div class="map-directions">
-			 <em class="teal-text">Search locations or drop a pin where you would like to host your game.</em>
-		</div>
-			<input id="pac-input" class="controls ng-cloak" type="text" placeholder="Search" ng-cloak>
-	 	<div id="gmap">
-	 	</div>
-	</div>
+<div class="row createGame normal-view">
 
- 	<!-- game input form -->
- 	<div class="half-div col m6 s12">
-		<form novalidate class="create-form" name="createForm">
+  <!-- game input form -->
+  <div class="col m6 s12">
+    <form novalidate class="create-form" name="createForm">
 
-			<!-- location form -->
-			<div class ="row">
-			 	<div class= "input-field col s12">
-					<input type="text" id="game-location" name="location" ng-model="game.location" placeholder=""/>
-					<label class="active" for="game-location">* Location</label>
-					<p ng-show="createForm.location.$error.required && createForm.location.$dirty" class="help-block">Location is required.</p>
-				</div>
-			</div>
+      <!-- game name and # of players form -->
+      <div class = "row">
+        <div class= "input-field col s12">
+          <autocomplete attr-input-id="game-name" attr-placeholder="" autocomplete-required click-activation="true" data="gamesArray" ng-model="game.name"></autocomplete>
+          <label class="active" for="game-name">Game name</label>
+          <p ng-show="createForm.name.$error.required && createForm.name.$dirty" class="help-block">Name is required.</p>
+        </div>
+      </div>
 
-			<!-- game name and # of players form -->
-			<div class = "row">
-				<div class= "input-field col s7">
-					<autocomplete attr-input-id="game-name" attr-placeholder="" autocomplete-required click-activation="true" data="gamesArray" ng-model="game.name"></autocomplete>
-					<label class="active" for="game-name">* Game name</label>
-					<p ng-show="createForm.name.$error.required && createForm.name.$dirty" class="help-block">Name is required.</p>
-				</div>
+      <!-- location form -->
+      <div class ="row">
+        <div class= "input-field col s10">
+          <input type="text" id="game-location" name="location" ng-model="game.location" placeholder=""/>
+          <label class="active" for="game-location">Location</label>
+          <p ng-show="createForm.location.$error.required && createForm.location.$dirty" class="help-block">Location is required.</p>
+        </div>
+        <!-- # of players form -->
+        <div class="input-field col s2">
+          <input type="number" id="num-players" ng-model="game.numPlayers" class="validate" min="2" max="20" placeholder="" required/>
+          <label class="active centered" for="num-players" data-error="2 - 20">Players</label>
+          <p ng-show="createForm.location.$error.required && createForm.location.$dirty" class="help-block">This is required.</p>
+        </div>
+      </div>
 
-				<!-- # of players form -->
-				<div class="input-field col s5">
-					<input type="number" id="num-players" ng-model="game.numPlayers" class="validate" min="2" max="20" placeholder="" required/>
-					<label class="active" for="num-players" data-error="2 - 20">* # of Players</label>
-					<p ng-show="createForm.location.$error.required && createForm.location.$dirty" class="help-block">This is required.</p>
-				</div>
 
-			</div>
+      <!-- datetime form -->
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="datetime" type="datetime-local" id="game-datetime" ng-model="game.datetime" required/>
+          <label class="active" for="game-datetime">Time</label>
+          <p ng-show="createForm.datetime.$error.required && createForm.datetime.$dirty" class="help-block">Datetime is required.</p>
+        </div>
+      </div>
 
-			<!-- datetime form -->
-			<div class="row">
-				<div class="input-field col s12">
-					<input name="datetime" type="datetime-local" id="game-datetime" ng-model="game.datetime" required/>
-					<label class="active" for="game-datetime">* Time</label>
-					<p ng-show="createForm.datetime.$error.required && createForm.datetime.$dirty" class="help-block">Datetime is required.</p>
-				</div>
-			</div>
+      <!-- game description form -->
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="game-description" ng-model="game.description" class="materialize-textarea" length="120"></textarea>
+          <label class="active" for="game-description">Description (Optional)</label>
+        </div>
+      </div>
 
-			<!-- game description form -->
-			<div class="row">
-				<div class="input-field col s12">
-					<textarea id="game-description" ng-model="game.description" class="materialize-textarea" length="120"></textarea>
-					<label class="active" for="game-description">Description</label>
-				</div>
-			</div>
-
-			<!-- invite players -->
-			<div class="row">
-				<div class="input-field col s12">
-					<!-- <div> -->
-				    <input id="search" type="search" ng-model="searchText" placeholder="Enter name to invite">
-            <label class="active" for="search">Invite Guests</label>
+      <!-- invite players -->
+      <div class="row">
+        <div class="input-field col s12">
+          <!-- <div> -->
+            <input id="search" type="search" ng-model="searchText" placeholder="Enter name to invite">
+            <label class="active" for="search">Invite Guests (Optional)</label>
            <!--  <i class="material-icons" ng-click="clearInviteSearch()">close</i> -->
           <!-- </div> -->
-					<div class="invitees col s6" ng-repeat="user in usersList | filter: searchText" ng-if="searchText !== ''">
-    				<input name="invitedPlayers[]" type="checkbox"  id="user-{{user.id}}" checklist-model="game.invitees" checklist-value="user.id" />
-    				<label class="invitee" for="user-{{user.id}}">
-    					<!-- <div class="invitee-picture"> -->
-    						<img class="circle responsive-img invitee-picture" ng-src="{{user.picture}}" ><span class="invitee-name">{{user.username}}</span>
-    					<!-- </div> -->
-    	<!-- 				<div class="invitee-name">
-    						{{user.username}}
-    					</div> -->
-    				</label>
-    			</div>
-				</div>
-			</div>
+          <div class="invitees col s6" ng-repeat="user in usersList | filter: searchText" ng-if="searchText !== ''">
+            <input name="invitedPlayers[]" type="checkbox"  id="user-{{user.id}}" checklist-model="game.invitees" checklist-value="user.id" />
+            <label class="invitee" for="user-{{user.id}}">
+              <!-- <div class="invitee-picture"> -->
+                <img class="circle responsive-img invitee-picture" ng-src="{{user.picture}}" ><span class="invitee-name">{{user.username}}</span>
+              <!-- </div> -->
+      <!--        <div class="invitee-name">
+                {{user.username}}
+              </div> -->
+            </label>
+          </div>
+        </div>
+      </div>
 
-			<!-- create game button -->
-			<div class="row">
-				<div class="input-field col s12">
-					<button type="submit" class="btn white-text waves-effect waves-light" ng-click="createGame(game)" ng-disabled="createForm.$invalid">Create Game</button>
-				</div>
-			</div>
+      <!-- create game button -->
+      <div class="row">
+        <div class="input-field col s12">
+          <button type="submit" class="btn white-text waves-effect waves-light" ng-click="createGame(game)" ng-disabled="createForm.$invalid">Create Game</button>
+        </div>
+      </div>
 
-		</form>
-	</div>
+    </form>
+  </div>
+
+    <!-- google map -->
+  <div google-maps  class="map-view col m6 s12">
+    <div class="map-directions">
+       <em class="teal-text">Search locations or drop a pin where you would like to host your game.</em>
+    </div>
+      <input id="pac-input" class="controls ng-cloak" type="text" placeholder="Search" ng-cloak>
+    <div id="gmap">
+    </div>
+  </div>
+
 </div>
