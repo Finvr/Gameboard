@@ -14,8 +14,8 @@
 		$scope.requestMessage = {comments: ''};
 		$scope.submitError = null;
 		$scope.gamesArray = GamePost.gamesArray;
-		$scope.startTimeFilter = null;
-		$scope.endTimeFilter= null;
+		$scope.startTimeFilter = 0;
+		$scope.endTimeFilter= 24;
 		$scope.distance_choices = {
 			"Within 1 mile": 1,
 			"Within 2 miles": 2,

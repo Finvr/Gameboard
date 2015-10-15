@@ -27,9 +27,10 @@
           <!-- time filter -->
           <div class="col m6 valign-wrapper">
             <p class="title grey-text text-darken-2 col m2 valign">Time</p>
-            <input id='startTime'class="col m4 datepicker" type="time" ng-model="startTimeFilter"/>
-            <!-- <p class="title grey-text text-darken-2 col s6">End Time</p> -->
-            <input id='endTime' class="col m4" type="time" ng-model="endTimeFilter"/>
+            <input id='startTime'class="col m4 datepicker" min="0" max="24" type="range" ng-model="startTimeFilter"/>
+            <span class="filteTime">{{startTimeFilter === 0 ? "12:00 AM" : (startTimeFilter == 24 ? "11:59 PM" : (startTimeFilter <= 12 ?  (startTimeFilter + ":00 AM") : ((startTimeFilter - 12) + ":00 PM") ) ) }}</span>
+            <input id='endTime' class="col m4" type="range" min="{{startTimeFilter}}" max="24" ng-model="endTimeFilter"/>
+            <span class="filteTime">{{endTimeFilter === 0 ? "12:00 AM" : (endTimeFilter === 24 ? "11:59 PM" : (endTimeFilter <= 12 ?  (endTimeFilter + ":00 AM") : ((endTimeFilter - 12) + ":00 PM") ) ) }}</span>
           </div>
         </div>
       </div>
