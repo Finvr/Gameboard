@@ -1,60 +1,47 @@
 <div class="myGames">
-
   <div ng-show="showFallback()" class="fallback-view container ng-cloak" ng-cloak>
     <!-- my-games fallback -->
     <div class="ng-include: 'app/templates/partials/myGamesFallBackPartial.html'">
     </div>
   </div>
-
   <div ng-show="showNormal()" class="row normal-view ng-cloak" ng-cloak>
-
     <div class="col profile m5">
-      <!-- my-games map -->
-      <div class="ng-include: 'app/templates/partials/myGamesMapPartial.html'">
-      </div>
       <!-- my-games mailbox-->
       <div class="ng-include: 'app/templates/partials/myGamesMailboxPartial.html'">
       </div>
+      <!-- my-games map -->
+      <div class="ng-include: 'app/templates/partials/myGamesMapPartial.html'">
+      </div>
     </div>
-
     <!-- button for agenda view -->
     <button type="button" id="agenda" class="btn">Agenda View</button>
-
     <!-- my-games calendar -->
-    <div ui-calendar="uiConfig.calendar" class="col m8" ng-model="eventSources" id="calendar" watch>    
+    <div ui-calendar="uiConfig.calendar" class="col m6" ng-model="eventSources" id="calendar" watch>    
     </div>
-
     <!-- my-games agenda list -->
     <div id="agendaList" class="col m7">
       <div class="ng-include: 'app/templates/partials/myGamesAgendaPartial.html'">
       </div>
     </div>
   </div>
-
   <!-- Pop-up modal for gameposts accept/decline join requests -->
   <div class="ng-include: 'app/templates/modals/gamepostModal.html'">
   </div>
-
   <!-- Pop-up modal for rating each game -->
   <div class="ng-include: 'app/templates/modals/gameReviewModal.html'">
   </div>
-
   <!-- Pop-up modal for requests of invitations -->
   <div class="ng-include: 'app/templates/modals/gameInvitationModal.html'">
   </div>
-
   <!-- Pop-up for game details -->
   <div class="ng-include: 'app/templates/modals/gameDetailsModal.html'">
   </div>
-
   <!-- Pop-up modal for cancelling of gameposts -->
   <div class="ng-include: 'app/templates/modals/gamepostCancelModal.html'">
   </div>
-
   <!-- Pop-up modal for cancelling of requests -->
   <div class="ng-include: 'app/templates/modals/requestCancelModal.html'">
   </div>
-
 </div>
 
 
