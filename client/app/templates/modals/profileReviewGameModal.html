@@ -1,0 +1,66 @@
+<!-- detail Modal for rating each game -->
+<div id="openRateModal" class="modal">
+  <div class="modal-header">
+    <div ng-click="close('#openRateModal')"><i class="material-icons right close">cancel</i></div>
+    <span class="white-text"><h4>{{currentRateGame.game ? currentRateGame.game : "No Name"}}</h4></span>
+  </div>
+  <div class="modal-content">
+    <div class="valign-wrapper">
+      <span class="title valign">Host: </span> 
+      <a href="#/profile/{{currentRateGame.host_id}}" target="_blank" class="valign">{{currentRateGame.host_name || currentRateGame.username}}</a>
+    </div>
+    <div>
+      <span class="title">Location:</span> {{currentRateGame.game_location}}
+    </div>
+    <div class="row">
+      <table ng-if="currentRateGame.playerPics.length > 0">
+        <thead>
+          <tr>
+            <th class="players">Player</th>
+            <th>Skip</th>
+            <th>Showed up</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="player in currentRateGame.playerPics">
+            <td class="players">
+              <a href="#/profile/{{player.user_id}}" target="_blank" ><img class="hostPic" ng-src="{{player.picture}}">{{player.username}}</a>
+            </td>
+            <td ng-if="!currentRateGame.reviewed">
+              <div class="switch" >
+                <label>
+                  <input type="checkbox" ng-model="player.skip" value="false">
+                  <span class="lever"></span>
+                </label>
+              </div>
+              <span class="reviewResults" watch>{{player.skip ? "Don't Rate" : "Rate"}}</span>
+            </td>
+            <td ng-if="!player.skip">               
+              <div class="switch" ng-if="!player.skip">
+                <label>
+                  <input type="checkbox" ng-model="player.showed_up">
+                  <span class="lever"></span>
+                </label>
+              </div>
+              <span class="reviewResults"  watch>{{player.showed_up ? "Yes" : "No"}}</span>
+            </td>
+            <td ng-if="!player.skip && player.showed_up">
+              <input type="range" ng-model="player.rating" min="0" max="5" />
+              <span class="reviewResults"  watch>{{player.rating}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer" ng-if="!currentRateGame.reviewed">
+      <div class = "col s4 right" ng-click="sendReviews(currentRateGame.playerPics)">
+        <a class = "btn btn-med waves-effect center waves-light grey darken-3" ng-click="close('#openRateModal')">
+          Complete Rating
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal complete -->
