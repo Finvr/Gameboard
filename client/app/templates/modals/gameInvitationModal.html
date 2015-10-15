@@ -3,7 +3,18 @@
     <div ng-click="close('#approve-invitation')"><i class="material-icons right close">close</i></div>
     <span class="white-text"><h4>{{ invitationToReview.game }}</h4></span>
   </div>
-  <div class="modal-content container"> 
+  <div class="modal-content container">
+
+  <div>
+    <p>
+      <strong>Time:</strong> {{ invitation.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+      <strong>Location:</strong> {{ invitation.game_location }}<br>
+      <strong>Players:</strong> {{invitation.player_count}}
+      <br>
+      <strong>Description:</strong> {{invitation.gamepost_description ? invitation.gamepost_description : "N/A"}}<br>
+    </p>
+  </div>
+
     <ul class="collection">
       <li class="row content-header">
         <div class="title col s8 grey-text">Invitation</div>

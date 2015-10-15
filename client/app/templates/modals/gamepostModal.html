@@ -3,6 +3,26 @@
     <div ng-click="close('#approve-pending')"><i class="material-icons right close">close</i></div>
     <span class="white-text"><h4>{{ gameToApprove.game }}</h4></span>
   </div>
+  <div>
+  <div>
+    <span class="title grey-text text-darkern-2">
+      {{ gameToAprrove.game | limitTo: 10 }} ... 
+    </span>
+    <span>
+      {{ gameToApprove.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+    </span>           
+    <a href="#approve-pending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">open_in_new</i></a>
+  </div>
+  <div>
+    <p>
+      <strong>Time:</strong> {{ gameToApprove.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+      <strong>Location:</strong> {{ gameToApprove.game_location }}<br>
+      <strong>Players:</strong> {{gameToApprove.accepted_players + "/" + game.player_count}}
+      <br>
+      <strong>Description:</strong> {{gameToApprove.gamepost_description ? game.gamepost_description : "N/A"}}<br>
+    </p>
+  </div>
+  </div>
   <div class="modal-content container"> 
     <ul class="collection">
       <li class="row content-header">
