@@ -1,5 +1,5 @@
 <li ng-repeat="game in myGames" class="collection-item avatar" ng-if="game.pending_requests > 0">
-  <img class="circle" src="{{game.picture}}" />
+  <i class="material-icons small">supervisor_account</i>
   <span class="title grey-text text-darkern-2">
       <strong>{{ game.game }}</strong> {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
   </span>
