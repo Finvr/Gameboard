@@ -8,7 +8,7 @@
 		// })
 		.controller('BrowseGamesController', BrowseGamesController);
 
-	function BrowseGamesController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost) {
+	function BrowseGamesController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost, Helper) {
 		//Scope variable initialization
 		$scope.games = [];
 		$scope.requestMessage = {comments: ''};
@@ -45,7 +45,7 @@
 			// calculate distance between each and user's current location
 			$scope.$on("currentLocation", function(event, data){
 				for (var i = 0; i < $scope.games.length; i ++){
-					$scope.games[i].distance = $scope.games[i].lat ? distance(data.lat, data.lng, $scope.games[i].lat, $scope.games[i].lng ) : null;
+					$scope.games[i].distance = $scope.games[i].lat ? Helper.distance(data.lat, data.lng, $scope.games[i].lat, $scope.games[i].lng ) : null;
 				}
 				$scope.$apply();
 			});
@@ -93,7 +93,7 @@
 	    }
     }
 
-		// Pagination 
+		// Pagination disabled
 		// $scope.pageSize = 8;
 		// $scope.currentPage = $scope.currentPage || 1;
 		// $scope.displayPage = function(page) {
@@ -104,21 +104,7 @@
 		//// filters 
 		/////////////////////
 
-		// Distance functions
-		function distance(lat1, lon1, lat2, lon2) {
-			var radlat1 = Math.PI * lat1/180
-			var radlat2 = Math.PI * lat2/180
-			var radlon1 = Math.PI * lon1/180
-			var radlon2 = Math.PI * lon2/180
-			var theta = lon1-lon2
-			var radtheta = Math.PI * theta/180
-			var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-			dist = Math.acos(dist)
-			dist = dist * 180/Math.PI
-			dist = dist * 60 * 1.1515
-			return Math.round(dist*10)/10;
-		}
-
+		// Distance filter functions
 		$scope.disFilter = function(dis) { 
 			var disSelect = $scope.distance ? $scope.distance_choices[$scope.distance] : null;
 			if (dis && disSelect) {
@@ -130,7 +116,6 @@
 
 		// name filter
 		$scope.nameFilter = function(name) {
-			console.log("name", name)
 			if (!$scope.searchText || (name && name.toUpperCase().includes($scope.searchText.toUpperCase()))) {
 				return true;
 			} else {
@@ -138,7 +123,7 @@
 			}
 		}
 
-		//Date and time functions
+		//Date filter functions
 		$scope.dateFilter = function(gameDate) {
 			var gameDate = Date.parse(gameDate);
 			var startTime = Date.parse($scope.startDateFilter);
@@ -152,6 +137,7 @@
 			}
 		}
 
+		// time filter
 		$scope.timeFilter = function(time){
 			var time = new Date(time).toString().split(" ")[4].split(":").slice(0,2);
 			var startTime= (document.getElementById('startTime').value) && (document.getElementById('startTime').value).toString().split(":");
