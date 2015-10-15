@@ -1,5 +1,39 @@
 <div class="browse">
   <div class="row">
+
+      <!-- filter -->
+      <div class="browse-filters col m12 row valign-wrapper">
+        <div class="nameAndDisFilter col m4 row valign-wrapper">
+          <!-- Game select autocomplete filter -->
+          <p class="title grey-text text-darken-2 col m3 left-align valign">Game</p>
+          <autocomplete class="col m3 valign" attr-input-class="center" attr-input-id="game-name" attr-placeholder="" click-activation="true" data="gamesArray" ng-model="searchText">
+          </autocomplete>
+        
+          <!-- Distance filter -->        
+          <p class="title grey-text text-darken-2 col m3 left-align">Distance</p>
+          <select class="browser-default col m3" ng-model="distance" material-select watch>
+            <option ng-repeat="(key, value) in distance_choices">{{key}}</option>
+          </select>
+        </div>
+        <!-- Games Date and Time Range  -->
+        <div class="col m8 datetimeFilter row valign-wrapper">
+          <!-- Games Date Range  -->
+          <div class="col m6 valign-wrapper">
+            <p class="title grey-text text-darken-2 col m2 valign">Date</p>
+            <input class="col m4 datepicker" type="date" ng-model="startDateFilter"/>
+           <!--  <p class="title grey-text text-darken-2 col s6">End Date</p> -->
+            <input class="col m4" type="date" ng-model="endDateFilter"/>
+          </div>
+          <!-- time filter -->
+          <div class="col m6 valign-wrapper">
+            <p class="title grey-text text-darken-2 col m2 valign">Time</p>
+            <input id='startTime'class="col m4 datepicker" type="time" ng-model="startTimeFilter"/>
+            <!-- <p class="title grey-text text-darken-2 col s6">End Time</p> -->
+            <input id='endTime' class="col m4" type="time" ng-model="endTimeFilter"/>
+          </div>
+        </div>
+      </div>
+      <!-- filter complete -->
     <div class="mapView col m5">
       <!-- map view -->
       <div google-maps  class="mapView col m12 s12">
@@ -7,40 +41,6 @@
       </div>
     </div>
 
-    <div class="filterAndGames col m7">
-      <!-- filter -->
-      <div class="browse-filters col m12 row">
-        <div class="nameAndDisFilter col m12 row">
-          <!-- Game select autocomplete filter -->
-          <p class="title grey-text text-darken-2 col m3 left">Game</p>
-          <autocomplete class="col m3" attr-input-class="center" attr-input-id="game-name" attr-placeholder="" click-activation="true" data="gamesArray" ng-model="searchText">
-          </autocomplete>
-        
-          <!-- Distance filter -->        
-          <p class="title grey-text text-darken-2 col m3">Distance</p>
-          <select class="browser-default col m3" ng-model="distance" material-select watch>
-            <option ng-repeat="(key, value) in distance_choices">{{key}}</option>
-          </select>
-        </div>
-        <!-- Games Date and Time Range  -->
-        <div class="col m12 datetimeFilter row">
-          <!-- Games Date Range  -->
-          <div class="col m6">
-            <p class="title grey-text text-darken-2 col s6">Start Date</p>
-            <p class="title grey-text text-darken-2 col s6">End Date</p>
-            <input class="col s6 datepicker" type="date" ng-model="startDateFilter"/>
-            <input class="col s6" type="date" ng-model="endDateFilter"/>
-          </div>
-          <!-- time filter -->
-          <div class="col m6">
-            <p class="title grey-text text-darken-2 col s6">Start Time</p>
-            <p class="title grey-text text-darken-2 col s6">End Time</p>
-            <input id='startTime'class="col s6 datepicker" type="time" ng-model="startTimeFilter"/>
-            <input id='endTime' class="col s6" type="time" ng-model="endTimeFilter"/>
-          </div>
-        </div>
-      </div>
-      <!-- filter complete -->
       
       <!-- search filter disabled
       <nav ng-hide="mapActivated">
@@ -54,7 +54,7 @@
       </nav> -->
 
       <!-- display all the games -->
-      <ul class="collection col m12" id="listView" watch>
+      <ul class="collection col m7" id="listView" watch>
         <!-- no game satisfy filter -->
         <div ng-if="newGames.length === 0" class="ng-include: 'app/templates/partials/browseGamesFallBackPartial.html'"></div>
 
@@ -83,7 +83,6 @@
           scroll-top="false"
           pagination-action="displayPage(page)" />
       </center> -->
-    </div>      
 
     <div class="ng-include: 'app/templates/modals/requestJoinGameModal.html'">
     </div>
