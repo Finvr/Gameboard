@@ -140,4 +140,43 @@
     font-size: 10px;
   }
 
+  #openRequest {
+
+
+    .modal-header {
+      background-color: $yellow;
+    }
+
+    .modal-content {
+      padding: 2%;
+
+      div {
+        padding: 1%;
+        padding-left: 5%;
+      }
+
+      div.input-field {
+        padding-left: 0px;
+        margin: 0px;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    h4 {
+      margin: 0px;
+    }
+
+    i {
+      margin: 0px;
+    }
+
+    .btn {
+      background-color: $blue;
+    }
+
+  }
+
 }
