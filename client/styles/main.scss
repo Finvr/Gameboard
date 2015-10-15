@@ -6,8 +6,17 @@
 @import 'home';
 @import 'variables';
 
+$blue: #28ABE3;
+$red: #DB3340;
+$green: #1FDA9A;
+$yellow: #E8B71A;
+
 nav {
 	background-color: $blue;
+}
+
+btn {
+	box-shadow: none;
 }
 
 .nav-profile-pic {
