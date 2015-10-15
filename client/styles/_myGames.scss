@@ -13,7 +13,6 @@
   }
 
   .normal-view {
-
     .profile {
       padding-top: 4%;
       padding-left: 1%;
@@ -26,24 +25,6 @@
     color: white;
   }
 
-	.collapsible-header {
-    .secondary-content {
-      width: 25px;
-    }
-    .material-icons {
-		  color: #666;
-    }
-    p {
-      line-height: 2rem;
-      padding-left: 10%;
-      margin: 2% 0;
-    }
-	}
-
-	.collection-header {
-		padding: 1%;
-    text-align: center;
-	}
 
   #agenda {
     margin-top: 1%;
@@ -57,7 +38,7 @@
     padding-left: 0%;
   }
 
-  .collection {
+  .agenda.collection {
 
     .collection-item {
       min-height: 15%;
@@ -102,6 +83,17 @@
   	.modal-footer {
   		background-color: #eee;
   	}
+  }
+
+  .collection {
+    .collection-item {
+      .nav-profile-pic {
+        height: 40px;
+      }
+    }
+    .collection-item:last-child {
+      border-bottom: 1px solid #e0e0e0;
+    }
   }
 
   [ng\:cloak], [ng-cloak], .ng-cloak {
