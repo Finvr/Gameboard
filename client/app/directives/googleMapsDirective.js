@@ -250,7 +250,7 @@
       // }
 
       //Event listeners for browse game
-      if (scope.newGames) {
+      if (scope.games) {
         scope.$watchGroup(['startTimeFilter', 'endTimeFilter', 'startDateFilter', 'endDateFilter', 'distance', 'searchText'], function(){
           scope.newGames = scope.games.filter(function(game){
             return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime) && scope.nameFilter(game.game));
