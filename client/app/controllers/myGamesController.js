@@ -20,8 +20,13 @@
       return GamePost.myHostedGames()
         .then(function(games){
           $scope.myGames = games;
+          if ($scope.newGames) {
+            $scope.newGames = $scope.newGames.concat(games);
+          } else {
+            $scope.newGames = games;
+          }
           var events = $scope.myGames.map(function(game) {
-            console.log("game: ", game)
+            // console.log("game: ", game)
             var newEvent = {};
             newEvent.title = game.game;
             newEvent.start = moment(game.game_datetime);
@@ -114,9 +119,10 @@
           } else {
             $scope.myRequests = requests;
           }
-          var events = $scope.myRequests.filter(function(request){
+          var acceptedReq = $scope.myRequests.filter(function(request){
             return request.status === 'accepted'
-          }).map(function(request){
+          })
+          var events = acceptedReq.map(function(request){
             console.log('request: ', request)
             var newEvent = {};
             newEvent.title = request.game;
@@ -124,6 +130,13 @@
             newEvent.data = request;
             return newEvent;
           });
+
+          if ($scope.newGames) {
+            $scope.newGames = $scope.newGames.concat(acceptedReq);
+          } else {
+            $scope.newGames = acceptedReq;
+          }
+
           callback(events);
         });
     };

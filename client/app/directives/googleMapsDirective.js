@@ -152,9 +152,13 @@
 
                 // add listener to show info window of the marker that was clicked
                 google.maps.event.addListener(newMark, 'click', function(){
-                  scope.getRequestInfo(game.id)
-                  $("#openRequest").openModal();
-                  scope.openGame(game);
+                  if (scope.games) {
+                    scope.getRequestInfo(game.id)
+                    $("#openRequest").openModal();
+                    scope.openGame(game);
+                  } else {
+                    scope.showHostedEventModal({data: game});
+                  }
                 })
                 return true
               } else {
@@ -250,7 +254,7 @@
       // }
 
       //Event listeners for browse game
-      if (scope.newGames) {
+      if (scope.games) {
         scope.$watchGroup(['startTimeFilter', 'endTimeFilter', 'startDateFilter', 'endDateFilter', 'distance', 'searchText'], function(){
           scope.newGames = scope.games.filter(function(game){
             return (scope.dateFilter(game.game_datetime) && scope.disFilter(game.distance) && scope.timeFilter(game.game_datetime) && scope.nameFilter(game.game));
