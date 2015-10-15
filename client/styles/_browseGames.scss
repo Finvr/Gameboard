@@ -149,15 +149,33 @@
 
     .modal-content {
       padding: 2%;
+      margin-bottom: 0px;
+
+      div.col {
+        padding: 0px;
+      }
+
+
+      div.input-field {
+        margin: 0px;
+        padding: 0px 3%;
+        padding-top: 2%;
+      }
+
+      .sentFallback {
+        font-size: 18px;
+        color: $yellow;
+        font-weight: bold;
+      }
+
+      a img{
+        width: 10%;
+      }
 
       div {
         padding: 1%;
         padding-left: 5%;
-      }
-
-      div.input-field {
-        padding-left: 0px;
-        margin: 0px;
+        padding-right: 5%;
       }
 
       span {

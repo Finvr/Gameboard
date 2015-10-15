@@ -28,15 +28,18 @@
       <span class="darkgrey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
     </div>
     <div ng-if="loggedIn">
-      <a href="#/profile/{{game.host_id}}" target="_blank"><img class="hostPic" ng-src="{{game.picture || game.host_pic}}">{{game.username}}</a> <br>
-      <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" ><img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}<br></a>
+      <a href="#/profile/{{game.host_id}}" target="_blank">
+      <img ng-src="{{game.picture || game.host_pic}}">{{game.username}}</a>
+    </div>
+    <div ng-if="loggedIn">
+      <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" ><img ng-src="{{requester.picture}}">{{requester.username}}<br></a>
     </div>
   </div>
 
     <div ng-if="loggedIn" class="col m12">
-      <div class="input-field row">
+      <div class="input-field center row">
         <textarea ng-if="!requestSent(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
-        <div ng-if="requestSent(game.id)">
+        <div ng-if="requestSent(game.id)" class="sentFallback">
           <div> Your request is: {{reqStatus}} </div>
           <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}} </div>
         </div>
