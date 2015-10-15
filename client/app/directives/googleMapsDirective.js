@@ -152,9 +152,13 @@
 
                 // add listener to show info window of the marker that was clicked
                 google.maps.event.addListener(newMark, 'click', function(){
-                  scope.getRequestInfo(game.id)
-                  $("#openRequest").openModal();
-                  scope.openGame(game);
+                  if (scope.games) {
+                    scope.getRequestInfo(game.id)
+                    $("#openRequest").openModal();
+                    scope.openGame(game);
+                  } else {
+                    scope.showHostedEventModal({data: game});
+                  }
                 })
                 return true
               } else {
