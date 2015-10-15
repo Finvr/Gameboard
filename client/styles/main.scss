@@ -1,15 +1,23 @@
+<<<<<<< HEAD
 $blue: #28ABE3;
 $red: #DB3340;
 $green: #1FDA9A;
 $yellow: #E8B71A;
 $cream: #F7EAC8;
 
+=======
+@import 'variables';
+>>>>>>> client - design - myGames
 @import 'createGame';
 @import 'myGames';
 @import 'login';
 @import 'browseGames';
 @import 'profile';
 @import 'home';
+<<<<<<< HEAD
+=======
+
+>>>>>>> client - design - myGames
 
 nav {
 	background-color: $blue;
@@ -43,7 +51,7 @@ nav {
 }
 
 .notification-number {
-  background-color: red;
+  background-color: $red;
   color: white;
   border: 2px solid white;
   border-radius: 100%;

@@ -111,6 +111,7 @@
 .myGames .mailbox-button a {
   top: -30px;
   right: -200px;
+  background-color: #E8B71A;
 }
 
 .myGames .normal-view {
@@ -153,9 +154,62 @@
   cursor: pointer;
 }
 
-.myGames .modal .modal-header {
+.myGames .modal {
+  border-radius: 5px;
+  background-color: white;
+}
+
+.myGames .modal .modal-header h4 {
   text-align: center;
+  font-size: 1.5em;
   padding: 1%;
+  background-color: #26A2D8;
+}
+
+.myGames .modal .modal-header .right {
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+.myGames .modal .modal-content {
+  padding-top: 0.5%;
+  margin: 0;
+}
+
+.myGames .modal .modal-content ul.collection {
+  width: 100%;
+}
+
+.myGames .modal .modal-content button.decline {
+  margin-left: 1%;
+}
+
+.myGames .modal .modal-content .accept {
+  background-color: white;
+  color: #1FDA9A;
+  border: 1px solid #1FDA9A;
+  width: 98%;
+}
+
+.myGames .modal .modal-content .accept:hover {
+  color: white;
+  background-color: #1FDA9A;
+}
+
+.myGames .modal .modal-content .decline {
+  background-color: white;
+  color: #DB3340;
+  border: 1px solid #DB3340;
+  width: 98%;
+}
+
+.myGames .modal .modal-content .decline:hover {
+  color: white;
+  background-color: #DB3340;
+}
+
+.myGames .modal .game-details {
+  margin-bottom: 5%;
 }
 
 .myGames .modal .content-header {
@@ -189,6 +243,17 @@
 
 .myGames [ng\:cloak], .myGames [ng-cloak], .myGames .ng-cloak {
   display: none !important;
+}
+
+.myGames center button {
+  background-color: #1FDA9A;
+  color: white;
+}
+
+.myGames center button:hover {
+  background-color: white;
+  color: #1FDA9A;
+  border: 1px solid #1FDA9A;
 }
 
 .home .img-wrapper {
@@ -482,7 +547,7 @@ nav {
 }
 
 .notification-number {
-  background-color: red;
+  background-color: #DB3340;
   color: white;
   border: 2px solid white;
   border-radius: 100%;
