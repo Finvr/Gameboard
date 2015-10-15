@@ -30,16 +30,16 @@
         <div class="title col s2 center">Accept</div>
         <div class="title col s2 center">Decline</div>
       </li>
-      <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item row" ng-if="request.status==='pending'">
-        <div class="col s8">
-          <div class="sub-list">
-            <strong class="content-lead">From: </strong>
-              <a href="#/profile/{{request.user_id}}" target="_blank"><img class="hostPic" ng-src="{{request.requester_pic}}">{{ request.username }}</a>
-          </div>     
-          <div class="sub-list">
-            <strong class="content-lead">Message:</strong>
-            <div> {{ request.comments }}</div>
-          </div>
+      <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item avatar row" ng-if="request.status==='pending'">
+        <div class="col s4">
+          <img class="circle" ng-src="{{request.requester_pic}}">
+          <a href="#/profile/{{request.user_id}}" target="_blank">
+            {{ request.username }}
+          </a>
+        </div>
+        <div class="col s4">
+          <div><strong class="content-lead">Message:</strong></div>
+          <div> {{ request.comments }}</div>
         </div>
         <div class="col s2">
           <button class="col btn-flat btn-medium waves-effect waves-light lighten-1 accept" ng-click="requestConfirm('accepted', request)">
