@@ -25,7 +25,7 @@
         "game": $scope.game.name,
         "gamepost_description": $scope.game.description,
         "player_count": $scope.game.numPlayers,
-        "game_datetime": $scope.game.datetime, 
+        "game_datetime": moment($scope.game.date + ' ' + $scope.game.time), 
         "business": $scope.game.business, //start set in googleMapsDirective
         "lat": $scope.game.lat, 
         "lng": $scope.game.lng, 
