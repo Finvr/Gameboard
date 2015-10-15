@@ -1,0 +1,12 @@
+<li ng-repeat="game in myGames" class="collection-item avatar" ng-if="game.pending_requests > 0">
+  <img class="circle" src="{{game.picture}}" />
+  <span class="title grey-text text-darkern-2">
+      <strong>{{ game.game }}</strong> {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+  </span>
+  <p>
+    {{ game.pending_requests}} request(s) to join 
+  </p>      
+  <a href="#approve-pending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal>
+    <i class="material-icons">open_in_new</i>
+  </a>
+</li>

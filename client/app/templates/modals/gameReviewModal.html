@@ -5,6 +5,16 @@
   </div>
   <div class="modal-content">
     <div>
+    <p>
+      <strong>Time:</strong> {{ gameToReview.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
+      <strong>Location:</strong> {{ gameToReview.game_location }}<br>
+      <strong>Players:</strong> {{gameToReview.accepted_players + "/" + gameToReview.player_count}}
+      <br>
+      <strong>Description:</strong> {{gameToReview.gamepost_description ? gameToReview.gamepost_description : "N/A"}}<br>
+    </p>
+  </div>
+    </div>
+    <div>
       <span class="grey-text">Host:</span> 
       <a href="#/profile/{{currentRateGame.host_id}}" target="_blank"><img class="hostPic" ng-src="{{currentRateGame.picture || currentRateGame.host_pic}}">{{currentRateGame.host_name || currentRateGame.username}}</a>
     </div>

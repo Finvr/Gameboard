@@ -26,7 +26,6 @@
             $scope.newGames = games;
           }
           var events = $scope.myGames.map(function(game) {
-            // console.log("game: ", game)
             var newEvent = {};
             newEvent.title = game.game;
             newEvent.start = moment(game.game_datetime);
@@ -255,6 +254,19 @@
           $scope.init();
         })
     };
+
+    /* ng-show tests */
+    $scope.showNormal = function(){
+      return  $scope.myGames && $scope.myGames.length > 0 || 
+              $scope.myInvitations && $scope.myInvitations.length > 0 || 
+              $scope.myRequests && $scope.myRequests.length > 0 ;
+    }
+
+    $scope.showFallback = function(){
+      return  $scope.myGames && $scope.myGames.length === 0 && 
+              $scope.myRequests && $scope.myRequests.length === 0 &&
+              $scope.myInvitations && $scope.myInvitations.length === 0; 
+    }
 
   };
 
