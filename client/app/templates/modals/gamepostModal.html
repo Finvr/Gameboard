@@ -1,34 +1,34 @@
 <div id="approve-pending" class="modal">
-  <div class="modal-header grey">
-    <div ng-click="close('#approve-pending')"><i class="material-icons right close">close</i></div>
+  <div class="modal-header">
+    <div ng-click="close('#approve-pending')"><i class="material-icons right close">cancel</i></div>
     <span class="white-text"><h4>{{ gameToApprove.game }}</h4></span>
   </div>
-  <div>
-  <div>
-    <span class="title grey-text text-darkern-2">
-      {{ gameToAprrove.game | limitTo: 10 }} ... 
-    </span>
-    <span>
-      {{ gameToApprove.game_datetime | date : "M/d/yyyy @ h:mm a" }}
-    </span>           
-    <a href="#approve-pending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal><i class="material-icons">open_in_new</i></a>
-  </div>
-  <div>
-    <p>
-      <strong>Time:</strong> {{ gameToApprove.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
-      <strong>Location:</strong> {{ gameToApprove.game_location }}<br>
-      <strong>Players:</strong> {{gameToApprove.accepted_players + "/" + game.player_count}}
-      <br>
-      <strong>Description:</strong> {{gameToApprove.gamepost_description ? game.gamepost_description : "N/A"}}<br>
-    </p>
-  </div>
-  </div>
-  <div class="modal-content container"> 
+  <div class="modal-content row">
+    <table class="game-details table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Player Count</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ gameToApprove.game_datetime | date : "M/d/yyyy" }}</td>
+          <td>{{ gameToApprove.game_datetime | date : "h:mm a" }}</td>
+          <td>{{ gameToApprove.game_location }} </td>
+          <td>{{ gameToApprove.accepted_players + "/" + gameToApprove.player_count }}</td>
+          <td>{{ gameToApprove.gamepost_description ? gameToApprove.gamepost_description : "N/A" }}</td>
+        </tr>
+      </tbody>
+    </table>
     <ul class="collection">
       <li class="row content-header">
-        <div class="title col s8 grey-text">Request</div>
-        <div class="title col s2 grey-text center">Accept</div>
-        <div class="title col s2 grey-text center">Decline</div>
+        <div class="title col s8 ">Request</div>
+        <div class="title col s2 center">Accept</div>
+        <div class="title col s2 center">Decline</div>
       </li>
       <li ng-repeat="request in requests | orderBy:'game_datetime'" class="collection-item row" ng-if="request.status==='pending'">
         <div class="col s8">
@@ -41,12 +41,16 @@
             <div> {{ request.comments }}</div>
           </div>
         </div>
-        <button class="col s2 btn-flat btn-medium waves-effect waves-light grey darken-3 lighten-1 white-text" ng-click="requestConfirm('accepted', request)">
-          <i class="material-icons">check</i>
-        </button>
-        <button class="col s2 btn-flat waves-effect waves-light grey white-text" ng-click="requestConfirm('declined', request)">
-          <i class="material-icons">close</i>
-        </button>
+        <div class="col s2">
+          <button class="col btn-flat btn-medium waves-effect waves-light lighten-1 accept" ng-click="requestConfirm('accepted', request)">
+            <i class="material-icons">check</i>
+          </button>
+        </div>
+        <div class="col s2">
+          <button class="btn-flat waves-effect waves-light decline" ng-click="requestConfirm('declined', request)">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
       </li> 
     </ul>
   </div>

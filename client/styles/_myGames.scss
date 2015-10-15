@@ -24,6 +24,7 @@
   .mailbox-button a {
     top: -30px;
     right: -200px;
+    background-color: $yellow;
   }
 
   .normal-view {
@@ -71,10 +72,55 @@
   }
 
   .modal {
+    border-radius: 5px;
+    background-color: white;
   	.modal-header {
-  		text-align: center;
-  		padding: 1%;
+      h4 {
+  		  text-align: center;
+        font-size: 1.5em;
+        padding: 1%;
+        background-color: $blue;
+      }
+      .right {
+        margin-right: 20px;
+        margin-top: 5px;
+      }
   	}
+
+    .modal-content {
+      padding-top: 0.5%;
+      margin: 0;
+      ul.collection {
+        width: 100%;
+      }
+      button.decline {
+        margin-left: 1%;
+      }
+      .accept {
+        background-color: white;
+        color: $green;
+        border: 1px solid $green;
+        width: 98%;
+      }
+      .accept:hover {
+        color: white;
+        background-color: $green;
+      }
+      .decline {
+        background-color: white;
+        color: $red;
+        border: 1px solid $red;
+        width: 98%;
+      }
+      .decline:hover {
+        color: white;
+        background-color: $red;
+      }
+    }
+
+    .game-details {
+      margin-bottom: 5%;
+    }
 
     .content-header {
       margin: 0;
@@ -109,5 +155,17 @@
 
   [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
+  }
+  center {
+    button {
+      background-color: $green;
+      color: white;
+    }
+    button:hover {
+      background-color: white;
+      color: $green;
+      border: 1px solid $green;
+    }
+
   }
 }
