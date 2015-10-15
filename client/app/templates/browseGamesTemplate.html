@@ -10,7 +10,7 @@
           </autocomplete>
         
           <!-- Distance filter -->        
-          <p class="title grey-text text-darken-2 col m3 left-align">Distance</p>
+          <p class="title col m3 left-align">Distance</p>
           <select class="browser-default col m3" ng-model="distance" material-select watch>
             <option ng-repeat="(key, value) in distance_choices">{{key}}</option>
           </select>
@@ -19,14 +19,14 @@
         <div class="col m8 datetimeFilter row valign-wrapper">
           <!-- Games Date Range  -->
           <div class="col m6 valign-wrapper">
-            <p class="title grey-text text-darken-2 col m2 valign">Date</p>
+            <p class="title col m2 valign">Date</p>
             <input class="col m4 datepicker" type="date" ng-model="startDateFilter"/>
            <!--  <p class="title grey-text text-darken-2 col s6">End Date</p> -->
             <input class="col m4" type="date" ng-model="endDateFilter"/>
           </div>
           <!-- time filter -->
           <div class="col m6 valign-wrapper">
-            <p class="title grey-text text-darken-2 col m2 valign">Time</p>
+            <p class="title col m2 valign">Time</p>
             <input id='startTime'class="col m4 datepicker" min="0" max="24" type="range" ng-model="startTimeFilter"/>
             <span class="filteTime">{{startTimeFilter === 0 ? "12:00 AM" : (startTimeFilter == 24 ? "11:59 PM" : (startTimeFilter <= 12 ?  (startTimeFilter + ":00 AM") : ((startTimeFilter - 12) + ":00 PM") ) ) }}</span>
             <input id='endTime' class="col m4" type="range" min="{{startTimeFilter}}" max="24" ng-model="endTimeFilter"/>
