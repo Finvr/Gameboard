@@ -1,28 +1,37 @@
 <div class="myGames">
+  <div class="mailbox-button">
+    <a class="btn-floating btn-large waves-effect waves-light teal button-collapse" data-activates="mailbox" data-sidenav="left" data-menuwidth="500" data-closeonclick="false">
+      <i class="material-icons">mail</i>
+    </a>
+  </div>
+  <!-- my-games mailbox-->
+  <div id="mailbox" class="side-nav">
+    <div class="ng-include: 'app/templates/partials/myGamesMailboxPartial.html'">
+    </div>
+  </div>
   <div ng-show="showFallback()" class="fallback-view container ng-cloak" ng-cloak>
     <!-- my-games fallback -->
     <div class="ng-include: 'app/templates/partials/myGamesFallBackPartial.html'">
     </div>
   </div>
   <div ng-show="showNormal()" class="row normal-view ng-cloak" ng-cloak>
-    <div class="col profile m5">
-      <!-- my-games mailbox-->
-      <div class="ng-include: 'app/templates/partials/myGamesMailboxPartial.html'">
-      </div>
+    <div class="col profile m6">
       <!-- my-games map -->
       <div class="ng-include: 'app/templates/partials/myGamesMapPartial.html'">
       </div>
     </div>
-    <!-- button for agenda view -->
-    <button type="button" id="agenda" class="btn">Agenda View</button>
     <!-- my-games calendar -->
     <div ui-calendar="uiConfig.calendar" class="col m6" ng-model="eventSources" id="calendar" watch>    
     </div>
     <!-- my-games agenda list -->
-    <div id="agendaList" class="col m7">
+    <div id="agendaList" class="col m6">
       <div class="ng-include: 'app/templates/partials/myGamesAgendaPartial.html'">
       </div>
     </div>
+    <center>
+      <!-- button for agenda view -->
+     <button type="button" id="agenda" class="btn">Agenda View</button>
+    </center>
   </div>
   <!-- Pop-up modal for gameposts accept/decline join requests -->
   <div class="ng-include: 'app/templates/modals/gamepostModal.html'">
