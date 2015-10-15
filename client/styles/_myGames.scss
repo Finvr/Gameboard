@@ -8,15 +8,17 @@
   }
 
   #gmap {
-    height: 40%;
+    height: 75%;
     margin-bottom: 1%;
   }
 
+  .mailbox-button a {
+    top: -30px;
+    right: -200px;
+  }
+
   .normal-view {
-    .profile {
-      padding-top: 4%;
-      padding-left: 1%;
-    }
+    padding: 1%;
   }
 
  .close {
