@@ -93,15 +93,16 @@ angular.module('imgame.profile', [])
           reviews.push(player)
         }
       }
-      if (reviews.length > 0) {
-        Review.createReview(reviews)
-          .then(function(reviews){
-            $scope.currentRateGame.reviewed = true;
-            console.log("reviews from profile controller : ", reviews)                
-          });        
+      if (reviews.length === 0) {
+        reviews = [{gameposts_id: gamepostId}];
       }
-    }
-    
+      Review.createReview(reviews)
+        .then(function(reviews){
+          $scope.currentRateGame.reviewed = true;
+          console.log("reviews from profile controller : ", reviews)                
+        });        
+    };
+
     init();
 	};
 
