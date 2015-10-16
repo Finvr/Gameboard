@@ -37,7 +37,7 @@
             {{game.username}}
           </a>
         </li>
-        <li class="player-item center" ng-repeat="requester in game.playersPictures">
+        <li ng-if="game.host_id !== requester.user_id" class="player-item center" ng-repeat="requester in game.playersPictures">
           <div class="img-wrapper">
             <img class="responsive-img" ng-src="{{requester.picture}}">
           </div>
@@ -47,11 +47,19 @@
         </li>
       </ul>
     </div>
-    <div class="input-field">
-      <textarea ng-if="!requestSent(game.id)" ng-model="requestMessage.comments" placeholder="Enter optional message for host">
-      </textarea>
+    <div class="modal-footer" ng-if="requestSent(game.id)">
+      <div ng-if="reqStatus === 'pending' || reqStatus === 'declined'">
+        Your request is being reviewed by the host.
+      </div>
+      <div ng-if="reqStatus === 'invite' || reqStatus === 'declined'">
+        The host has invited you to join this game.  Review the invitation in your <a href="my-games">inbox</a>.
+      </div>
     </div>
     <div class="modal-footer" ng-if="!requestSent(game.id) && loggedIn">
+      <div class="input-field">
+        <textarea ng-model="requestMessage.comments" placeholder="Enter optional message for host">
+        </textarea>
+      </div>
       <div ng-click="sendRequest(game)">
         <a class="btn-flat btn-med waves-effect waves-light accept">
           <i class="material-icons">send</i>
