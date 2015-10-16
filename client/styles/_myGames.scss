@@ -28,7 +28,7 @@
 
   .mailbox-button a {
     top: -30px;
-    right: -200px;
+    right: -150px;
     background-color: $yellow;
   }
 
@@ -87,14 +87,15 @@
       h4 {
   		  text-align: center;
         font-size: 1.5em;
-        padding: 1%;
+        padding: 1.5%;
         background-color: $blue;
       }
       .right {
-        margin-right: 20px;
-        margin-top: 5px;
+        margin-right: 25px;
+        margin-top: 10px;
       }
   	}
+
 
     .modal-content {
       padding-top: 0.5%;
@@ -128,7 +129,7 @@
     }
 
     .game-details {
-      margin-bottom: 5%;
+      margin-bottom: 2%;
     }
 
     .content-header {
@@ -168,13 +169,13 @@
   }
   center {
     button {
-      background-color: $green;
+      background-color: $yellow;
       color: white;
     }
     button:hover {
       background-color: white;
-      color: $green;
-      border: 1px solid $green;
+      color: $yellow;
+      border: 1px solid $yellow;
     }
 
   }

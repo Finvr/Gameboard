@@ -4,7 +4,7 @@
       <strong>{{ game.game }}</strong> {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
   </span>
   <p>
-    {{ game.pending_requests}} request(s) to join 
+    {{ game.pending_requests}} request(s) to join your game.
   </p>      
   <a href="#approve-pending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content" modal>
     <i class="material-icons">open_in_new</i>
