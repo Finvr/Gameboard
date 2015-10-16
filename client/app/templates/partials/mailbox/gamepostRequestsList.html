@@ -1,7 +1,7 @@
 <li ng-repeat="game in myGames" class="collection-item avatar" ng-if="game.pending_requests > 0">
   <div class="circle"><i class="material-icons small">supervisor_account</i></div>
   <span class="title grey-text text-darkern-2">
-      <strong>{{ game.game }}</strong> {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
+      <strong>{{ game.game }}</strong> on {{ game.game_datetime | date : "M/d/yyyy @ h:mm a" }}
   </span>
   <p>
     {{ game.pending_requests}} request(s) to join your game.

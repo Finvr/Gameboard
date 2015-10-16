@@ -100,32 +100,34 @@
     .modal-content {
       padding-top: 0.5%;
       margin: 0;
+      width: 100%;
       ul.collection {
         width: 100%;
       }
-      button.decline {
-        margin-left: 1%;
-      }
-      .accept {
-        background-color: white;
-        color: $green;
-        border: 1px solid $green;
-        width: 98%;
-      }
-      .accept:hover {
-        color: white;
-        background-color: $green;
-      }
-      .decline {
-        background-color: white;
-        color: $red;
-        border: 1px solid $red;
-        width: 98%;
-      }
-      .decline:hover {
-        color: white;
-        background-color: $red;
-      }
+    }
+    .btn, .btn-flat {
+      text-align: center;
+    }
+
+    .accept {
+      background-color: white;
+      color: $green;
+      border: 1px solid $green;
+      margin: 0 auto;
+    }
+    .accept:hover {
+      color: white;
+      background-color: $green;
+    }
+    .decline {
+      background-color: white;
+      color: $red;
+      border: 1px solid $red;
+      margin: 0 auto;
+    }
+    .decline:hover {
+      color: white;
+      background-color: $red;
     }
 
     .game-details {
@@ -136,21 +138,15 @@
       padding-bottom: 2%;
       border-bottom: 1px solid #e0e0e0;
     }
-    .sub-list div {
-      display: inline-block
-    }
-    .content-lead {
-      width: 40%;
-    }
 
     img.hostPic {
       width: 7%;
       height: auto;
     }
+    .modal-footer {
+      background-color: white;
+    }
 
-  	.modal-footer {
-  		background-color: #eee;
-  	}
   }
 
   .collection {
