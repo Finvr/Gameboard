@@ -15,29 +15,29 @@
 
     <!-- Right side -->
     <div class="col m7">
-      <h4 class="collection-item avater profile-field username">
+      <h4 class="collection-item avater profile-field username valign-wrapper">
         {{ myProfile.username }}
+        <a class="fbIcon valign right" target="_blank" href="{{myProfile.link}}"><img src="assets/facebook.png"></a>  
       </h4>   
       <ul class="collection profile-field">
         <li class="profile-field location">
-          <div ng-click="showInput('.location')"><span class="read">{{ myProfile.location ? myProfile.location : "Location not provided"}}</span> 
+          <div ng-click="showInput('.location')"><span class="read">{{ myProfile.location ? myProfile.location : "Location not provided"}} <i class="material-icons edit tiny" ng-if="!myProfile.viewId"> mode_edit</i></span> 
             <span class="write"><input type="text" ng-model="myProfile.location"></span> 
           </div>
         </li>
         <li class="profile-field about-me">
           <span class="title"><strong>About Me:</strong> </span>
-          <div ng-click="showInput('.about-me')"><span class="read">{{ myProfile.about_me ? myProfile.about_me : "Not yet provided" }}</span> 
+          <div ng-click="showInput('.about-me')"><span class="read">{{myProfile.about_me ? myProfile.about_me : "Not yet provided"}} <i class="material-icons edit tiny" ng-if="!myProfile.viewId"> mode_edit</i></span> 
             <span class="write"><input type="text" ng-model="myProfile.about_me" ng-model-options="{ updateOn: 'blur' }"></span> 
           </div>
         </li>
         <li class="profile-field games-i-like">
           <span class="title"><strong>Games I Like:</strong> </span>
-          <div ng-click="showInput('.games-i-like')"><span class="read">{{ myProfile.games_list ? myProfile.games_list : "Not yet provided" }}</span> 
+          <div ng-click="showInput('.games-i-like')"><span class="read">{{myProfile.games_list ? myProfile.games_list : "Not yet provided"}} <i class="material-icons edit tiny" ng-if="!myProfile.viewId"> mode_edit</i></span> 
             <span class="write"><input type="text" ng-model="myProfile.games_list"></span> 
           </div>
         </li>
       </ul>
-      <a class="fbIcon right" target="_blank" href="{{myProfile.link}}"><img align="middle" src="assets/facebook.png"></a>  
       <a ng-if="update" ng-click="updateProfile(myProfile)" class="center btn" ng-show="!myProfile.viewId">Save Changes</a>
     </div>
     </div>
