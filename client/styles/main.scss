@@ -17,7 +17,15 @@ nav {
 	background-color: $blue;
 }
 
+.autocomplete {
+  li.active {
+    background-color: $cream;
+  }
 
+  span.highlight {
+    background-color: $yellow !important;
+  }
+}
 
 .nav-profile-pic {  
   margin-top: 30%;
