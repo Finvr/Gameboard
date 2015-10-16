@@ -1,19 +1,33 @@
 <div id="openRateModal" class="modal">
-  <div class="modal-header grey">
-    <div ng-click="close('#openRateModal'); "><i class="material-icons right close">close</i></div>
-    <span class="white-text"><h4>{{currentRateGame.game ? currentRateGame.game : "No Name"}}</h4></span>
+  <div class="modal-header">
+    <div ng-click="close('#openRateModal'); ">
+      <i class="material-icons right close">close</i>
+    </div>
+    <h4 class="white-text">
+      {{currentRateGame.game ? currentRateGame.game : "No Name"}}
+    </h4>
   </div>
   <div class="modal-content">
-    <div>
-    <p>
-      <strong>Time:</strong> {{ gameToReview.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
-      <strong>Location:</strong> {{ gameToReview.game_location }}<br>
-      <strong>Players:</strong> {{gameToReview.accepted_players + "/" + gameToReview.player_count}}
-      <br>
-      <strong>Description:</strong> {{gameToReview.gamepost_description ? gameToReview.gamepost_description : "N/A"}}<br>
-    </p>
-  </div>
-    </div>
+    <table class="game-details table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Player Count</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ currentRateGame.game_datetime | date : "M/d/yyyy" }}</td>
+          <td>{{ currentRateGame.game_datetime | date : "h:mm a" }}</td>
+          <td>{{ currentRateGame.game_location }} </td>
+          <td>{{ currentRateGame.accepted_players + "/" + currentRateGame.player_count }}</td>
+          <td>{{ currentRateGame.gamepost_description ? currentRateGame.gamepost_description : "N/A" }}</td>
+        </tr>
+      </tbody>
+    </table>
     <div>
       <span class="grey-text">Host:</span> 
       <a href="#/profile/{{currentRateGame.host_id}}" target="_blank"><img class="hostPic" ng-src="{{currentRateGame.picture || currentRateGame.host_pic}}">{{currentRateGame.host_name || currentRateGame.username}}</a>
@@ -22,7 +36,7 @@
       <span class="grey-text">Location:</span> {{currentRateGame.game_location}}
     </div>
     <div class="row">
-      <table ng-if="currentRateGame.playerPics.length > 0">
+      <table ng-if="currentRateGame.playerPics.length > 0" class="table">
         <thead>
           <tr>
             <th class="players">Player</th>
@@ -31,7 +45,6 @@
             <th>Rating</th>
           </tr>
         </thead>
-
         <tbody>
           <tr ng-repeat="player in currentRateGame.playerPics">
             <td class="players">
@@ -65,7 +78,7 @@
     </div>
     <div class="modal-footer" ng-if="!currentRateGame.reviewed">
       <div class = "col s4 right" ng-click="sendReviews(currentRateGame.playerPics)">
-        <a class = "btn btn-med waves-effect center waves-light grey darken-3" ng-click="close('#openRateModal')">
+        <a class = "btn-flat btn-med waves-effect center waves-light accept darken-3" ng-click="close('#openRateModal')">
           Complete Rating
         </a>
       </div>
