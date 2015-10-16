@@ -7,18 +7,15 @@
     <table class="game-details table">
       <thead>
         <tr>
-          <th>Host</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Location</th>
-          <th>Player Count</th>
-          <th>Info</th>
+          <th>Host</th><th>Date</th><th>Time</th>
+          <th>Location</th><th>Player Count</th><th>Info</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
-            <a href="#/profile/{{game.host_id}}" target="_blank">{{game.username }}
+            <a href="#/profile/{{game.host_id}}" target="_blank">
+              {{loggedIn ? game.username : "Login to see more!"}}
             </a>
           </td>
           <td>{{ game.game_datetime | date : "M/d/yyyy" }}</td>
@@ -29,29 +26,30 @@
         </tr>
       </tbody>
     </table>
-    <div>
-      <div>
-        <span class="darkgrey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
-      </div>
-      <div ng-if="loggedIn">
-        <a href="#/profile/{{game.host_id}}" target="_blank">
-          <img ng-src="{{game.picture || game.host_pic}}">{{game.username}}
-        </a>
-      </div>
-      <div ng-if="loggedIn">
-        <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" ><img ng-src="{{requester.picture}}">{{requester.username}}<br></a>
-      </div>
+    <div ng-if="loggedIn" class="player-list">
+      <h5>Players</h5>
+      <ul>
+        <li class="player-item center">
+          <div class="img-wrapper">
+            <img class="responsive-img" ng-src="{{game.picture}}">
+          </div>
+          <a href="#/profile/{{game.host_id}}" target="_blank" >
+            {{game.username}}
+          </a>
+        </li>
+        <li class="player-item center" ng-repeat="requester in game.playersPictures">
+          <div class="img-wrapper">
+            <img class="responsive-img" ng-src="{{requester.picture}}">
+          </div>
+          <a href="#/profile/{{requester.user_id}}" target="_blank" >
+            {{requester.username}}
+          </a>
+        </li>
+      </ul>
     </div>
-    <div>
-      <div class="input-field">
-        <textarea ng-if="!requestSent(game.id)" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
-        <div ng-if="requestSent(game.id)" class="sentFallback">
-          <div>Your request is: {{reqStatus}} </div>
-          <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}}</div>
-        </div>
-        <div ng-if="submitError" class="error col s12 darkgrey-text">{{submitError}}</div>
-        </div>
-      </div>
+    <div class="input-field">
+      <textarea ng-if="!requestSent(game.id)" ng-model="requestMessage.comments" placeholder="Enter optional message for host">
+      </textarea>
     </div>
     <div class="modal-footer" ng-if="!requestSent(game.id) && loggedIn">
       <div ng-click="sendRequest(game)">
