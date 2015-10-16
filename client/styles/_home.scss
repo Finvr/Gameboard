@@ -5,35 +5,35 @@
     text-align: center;
   }
 
+  .parallax {
+    z-index: 1;
+  }
+
   .parallax-container {
-  	height: 750px;
+  	height: 800px;
   	overflow: inherit;
+  }
+
+  .footer {
+  	background-color: $cream;
+  }
+
+  .section {
+    position: relative;
+    z-index: 3;
   }
 
   .btn-large {
   	color: white;
-  	background-color: $red;
   	box-shadow: none;
     border-radius: 6px;
-    margin-top: 30%;
+    margin-top: 35%;
+    background-color: $red;
+    position: relative;
   }
+
   #fb_button {
   	margin-right: 1%;
   }
- #section1 {
- 	
- }
 
-#section2 {
-	
 }
-
-#section3 {
-	
-}
-
-#copyright {
-	z-index: 3;
-}
-
- }
