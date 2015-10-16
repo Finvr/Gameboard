@@ -60,8 +60,12 @@
     color: gray;
   }
 
-  .game_list{
+  .game_list {
     margin-bottom: 0px;
+  }
+
+  .profile-field div {
+    min-height: 3rem;
   }
 
   .recent_game_list li.collection-header {
