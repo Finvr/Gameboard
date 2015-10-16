@@ -1,12 +1,32 @@
 <div id="cancelRequestModal" class="modal">
-  <div class="modal-header grey">
-    <h4 class="darkgray-text">Cancel Request</h4>
-    <a ng-click="close('#cancelRequestModal')"><i class="material-icons">close</i></a>
+  <div class="modal-header">
+    <a ng-click="close('#cancelRequestModal')"><i class="material-icons right close">cancel</i></a>
+    <h4 class="white-text">{{ requestToCancel.game }}</h4>
   </div>
-  <div class="modal-content container"> 
-      <p>Are you sure you want to cancel this request to play {{request.name}}?  The host will be notified and your spot will be freed up for others.</p>
+  <div class="modal-content row">
+    <table class="game-details table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Player Count</th>
+            <th>Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ requestToCancel.game_datetime | date : "M/d/yyyy" }}</td>
+            <td>{{ requestToCancel.game_datetime | date : "h:mm a" }}</td>
+            <td>{{ requestToCancel.game_location }} </td>
+            <td>{{ requestToCancel.accepted_players + "/" + requestToCancel.player_count }}</td>
+            <td>{{ requestToCancel.gamepost_description ? requestToCancel.gamepost_description : "N/A" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Are you sure you want to cancel this request to play {{requestToCancel.name}}?  <a target="_blank" href="#/profile/{{request.host_id}}">{{requestToCancel.host_name }}</a> will be notified, and your spot will be freed up for others.</p>
   </div>
   <div class="modal-footer">
-    <a ng-click="cancelRequest(requestToCancel)" class="btn btn-med waves-effect waves-light grey darken-3">Cancel Request</a>
+    <a ng-click="cancelRequest(requestToCancel)" class="btn-flat btn-med waves-effect waves-light decline">Cancel Request</a>
   </div>
 </div>
