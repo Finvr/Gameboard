@@ -112,7 +112,7 @@
   #openRateModal {
 
     .modal-header {
-      background-color: $yellow;
+      padding: 0px;
     }
 
     .modal-content {
@@ -157,6 +157,8 @@
 
     i {
       margin: 0px;
+      margin-right: 1%;
+      margin-top: 1%;
     }
 
     .btn {
