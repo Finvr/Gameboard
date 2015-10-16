@@ -5,6 +5,7 @@
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
     $scope.game = { invitees: [] };
     $scope.searchText = "";
+    $scope.game.time = 12;
     $scope.gamesArray = GamePost.gamesArray;
     $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
@@ -21,8 +22,9 @@
 
     $scope.createGame = function(game){
       var mDate = moment($scope.game.date);
-      var mTime = moment($scope.game.time);
-      var mDateTime = moment(mDate.format('YYYY-MM-DD') + ' ' + mTime.format('hh:mm:ss a') + mDate.format('Z'));
+      var mTime = $scope.game.time > 12 ? ($scope.game.time - 12 + ":00:00 pm") : ($scope.game.time === 12 ? "12:00:00 pm" : $scope.game.time.length > 1 ? $scope.game.time + ":00:00 am" : "0" + $scope.game.time + ":00:00 am" );
+      // var mTime = moment($scope.game.time);
+      var mDateTime = moment(mDate.format('YYYY-MM-DD') + ' ' + mTime + mDate.format('Z'));
 
       game = { 
         "game_location": $scope.game.location, //start set in template
