@@ -58,7 +58,7 @@
             <label class="active" for="search">Invite Guests (Optional)</label>
            <!--  <i class="material-icons" ng-click="clearInviteSearch()">close</i> -->
           <!-- </div> -->
-          <div class="invitees col s6" ng-repeat="user in usersList | filter: searchText" ng-if="searchText !== ''">
+          <div class="invitees col s6" ng-repeat="user in usersList" ng-if="searchText !== '' && ((user.username.toUpperCase()).indexOf(searchText.toUpperCase()) !== -1)">
             <input name="invitedPlayers[]" type="checkbox"  id="user-{{user.id}}" checklist-model="game.invitees" checklist-value="user.id" />
             <label class="invitee" for="user-{{user.id}}">
               <!-- <div class="invitee-picture"> -->
