@@ -11,6 +11,8 @@
 
     Auth.requireAuth();
 
+    $('.autocomplete input').attr("autocomplete", "off");
+
     $scope.clearInviteSearch = function(){
       $("#search").text();
       $scope.searchText = "";

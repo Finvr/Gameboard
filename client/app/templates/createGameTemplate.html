@@ -7,7 +7,7 @@
       <!-- game name and # of players form -->
       <div class = "row">
         <div class= "input-field col m12">
-          <autocomplete attr-input-id="game-name" attr-placeholder="" autocomplete-required click-activation="true" data="gamesArray" ng-model="game.name"></autocomplete>
+          <autocomplete attr-input-id="game-name" attr-placeholder="" autocomplete-required click-activation="true" data="gamesArray" ng-model="game.name" autocomplete="off"></autocomplete>
           <label class="active" for="game-name">Game name</label>
           <p ng-show="createForm.name.$error.required && createForm.name.$dirty" class="help-block">Name is required.</p>
         </div>
