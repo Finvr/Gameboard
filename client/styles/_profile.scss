@@ -102,8 +102,15 @@
     color: white;
   }
 
-  a.fbIcon img {
-    width: 5%;
+  a.fbIcon {
+    margin-left: 2%;
+    width: auto;
+    height: auto;
+
+    img {
+      align: middle;
+      height: 8%;
+    }
   }
 
   .edit {
