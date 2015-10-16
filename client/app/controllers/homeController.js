@@ -4,6 +4,10 @@
 
  	function HomeController($scope, Auth){
     Auth.requireAuth();
+      $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+        
  	};
 
 })();
