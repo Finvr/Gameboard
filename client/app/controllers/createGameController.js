@@ -20,12 +20,16 @@
     //document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
 
     $scope.createGame = function(game){
+      var mDate = moment($scope.game.date);
+      var mTime = moment($scope.game.time);
+      var mDateTime = moment(mDate.format('YYYY-MM-DD') + ' ' + mTime.format('hh:mm:ss a') + mDate.format('Z'));
+
       game = { 
         "game_location": $scope.game.location, //start set in template
         "game": $scope.game.name,
         "gamepost_description": $scope.game.description,
         "player_count": $scope.game.numPlayers,
-        "game_datetime": moment($scope.game.date + ' ' + $scope.game.time), 
+        "game_datetime": mDateTime.format(), 
         "business": $scope.game.business, //start set in googleMapsDirective
         "lat": $scope.game.lat, 
         "lng": $scope.game.lng, 

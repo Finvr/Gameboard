@@ -18,12 +18,12 @@
         <div class="input-field col m6">
           <input name="date" type="date" id="game-date" ng-model="game.date" required/>
           <label class="active" for="game-date">Date</label>
-          <p ng-show="createForm.datetime.$error.required && createForm.datetime.$dirty" class="help-block">Date is required.</p>
+          <p ng-show="createForm.date.$error.required && createForm.date.$dirty" class="help-block">Date is required.</p>
         </div>
         <div class="input-field col m6">
           <input name="time" type="time" id="game-time" ng-model="game.time" required/>
           <label class="active" for="game-time">Time</label>
-          <p ng-show="createForm.datetime.$error.required && createForm.datetime.$dirty" class="help-block">Time is required.</p>
+          <p ng-show="createForm.time.$error.required && createForm.time.$dirty" class="help-block">Time is required.</p>
         </div>
       </div>
 
