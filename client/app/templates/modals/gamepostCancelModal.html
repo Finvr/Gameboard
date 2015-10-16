@@ -1,12 +1,12 @@
 <div id="cancel-modal" class="modal">
-  <div class="modal-header grey">
+  <div class="modal-header">
     <div ng-click="close('#cancel-modal')"><i class="material-icons white-text right">close</i></div>
-    <h4 class="white-text">Cancel Game</h4>
+    <h4 class="white-text">{{ gameToCancel.game }}</h4>
   </div>
   <div class="modal-content container"> 
-      <p>Are you sure you want to cancel this game of {{gameToCancel.game}}?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
+      <p>Are you sure you want to cancel this game of <span class="blue-text">{{gameToCancel.game}}</span> on <span class="blue-text">{{ gameToShowDetails.game_datetime | date : "M/d/yyyy @ h:mm a" }}</span>?  The game will no longer show up in searches and those who have requested to join this game will be notified that it has been cancelled.</p>
   </div>
   <div class="modal-footer">
-    <a ng-click="cancelGame()" class="btn btn-med waves-effect waves-light grey darken-3">Cancel Game</a>
+    <a ng-click="cancelGame()" class="btn-flat btn-med waves-effect waves-light decline">Cancel Game</a>
   </div>
 </div>
