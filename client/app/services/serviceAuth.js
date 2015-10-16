@@ -47,7 +47,8 @@
       } else {
         
         navigator.geolocation.getCurrentPosition(function (position) {
-          $rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+          $rootScope.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          //$rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
           $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
         })
       }

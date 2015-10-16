@@ -42,29 +42,28 @@
             // add current location dot
             $('#pac-input') && $('#pac-input').show();
             // store currentLocation and center map around it and pop up info window
-            scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+            scope.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             $rootScope.currentLocation = scope.currentLocation;
+
             // center current location and also make sure current location always show on map
             input && map.setCenter(scope.currentLocation);
+            
             bounds = new google.maps.LatLngBounds(scope.currentLocation);
             // add current location dot
             new google.maps.Marker({
               position: scope.currentLocation,
               map: map,
               icon: currIcon
-            });
-            bounds.extend(scope.currentLocation);
-            map.fitBounds(bounds);   
+            }); 
           });
         } else {
-          $('#pac-input') && $('#pac-input').show();
+          $('#pac-input') && $('#pac-input').show() && map.setCenter(scope.currentLocation);
           // center current location and also make sure current location always show on map
           new google.maps.Marker({
             position: scope.currentLocation,
             map: map,
             icon: currIcon
           });
-          input && map.setCenter(scope.currentLocation);
           bounds = new google.maps.LatLngBounds(scope.currentLocation);
           bounds.extend(scope.currentLocation);
           map.fitBounds(bounds);   
@@ -136,12 +135,12 @@
         // display games markers on map in Browse Game page
         scope.$watch('newGames', function() {
           if (scope.newGames && scope.newGames.length > 0) {
-            map.setCenter(scope.currentLocation);
+            //map.setCenter(scope.currentLocation);
             bounds = new google.maps.LatLngBounds(scope.currentLocation);
             clearMaker(); 
             scope.newGames.forEach(function(game){              
               if (game.lat){
-                game.location = new google.maps.LatLng(Number(game.lat), Number(game.lng));
+                game.location = new google.maps.LatLng(Number(game.lat), Number(game.lng));                
                 var image = "<img src='/assets/facebook.png'>";
                 var newMark = new google.maps.Marker({
                   map: map,
@@ -152,6 +151,7 @@
                 });
                 searchMarkers.push(newMark);
                 bounds.extend(game.location);
+                scope.currentLocation && bounds.extend(scope.currentLocation);
                 map.fitBounds(bounds);                  
 
                 // add listener to show info window of the marker that was clicked
