@@ -1,6 +1,39 @@
-  
+.home {  
   .intro {
     color: #26a69a;
     padding: 2%;
     text-align: center;
   }
+
+  .parallax-container {
+  	height: 750px;
+  	overflow: inherit;
+  }
+
+  .btn-large {
+  	color: white;
+  	background-color: $red;
+  	box-shadow: none;
+    border-radius: 6px;
+    margin-top: 30%;
+  }
+  #fb_button {
+  	margin-right: 1%;
+  }
+ #section1 {
+ 	
+ }
+
+#section2 {
+	
+}
+
+#section3 {
+	
+}
+
+#copyright {
+	z-index: 3;
+}
+
+ }
