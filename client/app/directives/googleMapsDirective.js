@@ -37,7 +37,7 @@
         input && map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
         // In case rootscope did not get current location, request current location and set current location on map
-        if (!scope.currentLocation && navigator.geolocation) {
+        if ((!scope.currentLocation || $rootScope.currentLocation) && navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (position) {
             // add current location dot
             $('#pac-input') && $('#pac-input').show();
@@ -45,7 +45,7 @@
             scope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
             $rootScope.currentLocation = scope.currentLocation;
             // center current location and also make sure current location always show on map
-            map.setCenter(scope.currentLocation);
+            input && map.setCenter(scope.currentLocation);
             bounds = new google.maps.LatLngBounds(scope.currentLocation);
             // add current location dot
             new google.maps.Marker({
@@ -53,6 +53,8 @@
               map: map,
               icon: currIcon
             });
+            bounds.extend(scope.currentLocation);
+            map.fitBounds(bounds);   
           });
         } else {
           $('#pac-input') && $('#pac-input').show();
@@ -62,8 +64,10 @@
             map: map,
             icon: currIcon
           });
-          map.setCenter(scope.currentLocation);
+          input && map.setCenter(scope.currentLocation);
           bounds = new google.maps.LatLngBounds(scope.currentLocation);
+          bounds.extend(scope.currentLocation);
+          map.fitBounds(bounds);   
         }  
 
         function clearMaker () {
