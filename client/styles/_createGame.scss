@@ -1,7 +1,36 @@
-
 .createGame {
 
   padding: 1.5%;
+  padding-bottom: 0px;
+  height: 90%;
+
+  .half-div {
+    height: 100%;
+
+    .create-form {
+      overflow-y: scroll;      
+      padding: 2%;
+      border: 3px solid lightgray;
+      height: 98%;
+
+      div {
+        padding-top: 2%;
+        margin-bottom: 0px;
+      }
+
+      div.row {
+        height: 16%;
+      }
+    }
+  }
+
+  .map-view {
+    height: 100%;
+
+    #gmap {    
+      height: 92%;
+    }
+  }
 
   .invitees {
     min-height: 8%;
@@ -28,20 +57,6 @@
 
   textarea {
     padding-top: 0.5rem;
-  }
-
-  #gmap {    
-    height: 75%;
-  }
-
-  .create-form {
-    padding: 2%;
-    border: 3px solid lightgray;
-    height: 80%;
-    .row {
-      padding: 0;
-      margin: 0;
-    }
   }
 
   .controls {
