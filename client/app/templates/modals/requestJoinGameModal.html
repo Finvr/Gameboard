@@ -1,59 +1,65 @@
-<!-- detail Modal for each game -->
 <div id="openRequest" class="modal">
   <div class="modal-header">
     <div ng-click="close()"><i class="material-icons right close">cancel</i></div>
     <h4 class="white-text">{{game.game}}</h4>
   </div>
   <div class="modal-content row">
-    <div class="col m8">
+    <table class="game-details table">
+      <thead>
+        <tr>
+          <th>Host</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Player Count</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <a href="#/profile/{{game.host_id}}" target="_blank">{{game.username }}
+            </a>
+          </td>
+          <td>{{ game.game_datetime | date : "M/d/yyyy" }}</td>
+          <td>{{ game.game_datetime | date : "h:mm a" }}</td>
+          <td>{{ game.game_location }} </td>
+          <td>{{ game.accepted_players + "/" + game.player_count }}</td>
+          <td>{{ game.gamepost_description ? game.gamepost_description : "N/A" }}</td>
+        </tr>
+      </tbody>
+    </table>
     <div>
-      <span class="darkgrey-text">Host:</span> 
-      <a href="#/profile/{{game.host_id}}" target="_blank">{{loggedIn ? game.username : "Login to see more!"}}</a>
+      <div>
+        <span class="darkgrey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
+      </div>
+      <div ng-if="loggedIn">
+        <a href="#/profile/{{game.host_id}}" target="_blank">
+          <img ng-src="{{game.picture || game.host_pic}}">{{game.username}}
+        </a>
+      </div>
+      <div ng-if="loggedIn">
+        <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" ><img ng-src="{{requester.picture}}">{{requester.username}}<br></a>
+      </div>
     </div>
     <div>
-      <span class="darkgrey-text">Time:</span> {{game.game_datetime | date:"EEE, MMM-d-y '@' h:mma"}}
-    </div>
-    <div>
-      <span class="darkgrey-text">Location:</span> {{loggedIn ? game.game_location : "Login to see more!"}}
-    </div>
-    <div>
-      <span class="darkgrey-text">Distance to current location:</span> {{game.distance + " m"}}
-    </div>
-    <div>
-      <span class="darkgrey-text">Details:  </span>{{game.gamepost_description ? game.gamepost_description : "N/A"}}
-    </div>
-  </div>
-  <div class="col m4">
-    <div >
-      <span class="darkgrey-text">Players:</span> {{game.accepted_players}}/{{game.player_count}}
-    </div>
-    <div ng-if="loggedIn">
-      <a href="#/profile/{{game.host_id}}" target="_blank">
-      <img ng-src="{{game.picture || game.host_pic}}">{{game.username}}</a>
-    </div>
-    <div ng-if="loggedIn">
-      <a ng-repeat="requester in game.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" ><img ng-src="{{requester.picture}}">{{requester.username}}<br></a>
-    </div>
-  </div>
-
-    <div ng-if="loggedIn" class="col m12">
-      <div class="input-field center row">
-        <textarea ng-if="!requestSent(game.id)" class ="col s12" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
+      <div class="input-field">
+        <textarea ng-if="!requestSent(game.id)" ng-model="requestMessage.comments" placeholder="Enter optional message for host"></textarea>
         <div ng-if="requestSent(game.id)" class="sentFallback">
-          <div> Your request is: {{reqStatus}} </div>
-          <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}} </div>
+          <div>Your request is: {{reqStatus}} </div>
+          <div ng-if= 'reqComments != ""'>Sent message to host: {{reqComments}}</div>
         </div>
-        <br>
         <div ng-if="submitError" class="error col s12 darkgrey-text">{{submitError}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" ng-if="!requestSent(game.id) && loggedIn">
+      <div ng-click="sendRequest(game)">
+        <a class="btn-flat btn-med waves-effect waves-light accept">
+          <i class="material-icons">send</i>
+        </a>
       </div>
     </div>
   </div>
-  <div class="modal-footer" ng-if="!requestSent(game.id) && loggedIn">
-    <div class = "col s4 right" ng-click="sendRequest(game)">
-            <a class = "btn btn-med waves-effect waves-light darkgrey darken-3">
-              <i class="material-icons">send</i>
-            </a>
-    </div>
-  </div>
 </div>
-<!-- modal complete -->
+
