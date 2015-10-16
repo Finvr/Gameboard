@@ -15,6 +15,10 @@
     </div>
   </div>
   <div ng-show="showNormal()" class="row normal-view ng-cloak" ng-cloak>
+    <center>
+      <!-- button for agenda view -->
+     <button type="button" id="agenda" class="btn-flat">Agenda View</button>
+    </center>
     <div class="col profile m6">
       <!-- my-games map -->
       <div class="ng-include: 'app/templates/partials/myGamesMapPartial.html'">
@@ -28,10 +32,7 @@
       <div class="ng-include: 'app/templates/partials/myGamesAgendaPartial.html'">
       </div>
     </div>
-    <center>
-      <!-- button for agenda view -->
-     <button type="button" id="agenda" class="btn-flat">Agenda View</button>
-    </center>
+
   </div>
   <!-- Pop-up modal for gameposts accept/decline join requests -->
   <div class="ng-include: 'app/templates/modals/gamepostModal.html'">

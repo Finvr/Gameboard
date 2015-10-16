@@ -3,44 +3,50 @@
     <div ng-click="close('#approve-invitation')"><i class="material-icons right close">close</i></div>
     <span class="white-text"><h4>{{ invitationToReview.game }}</h4></span>
   </div>
-  <div class="modal-content container">
-
-  <div>
-    <p>
-      <strong>Time:</strong> {{ invitation.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}<br>
-      <strong>Location:</strong> {{ invitation.game_location }}<br>
-      <strong>Players:</strong> {{invitation.player_count}}
-      <br>
-      <strong>Description:</strong> {{invitation.gamepost_description ? invitation.gamepost_description : "N/A"}}<br>
-    </p>
-  </div>
-
+  <div class="modal-content">
+    <table class="game-details table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Player Count</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ invitationToReview.game_datetime | date : "M/d/yyyy" }}</td>
+          <td>{{ invitationToReview.game_datetime | date : "h:mm a" }}</td>
+          <td>{{ invitationToReview.game_location }} </td>
+          <td>{{ invitationToReview.accepted_players + "/" + invitationToReview.player_count }}</td>
+          <td>{{ invitationToReview.gamepost_description ? invitationToReview.gamepost_description : "N/A" }}</td>
+        </tr>
+      </tbody>
+    </table>
     <ul class="collection">
       <li class="row content-header">
-        <div class="title col s8 grey-text">Invitation</div>
-        <div class="title col s2 grey-text center">Accept</div>
-        <div class="title col s2 grey-text center">Decline</div>
+        <div class="title col s8 ">Invitation From</div>
+        <div class="title col s2 center">Accept</div>
+        <div class="title col s2 center">Decline</div>
       </li>
-      <li class="collection-item row">
-        <div class="col s8">
-          <div class="sub-list">
-            <strong class="content-lead">From: </strong>
-              <a href="#/profile/{{invitationToReview.host_id}}" target="_blank"><img class="hostPic" ng-src="{{invitationToReview.host_pic}}">{{ invitationToReview.host_name }}</a>
-          </div>     
-          <div class="sub-list">
-            <strong class="content-lead">Details:</strong>
-            <div> {{ invitationToReview.game }}</div>
-            <div> {{ invitationToReview.game_datetime }}</div>
-            <div> {{ invitationToReview.game_location }} </div>
-            <div> {{ invitationToReview.game_description}}</div>
-          </div>
+      <li class="collection-item avatar row">
+        <div class="col s4">
+          <img class="circle" ng-src="{{invitationToReview.host_pic}}">
+          <a href="#/profile/{{invitationToReview.host_id}}" target="_blank">
+            {{ invitationToReview.host_name }}
+          </a>
         </div>
-        <button class="col s2 btn-flat btn-medium waves-effect waves-light grey darken-3 lighten-1 white-text" ng-click="requestConfirm('accepted', invitationToReview)">
-          <i class="material-icons">check</i>
-        </button>
-        <button class="col s2 btn-flat waves-effect waves-light grey white-text" ng-click="requestConfirm('declined', invitationToReview)">
-          <i class="material-icons">close</i>
-        </button>
+        <div class="col s2 offset-s4">
+          <button class="btn-flat btn-medium waves-effect waves-light lighten-1 accept" ng-click="requestConfirm('accepted', invitationToRview)">
+            <i class="material-icons">check</i>
+          </button>
+        </div>
+        <div class="col s2">
+          <button class="btn-flat waves-effect waves-light decline" ng-click="requestConfirm('declined', invitationToReview)">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
       </li>
     </ul>
   </div>

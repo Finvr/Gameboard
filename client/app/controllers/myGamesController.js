@@ -62,8 +62,6 @@
     };
 
     $scope.openRateModal = function(game) {
-      console.log('game modal: ', game)
-      // game.host_name=true;
       if (game.host_name) {
         game.playerPics.unshift({
           picture: game.host_pic,
@@ -98,7 +96,6 @@
       Review.createReview(reviews)
         .then(function(reviews){
           $scope.currentRateGame.reviewed = true;
-          console.log("reviews from profile controller : ", reviews)                
         });        
     }
 
@@ -122,7 +119,6 @@
             return request.status === 'accepted'
           })
           var events = acceptedReq.map(function(request){
-            console.log('request: ', request)
             var newEvent = {};
             newEvent.title = request.game;
             newEvent.start = moment(request.game_datetime);
@@ -143,7 +139,6 @@
     var getMyInvitations = function(){
       Invitations.all()
         .then(function(invitations){
-          console.log("invitation", invitations)
           if (typeof invitations === "string") {
             $scope.myInvitations = [];       
           } else {
@@ -153,7 +148,6 @@
     }
 
     $("#agenda").click(function(){
-      console.log('$("#agenda").text', $("#agenda").text())
       if ($("#agenda").text() === "Calendar View") {
         $("#agenda").text("Agenda View");        
       } else {

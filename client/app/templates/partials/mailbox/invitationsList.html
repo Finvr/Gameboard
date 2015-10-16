@@ -4,7 +4,7 @@
     <strong>{{ invitation.game }}</strong> on {{ invitation.game_datetime | date : "M/d/yyyy @ h:mm a" }}
   </span>
   <p>
-    {{invitation.host_name}} has invited you to join.
+    {{invitation.host_name}} has invited you to join their game.
   </p>
   <a href="#approve-invitation" ng-click="setInvitationToReview(invitation)" class="waves-effect waves-light secondary-content" modal>
     <i class="material-icons">open_in_new</i>

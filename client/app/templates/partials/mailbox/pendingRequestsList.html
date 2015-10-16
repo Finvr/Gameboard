@@ -1,5 +1,5 @@
 <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending' || request.status==='denied' "> 
-  <div class="collapsible-header">
+  <div>
     <span class="title grey-text text-darkern-2">
       {{ request.game | limitTo: 10 }} ... 
     </span>
