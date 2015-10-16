@@ -17,11 +17,25 @@ nav {
 	background-color: $blue;
 }
 
-.nav-profile-pic {
+.autocomplete {
+  li.active {
+    background-color: $cream;
+  }
+
+  span.highlight {
+    background-color: $yellow !important;
+  }
+}
+
+.nav-profile-pic {  
   margin-top: 30%;
   width: auto;
   height: 60%;
   border-radius: 50%;
+}
+
+li.profile-pic {
+  height: 100%;
 }
 
 .notification {

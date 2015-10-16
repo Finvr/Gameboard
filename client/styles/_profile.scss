@@ -24,7 +24,8 @@
 
   .collection.profile-field {
     border: none;
-    margin-top: 5%;
+    margin-top: 1%;
+    margin-bottom: 5%;
 
   }
 
@@ -59,8 +60,12 @@
     color: gray;
   }
 
-  .game_list{
+  .game_list {
     margin-bottom: 0px;
+  }
+
+  .profile-field div {
+    min-height: 3rem;
   }
 
   .recent_game_list li.collection-header {
@@ -97,8 +102,15 @@
     color: white;
   }
 
-  a.fbIcon img {
-    width: 5%;
+  a.fbIcon {
+    margin-left: 2%;
+    width: auto;
+    height: auto;
+
+    img {
+      align: middle;
+      height: 8%;
+    }
   }
 
   .edit {
@@ -112,7 +124,7 @@
   #openRateModal {
 
     .modal-header {
-      background-color: $yellow;
+      padding: 0px;
     }
 
     .modal-content {
@@ -157,6 +169,8 @@
 
     i {
       margin: 0px;
+      margin-right: 1%;
+      margin-top: 1%;
     }
 
     .btn {
