@@ -60,16 +60,7 @@
   .game_list{
     margin-bottom: 0px;
   }
-  
-  .modal-header {
-      text-align: center;
-      padding: 1%;
-  }
-
-  .modal-footer {
-      background-color: #eee;
-   }
-
+ 
   #listView .btn {
     float: right;
     margin-top: 0px;
@@ -160,61 +151,6 @@
     font-size: 10px;
   }
 
-  #openRequest {
-
-
-    .modal-header {
-      background-color: $yellow;
-    }
-
-    .modal-content {
-      padding: 2%;
-      margin-bottom: 0px;
-
-      div.col {
-        padding: 0px;
-      }
-
-
-      div.input-field {
-        margin: 0px;
-        padding: 0px 3%;
-        padding-top: 2%;
-      }
-
-      .sentFallback {
-        font-size: 18px;
-        color: $yellow;
-        font-weight: bold;
-      }
-
-      a img{
-        width: 10%;
-      }
-
-      div {
-        padding: 1%;
-        padding-left: 5%;
-        padding-right: 5%;
-      }
-
-      span {
-        font-weight: bold;
-      }
-    }
-
-    h4 {
-      margin: 0px;
-    }
-
-    i {
-      margin: 0px;
-    }
-
-    .btn {
-      background-color: $blue;
-    }
-
-  }
+  
 
 }
