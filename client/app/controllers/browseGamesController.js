@@ -42,6 +42,8 @@
 					$scope.getMyRequests();
 				});
 
+			$('.autocomplete input').attr("autocomplete", "off");
+
 			// calculate distance between each and user's current location
 			$scope.$on("currentLocation", function(event, data){
 				for (var i = 0; i < $scope.games.length; i ++){
