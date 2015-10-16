@@ -3,6 +3,10 @@
     <a class="btn-floating btn-large waves-effect waves-light button-collapse" data-activates="mailbox" data-sidenav="left" data-menuwidth="500" data-closeonclick="false">
       <i class="material-icons">mail</i>
     </a>
+
+      <!-- button for agenda view -->
+      <button type="button" id="agenda" class="agendaViewButton btn-flat">Agenda View</button>
+
   </div>
   <!-- my-games mailbox-->
   <div id="mailbox" class="side-nav">
@@ -14,11 +18,8 @@
     <div class="ng-include: 'app/templates/partials/myGamesFallBackPartial.html'">
     </div>
   </div>
+
   <div ng-show="showNormal()" class="row normal-view ng-cloak" ng-cloak>
-    <center>
-      <!-- button for agenda view -->
-     <button type="button" id="agenda" class="btn-flat">Agenda View</button>
-    </center>
     <div class="col profile m6">
       <!-- my-games map -->
       <div class="ng-include: 'app/templates/partials/myGamesMapPartial.html'">

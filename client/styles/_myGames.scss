@@ -167,16 +167,16 @@
   [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
   }
-  center {
-    button {
-      background-color: $yellow;
-      color: white;
-    }
-    button:hover {
-      background-color: white;
-      color: $yellow;
-      border: 1px solid $yellow;
-    }
 
+  button.agendaViewButton {
+    background-color: $yellow;
+    color: white;
   }
+
+  button.agendaViewButton:hover {
+    background-color: white;
+    color: $yellow;
+    border: 1px solid $yellow;
+  }
+
 }
