@@ -101,4 +101,67 @@
     width: 5%;
   }
 
+  .edit {
+    font-size: 14px;
+  }
+
+  .profileHostPic {
+    width: 60%;
+  }
+
+  #openRateModal {
+
+    .modal-header {
+      background-color: $yellow;
+    }
+
+    .modal-content {
+      padding: 2%;
+      margin-bottom: 0px;
+
+      div.col {
+        padding: 0px;
+      }
+
+
+      div.input-field {
+        margin: 0px;
+        padding: 0px 3%;
+        padding-top: 2%;
+      }
+
+      .sentFallback {
+        font-size: 18px;
+        color: $yellow;
+        font-weight: bold;
+      }
+
+      a img{
+        width: 10%;
+      }
+
+      div {
+        padding: 1%;
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    h4 {
+      margin: 0px;
+    }
+
+    i {
+      margin: 0px;
+    }
+
+    .btn {
+      background-color: $blue;
+    }
+  }
+
 }
