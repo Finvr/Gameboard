@@ -11,21 +11,52 @@
 
     Auth.requireAuth();
 
+    /* Datepicker functions */
+    var currentTime = new Date();
+    //$scope.game.date = currentTime;
+    $scope.currentTime = currentTime;
+    $scope.month = ['Januar', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    $scope.monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    $scope.weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    $scope.weekdaysLetter = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    $scope.disable = [false, 1, 7];
+    $scope.today = 'Today';
+    $scope.clear = 'Clear';
+    $scope.close = 'Close';
+    var days = 15;
+    $scope.minDate = (new Date($scope.currentTime.getTime() - ( 1000 * 60 * 60 *24 * days ))).toISOString();
+    $scope.maxDate = (new Date($scope.currentTime.getTime() + ( 1000 * 60 * 60 *24 * days ))).toISOString();
+    $scope.onStart = function () {
+        console.log('onStart');
+    };
+    $scope.onRender = function () {
+        console.log('onRender');
+    };
+    $scope.onOpen = function () {
+        console.log('onOpen');
+    };
+    $scope.onClose = function () {
+        console.log('onClose');
+    };
+    $scope.onSet = function () {
+        console.log('onSet');
+    };
+    $scope.onStop = function () {
+        console.log('onStop');
+    };
+    /* end datepicker functions */
+
     $('.autocomplete input').attr("autocomplete", "off");
 
     $scope.clearInviteSearch = function(){
       $("#search").text();
       $scope.searchText = "";
     }
-
-    // set today as the ealiest day user can select
-    //controller should not know anything about the DOM, this makes our tests fail
-    //document.getElementById('game-datetime').setAttribute('min', $scope.now + "T00:00:00");
+ 
 
     $scope.createGame = function(game){
       var mDate = moment($scope.game.date);
       var mTime = $scope.game.time > 12 ? ($scope.game.time - 12 + ":00:00 pm") : ($scope.game.time === 12 ? "12:00:00 pm" : $scope.game.time.length > 1 ? $scope.game.time + ":00:00 am" : "0" + $scope.game.time + ":00:00 am" );
-      // var mTime = moment($scope.game.time);
       var mDateTime = moment(mDate.format('YYYY-MM-DD') + ' ' + mTime + mDate.format('Z'));
 
       game = { 

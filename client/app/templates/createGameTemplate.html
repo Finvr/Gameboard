@@ -16,13 +16,38 @@
       <!-- datetime form -->
       <div class="row">
         <div class="input-field col m6">
-          <input name="date" type="date" id="game-date" ng-model="game.date" required/>
+          <!--<input name="date" type="date" id="game-date" ng-model="game.date" required/>-->
+          <input input-date
+                type="text"
+                name="created"
+                id="game-date"
+                ng-model="currentTime"
+                container="body"
+                format="mm/dd/yyyy"
+                months-full="{{ month }}"
+                months-short="{{ monthShort }}"
+                weekdays-full="{{ weekdaysFull }}"
+                weekdays-short="{{ weekdaysShort }}"
+                weekdays-letter="{{ weekdaysLetter }}"
+                disable="disable"
+                min="{{ minDate }}"
+                max="{{ maxDate }}"
+                today="today"
+                clear="clear"
+                close="close"
+                select-years="15"
+                on-start="onStart()"
+                on-render="onRender()"
+                on-open="onOpen()"
+                on-close="onClose()"
+                on-set="onSet()"
+                on-stop="onStop()" 
+            />
           <label class="active" for="game-date">Date</label>
           <p ng-show="createForm.date.$error.required && createForm.date.$dirty" class="help-block">Date is required.</p>
         </div>
         <div class="input-field col m6 row valign-wrapper">
           <input name="time" type="range" id="game-time" class="col m8" ng-model="game.time" min="0" max="24" required/><span class="filteTime col m4 valign">{{game.time === 0 ? "12:00 AM" : (game.time == 24 ? "11:59 PM" : (game.time === 12 ? "12:00 PM" : (game.time < 12 ?  (game.time + ":00 AM") : ((game.time - 12) + ":00 PM") ) ) ) }}</span>
-         <!--  <input name="time" type="time" id="game-time" ng-model="game.time1" required/> -->
           <label class="active" for="game-time">Time</label>
           <p ng-show="createForm.time.$error.required && createForm.time.$dirty" class="help-block">Time is required.</p>
         </div>
@@ -76,7 +101,7 @@
       <!-- create game button -->
       <div class="row">
         <div class="input-field col m12">
-          <button type="submit" class="btn white-text waves-effect waves-light" ng-click="createGame(game)" ng-disabled="createForm.$invalid">Create Game</button>
+          <button type="submit" class="btn btn-flat white-text waves-effect waves-light" ng-click="createGame(game)" ng-disabled="createForm.$invalid">Create Game</button>
         </div>
       </div>
 

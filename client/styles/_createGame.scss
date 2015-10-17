@@ -104,4 +104,15 @@
     width: 100%;
   }
 
+  .btn {
+    background-color: $green;
+  }
+}
+
+.picker__weekday-display, .picker__date-display, .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+  background-color: $green;
+}
+
+.thumber, .picker__close, .picker__today {
+  color: $green;
 }
