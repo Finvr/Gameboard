@@ -4,6 +4,7 @@
   .factory('GamePost', GamePost);
 
   function GamePost($http) {
+    //gamesArray is uses to populate game name autocomplete
     var gamesArray = [
       "7 Wonders",
       "A Game of Thrones",
@@ -18,7 +19,7 @@
       "Axis and Allies",
       "Babylon 5",
       "Backgammon",
-      "Balderash",
+      "Balderdash",
       "Bang",
       "Bananagrams",
       "Battlefleet Gothic",
@@ -182,6 +183,7 @@
     ];
 
   	function create(gameInfo){
+      //Create a new gamepost
 			return $http({
         method: 'POST',
         url: '/gameposts',
@@ -197,6 +199,7 @@
   	};
 
     function myRequests(){
+      //Get all reqeusts created by the current user
       return $http({
           method: 'GET',
           url: '/me/requests'
@@ -207,6 +210,7 @@
     };
 
     function myHostedGames(){
+      //Get all gameposts created by the current user
       return $http({
         method: 'GET',
         url: '/me/gameposts'
@@ -217,6 +221,7 @@
     };
 
     function gamepostRequest(gamepostId) {
+      //Get all requests for a particular gamepost
       return $http({
         method: 'GET',
         url: '/gameposts/' + gamepostId + '/requests'
@@ -228,6 +233,7 @@
     };
 
     function requestConfirm(request) {
+      //Accept a request/invite
       return $http({
         method: "PUT",
         url: "/requests/" + request.id,
@@ -244,6 +250,7 @@
     }
 
     function requestCancel(request) {
+      //Cancel a request
        console.log("request in service", request);
       return $http({
         method: "DELETE",
@@ -262,6 +269,7 @@
     }
 
     function deleteGame(game){
+      //Cancel a game
       console.log("game", game);
       return $http({
         method: "DELETE",
@@ -277,6 +285,7 @@
     }
 
     function getPictures(gamepostId) {
+      //Get all user pictures for a gamepost
       return $http({
         method: "GET",
         url: "/gameposts/" + gamepostId + "/pictures"

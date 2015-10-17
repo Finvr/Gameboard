@@ -74,6 +74,10 @@ gulp mocha OR npm test
 
 ![Schema](/gameboard_schema.png)
 
+## API
+
+![API](/gameboardAPI.png)
+
 ## Known Bugs
 
 -Currently this application is built for Google Chrome
@@ -81,4 +85,4 @@ gulp mocha OR npm test
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/glorypod/spkr/blob/master/_CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
