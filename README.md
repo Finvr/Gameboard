@@ -1,4 +1,4 @@
-# GAMEBOARD
+# __game__board
 
   > An application for connecting people who want to play board games.
 
