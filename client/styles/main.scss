@@ -17,6 +17,10 @@ nav {
 	background-color: $blue;
 }
 
+#nav-mobile li a{
+  color: $green;
+}
+
 .autocomplete {
   li.active {
     background-color: $cream;
