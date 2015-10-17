@@ -1,4 +1,4 @@
-# **game**board
+# *game*board
 
   > An application for connecting people who want to play board games.
 
