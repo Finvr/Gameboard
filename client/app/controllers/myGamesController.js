@@ -246,6 +246,7 @@
       return GamePost.requestConfirm(req)
         .then(function(data){
           $scope.init();
+          $scope.close('.modal');
         })
     };
 
