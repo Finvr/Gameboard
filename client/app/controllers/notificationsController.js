@@ -26,7 +26,7 @@ angular.module('imgame.notification', [])
         })
     }
 
-    // 
+    // as user mouse over a notification, note coutns decrease
     $scope.addToViewed = function(note) {
       if ( !note.viewed ) {
         $scope.viewed.push(note.id);
@@ -35,6 +35,7 @@ angular.module('imgame.notification', [])
       }
     },
 
+    // watch notification counts that could be changed from "$scope.addToViewed" func, to update view
     $scope.$watch(function(scope) {
       return scope.newNotes;
     }, function(newNotes){
@@ -44,6 +45,7 @@ angular.module('imgame.notification', [])
       }
     },true);
 
+    // updateViewed is called every 5 seconds to update when user viewed a notification
     $scope.updateViewed = function() {
       if ( $scope.viewed.length > 0 ) {
         return Notification.updateNotifications($scope.viewed)
@@ -53,6 +55,7 @@ angular.module('imgame.notification', [])
       }
     }
 
+    // calculate time from now to when the notification was created to improve user interface
     $scope.timeElapsed = function(initialTime) {
       var toTime = new Date();
       var fromTime = new Date(initialTime);

@@ -6,6 +6,7 @@ angular.module('imgame.profile', [])
 
     Auth.requireAuth();
 
+    // get user's or other users' profile
     var getProfile = function(){
       Profile.getProfile($route.current.params.id)
       	.then(function(profile){
@@ -14,6 +15,7 @@ angular.module('imgame.profile', [])
       	});
     };
 
+    // get user's recent games, including games user hosted and joined
     $scope.getRecentGames = function(){
         Profile.getRecentGames()
         .then(function(games){
@@ -29,6 +31,9 @@ angular.module('imgame.profile', [])
         })
     };
 
+    //////////////////////////////////////////////////////////////////
+    // modal functions
+    //////////////////////////////////////////////////////////////////
     $scope.close = function(selector) {
       $(selector).closeModal();
     };
@@ -39,14 +44,6 @@ angular.module('imgame.profile', [])
           $scope.update = null;
 			    init();
         });
-    };
-
-    $scope.showInput = function(selector){
-      if (!$scope.myProfile || !$scope.myProfile.viewId) {
-        $scope.update = true;
-        $(selector).find('.read').hide();
-        $(selector).find('.write').show();            
-      }
     };
 
     $scope.openRateModal = function(game) {
@@ -64,7 +61,18 @@ angular.module('imgame.profile', [])
       })
       $scope.currentRateGame = game;
     };
+    // modal function complete
 
+    // As loggedIn user click on edit, write right is permitted
+    $scope.showInput = function(selector){
+      if (!$scope.myProfile || !$scope.myProfile.viewId) {
+        $scope.update = true;
+        $(selector).find('.read').hide();
+        $(selector).find('.write').show();            
+      }
+    };
+
+    // get user's reviews on other users
     $scope.getReviews = function() {
       Profile.getReviews()
         .then(function(data){
@@ -72,17 +80,11 @@ angular.module('imgame.profile', [])
         })
     };
 
-    var init = function(){
-    	$('.profile-field').find('span.write').hide();
-    	$('.profile-field').find('span.read').show();
-    	getProfile();
-      $scope.getRecentGames();
-      $scope.getReviews();
-    }
-
+    // send reviews as user reviewed other players in a recently played game
     $scope.sendReviews = function (players){
       var gamepostId = $scope.currentRateGame.gamepost_id;
       var reviews = [];
+      // build up review obj for each player the user reviewed
       for (var i = 0; i < players.length; i++){
         var player = {}
         if (!players[i].skip) {
@@ -102,6 +104,17 @@ angular.module('imgame.profile', [])
           console.log("reviews from profile controller : ", reviews)                
         });        
     };
+
+    //////////////////////////////////////////////////////////////////
+    // page initiation
+    //////////////////////////////////////////////////////////////////
+    var init = function(){
+      $('.profile-field').find('span.write').hide();
+      $('.profile-field').find('span.read').show();
+      getProfile();
+      $scope.getRecentGames();
+      $scope.getReviews();
+    }
 
     init();
 	};
