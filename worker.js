@@ -14,9 +14,14 @@ function findExpired () {
       return helpers.promiseFor(function (i) {
         return i < expiredIds.length;
       }, function (i) {
-        return Requests.updateByGamepost(expiredIds[i], 'expired')
+        return Requests.updateByGamepost(expiredIds[i], 'expired', ['accepted'])
           .then(function (requestIds) {
             reqIds = reqIds.concat(requestIds);
+          })
+          .then(function () {
+            return Requests.updateByGamepost(expiredIds[i], 'declined', ['invite', 'pending'])
+          })
+          .then(function () {
             return ++i;
           });
       }, 0)
