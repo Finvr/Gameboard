@@ -1,5 +1,9 @@
 .myGames {
 
+  button.fc-button:focus, button.fc-icon:focus, .fc-state-hover {
+    background-color: $green;
+  }
+
   .cancel-icon {
     color: $green;
 
