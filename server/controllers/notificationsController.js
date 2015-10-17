@@ -6,6 +6,7 @@ var Notes     = require('../models/notificationsModel.js'),
 module.exports = {
 
   getNotifications: function (req, res) {
+    //Get notifications for a user
     Notes.fetchByUserId(req.user)
       .then(function (result) {
         res.send(result);
@@ -16,7 +17,8 @@ module.exports = {
   },
 
   updateNotifications: function (req, res) {
-    var updated = req.body;
+    //Change viewed property of notifications
+    var updated = req.body; //array of notification IDs
     helpers.promiseFor(function (i) {
       return i < updated.length;
     }, function (i) {
@@ -30,6 +32,7 @@ module.exports = {
   },
 
   acceptedReq: function (req, res) {
+    //Notification for accepted request
     var requestId = req.body.id;
     var userId = req.body.user_id;
 
@@ -44,6 +47,7 @@ module.exports = {
   },
 
   newReq: function (req, res, next) {
+    //Notification of received request
     var gamepostId = parseInt(req.url.split('/')[2]);
     GamePosts.fetchById(gamepostId)
       .then(function (gamepost) {
@@ -57,6 +61,7 @@ module.exports = {
   },
 
   cancelledGame: function (req, res) {
+    //Notification of cancelled game
     var gamepostId = parseInt(req.url.split('/')[2]);
     Requests.getRequestByGameId(gamepostId)
       .then(function (requests) {
@@ -78,6 +83,7 @@ module.exports = {
   },
 
   newInvitiation: function (req, res, next) {
+    //Notification of invitation
     var requestId = req.body.id;
     var userId = req.body.user_id;
     return Notes.create(userId, 'invitation', requestId)
