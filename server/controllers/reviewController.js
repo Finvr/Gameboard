@@ -3,6 +3,7 @@ var helpers  = require ('../utils/helpers.js');
 
 module.exports = {
   getReviewsByReviewerId: function(req, res) {
+    //Get all reviews created by a user
     var reviewerId = req.user;
     Reviews.getReviewsByReviewerId(reviewerId)
       .then(function(reviews){
@@ -11,6 +12,7 @@ module.exports = {
   },
 
   createReviewsByGamePostsId: function(req, res) {
+    //Create a review
     var reviewerId = req.user;
     var reviews = req.body;
     console.log("createReviewsByGamePostsId: ", reviews)
