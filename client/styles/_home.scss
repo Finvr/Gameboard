@@ -16,13 +16,23 @@
 
   #title {
     position: relative;
-    z-index: 10;
-    margin-top: -2%;
-    font-size: 100px;
+    z-index: 5;
+    font-size: 110px;
     text-shadow: -2px 0 #353535;
-    margin-top: 5%;
     margin-right: 2%;
     color: $cream;
+  }
+
+  #slogan {
+    position: relative;
+    z-index: 5;
+    font-size: 25px;
+    margin-right: 3%;
+    margin-top: -2%;
+    letter-spacing: 2px;
+      p {
+        color: $cream;
+      }
   }
 
   #contact {
@@ -38,20 +48,19 @@
   }
 
   .btn-large {
-  	color: white;
   	box-shadow: none;
     border-radius: 6px;
+    margin-right: 3%;
     position: relative;
     z-index: 2;
+    color: white;
     background-color: $red;
+    height: 46px;
+    line-height: 48px;
   }
 
-  #fb_button {
-  	margin-right: 2%;
-  }
-
-  #browse_button {
-    margin-right: 2%;
+  .btn-large:hover {
+    background-color: $blue;
   }
 
 }
