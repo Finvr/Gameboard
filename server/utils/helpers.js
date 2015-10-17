@@ -27,8 +27,8 @@ module.exports = {
     // Return default values if not enough reviews
     if ( reviews.length < 5 ) {
       return {
-        rating: 5, 
-        reliability: 1, 
+        rating: null, 
+        reliability: null, 
         reviewCount: reviews.length 
       };
     }
