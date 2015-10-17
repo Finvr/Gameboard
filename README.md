@@ -70,9 +70,9 @@ Back-end tests:
 (from the project root directory in a separate tab on the command line)
 gulp mocha OR npm test
 
-## Roadmap
+## Schema
 
-View the project roadmap
+![Schema](/gameboard_schema.png)
 
 ## Known Bugs
 
