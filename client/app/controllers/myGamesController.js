@@ -30,6 +30,7 @@
             newEvent.title = game.game;
             newEvent.start = moment(game.game_datetime);
             newEvent.data = game;
+            newEvent.className = 'hosted';
             return newEvent;
           });
           callback(events);
@@ -123,6 +124,7 @@
             newEvent.title = request.game;
             newEvent.start = moment(request.game_datetime);
             newEvent.data = request;
+            newEvent.className = 'joined';
             return newEvent;
           });
 

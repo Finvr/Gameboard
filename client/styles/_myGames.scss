@@ -19,6 +19,16 @@
     thead {
       border-bottom: none;
     }
+    .hosted{
+      background-color: $blue;
+      border-color: $blue;
+      cursor: pointer;
+    }
+    .joined {
+      background-color: $green;
+      border-color: $green;
+      cursor: pointer;
+    }
   }
 
   .fallback-view {
