@@ -1,5 +1,9 @@
 .myGames {
 
+  .cancel-icon {
+    color: $green;
+
+  }
   .tabs .tab a {
     color: $red;
   }
@@ -83,6 +87,9 @@
 
   .agendaListGameName {
     cursor: pointer;
+    .title {
+      color: $blue;
+    }
   }
 
   .collection {
