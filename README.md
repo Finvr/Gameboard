@@ -85,4 +85,4 @@ gulp mocha OR npm test
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/glorypod/spkr/blob/master/_CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
