@@ -13,8 +13,8 @@
 
     /* Datepicker functions */
     var currentTime = new Date();
-    //$scope.game.date = currentTime;
-    $scope.currentTime = currentTime;
+    $scope.game.date = currentTime;
+    //$scope.currentTime = currentTime;
     $scope.month = ['Januar', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     $scope.monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     $scope.weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -24,8 +24,8 @@
     $scope.clear = 'Clear';
     $scope.close = 'Close';
     var days = 15;
-    $scope.minDate = (new Date($scope.currentTime.getTime() - ( 1000 * 60 * 60 *24 * days ))).toISOString();
-    $scope.maxDate = (new Date($scope.currentTime.getTime() + ( 1000 * 60 * 60 *24 * days ))).toISOString();
+    $scope.minDate = (new Date($scope.game.date.getTime() - ( 1000 * 60 * 60 *24 * days ))).toISOString();
+    $scope.maxDate = (new Date($scope.game.date.getTime() + ( 1000 * 60 * 60 *24 * days ))).toISOString();
     $scope.onStart = function () {
         console.log('onStart');
     };
@@ -58,6 +58,8 @@
       var mDate = moment($scope.game.date);
       var mTime = $scope.game.time > 12 ? ($scope.game.time - 12 + ":00:00 pm") : ($scope.game.time === 12 ? "12:00:00 pm" : $scope.game.time.length > 1 ? $scope.game.time + ":00:00 am" : "0" + $scope.game.time + ":00:00 am" );
       var mDateTime = moment(mDate.format('YYYY-MM-DD') + ' ' + mTime + mDate.format('Z'));
+
+      console.log(mDateTime);
 
       game = { 
         "game_location": $scope.game.location, //start set in template
