@@ -29,7 +29,7 @@ module.exports = {
       return {
         rating: null, 
         reliability: null, 
-        reviewCount: reviews.length 
+        reviewcounts: reviews.length 
       };
     }
 
