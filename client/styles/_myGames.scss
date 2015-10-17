@@ -1,5 +1,13 @@
 .myGames {
 
+  button.fc-button:focus, button.fc-icon:focus, .fc-state-hover {
+    background-color: $green;
+  }
+
+  .cancel-icon {
+    color: $green;
+
+  }
   .tabs .tab a {
     color: $red;
   }
@@ -83,6 +91,9 @@
 
   .agendaListGameName {
     cursor: pointer;
+    .title {
+      color: $blue;
+    }
   }
 
   .collection {

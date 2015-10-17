@@ -7,12 +7,12 @@
   <div class="games">
     <div ng-repeat="game in myGames | orderBy: 'game_datetime'" class="collection-item row">
       <p class="agendaListGameName col m8" ng-click="showHostedEventModal({data:game})">
-        <span class="title indigo-text text-darkern-2">
+        <span class="title">
           {{game.game}}
         </span> @ {{ game.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}
       </p>
       <a href="#cancel-modal" ng-click="setGameToCancel(game)" class="waves-effect waves-light secondary-content right col m1.5" modal>
-        <i class="material-icons">cancel</i>
+        <i class="material-icons cancel-icon">cancel</i>
       </a>
       <a href="#approve-pending" ng-click="getGamepostRequest(game)" class="waves-effect waves-light secondary-content right col m1.5" modal>
         <i class="material-icons" ng-if="game.pending_requests > 0">add_alert</i>
@@ -31,12 +31,12 @@
   <div class="games">
     <div ng-repeat="request in myRequests | orderBy: 'game_datetime'" ng-if="request.status === 'accepted'" class="collection-item row">
       <p class="agendaListGameName col m8" ng-click="showHostedEventModal({data:request})">
-        <span class="title indigo-text text-darkern-2">
+        <span class="title">
           {{request.game}}
         </span> @ {{ request.game_datetime | date : "EEE, MMM d, y @ h:mm a" }}
       </p>
       <a href="#cancelRequestModal" ng-click="setRequestToCancel(request)" class="waves-effect waves-light secondary-content right col m1.5" modal>
-        <i class="material-icons">cancel</i>
+        <i class="material-icons cancel-icon">cancel</i>
       </a>
     </div>
   </div>  
