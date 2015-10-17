@@ -11,6 +11,7 @@
     <table class="game-details table">
       <thead>
         <tr>
+          <th>Host</th>
           <th>Date</th>
           <th>Time</th>
           <th>Location</th>
@@ -20,6 +21,7 @@
       </thead>
       <tbody>
         <tr>
+          <td><a href="#/profile/{{currentRateGame.host_id}}" target="_blank">{{currentRateGame.host_name || currentRateGame.username}}</a></td>
           <td>{{ currentRateGame.game_datetime | date : "M/d/yyyy" }}</td>
           <td>{{ currentRateGame.game_datetime | date : "h:mm a" }}</td>
           <td>{{ currentRateGame.game_location }} </td>
@@ -28,15 +30,8 @@
         </tr>
       </tbody>
     </table>
-    <div>
-      <span class="grey-text">Host:</span> 
-      <a href="#/profile/{{currentRateGame.host_id}}" target="_blank"><img class="hostPic" ng-src="{{currentRateGame.picture || currentRateGame.host_pic}}">{{currentRateGame.host_name || currentRateGame.username}}</a>
-    </div>
-    <div>
-      <span class="grey-text">Location:</span> {{currentRateGame.game_location}}
-    </div>
     <div class="row">
-      <table ng-if="currentRateGame.playerPics.length > 0" class="table">
+      <table ng-if="currentRateGame.playerPics.length > 0">
         <thead>
           <tr>
             <th class="players">Player</th>
@@ -48,7 +43,12 @@
         <tbody>
           <tr ng-repeat="player in currentRateGame.playerPics">
             <td class="players">
-              <a href="#/profile/{{player.user_id}}" target="_blank" ><img class="hostPic" ng-src="{{player.picture}}">{{player.username}}</a>
+              <div class="img-wrapper">
+                <img class="responsive-img" ng-src="{{player.picture}}">
+              </div>
+                <a href="#/profile/{{player.user_id}}" target="_blank" >
+                  {{player.username}}
+                </a>
             </td>
             <td ng-if="!currentRateGame.reviewed">
               <div class="switch" >
@@ -57,7 +57,7 @@
                   <span class="lever"></span>
                 </label>
               </div>
-              <span class="reviewResults" watch>{{player.skip ? "Don't Rate" : "Rate"}}</span>
+              <span class="reviewResults" watch>{{player.skip ? "Skip Review" : "Review"}}</span>
             </td>
             <td ng-if="!player.skip">               
               <div class="switch" ng-if="!player.skip">
@@ -79,7 +79,7 @@
     <div class="modal-footer" ng-if="!currentRateGame.reviewed">
       <div class = "col s4 right" ng-click="sendReviews(currentRateGame.playerPics)">
         <a class = "btn-flat btn-med waves-effect center waves-light accept darken-3" ng-click="close('#openRateModal')">
-          Complete Rating
+          Submit Reviews
         </a>
       </div>
     </div>
