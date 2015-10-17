@@ -17,6 +17,7 @@ module.exports = {
   },
 
   getRecentGames: function(req, res) {
+    //Get recent gameposts and requests
     var userId = req.user;
     console.log("getRecentGames userId: ", userId)
     GamePosts.getRecentGames(userId)
@@ -82,6 +83,7 @@ module.exports = {
 }
 
 function handleInvites (invitations, gamepostId) {
+  //create invitation and notification for invitation
   return Requests.createInvitations(invitations, gamepostId)
     .then(function (inviteIds) {
       var inviteNotes = [];

@@ -2,6 +2,7 @@ var db = require('../db.js');
 
 module.exports = {
 	findOrCreateReview: function (review){
+		//Create a review if it doesn't exist and return the review
 		return db('reviews')
 			.where({
 				reviewer_id: review.reviewer_id,
@@ -28,6 +29,7 @@ module.exports = {
 	  },
 
 	getRatingByUserId: function (userId) {
+		//Get all reviews submitted for a user
 		return db('reviews').select([
 				'rating',
 				'showed_up',
@@ -44,6 +46,7 @@ module.exports = {
 	},
 
 	getReviewsByReviewerId: function(reviewerId) {
+		//Get all reviews submitted by a user
 		return db('reviews').select([
 				'gameposts_id',
 				'reviewer_id'

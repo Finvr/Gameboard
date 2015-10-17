@@ -28,6 +28,7 @@ module.exports = {
   },
 
   getRequestersPictures: function(req, res) {
+    //Get all photos of users who have joined a gamepost
     var gamepostId = parseInt(req.url.split('/')[2]);
     Requests.getRequestersPictures(gamepostId, 'accepted')
       .then(function(data){
