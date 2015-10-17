@@ -98,7 +98,7 @@ module.exports = {
   declineAll: function (req, res, next) {
     //After a gamepost is cancelled, set all associated requests to declined
     var gamepostId = parseInt(req.url.split('/')[2]);
-    Requests.updateByGamepost(gamepostId, 'declined')
+    Requests.updateByGamepost(gamepostId, 'declined', ['accepted', 'pending', 'invite'])
       .then(function () {
         next();
       })

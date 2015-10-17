@@ -121,11 +121,12 @@ module.exports = {
       })
   },
 
-  updateByGamepost: function (gamepostId, status) {
+  updateByGamepost: function (gamepostId, newStatus, oldStatuses) {
     return db('requests')
-      .where({gamepost_id: gamepostId})
+      .whereIn('status', oldStatuses)
+      .andWhere({gamepost_id: gamepostId})
       .update({
-        status: status,
+        status: newStatus,
         updated_at: db.raw('now()')
       })
       .returning('id')
