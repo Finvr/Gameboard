@@ -83,8 +83,8 @@
 			// calculate distance between each and user's current location
 			$scope.$on("currentLocation", function(event, data){
 				for (var i = 0; i < $scope.games.length; i ++){
-					$scope.games[i].distance = $scope.games[i].lat ? Helper.distance(data.lat, data.lng, $scope.games[i].lat, $scope.games[i].lng ) : null;
-				}
+					$scope.games[i].distance = $scope.games[i].lat ? Helper.distance(data.lat(), data.lng(), $scope.games[i].lat, $scope.games[i].lng ) : null;
+        }
 				$scope.$apply();
 			});
 
