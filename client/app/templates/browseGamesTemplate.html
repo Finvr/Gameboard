@@ -20,10 +20,50 @@
           <!-- Games Date Range  -->
           <div class="col m6 valign-wrapper">
             <p class="title col m1 valign">Date</p>
-            <input class="col m4 datepicker" type="date" ng-model="startDateFilter"/>
+            <!-- <input class="col m4 datepicker" type="date" ng-model="startDateFilter"/> -->
+            <input input-date
+                  type="text"
+                  name="start-date-filter"
+                  id="start-date-filter"
+                  ng-model="startDateFilter"
+                  container="body"
+                  format="mm/dd/yyyy"
+                  months-full="{{ month }}"
+                  months-short="{{ monthShort }}"
+                  weekdays-full="{{ weekdaysFull }}"
+                  weekdays-short="{{ weekdaysShort }}"
+                  weekdays-letter="{{ weekdaysLetter }}"
+                  disable="disable"
+                  min="{{ minDate }}"
+                  max="{{ maxDate }}"
+                  today="today"
+                  clear="clear"
+                  close="close"
+                  select-years="15"
+              />
             <span class="col m1"> to </span>
-           <!--  <p class="title grey-text text-darken-2 col s6">End Date</p> -->
-            <input class="col m4" type="date" ng-model="endDateFilter"/>
+   
+            <!--<input class="col m4" type="date" ng-model="endDateFilter"/>-->
+            <input input-date
+                  type="text"
+                  name="end-date-filter"
+                  id="end-date-filter"
+                  ng-model="endDateFilter"
+                  container="body"
+                  format="mm/dd/yyyy"
+                  months-full="{{ month }}"
+                  months-short="{{ monthShort }}"
+                  weekdays-full="{{ weekdaysFull }}"
+                  weekdays-short="{{ weekdaysShort }}"
+                  weekdays-letter="{{ weekdaysLetter }}"
+                  disable="disable"
+                  min="{{ minDate }}"
+                  max="{{ maxDate }}"
+                  today="today"
+                  clear="clear"
+                  close="close"
+                  select-years="15"
+              />
           </div>
           <!-- time filter -->
           <div class="col m6 valign-wrapper">

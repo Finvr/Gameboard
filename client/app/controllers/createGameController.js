@@ -23,7 +23,7 @@
     $scope.today = 'Today';
     $scope.clear = 'Clear';
     $scope.close = 'Close';
-    var days = 15;
+    var days = 365;
     $scope.minDate = (new Date($scope.game.date.getTime() - ( 1000 * 60 * 60 *24 * days ))).toISOString();
     $scope.maxDate = (new Date($scope.game.date.getTime() + ( 1000 * 60 * 60 *24 * days ))).toISOString();
     $scope.onStart = function () {
