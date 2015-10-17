@@ -50,7 +50,7 @@
   }
 
     img.hostPic {
-    width: 7%;
+    width: 3%;
     height: auto;
   }
 
@@ -68,11 +68,76 @@
     min-height: 3rem;
   }
 
-  .recent_game_list li.collection-header {
-    background-color: darkgray;
-    color: white;
-    padding: 1%;
-    text-align: center;
+  .container .row {
+    margin: 0px;
+  }
+
+  .recent_game_list {
+    .collection {
+      border: none !important;
+
+      .collection-item {
+        padding-left: 0px;
+        padding-right: 0px;
+        border-bottom: 1px solid lightgray;
+
+        .beforePlayer {
+          color: black;
+        }
+
+        .gameTime {
+          font-size: 10px;
+        }
+      }
+
+      .col {
+        padding: 0px;
+        align: middle;
+      }
+
+      .btn {
+        float: right;
+        margin-top: 0px;
+        height: 25px;
+        width: 80%;
+        padding: 0px;
+        font-weight: normal;
+        box-shadow: none;
+        background-color: white;
+        border-radius: 4px;
+        border-radius: 6px;
+      }
+
+      .rate {
+        color: $green;
+        border: 1px solid $green;  
+      }
+
+      .rate:hover {
+        background-color: $green;
+        color: white;
+      }
+
+      .view {
+        color: $yellow;
+        border: 1px solid $yellow; 
+      }
+
+      .view:hover {
+        background-color: $yellow;
+        color: white;
+      }
+    }
+
+    li.collection-header {
+      color: $blue;
+      padding: 1%;
+      text-align: center;
+
+      h5 {
+        text-align: left;
+      }
+    }
   }
   
   .modal-header {
