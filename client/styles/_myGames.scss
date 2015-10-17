@@ -112,8 +112,13 @@
         height: 40px;
       }
     }
+
     .collection-item:last-child {
       border-bottom: 1px solid #e0e0e0;
+    }
+
+    .collection-item.avatar .secondary-content {
+      right: 0;
     }
   }
 
