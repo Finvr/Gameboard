@@ -47,7 +47,7 @@
         </ul>
 
         <ul id='notifications' class='dropdown-content'>
-          <div ng-repeat="note in notifications | limitTo:15">
+          <div ng-repeat="note in notifications">
             <li ng-if="note.type==='game ended'" ng-mouseover="addToViewed(note)" class="message {{note.viewed}}">
               Your game of <b class="game">{{note.game}}</b> has ended. You may now submit user reviews.
               <br>
