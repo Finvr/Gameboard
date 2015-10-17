@@ -1,8 +1,8 @@
 .browse {
 
   line-height: 1;
-  overslow-x: hidden;
-  overslow-y: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
 
   .mapView {
     padding: 0px;
@@ -110,13 +110,6 @@
     nav {
       height: 10%;
     }
-  }
-
-  textarea {
-    border-color: grey;
-    border: dotted 1px;
-    border-radius: 2px;
-    resize: none;
   }
 
   autocomplete.col {
