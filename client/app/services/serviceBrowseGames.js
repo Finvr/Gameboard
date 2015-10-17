@@ -1,8 +1,11 @@
 (function() {
+
   angular.module('imgame.service')
   .factory('BrowseGames', BrowseGames);
 
   function BrowseGames($http){
+
+    // get all the active games from database
 		function getGames(){
 			return $http({
         method: 'GET',
@@ -10,9 +13,13 @@
       })
       .then(function(resp) {
         return resp.data;
+      })
+      .catch(function(err){
+        console.log("Error from get all games http request: ", err)
       });
 		};
 
+    // send request to server as user wants to join a game
 		function sendRequest(message, gamepostsId){
 			return $http({
 				method: 'POST',
@@ -24,7 +31,7 @@
 			})
 			.catch(function(err){
 				console.log("Error from sendRequest http request: ", err)
-			})
+			});
 		};
 		  	
   	return {

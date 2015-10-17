@@ -206,6 +206,9 @@
       })
       .then(function(requests){
         return requests.data;
+      })
+      .catch(function(err){
+        console.log("Error from get all requests http request: ", err)
       });
     };
 
@@ -217,6 +220,9 @@
       })
       .then(function(gamePosts){
         return gamePosts.data;
+      })
+      .catch(function(err){
+        console.log("Error from get all games that I hosted http request: ", err)
       });
     };
 
@@ -227,9 +233,11 @@
         url: '/gameposts/' + gamepostId + '/requests'
       })
       .then(function(requests){
-        console.log("gamepostRequest resp: ", requests)
         return requests.data;
       })
+      .catch(function(err){
+        console.log("Error from get all requests for a gamepost http request: ", err)
+      });
     };
 
     function requestConfirm(request) {
@@ -240,7 +248,6 @@
         data: request
       })
       .then(function(resp) {
-        console.log("requestConfirm service resp: ", resp);
         return resp.data;
       })
       .catch(function(err) {
@@ -258,8 +265,6 @@
         data: JSON.stringify(request)
       })
       .then(function(resp) {
-        console.log("delete request: ", request);
-        console.log("resp", resp);
         return resp.data;
       })
       .catch(function(err) {
@@ -276,7 +281,6 @@
         url: "/gameposts/"+ game.id
       })
       .then(function(resp) {
-        console.log("deleteresp", resp);
         return resp.data;
       })
       .catch(function(err) {

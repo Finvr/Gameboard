@@ -1,4 +1,5 @@
 (function(){
+  
 	angular.module('imgame.service')
 	.factory('Review', Review);
 
