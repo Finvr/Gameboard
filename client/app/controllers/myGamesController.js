@@ -241,12 +241,12 @@
       $scope.invitationToReview = invitation;
     }
 
-    $scope.requestConfirm = function(str, req) {
+    $scope.requestConfirm = function(str, req, sel) {
       req.status = str;
       return GamePost.requestConfirm(req)
         .then(function(data){
           $scope.init();
-          $scope.close('.modal');
+          $scope.close(sel);
         })
     };
 
