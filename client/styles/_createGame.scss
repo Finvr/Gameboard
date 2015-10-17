@@ -112,7 +112,7 @@
   background-color: $green;
 }
 
-.thumber, .picker__close, .picker__today {
+.picker__close, .picker__today {
   color: $green;
 }
 
@@ -121,4 +121,14 @@
 }
 input[type="text"] {
   text-align: center;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background-color: $green;
+}
+input[type="range"]::-moz-range-thumb {
+  background-color: $green; 
+}
+input[type="range"]::-ms-thumb {
+  background-color: $green; 
 }
