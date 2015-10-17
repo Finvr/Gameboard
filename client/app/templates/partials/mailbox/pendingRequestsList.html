@@ -1,5 +1,5 @@
 <li ng-repeat="request in myRequests track by $index | orderBy:'game_datetime'" class="collection-item avatar" ng-if="request.status==='pending' || request.status==='denied' "> 
-  <img class="circle" src="{{request.host_pic}}">
+  <img class="circle" ng-src="{{request.host_pic}}">
   <span class="title grey-text text-darkern-2">
       <strong>{{ request.game}}</strong> on {{ request.game_datetime | date : "M/d/yyyy @ h:mm a" }}.
   </span>

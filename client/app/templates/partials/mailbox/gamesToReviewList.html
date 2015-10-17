@@ -1,5 +1,5 @@
 <li ng-repeat="gameToReview in recentGames track by $index | orderBy:'-game_datetime'" class="collection-item avatar" ng-if="!gameToReview.reviewed">
-  <img class="circle" src="{{ gameToReview.picture }}">
+  <img class="circle" ng-src="{{ gameToReview.picture }}">
   <span class="title grey-text text-darkern-2">
     You can now review {{ gameToReview.game }} from {{ gameToReview.game_datetime | date : "M/d/yyyy @ h:mm a" }}.
   </span> 
