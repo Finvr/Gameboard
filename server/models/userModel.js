@@ -3,6 +3,7 @@ var db = require ('../db.js')
 module.exports = {
 
   findOrCreate: function(user) {
+    //Create a user or return an existing user
     var facebookToken = user.facebook_token;
     var username = user.username;
 
@@ -23,18 +24,21 @@ module.exports = {
   },
 
   find: function(userId) {
+    //Return a user
     return db.select()
       .from('users')
       .where({id: userId})      
   },
 
   delete: function(userId) {
+    //Delete a user from the database
     return db('users')
       .where('id', userId)
       .del();
   },
 
   getToken: function(userId) {
+    //Get a user's facebook token for use in making API calls
     return db.select('facebook_token')
       .from('users')
       .where({id: userId})
@@ -44,6 +48,7 @@ module.exports = {
   },
 
   updateProfile: function(user) {
+    //Update profile fields
     return db('users')
       .where({id: user.id})
       .update({
@@ -58,6 +63,7 @@ module.exports = {
   },
 
   fetchAll: function() {
+    //Get all user id's, usernames and pictures
     return db.select(['id', 'username', 'picture'])
       .from('users')
       .catch(function (err) {
@@ -69,6 +75,7 @@ module.exports = {
 };
 
 function create(user) {
+  //Create a user in the database
   return db('users')
     .insert(user)
     .returning("id")
@@ -81,6 +88,7 @@ function create(user) {
 };
 
 function updateFBInfo(user, updatedUser) {
+  //Update user information to match current data from facebook
   return db('users')
     .where({id: user.id})
     .update({
