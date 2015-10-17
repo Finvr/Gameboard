@@ -1,8 +1,8 @@
 .home {  
-  .intro {
-    color: #26a69a;
-    padding: 2%;
-    text-align: center;
+
+  .icns {
+    font-size: 100px;
+    color: white;
   }
 
   .parallax {
@@ -14,26 +14,44 @@
   	overflow: inherit;
   }
 
-  .footer {
-  	background-color: $cream;
+  #title {
+    position: relative;
+    z-index: 10;
+    margin-top: -2%;
+    font-size: 100px;
+    text-shadow: -2px 0 #353535;
+    margin-top: 5%;
+    margin-right: 2%;
+    color: $cream;
+  }
+
+  #contact {
+    padding: 2% 0 2% 0;
+    background-color: $cream;
   }
 
   .section {
     position: relative;
     z-index: 3;
+    padding-top: 5%;
+    padding-bottom: 5%;
   }
 
   .btn-large {
   	color: white;
   	box-shadow: none;
     border-radius: 6px;
-    margin-top: 35%;
-    background-color: $red;
     position: relative;
+    z-index: 2;
+    background-color: $red;
   }
 
   #fb_button {
-  	margin-right: 1%;
+  	margin-right: 2%;
+  }
+
+  #browse_button {
+    margin-right: 2%;
   }
 
 }
