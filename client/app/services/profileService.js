@@ -1,20 +1,25 @@
 (function(){
 
   angular.module('imgame.service')
+  .factory('Profile', Profile);
 
-  .factory('Profile', function Profile($http){
+  function Profile ($http) {
 
-    function getProfile(id){
+    // get profile data of a user with passed id
+    function getProfile(id) {
       if (id) {
+        // if id is passed, user is viewing other user's profile
         return $http({
           method: 'GET',
           url: '/users/' + id
         })
         .then(function(resp){
+          // set viewId as the id to prevent user edit other user's info
           resp.data.viewId = id;
           return resp.data;
         });
       } else {
+        // get user's own profile
       	return $http({
       		method: 'GET',
       		url: '/me/profile'
@@ -23,8 +28,9 @@
       		return resp.data;
       	});      
       }
-    }
+    };
 
+    // updating user's profile
     function updateProfile(profileData){
       return $http({
         method: 'PUT',
@@ -37,8 +43,9 @@
       .catch(function(err){
         console.log("updateProfile service Error: ", err);
       });
-    }
+    };
 
+    // get recent games for user to show in profile
     function getRecentGames() {
       return $http({
         methos: "GET",
@@ -50,8 +57,9 @@
       .catch(function(err){
         console.log("getRecentGames service Error: ", err);
       });
-    }
+    };
 
+    // get user's reviews about other users to prevent re-submit reviews
     function getReviews() {
       return $http({
         methos: "GET",
@@ -63,7 +71,7 @@
       .catch(function(err){
         console.log("getReviews service Error: ", err);
       });      
-    }
+    };
 
     return {
       getProfile: getProfile,
@@ -71,6 +79,6 @@
       getRecentGames: getRecentGames,
       getReviews: getReviews
     };
-  });
+  };
 
 })();

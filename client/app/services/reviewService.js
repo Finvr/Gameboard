@@ -1,8 +1,10 @@
 (function(){
 	angular.module('imgame.service')
-	.factory('Review', function Review($http){
-		function createReview(reviews){
-      console.log('reviews',reviews)
+	.factory('Review', Review);
+
+  function Review ($http) {
+    // send reviews for a specific gameposts to server to store
+		function createReview (reviews) {
 			return $http({
         method: 'POST',
         url: '/me/reviews',
@@ -18,7 +20,7 @@
 		
     return {
 				createReview: createReview
-			}
-	  });
+		};
+  };
 
 })();

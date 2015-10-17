@@ -1,11 +1,11 @@
 (function(){
 
   angular.module('imgame.service', [])
-
-  .factory('Auth', Auth)
+  .factory('Auth', Auth);
 
   function Auth ($rootScope, $http, $location, $window) {
 
+    // get request to server to check if user logged in 
     function requireAuth (url) {
       return $http({
         method: 'GET',
@@ -25,6 +25,7 @@
       });
     };
 
+    // signout user
     function signout () {
       $rootScope.loggedIn = false;
       return $http({
@@ -41,14 +42,13 @@
       });
     };
 
+    // get user's current location
     function getCurrentLocation () {
       if ($rootScope.currentLocation) {
         $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
-      } else {
-        
+      } else {        
         navigator.geolocation.getCurrentPosition(function (position) {
           $rootScope.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          //$rootScope.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
           $rootScope.$broadcast("currentLocation", $rootScope.currentLocation);
         })
       }
