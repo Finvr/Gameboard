@@ -4,12 +4,31 @@
 
   function MyGamesController($scope, $window, $location, $route, Auth, GamePost, Profile, Invitations,Review){
 
-    /* Modal functions */
+    
+    //////////////////////////////////////////////////////////////////
+    // modal functions
+    //////////////////////////////////////////////////////////////////
     $scope.showHostedEventModal = function(date){
       $scope.gameToShowDetails = date.data;
       $scope.getGamepostPictures($scope.gameToShowDetails);
       $('#game-details').openModal();
     }
+
+    $scope.openRateModal = function(game) {
+      if (game.host_name) {
+        game.playerPics.unshift({
+          picture: game.host_pic,
+          user_id: game.host_id,
+          username: game.host_name
+        });
+      }
+      game.playerPics.forEach(function(player){
+        player.skip = true;
+        player.showed_up
+        player.rating = 3;
+      })
+      $scope.currentRateGame = game;
+    };
 
     $scope.close = function(selector) {
       $(selector).closeModal();
@@ -37,6 +56,7 @@
         });
     };
 
+    // get all users' reviews of other users
     $scope.getReviews = function() {
       return Profile.getReviews()
         .then(function(data){
@@ -44,6 +64,7 @@
         })
     };
 
+    // get all users recently played games
     $scope.getRecentGames = function(){
         return $scope.getReviews()
         .then(function(reviews){
@@ -62,22 +83,7 @@
         })
     };
 
-    $scope.openRateModal = function(game) {
-      if (game.host_name) {
-        game.playerPics.unshift({
-          picture: game.host_pic,
-          user_id: game.host_id,
-          username: game.host_name
-        });
-      }
-      game.playerPics.forEach(function(player){
-        player.skip = true;
-        player.showed_up
-        player.rating = 3;
-      })
-      $scope.currentRateGame = game;
-    };
-
+    // send reviews as user reviewed other users
     $scope.sendReviews = function (players){
       var gamepostId = $scope.currentRateGame.gamepost_id;
       var reviews = [];
@@ -100,14 +106,15 @@
         });        
     }
 
-
-
+    // get user's profile
     var getMyProfile = function(){
-      Profile.getProfile().then(function(profile){
-        $scope.myProfile = profile;
-      });
+      Profile.getProfile()
+        .then(function(profile){
+          $scope.myProfile = profile;
+        });
     };
 
+    // get all user's requests and convert them calendar envents
     var getMyRequests = function(s,e,t,callback){
       return GamePost.myRequests()
         .then(function(requests){
@@ -138,6 +145,7 @@
         });
     };
 
+    // get user's invitations
     var getMyInvitations = function(){
       Invitations.all()
         .then(function(invitations){
@@ -149,6 +157,7 @@
         });
     }
 
+    // agenda view handler
     $("#agenda").click(function(){
       if ($("#agenda").text() === "Calendar View") {
         $("#agenda").text("Agenda View");        
@@ -161,6 +170,7 @@
 
     $("#agendaList").hide();
 
+    // calendar view initiation
     $scope.uiConfig = {
       calendar:{
         height: 530,
@@ -174,24 +184,7 @@
       }
     };
 
-    $scope.init = function() {
-      Auth.requireAuth();
-      getMyGames(null,null,null,function(){}); //find less hacky solution
-      getMyRequests(null,null,null,function(){});
-      getMyProfile();
-      getMyInvitations();
-      $scope.getReviews();
-      $scope.getRecentGames();
-      /* Scope variables */
-      $scope.eventSources = [getMyGames, getMyRequests];
-      $scope.gameToShowDetails = null;
-      $scope.gameToCancel = null;
-      $scope.gameToApprove = null;
-      $scope.invitationToReview = null;
-    };
-    
-    $scope.init();
-
+    // get pictures of players of a gamepost
     $scope.getGamepostPictures = function(game){
       var gamePostId = game.gamepost_id ? game.gamepost_id : game.id;
       return GamePost.getPictures(gamePostId)
@@ -201,11 +194,13 @@
         })
     }
 
+    // game handler when cancel is clicked
     $scope.setGameToCancel = function(game){
       $scope.gameToCancel = game;
       $scope.close('#game-details');
     }
 
+    // send request when cancel a game is confirmed
     $scope.cancelGame = function() {
       return GamePost.deleteGame($scope.gameToCancel)
         .then(function(){
@@ -216,11 +211,13 @@
         });
     }
 
+    // set request to calncel when cancel is clicked on a accepted request
     $scope.setRequestToCancel = function(request) {
       $scope.requestToCancel = request;
       $scope.close('#game-details');
     }
 
+    // send cancel request when cancel is confirmed
     $scope.cancelRequest = function(request) {
       return GamePost.requestCancel(request)
       .then(function() {
@@ -231,6 +228,7 @@
       });
     }
 
+    // get all requests of a game that user hosted
     $scope.getGamepostRequest = function(game){
       return GamePost.gamepostRequest(game.id)
         .then(function(requests){
@@ -239,10 +237,12 @@
         })
     };
 
+    // select sepcific invitation request as modal for the invitation is opened
     $scope.setInvitationToReview = function(invitation){
       $scope.invitationToReview = invitation;
     }
 
+    // send confirm info as user accept/declined a request to join a game user hosted
     $scope.requestConfirm = function(str, req, sel) {
       req.status = str;
       return GamePost.requestConfirm(req)
@@ -264,6 +264,27 @@
               $scope.myRequests && $scope.myRequests.length === 0 &&
               $scope.myInvitations && $scope.myInvitations.length === 0; 
     }
+
+    //////////////////////////////////////////////////////////////////
+    // page initiation
+    //////////////////////////////////////////////////////////////////
+    $scope.init = function() {
+      Auth.requireAuth();
+      getMyGames(null,null,null,function(){}); //find less hacky solution
+      getMyRequests(null,null,null,function(){});
+      getMyProfile();
+      getMyInvitations();
+      $scope.getReviews();
+      $scope.getRecentGames();
+      /* Scope variables */
+      $scope.eventSources = [getMyGames, getMyRequests];
+      $scope.gameToShowDetails = null;
+      $scope.gameToCancel = null;
+      $scope.gameToApprove = null;
+      $scope.invitationToReview = null;
+    };
+    
+    $scope.init();
 
   };
 

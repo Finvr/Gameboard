@@ -9,9 +9,18 @@
     $scope.gamesArray = GamePost.gamesArray;
     $scope.now = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
-    Auth.requireAuth();
+    //////////////////////////////////////////////////////////////////
+    // page initiation
+    //////////////////////////////////////////////////////////////////
+    $scope.init = function () {
+      Auth.requireAuth();
+      $('.autocomplete input').attr("autocomplete", "off");      
+    }
+    $scope.init();
 
-    /* Datepicker functions */
+    //////////////////////////////////////////////////////////////////
+    // datepicker functions
+    //////////////////////////////////////////////////////////////////
     var currentTime = new Date();
     $scope.game.date = currentTime;
     //$scope.currentTime = currentTime;
@@ -45,21 +54,19 @@
     };
     /* end datepicker functions */
 
-    $('.autocomplete input').attr("autocomplete", "off");
-
+    // clear invite search when close button is clicked
     $scope.clearInviteSearch = function(){
       $("#search").text();
       $scope.searchText = "";
     }
- 
-
+    
+    // create game as user fill out required properties
     $scope.createGame = function(game){
       var mDate = moment($scope.game.date);
       var mTime = $scope.game.time > 12 ? ($scope.game.time - 12 + ":00:00 pm") : ($scope.game.time === 12 ? "12:00:00 pm" : $scope.game.time.length > 1 ? $scope.game.time + ":00:00 am" : "0" + $scope.game.time + ":00:00 am" );
       var mDateTime = moment(mDate.format('YYYY-MM-DD') + ' ' + mTime + mDate.format('Z'));
 
-      console.log(mDateTime);
-
+      // create standard game object as user filled create form
       game = { 
         "game_location": $scope.game.location, //start set in template
         "game": $scope.game.name,
@@ -76,7 +83,7 @@
           return { user_id: id };
         });
       }
-
+      // call service function to send ajex request to server
       GamePost.create(game)
         .then(function(data){
           $location.path("/my-games");

@@ -20,6 +20,7 @@
       }
       var map;
 
+      // current location icon set up
       var currIcon = {
         url: 'assets/gpsloc.png',
         size: new google.maps.Size(34, 34),
