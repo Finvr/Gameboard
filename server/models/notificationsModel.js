@@ -3,6 +3,7 @@ var db = require('../db.js');
 module.exports = {
 
   create: function (userId, type, otherId) {
+    //Create a notification in the database
     if ( type === "game cancelled" || type === "request accepted" || type === "invite" ) {
       return db('notifications')
         .insert({
@@ -29,6 +30,7 @@ module.exports = {
   },
 
   fetchByUserId: function (userId) {
+    //get notifications matching userId
     return db('notifications')
       .select([
         'notifications.*',
@@ -47,6 +49,7 @@ module.exports = {
   },
 
   update: function (noteId) {
+    //Set notification to viewed by ID
     return db('notifications')
       .where('id', noteId)
       .update({
@@ -59,6 +62,7 @@ module.exports = {
   },
 
   deleteExpired: function () {
+    //Delete notifications that have been viewed and more than 2 days old
     return db('notifications')
       .where('viewed', true)
       .andWhere('created_at', '<', db.raw("NOW() - INTERVAL '2 days'"))
@@ -71,6 +75,7 @@ module.exports = {
   },
 
   createInvitationNotes: function (invitations) {
+    //Create several invitation notifications at once
     return db('notifications')
       .insert(invitations)
       .catch(function (err) {
