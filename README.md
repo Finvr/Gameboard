@@ -51,12 +51,12 @@ Starting the database:
 start postgresql using postgres.app, or 'psql' from the command line
 
 Starting the server:
-(from the project root directory in a separate tab on the command line)
-nodemon server/server.js
+- navigate to root directory
+- run nodemon server/server.js
 
 In the Chrome browser:
-Navigate to : 
-localhost:3000
+- Navigate to : 
+- localhost:3000
 
 
 ### Running tests
@@ -80,8 +80,8 @@ gulp mocha OR npm test
 
 ## Known Bugs
 
--Currently this application is built for Google Chrome
--Mobile support has not yet been tested
+- Currently this application is built for Google Chrome
+- Mobile support has not yet been tested
 
 ## Contributing
 
