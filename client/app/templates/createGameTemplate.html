@@ -47,7 +47,7 @@
           <p ng-show="createForm.date.$error.required && createForm.date.$dirty" class="help-block">Date is required.</p>
         </div>
         <div class="input-field col m6 row valign-wrapper">
-          <input name="time" type="range" id="game-time" class="col m8" ng-model="game.time" min="0" max="24" required/><span class="filteTime col m4 valign">{{game.time === 0 ? "12:00 AM" : (game.time == 24 ? "11:59 PM" : (game.time === 12 ? "12:00 PM" : (game.time < 12 ?  (game.time + ":00 AM") : ((game.time - 12) + ":00 PM") ) ) ) }}</span>
+          <input name="time" type="range" id="game-time" class="col m8" ng-model="game.time" min="0" max="24" required/><span class="filteTime col m4 valign">{{game.time === 0 ? "12:00 AM" : (game.time == 24 ? "11:59 PM" : (game.time == 12 ? "12:00 PM" : (game.time < 12 ?  (game.time + ":00 AM") : ((game.time - 12) + ":00 PM") ) ) ) }}</span>
           <label class="active" for="game-time">Time</label>
           <p ng-show="createForm.time.$error.required && createForm.time.$dirty" class="help-block">Time is required.</p>
         </div>
