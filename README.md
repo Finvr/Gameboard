@@ -1,4 +1,4 @@
-# GAMEBOARD
+# __game__board
 
   > An application for connecting people who want to play board games.
 
@@ -70,13 +70,13 @@ Back-end tests:
 (from the project root directory in a separate tab on the command line)
 gulp mocha OR npm test
 
-## Roadmap
+## Schema
 
-View the project roadmap
+![Schema](/gameboard_schema.png)
 
 ## Known Bugs
 
--Currently this application is built for Google Chrome, on a desktop browser
+-Currently this application is built for Google Chrome
 -Mobile support has not yet been tested
 
 ## Contributing

@@ -5,6 +5,7 @@ var Users   = require ('../models/userModel.js'),
 module.exports = {
 
   checkAuth: function (req, res, next) {
+    //Check user authorization
     if (!req.user) {
       res.status(403).send('User is not logged in!')
     }
@@ -23,15 +24,18 @@ module.exports = {
   },
 
   logout: function (req, res) {
+    //End session
     req.logout();
     res.sendStatus(200);
   },
 
   loggedIn: function (req, res) {
+    //Confirm login
     res.sendStatus(200);
   },
 
   getMyProfile: function (req, res) {
+    //Get current user profile information
     var profile;
     Users.find(req.user)
       .then(function (result) {
@@ -45,6 +49,7 @@ module.exports = {
   }, 
 
   getProfile: function (req, res) {
+    //Get profile information for any user
     var userId = parseInt(req.url.split('/')[2]);
     return Users.find(userId)
       .then(function (result) {
@@ -67,6 +72,7 @@ module.exports = {
   },
 
   getRatingByUserId: function(id) {
+    //Get user rating scores
     return Reviews.getRatingByUserId(id)
       .then(function(result){
         return result;
@@ -74,6 +80,7 @@ module.exports = {
   },
 
   updateProfile: function (req, res) {
+    //Update profile information
     if ( req.user !== req.body.id ) {
       res.status(403).send("Invalid user object")
     } else {
@@ -88,6 +95,7 @@ module.exports = {
   },
 
   getAllUsers: function (req, res) {
+    //Get all user_id's, pictures and usernames
     Users.fetchAll()
       .then(function (result) {
         res.status(200).send(result);

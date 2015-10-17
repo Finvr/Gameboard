@@ -60,6 +60,36 @@
   }
   .modal-footer {
     background-color: white;
+    height: 30%;
+    div {
+      display: inline-block;
+    }
+    .message {
+      height: 90%;
+      width: 75%;
+      margin-top: 0;
+      line-height: 1.5;
+      textarea {
+        border: solid $yellow 1px;
+        border-radius: 2px;
+        resize: none;
+        height: 50px;
+      }
+    }
+    .join-button {
+      width: 20%;
+      height: 90%;
+      margin-left: 2%;
+      line-height: 1.5;
+      .accept {
+        height: 50px;
+        width: 100%;
+        margin: 0;
+      }
+      .material-icons {
+        line-height: 2.5;
+      }
+    }
   }
 }
 
