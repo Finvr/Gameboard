@@ -44,8 +44,11 @@ li.profile-pic {
 
 #notifications {
   
-  padding: 1%;
   height: 300px;
+
+  .message {
+    padding: 1%;
+  }
 
   span.noteTime{
     font-size: 10px;
@@ -54,7 +57,7 @@ li.profile-pic {
   }
 
   .true {
-    background-color: $cream;  
+    background-color: #EDEDED;  
   }  
 }
 
