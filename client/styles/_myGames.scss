@@ -54,6 +54,11 @@
     float: right;
   }
 
+  #agendaList .games{
+    height: 70%;
+    overflow-y: scroll;
+  }
+
   #agendaList, #calendar {
     padding-right: 5%;
     padding-left: 0%;
