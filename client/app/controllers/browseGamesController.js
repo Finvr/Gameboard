@@ -31,7 +31,7 @@
 		//////////////////////////////////////////////////////////////////
     var currentTime = new Date();
     $scope.startDateFilter = currentTime;
-    $scope.endDateFilter = currentTime;
+    //$scope.endDateFilter = currentTime;
     $scope.month = ['Januar', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     $scope.monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     $scope.weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
