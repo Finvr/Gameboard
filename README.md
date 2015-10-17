@@ -76,7 +76,7 @@ gulp mocha OR npm test
 
 ## Known Bugs
 
--Currently this application is built for Google Chrome, on a desktop browser
+-Currently this application is built for Google Chrome
 -Mobile support has not yet been tested
 
 ## Contributing
