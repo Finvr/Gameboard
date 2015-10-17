@@ -115,3 +115,10 @@
 .thumber, .picker__close, .picker__today {
   color: $green;
 }
+
+.picker__select--year.browser-default {
+  width: 30%;
+}
+input[type="text"] {
+  text-align: center;
+}
