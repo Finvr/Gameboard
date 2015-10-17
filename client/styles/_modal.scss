@@ -109,3 +109,28 @@
     font-size: 1.5em;
   }
 }
+
+#openRateModal {
+  .players {
+    width: 20%;
+  }
+  .img-wrapper {
+    width: 100%;
+    margin-bottom: 3%;
+  }
+  img {
+    width: 80px;
+  }
+  .lever {
+    width: 70px;
+    margin-left: 0;
+    margin-bottom: 10%;
+    background-color: $yellow;
+  }
+  .switch label input[type="checkbox"]:checked+.lever {
+    background-color: $green;
+  }
+  .switch label input[type="checkbox"]:checked+.lever:after {
+    background-color: white;
+  }
+}
