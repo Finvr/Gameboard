@@ -19,6 +19,13 @@
   	overflow: inherit;
   }
 
+  #title {
+    position: relative;
+    z-index: 10;
+    font-size: 100px;
+    text-shadow: -1px 0 gray;
+  }
+
   #contact {
     padding: 2% 0 2% 0;
     background-color: $cream;
@@ -35,9 +42,10 @@
   	color: white;
   	box-shadow: none;
     border-radius: 6px;
-    margin-top: 35%;
+    margin-top: 25%;
     background-color: $red;
     position: relative;
+    z-index: 2;
   }
 
   #fb_button {
