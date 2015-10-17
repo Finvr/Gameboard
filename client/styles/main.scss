@@ -44,8 +44,18 @@ li.profile-pic {
 
 #notifications {
   
-  padding: 1%;
   height: 300px;
+  width: 500px;
+
+  .message {
+    padding: 1%;
+  }
+
+  .game {
+    font-size: 14px;
+    color: $red;
+    padding: 0;
+  }
 
   span.noteTime{
     font-size: 10px;
@@ -54,7 +64,7 @@ li.profile-pic {
   }
 
   .true {
-    background-color: $cream;  
+    background-color: #EDEDED;  
   }  
 }
 
