@@ -56,11 +56,11 @@
       </div>
     </div>
     <div class="modal-footer" ng-if="!requestSent(game.id) && loggedIn">
-      <div class="input-field">
+      <div class="input-field message">
         <textarea ng-model="requestMessage.comments" placeholder="Enter optional message for host">
         </textarea>
       </div>
-      <div ng-click="sendRequest(game)">
+      <div ng-click="sendRequest(game)" class="join-button">
         <a class="btn-flat btn-med waves-effect waves-light accept">
           <i class="material-icons">send</i>
         </a>
