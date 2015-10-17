@@ -3,12 +3,14 @@ var Promise = require('../../node_modules/knex/node_modules/bluebird/js/main/blu
 module.exports = {
   
   handleError: function(err, res, code) {
+    //Send server error to client
     code = code || 500;
     console.log(err);
     res.send(code, err.message);
   },
 
   promiseFor: Promise.method(function(condition, action, value) {
+    //For-loop structure for functions that return promises
     if ( !condition(value) ) {
       return value;
     } else { 
@@ -63,6 +65,7 @@ module.exports = {
 };
 
 function calculateReliability (gameData) {
+  //Calculate a user's reliability score
   var reliability = 0;
   var played = gameData.length;
 
