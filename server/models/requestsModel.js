@@ -3,6 +3,7 @@ var db = require('../db.js');
 module.exports = {
 
 	getRequestsByUserId: function (userId, status) {
+    //Get requests by userId, optionally filtering by status
     var match = {user_id: userId};
     if (status) {match.status = status};
     return db('gameposts').select([
@@ -31,6 +32,7 @@ module.exports = {
   },
 
   getRequestByGameId: function (gamepostId) {
+    //Get all requests for a gamepost
     return db.select([
       'gameposts.*',
       'requests.*',
@@ -49,6 +51,7 @@ module.exports = {
   },
 
   getRequestersPictures: function(gamepostId, status) {
+    //Get pictures of users who have submitted requests to a gamepost by status
     return db('requests')
       .join('users', 'user_id', 'users.id')
       .select([
@@ -70,6 +73,7 @@ module.exports = {
   },
 
   changeStatus: function (request) {
+    //Update the status of a request
     return db('requests')
       .where({id: request.id})
       .update({
@@ -83,6 +87,7 @@ module.exports = {
   },
 
   create: function (request) {
+    //Create a new request in the database
     return db('requests')
       .select()
       .where({
@@ -109,6 +114,7 @@ module.exports = {
   },
 
   deleteRequest: function (requestId) {
+    //Delete request
     return db.select()
       .from('requests')
       .where({
@@ -122,6 +128,7 @@ module.exports = {
   },
 
   updateByGamepost: function (gamepostId, newStatus, oldStatuses) {
+    //Update all requests matching oldStatuses array for a gamepost to be newStatus
     return db('requests')
       .whereIn('status', oldStatuses)
       .andWhere({gamepost_id: gamepostId})
@@ -137,6 +144,7 @@ module.exports = {
   },
 
   acceptedPlayers: function (gamepostId) {
+    //get all accepted requests for a gamepost
     return db('requests')
       .where({
         gamepost_id: gamepostId,
@@ -152,6 +160,7 @@ module.exports = {
   },
 
   fetchById: function (requestId) {
+    //Get a specific request by ID
     return db('requests')
       .where('id', requestId)
       .then(function (result) {
@@ -167,6 +176,7 @@ module.exports = {
   },
 
   createInvitations: function (invitations, gamepostId) {
+    //Create an invitation, which is a request object with status === 'invite'
     for ( var i = 0; i < invitations.length; i++ ) {
       invitations[i].gamepost_id = gamepostId;
       invitations[i].status = 'invite';
