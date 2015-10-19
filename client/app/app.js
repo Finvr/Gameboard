@@ -35,6 +35,9 @@
         templateUrl: 'app/templates/homeTemplate.html',
         controller: 'HomeController'
       })
+      .when('/privacyPolicy', {
+        templateUrl: 'app/templates/privacyPolicy.html',
+      })
       .when('/create-game', {
         templateUrl: 'app/templates/createGameTemplate.html',
         controller: 'CreateGameController'
