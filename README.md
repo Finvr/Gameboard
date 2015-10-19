@@ -25,7 +25,7 @@
 
   - __Product Owner__: PyNate (Nathan Leonard)
   - __Scrum Master__: fangtingPrahl (Fangting Prahl)
-  - __Development Team Members__: vaishr (Vaishnavi Reddi), trsreagan3 (Reagan Schiller), gato-gordo (Ignacio Prado)
+  - __Development Team Members__: vaishr (Vaishnavi Reddy), trsreagan3 (Reagan Schiller), gato-gordo (Ignacio Prado)
   
 ## Requirements
 - Postgresql
