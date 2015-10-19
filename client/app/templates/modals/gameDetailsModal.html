@@ -7,6 +7,7 @@
     <table class="game-details table">
       <thead>
         <tr>
+          <th>Host</th>
           <th>Date</th>
           <th>Time</th>
           <th>Location</th>
@@ -16,6 +17,11 @@
       </thead>
       <tbody>
         <tr>
+         <td>
+            <a href="#/profile/{{game.host_id}}" target="_blank">
+              {{gameToShowDetails.username}}
+            </a>
+          </td>
           <td>{{ gameToShowDetails.game_datetime | date : "M/d/yyyy" }}</td>
           <td>{{ gameToShowDetails.game_datetime | date : "h:mm a" }}</td>
           <td>{{ gameToShowDetails.game_location }} </td>
@@ -24,15 +30,24 @@
         </tr>
       </tbody>
     </table>
-    <p>
-      <div>
-        <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank"><img class="hostPic" ng-src="{{gameToShowDetails.picture || gameToShowDetails.host_pic}}">{{gameToShowDetails.host_name}}</a>
-        <a ng-repeat="requester in gameToShowDetails.playersPictures" href="#/profile/{{requester.user_id}}" target="_blank" >, <img class="hostPic" ng-src="{{requester.picture}}">{{requester.username}}</a>
-      </div>
-      <div><strong>Description:</strong> {{ gameToShowDetails.gamepost_description ? gameToShowDetails.gamepost_description : "N/A"}}
-      </div>
-      <div ng-if="gameToShowDetails.comments !== undefined"><strong>Message sent:</strong> {{ gameToShowDetails.comments ? gameToShowDetails.comments : "N/A"}}</div>
-    </p>
+    <ul>
+      <li class="player-item center">
+        <div class="img-wrapper">
+          <img class="responsive-img" ng-src="{{gameToShowDetails.picture}}">
+        </div>
+        <a href="#/profile/{{gameToShowDetails.host_id}}" target="_blank" >
+            {{gameToShowDetails.username}}
+        </a>
+      </li>
+      <li ng-if="gameToShowDetails.host_id !== requester.user_id" class="player-item center" ng-repeat="requester in gameToShowDetails.playersPictures">
+          <div class="img-wrapper">
+            <img class="responsive-img" ng-src="{{requester.picture}}">
+          </div>
+          <a href="#/profile/{{requester.user_id}}" target="_blank" >
+            {{requester.username}}
+          </a>
+        </li>
+    </ul>
   </div>
   <div class="modal-footer">
     <a href="#cancel-modal" ng-if="gameToShowDetails.pending_requests" ng-click="setGameToCancel(gameToShowDetails)" class="btn-flat btn-med waves-effect waves-light decline" modal>Cancel Game</i></a>
