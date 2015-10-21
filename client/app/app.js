@@ -50,7 +50,7 @@
         templateUrl: 'app/templates/profileTemplate.html',
         controller: 'ProfileController'
       })
-      .when('/my-games', {
+      .when('/dashboard', {
         templateUrl: 'app/templates/myGamesTemplate.html',
         controller: 'MyGamesController'      
       })
