@@ -1,11 +1,5 @@
 (function() {
 	angular.module('imgame.browseGames', [])
-		// .filter('startFrom', function() {
-	 //    return function(input, start) {
-		//     start = parseInt(start, 10);
-		//     return input.slice(start);
-  //   	}
-		// })
 		.controller('BrowseGamesController', BrowseGamesController);
 
 	function BrowseGamesController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost, Helper) {
