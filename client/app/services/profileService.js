@@ -1,7 +1,7 @@
 (function(){
 
   angular.module('imgame.service')
-  .factory('Profile', Profile);
+  .factory('Profile', ['$http', Profile]);
 
   function Profile ($http) {
 

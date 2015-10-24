@@ -1,7 +1,7 @@
 (function(){
 
   angular.module('imgame.service')
-  .factory('GamePost', GamePost);
+  .factory('GamePost', ['$http', GamePost]);
 
   function GamePost($http) {
     //gamesArray is uses to populate game name autocomplete

@@ -1,7 +1,7 @@
 (function(){
   
 	angular.module('imgame.service')
-	.factory('Review', Review);
+	.factory('Review', ['$http', Review]);
 
   function Review ($http) {
     // send reviews for a specific gameposts to server to store

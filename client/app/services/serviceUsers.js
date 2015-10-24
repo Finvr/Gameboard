@@ -1,10 +1,9 @@
 (function(){
 
 	angular.module("imgame.service")
-	.factory("Users", Users);
+	.factory("Users", ['$http', Users]);
 
 	function Users($http){
-
 		// get all user basic info so that loggedIn user can invite other users to play a game
 		var all = function(){
 			return $http({

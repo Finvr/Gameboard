@@ -1,7 +1,7 @@
 (function(){
 
   angular.module('imgame.service')
-  .factory('Notification', Notification);
+  .factory('Notification', ['$http', Notification]);
 
   function Notification ($http) {
 
