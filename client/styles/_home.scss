@@ -21,6 +21,7 @@
   }
 
   #title {
+    text-transform: lowercase;
     position: relative;
     z-index: 5;
     font-size: 110px;
@@ -31,6 +32,7 @@
 
   #slogan {
     position: relative;
+    text-transform: uppercase;
     z-index: 5;
     font-size: 25px;
     margin-right: 3%;
@@ -39,6 +41,10 @@
       p {
         color: $cream;
       }
+  }
+
+  .red, .blue, .amber {
+    text-transform: lowercase;
   }
 
   #contact {
