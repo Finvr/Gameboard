@@ -1,6 +1,9 @@
 (function(){
  angular.module('imgame.home', [])
- 	.controller('HomeController', HomeController);
+ 	.controller('HomeController', [
+ 			'$scope',
+ 			'Auth',
+ 		HomeController]);
 
  	function HomeController($scope, Auth){
     Auth.requireAuth();
