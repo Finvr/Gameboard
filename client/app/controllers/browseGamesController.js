@@ -1,6 +1,14 @@
 (function() {
 	angular.module('imgame.browseGames', [])
-		.controller('BrowseGamesController', BrowseGamesController);
+		.controller('BrowseGamesController', [
+				'$rootScope',
+				'$scope',
+				'BrowseGames',
+				'Auth',
+				'$location',
+				'GamePost',
+				'Helper',
+			BrowseGamesController]);
 
 	function BrowseGamesController($rootScope, $scope,  BrowseGames, Auth, $location, GamePost, Helper) {
 		//Scope variable initialization
