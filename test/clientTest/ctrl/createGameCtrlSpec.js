@@ -15,7 +15,7 @@ describe('CreateGameController', function() {
 
   describe("scope initialization", function(){
   	it("should set $scope.game to an object with an invitees array", function(){
-  		expect(scope.game).toEqual({invitees: []});
+  		expect(scope.game).toEqual(jasmine.objectContaining({invitees: []}));
   	});
   });
   describe("$scope.createGame", function(){

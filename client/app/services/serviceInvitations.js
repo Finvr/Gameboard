@@ -1,7 +1,7 @@
 (function(){
 
 	angular.module('imgame.service')
-	.factory('Invitations', InvitationsFactory);
+	.factory('Invitations', ['$http', InvitationsFactory]);
 
 	function InvitationsFactory($http) {
 

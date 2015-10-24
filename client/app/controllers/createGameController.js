@@ -1,6 +1,12 @@
 (function(){
  angular.module('imgame.createGame', [])
- 	.controller('CreateGameController', CreateGameController);
+ 	.controller('CreateGameController', [
+      '$scope',
+      '$window',
+      '$location',
+      'GamePost',
+      'Auth',
+    CreateGameController]);
 
  	function CreateGameController($scope, $window, $location, GamePost, Auth){
     $scope.game = { invitees: [] };

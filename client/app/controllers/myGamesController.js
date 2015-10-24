@@ -1,8 +1,18 @@
 (function(){
 	angular.module('imgame.myGames', [])
-	  .controller('MyGamesController', MyGamesController);
+	  .controller('MyGamesController', [
+        '$scope',
+        '$window',
+        '$location',
+        '$route',
+        'Auth',
+        'GamePost',
+        'Profile',
+        'Invitations',
+        'Review',
+      MyGamesController]);
 
-  function MyGamesController($scope, $window, $location, $route, Auth, GamePost, Profile, Invitations,Review){
+  function MyGamesController($scope, $window, $location, $route, Auth, GamePost, Profile, Invitations, Review){
 
     
     //////////////////////////////////////////////////////////////////

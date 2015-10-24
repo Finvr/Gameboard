@@ -33,11 +33,11 @@ describe('BrowseGamesController', function() {
     it("should intialize $scope.gamesArray correctly", function(){
       //find way to mock service call
     });
-    it("should initialize $scope.startTimeFilter to null", function(){
-      expect(scope.startTimeFilter).toBeNull();
+    it("should initialize $scope.startTimeFilter to 0", function(){
+      expect(scope.startTimeFilter).toEqual(0);
     });
     it("should initialize $scope.endTimeFilter", function(){
-      expect(scope.endTimeFilter).toBeNull();
+      expect(scope.endTimeFilter).toEqual(24);
     });
     xit("should initialize $scope.distance_choices correctly", function(){
       var choices = {

@@ -1,6 +1,13 @@
 (function(){
 angular.module('imgame.notification', [])
-  .controller('NotificationsController', NotificationsController);
+  .controller('NotificationsController', [
+      '$scope',
+      '$rootScope',
+      'Auth',
+      'Notification',
+      '$route',
+      '$location',
+    NotificationsController]);
 
   function NotificationsController($scope, $rootScope, Auth, Notification, $route, $location){
  

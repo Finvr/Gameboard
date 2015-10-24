@@ -1,7 +1,12 @@
 (function(){
 
   angular.module('imgame.service', [])
-  .factory('Auth', Auth);
+  .factory('Auth', [
+      '$rootScope',
+      '$http',
+      '$location',
+      '$window',
+    Auth]);
 
   function Auth ($rootScope, $http, $location, $window) {
 
