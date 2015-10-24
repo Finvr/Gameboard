@@ -28,9 +28,9 @@ describe('Routing', function() {
     expect($route.routes['/profile/:id'].templateUrl).toBe('app/templates/profileTemplate.html');
   });
 
-  it('Should have my-games (\'/my-games\') route that is linked to the myGames controller and template', function() {
-    expect($route.routes['/my-games'].controller).toBe('MyGamesController');
-    expect($route.routes['/my-games'].templateUrl).toBe(
+  it('Should have dashboard (\'/dashboard\') route that is linked to the myGames controller and template', function() {
+    expect($route.routes['/dashboard'].controller).toBe('MyGamesController');
+    expect($route.routes['/dashboard'].templateUrl).toBe(
       'app/templates/myGamesTemplate.html');
   });
 
