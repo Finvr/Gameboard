@@ -1,6 +1,13 @@
 (function(){
 angular.module('imgame.profile', [])
-	.controller('ProfileController', ProfileController);
+	.controller('ProfileController', [
+      '$scope', 
+      'Profile', 
+      'Auth',
+      '$route',
+      '$location',
+      'Review',
+    ProfileController]);
 
 	function ProfileController($scope, Profile, Auth, $route, $location, Review){
 
