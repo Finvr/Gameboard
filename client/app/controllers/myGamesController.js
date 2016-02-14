@@ -48,7 +48,7 @@
     var getMyGames = function(s,e,t,callback){ //find less hacky solution
       return GamePost.myHostedGames()
         .then(function(games){
-          $scope.myGames = games;
+          $scope.myGames  = games;
           $scope.newGames = $scope.newGames ? 
                             $scope.newGames.concat(games) :
                             games;
@@ -260,14 +260,14 @@
 
     /* ng-show tests */
     $scope.showNormal = function(){
-      return  $scope.myGames && $scope.myGames.length > 0 || 
+      return  $scope.myGames       && $scope.myGames.length > 0       || 
               $scope.myInvitations && $scope.myInvitations.length > 0 || 
-              $scope.myRequests && $scope.myRequests.length > 0 ;
+              $scope.myRequests    && $scope.myRequests.length > 0 ;
     }
 
     $scope.showFallback = function(){
-      return  $scope.myGames && $scope.myGames.length === 0 && 
-              $scope.myRequests && $scope.myRequests.length === 0 &&
+      return  $scope.myGames       && $scope.myGames.length       === 0 && 
+              $scope.myRequests    && $scope.myRequests.length    === 0 &&
               $scope.myInvitations && $scope.myInvitations.length === 0; 
     }
 
