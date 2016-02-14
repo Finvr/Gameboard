@@ -130,30 +130,24 @@
     var getMyRequests = function(s,e,t,callback){
       return GamePost.myRequests()
         .then(function(requests){
-          if (requests === 'request does not exist'){
-            $scope.myRequests = [];
-          } else {
-            $scope.myRequests = requests;
-          }
-          var acceptedReq = $scope.myRequests.filter(function(request){
-            return request.status === 'accepted'
-          })
-          var events = acceptedReq.map(function(request){
-            var newEvent = {};
-            newEvent.title = request.game;
-            newEvent.start = moment(request.game_datetime);
-            newEvent.data = request;
-            newEvent.className = 'joined';
-            return newEvent;
-          });
-
-          if ($scope.newGames) {
-            $scope.newGames = $scope.newGames.concat(acceptedReq);
-          } else {
-            $scope.newGames = acceptedReq;
-          }
-
-          callback(events);
+          $scope.myRequests = requests === 'request does not exist' ?
+                              [] : requests;
+          var accepted      = $scope.myRequests.filter(function(request){
+                                return request.status === 'accepted'
+                              });
+          $scope.newGames   = $scope.newGames ?
+                              $scope.newGames.concat(accepted) :
+                              accepted;
+          callback(
+            accepted.map(function(accReq){
+              return {
+                title:      accReq.game,
+                start:      moment(accReq.game_datetime),
+                data:       accReq,
+                className: 'joined'
+              };
+            })
+          );
         });
     };
 
