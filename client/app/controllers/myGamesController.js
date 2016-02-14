@@ -34,7 +34,7 @@
       }
       game.playerPics.forEach(function(player){
         player.skip = true;
-        player.showed_up
+        player.showed_up;
         player.rating = 3;
       })
       $scope.currentRateGame = game;
