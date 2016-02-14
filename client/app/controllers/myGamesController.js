@@ -25,7 +25,7 @@
     }
 
     $scope.openRateModal = function(game) {
-      if (game.host_name) {
+      if( game.host_name ){
         game.playerPics.unshift({
           picture: game.host_pic,
           user_id: game.host_id,
@@ -49,20 +49,19 @@
       return GamePost.myHostedGames()
         .then(function(games){
           $scope.myGames = games;
-          if ($scope.newGames) {
-            $scope.newGames = $scope.newGames.concat(games);
-          } else {
-            $scope.newGames = games;
-          }
-          var events = $scope.myGames.map(function(game) {
-            var newEvent = {};
-            newEvent.title = game.game;
-            newEvent.start = moment(game.game_datetime);
-            newEvent.data = game;
-            newEvent.className = 'hosted';
-            return newEvent;
-          });
-          callback(events);
+          $scope.newGames = $scope.newGames ? 
+                            $scope.newGames.concat(games) :
+                            games;
+          callback(
+            $scope.myGames.map(function(game) {
+              return {
+                title:      game.game,
+                start:      moment(game.game_datetime),
+                data:       game,
+                className: 'hosted'
+              };
+            })
+          );
         });
     };
 
@@ -77,39 +76,42 @@
     // get all users recently played games
     $scope.getRecentGames = function(){
         return $scope.getReviews()
-        .then(function(reviews){
-          return Profile.getRecentGames()
-        })
-        .then(function(games){
-          games.forEach(function(game){
-            game.user_id = game.user_id ? game.user_id : game.host_id;
-            $scope.existingReviews.forEach(function(review){
-              if (review.gameposts_id === game.gamepost_id && review.reviewer_id === game.user_id) {
-                game.reviewed = true;
-              }
-            })
-          })                     
-          $scope.recentGames = games;
-        })
+          .then(function(reviews){
+            return Profile.getRecentGames()
+          })
+          .then(function(games){
+            $scope.recentGames = games.map( 
+              function(g){
+                g.user_id = g.user_id ? g.user_id : g.host_id;
+                $scope.existingReviews.forEach(function(rev){
+                  if ( rev.gameposts_id === g.gamepost_id && 
+                       rev.reviewer_id  === g.user_id
+                    ){
+                      g.reviewed = true;
+                    }
+                })
+              })                     
+          })
     };
 
     // send reviews as user reviewed other users
     $scope.sendReviews = function (players){
-      var gamepostId = $scope.currentRateGame.gamepost_id;
-      var reviews = [];
-      for (var i = 0; i < players.length; i++){
-        var player = {}
-        if (!players[i].skip) {
-          player.reviewee_id = players[i].user_id
-          player.gameposts_id = gamepostId;
-          player.rating = players[i].rating;
-          player.showed_up = players[i].showed_up;
-          reviews.push(player)
-        }
-      }
-      if (reviews.length === 0) {
-        reviews = [{gameposts_id: gamepostId}];
-      }
+      var gamepostId = $scope.currentRateGame.gamepost_id,
+          reviews    = players
+                        .filter(function(player){
+                            return !player.skip;
+                          })
+                        .map(function(player){
+                          return {
+                            reviewee_id:  player.user_id,
+                            gameposts_id: gamepostId,
+                            rating:       player.rating,
+                            showed_up:    player.showed_up
+                          }
+                        });
+
+      if(!reviews.length) reviews = [ { gameposts_id: gamepostId }];
+
       Review.createReview(reviews)
         .then(function(reviews){
           $scope.currentRateGame.reviewed = true;

@@ -18,15 +18,16 @@
   },
   "homepage": "https://github.com/Finvr/Imgame#readme",
   "dependencies": {
+    "bluebird": "^3.3.1",
     "body-parser": "^1.14.0",
     "bower": "^1.5.3",
     "cookie-session": "^1.2.0",
     "express": "^4.13.3",
     "knex": "^0.8.6",
+    "morgan": "^1.6.1",
     "passport": "^0.3.0",
     "passport-facebook": "^2.0.0",
     "pg": "^4.4.2",
-    "morgan": "^1.6.1",
     "request": "^2.64.0",
     "unicorn": "0.0.1"
   },
