@@ -95,21 +95,20 @@
 
     // send reviews as user reviewed other users
     $scope.sendReviews = function (players){
-      var gamepostId = $scope.currentRateGame.gamepost_id;
-      var reviews = [];
-      for (var i = 0; i < players.length; i++){
-        var player = {}
-        if (!players[i].skip) {
-          player.reviewee_id = players[i].user_id
-          player.gameposts_id = gamepostId;
-          player.rating = players[i].rating;
-          player.showed_up = players[i].showed_up;
-          reviews.push(player)
-        }
-      }
-      if (reviews.length === 0) {
-        reviews = [{gameposts_id: gamepostId}];
-      }
+      var gamepostId = $scope.currentRateGame.gamepost_id,
+          reviews    = players
+                        .filter(function(player){
+                            return !player.skip;
+                          })
+                        .map(function(player){
+                          return {
+                            reviewee_id:  player.user_id,
+                            gameposts_id: gamepostId,
+                            rating:       player.rating,
+                            showed_up:    player.showed_up;
+                          }
+                        }) || [ { gameposts_id: gamepostId }];
+
       Review.createReview(reviews)
         .then(function(reviews){
           $scope.currentRateGame.reviewed = true;
