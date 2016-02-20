@@ -1,8 +1,7 @@
 # GAMEBOARD
 
   > An application for connecting people who want to play board games.
-  
-  http://gameboard-finvr.herokuapp.com/
+
 
 
 ## Table of Contents
